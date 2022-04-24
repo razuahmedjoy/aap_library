@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -195,5 +195,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 # SMS API CREDENTIALS
-SMS_API_USERNAME = '01610427497'
-SMS_API_PASSWORD = '01610427496'
+SMS_API_USERNAME = os.environ.get('SMS_API_USERNAME')
+SMS_API_PASSWORD = os.environ.get('SMS_API_PASSWORD')
