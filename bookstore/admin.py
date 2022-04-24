@@ -50,5 +50,52 @@ admin.site.register(Cart,CartAdmin)
 
 
 
-admin.site.register(Order)
-admin.site.register(OrderedProducts)
+class OrderedBooksAdmin(admin.TabularInline):
+    model = OrderedProducts
+    fields = ("books", "quantity","price","total_amount")
+    readonly_fields = ("books", "quantity","price","total_amount")
+    extra = 0
+    
+
+
+class OrderAdmin(admin.ModelAdmin):
+    
+    list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status')
+    readonly_fields = ('customer','grand_total','order_id','address','payment','contact_no')
+    inlines = [OrderedBooksAdmin]
+
+    search_fields = ('payment__transaction_id',)
+
+    def get_address(self,obj):
+        return f"{obj.address.district}-{obj.address.upazilla},{obj.address.thana},{obj.address.address}"
+
+    def payment_details(self,obj):
+        return f"({obj.payment.payment_method})- ({obj.payment.sender_number}) - TRXID: {obj.payment.transaction_id}"
+    
+    get_address.short_description = "Shipping"
+
+    
+
+
+admin.site.register(Order,OrderAdmin)
+
+
+
+class PaymentAdmin(admin.ModelAdmin):
+    
+    list_display = ('__str__','sender_number','transaction_id','payment_method','total_amount','order_id')
+    readonly_fields = ('sender_number','transaction_id','payment_method','total_amount','order_id',)
+
+
+admin.site.register(Payment,PaymentAdmin)
+
+
+class OrderedProductsAdmin(admin.ModelAdmin):
+    
+    list_display = ('__str__','customer')
+    readonly_fields = ('customer','order','books','quantity','price','total_amount')
+
+admin.site.register(OrderedProducts,OrderedProductsAdmin)
+
+
+admin.site.register(WebSettings)

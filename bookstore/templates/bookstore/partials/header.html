@@ -1,5 +1,5 @@
 <!-- header section starts  -->
-
+{% load cart_sub_total %}
 <header class="header">
 
     <div class="header-1">
@@ -14,7 +14,9 @@
         <div class="icons d-flex align-items-center">
             <div id="search-btn" class="fas fa-search"></div>
             <!-- <a href="#" class="fas fa-heart"></a> -->
-            <a href="{% url 'cart' %}" class="fas fa-shopping-cart"></a>
+            <a href="{% url 'cart' %}" class="fas fa-shopping-cart">
+                <span class="total-items">{% total_cart_item request.user %}</span>
+            </a>
 
             {% if request.user.is_authenticated %}
             <div class="fas fa-user dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -24,8 +26,8 @@
             </div>
             <ul class="dropdown-menu header-user-navigation" aria-labelledby="navbarDropdown">
 
-                <li><a class="dropdown-item ms-0" href="#">My Account</a></li>
-                <li><a class="dropdown-item ms-0" href="#">My Orders</a></li>
+                <li><a class="dropdown-item ms-0" href="{% url 'profile' %}">My Account</a></li>
+              
                 <li><a class="dropdown-item ms-0" href="{% url 'logout' %}">Logout</a></li>
 
 
@@ -69,11 +71,11 @@
 <!-- header section ends -->
 
 <!-- bottom navbar  -->
-
+<!-- 
 <nav class="bottom-navbar">
     <a href="#home" class="fas fa-home"></a>
     <a href="#featured" class="fas fa-list"></a>
     <a href="#arrivals" class="fas fa-tags"></a>
     <a href="#reviews" class="fas fa-comments"></a>
     <a href="#blogs" class="fas fa-blog"></a>
-</nav>
+</nav> -->

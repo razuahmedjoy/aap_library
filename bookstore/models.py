@@ -6,6 +6,7 @@ from PIL import Image
 from django.conf import settings
 import uuid
 
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Main_Category(models.Model):
@@ -74,9 +75,9 @@ class Customers(models.Model):
 
 class Address(models.Model):
     user = models.ForeignKey(Customers,on_delete=models.SET_NULL,null=True)
-    district = models.CharField(max_length=50,null=True,blank=True)
-    upazilla = models.CharField(max_length=50,null=True,blank=True)
-    thana = models.CharField(max_length=50,null=True,blank=True)
+    district = models.CharField(max_length=50)
+    upazilla = models.CharField(max_length=50)
+    thana = models.CharField(max_length=50)
     address = models.CharField(max_length=50,null=True,blank=True)
     contact_no = models.CharField(max_length=50,null=True,blank=True)
 
@@ -104,11 +105,21 @@ class Cart(models.Model):
 
 
 
+class Payment(models.Model):
+    customer = models.ForeignKey(Customers,on_delete=models.SET_NULL,null=True,editable=False)
+    sender_number = models.CharField(max_length=15)
+    transaction_id = models.CharField(max_length=100)
+    payment_method = models.CharField(max_length=20)
+    total_amount = models.FloatField(editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True) 
+    order_id = models.CharField(max_length=100,editable=False)
 
-
+    def __str__(self):
+        return f"{self.payment_method}-{self.transaction_id}-{self.total_amount}"
 class Order(models.Model):
     STATUS = (
-        ('New', 'New'),
+        ('Pending', 'Pending'),
         ('Paid', 'Paid'),
         ('Preaparing', 'Preaparing'),
         ('OnShipping', 'OnShipping'),
@@ -119,13 +130,18 @@ class Order(models.Model):
     customer = models.ForeignKey(Customers,on_delete=models.SET_NULL,null=True)
     contact_no = models.CharField(max_length=20,blank=True,null=True)
     grand_total = models.FloatField()
-    status = models.CharField(max_length=10,choices=STATUS,default='New')
+    status = models.CharField(max_length=10,choices=STATUS,default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL,null=True,blank=True)
+    order_id = models.CharField(max_length=100)
+    payment = models.ForeignKey(Payment, on_delete=models.SET_NULL,null=True)
 
     def __str__(self):
         return self.customer.name
+    
+    def get_shipping_address(self):
+        return f"{self.address.address}, {self.address.upazilla}, {self.address.thana}, {self.address.district}"
 
 
 class OrderedProducts(models.Model):
@@ -143,5 +159,8 @@ class OrderedProducts(models.Model):
     def __str__(self):
         return self.books.title
 
+class WebSettings(models.Model):
+    payment_instruction = RichTextField()
 
-
+    def __str__(self):
+        return f"Web Settings ( Don't delete it )"

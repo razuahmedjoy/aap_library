@@ -1,0 +1,76 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+p{
+    font-size: 1.5rem;
+}
+</style>
+
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="order-completed">
+    <div class="h-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-10 col-xl-8">
+              <div class="card" style="border-radius: 10px;">
+                <div class="card-header px-4 py-5">
+                  <h1 class="text-muted mb-0">Thanks for your Order!</h1>
+                </div>
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <p class="lead fw-normal mb-0">ORDER ID: <strong>{{order_id}}</strong> </p>
+                    <p class="text-muted mb-0">{{order.created_at}}</p>
+                  </div>
+           
+      
+                  <div class="d-flex justify-content-between flex-column pt-2">
+                    <p class="fw-bold mb-0">Order Details</p>
+                    <p class="mb-0"> <strong>Contact No :</strong> {{order.contact_no}}</p>
+                    <p class="mb-0"><strong>Shipping Address :</strong> {{order.get_shipping_address}}</p>
+                    <p class="mb-0"><strong>Payment Method :</strong> {{order.payment.payment_method}}</p>
+                    
+                    
+                  </div><br>
+                  <p>We will manually Chack Your payment and Update it. You can Check Order Details From Your Account Dashboard Also.</p>
+                  <p class="text-muted mb-0">If You found any information wrong , Contact With us as soon as Possible</p>
+      
+                
+                </div>
+                <div class="card-footer border-0 px-4 py-5"
+                  style="background-color: var(--green); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                  <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total Amount: <span class="h2 mb-0 ms-2">{{order.grand_total}}</span></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+
+</script>
+
+
+
+{% endblock js %}

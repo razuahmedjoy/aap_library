@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'bookstore',
 
     'crispy_forms',
-    # 'ckeditor',
+    'ckeditor',
     # 'tinymce',
     # 'import_export',
     # 'colorfield',

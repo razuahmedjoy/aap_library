@@ -1,5 +1,5 @@
 from django import forms
-from .models import Address
+from .models import Address, Payment
 
 class AddressForm(forms.ModelForm):
 
@@ -12,3 +12,12 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = ('user',)
+
+class PaymentForm(forms.ModelForm):
+    
+    sender_number = forms.IntegerField(required=True,label="Sender Number")
+    transaction_id = forms.CharField(required=True,label="Transaction ID")
+    
+    class Meta:
+        model = Payment
+        fields = ('sender_number','transaction_id')

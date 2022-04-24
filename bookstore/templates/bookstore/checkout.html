@@ -24,9 +24,26 @@
     input {
         font-size: 1.8rem !important;
     }
+
     .list-group {
-   
-    font-size: 1.5rem;
+
+        font-size: 1.5rem;
+    }
+
+    .input {
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1.5rem 0;
+    }
+
+    .payment-method-input p {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+    }
+
+    .payment-instruction {
+        font-size: 1.2rem;
     }
 </style>
 {%endblock style%}
@@ -55,43 +72,75 @@
                             </span>
                         </li>
                         {%endfor%}
-                       
+
                     </ol>
                     <ul class="list-group list-group">
-                        
+
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <h2 class="fw-bold">SubTotal</h2>
-                                
+
                             </div>
                             <span class="badge bg-danger rounded-pill">
                                 ৳{% cart_sub_total usercart %}
                             </span>
                         </li>
-                        
-                       
+
+
                     </ul>
 
 
                 </div>
             </div>
             <div id="cartList" class="col-md-8">
+                <form method="POST">
 
-                <div class="row cart-items">
-                    <div class="col-md-6">
-                        <h3 class="text-center page-title">Shipping Address</h3>
+                    {% csrf_token %}
+                    <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
+                    <div class="row cart-items">
 
-                        {{ addressForm|crispy }}
+                        <div class="col-md-6">
+                            <h3 class="text-center page-title">Shipping Address</h3>
+
+                            {{ addressForm|crispy }}
+
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-center page-title">Payment Details</h3>
+                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}</div>
+
+                            <div class="payment-method-input">
+                                <p>Select Any Payment Method</p>
+                                <div class="input">
+                                    <div class="form-check form-check-inline">
+
+                                        <input class="form-check-input" type="radio" name="payment_method" id="bKash"
+                                            value="bKash" checked>
+                                        <label class="form-check-label" for="bKash">bKash</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Nagad"
+                                            value="Nagad">
+                                        <label class="form-check-label" for="Nagad">Nagad</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Rocket"
+                                            value="Rocket">
+                                        <label class="form-check-label" for="Rocket">Rocket</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{paymentForm |crispy }}
+
+                            <input type="submit" class="form-control" value="Confirm Order">
+
+                        </div>
+
+
 
                     </div>
-                    <div class="col-md-6">
-                        <h3 class="text-center page-title">Payment Details</h3>
-
-
-                    </div>
-
-
-                </div>
+                </form>
             </div>
 
 
@@ -110,9 +159,10 @@
 
 {% block js %}
 <script>
-
+    $('select').attr('required',1);
+    openLoader()
     window.onload = async () => {
-        openLoader()
+
         const res = await fetch("{% url 'get_districts' %}")
         const data = await res.json()
         const districts = data.data
@@ -141,10 +191,12 @@
 
     const districtInput = document.getElementById('id_district')
     districtInput.addEventListener("change", async (e) => {
-        openLoader()
+
 
         const districtId = parseInt(e.target.selectedOptions[0].attributes.districtid.value)
-
+        if (districtId != "") {
+            openLoader()
+        }
         let url = "{% url 'get_upazilla' %}"
         url = `${url}?district_id=${districtId}`
         const res = await fetch(url)
@@ -166,8 +218,11 @@
 
     const upazillaInput = document.getElementById('id_upazilla')
     upazillaInput.addEventListener('change', async (e) => {
-        openLoader()
+
         const upazillaId = parseInt(e.target.selectedOptions[0].attributes.upazillaid.value)
+        if (upazillaId != "") {
+            openLoader()
+        }
         const url = 'https://raw.githubusercontent.com/nuhil/bangladesh-geocode/master/unions/unions.json'
         const res = await fetch(url)
         const data = await res.json()

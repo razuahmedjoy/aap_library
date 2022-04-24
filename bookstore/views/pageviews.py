@@ -3,16 +3,17 @@ from django.shortcuts import get_object_or_404, redirect, render
 from bookstore.models import *
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
-
+from time import time
 from django.conf import settings
 
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+from django.utils.crypto import get_random_string
 # Create your views here.
 
 
 # import custom forms
-from bookstore.forms import AddressForm
+from bookstore.forms import AddressForm, PaymentForm
 
 def book_store_home(request):
     single_category = None
@@ -129,16 +130,103 @@ def update_cart_item(request):
     else:
         raise Exception("Error")
     
+
 @login_required(login_url="login")
+def profile_view(request):
 
+    current_customer = Customers.objects.get(user=request.user)
+    orders = Order.objects.filter(customer = current_customer)
+
+    context = {
+        "orders": orders,
+        "customer": current_customer
+    }
+
+    return render(request, 'bookstore/profile.html',context)
+
+
+
+
+
+
+
+
+
+@login_required(login_url="login")
 def checkout(request):
-    addressForm = AddressForm()
-    
-    usercart = Cart.objects.filter(user=request.user.customers)
+    current_user = request.user
+    addressForm = AddressForm(instance=current_user)
+    paymentForm = PaymentForm(instance=current_user)
 
+    
+
+    usercart = Cart.objects.filter(user=request.user.customers)
+    try:
+        web_settings = WebSettings.objects.last()
+    except:
+        web_settings = None
+
+    if request.method == 'POST':
+        
+        district = request.POST['district']
+        upazilla = request.POST['upazilla']
+        thana = request.POST['thana']
+        address = request.POST['address']
+        contact_no = request.POST['contact_no']
+        payment_method = request.POST['payment_method']
+        sender_number = request.POST['sender_number']
+        transaction_id = request.POST['transaction_id']
+
+        total_amount = int(request.POST['total_amount'])
+        
+        customer = Customers.objects.get(user=request.user)
+
+        # create payment
+        newPayment = Payment(customer=customer,sender_number=sender_number,payment_method=payment_method,transaction_id=transaction_id,total_amount=total_amount)
+        
+        # generate orderid
+        order_id = f"AAP-{get_random_string(8).upper()}{int(time())}"
+        newPayment.order_id = order_id
+        newPayment.save()
+
+        # set address
+        newOrderAddress = Address(user=customer,district=district,upazilla=upazilla,thana=thana,address=address,contact_no=contact_no)
+        newOrderAddress.save()
+
+
+        # create order
+        newOrder = Order(customer=customer,contact_no=contact_no,grand_total=total_amount,address=newOrderAddress,order_id=order_id,payment=newPayment)
+        newOrder.save()
+
+        for item in usercart:
+            orderd_product = OrderedProducts()
+            orderd_product.order = newOrder
+            orderd_product.customer = customer
+            orderd_product.books = item.book
+            orderd_product.quantity = item.quantity
+            orderd_product.price = item.price
+            orderd_product.total_amount = item.total_amount
+            orderd_product.save()
+            
+        Cart.objects.filter(user=customer).delete()
+        order = newOrder
+
+        
+        context = {
+            "order_id": order_id,
+            "order":order,
+        }
+        return render(request,"bookstore/ordercomplete.html",context)
+    
+
+    if len(usercart)  == 0:
+        return HttpResponse("You dont have any product on your cart. Please Add some product")
+    
     context = {
         "usercart":usercart,
         "addressForm":addressForm,
+        "paymentForm":paymentForm,
+        "web_settings" : web_settings
     }
 
     return render(request, 'bookstore/checkout.html',context)

@@ -18,6 +18,12 @@ urlpatterns = [
     path('passwordreset/', passwordresetView, name="passwordreset" ),
 
 
+     # user profile
+    path('profile/', profile_view, name="profile" ),
+   
+
+
+
     path('cart/', cart, name="cart" ),
     path('buy_now/', buy_now, name="buy_now" ),
     path('update_cart_item', update_cart_item, name="update_cart_item" ),
