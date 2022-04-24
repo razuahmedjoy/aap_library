@@ -118,9 +118,9 @@ DATABASES = {
             'charset': 'utf8mb4',
      
         },
-        'NAME': 'aapbookstoredb',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'yranibuh_aap_library',
+        'USER': 'yranibuh_aap_library',
+        'PASSWORD': 'yranibuh_aap_library',
         'HOST': 'localhost',
         'PORT': '3306',
         
