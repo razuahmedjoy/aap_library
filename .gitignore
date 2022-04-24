@@ -1,3 +1,4 @@
 /bookenv
 db.sqlite3
 /aapbookstore/settings_dev.py
+/aapbookstore/secret_key.txt
