@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(BASE_DIR/'aapbookstore/secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECRET_KEY = 'django-insecure-wxnsm2r5woo8_0*n11zh!l8-(nw89w+9*l9a$2@n^d5lyb=fqe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
