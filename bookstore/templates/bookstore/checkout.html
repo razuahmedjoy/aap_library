@@ -1,0 +1,196 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+{% load crispy_forms_tags %}
+{% load cart_sub_total %}
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+    .form-group {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+
+    }
+
+    select,
+    input {
+        font-size: 1.8rem !important;
+    }
+    .list-group {
+   
+    font-size: 1.5rem;
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="cart-page">
+    <h3 class="text-center page-title">Checkout</h3>
+
+    <div class="cart-container container">
+        <a href="{% url 'cart' %}" class="btn btn-outline-secondary bg-dark btn-sm text-light">Back To Cart</a>
+        <div class="row justify-content-center m-auto">
+
+            <div id="cartList" class="col-md-4">
+                <div class="cart-items">
+                    <ol class="list-group list-group-numbered">
+                        {% for item in usercart %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{item.book.title}}</div>
+                                <span>{{item.quantity}} x ৳{{item.price}}</span>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">
+                                ৳{{item.total_amount}}
+                            </span>
+                        </li>
+                        {%endfor%}
+                       
+                    </ol>
+                    <ul class="list-group list-group">
+                        
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <h2 class="fw-bold">SubTotal</h2>
+                                
+                            </div>
+                            <span class="badge bg-danger rounded-pill">
+                                ৳{% cart_sub_total usercart %}
+                            </span>
+                        </li>
+                        
+                       
+                    </ul>
+
+
+                </div>
+            </div>
+            <div id="cartList" class="col-md-8">
+
+                <div class="row cart-items">
+                    <div class="col-md-6">
+                        <h3 class="text-center page-title">Shipping Address</h3>
+
+                        {{ addressForm|crispy }}
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="text-center page-title">Payment Details</h3>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    {% include 'bookstore/partials/loader.html' %}
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+
+    window.onload = async () => {
+        openLoader()
+        const res = await fetch("{% url 'get_districts' %}")
+        const data = await res.json()
+        const districts = data.data
+        console.log(districts)
+
+        // const newAr = []
+        // for(let item of districts){
+        //     const newData ={}
+        //     newData['id'] = item.id; 
+        //     newData['name'] = item.name;
+        //     newData['name_bn'] = item.bn_name;
+        //     newAr.push(newData)
+        // }
+        // console.log(JSON.stringify(newAr))
+        let options = '<option value="">Select District</option>'
+
+        for (let item of districts) {
+            options += `<option value="${item.name}" districtid="${item.id}">${item.name_bn}</option>`
+        }
+        // console.log(options)
+        districtContainer = document.getElementById('id_district')
+        districtContainer.innerHTML = options;
+        closeLoader()
+
+    }
+
+    const districtInput = document.getElementById('id_district')
+    districtInput.addEventListener("change", async (e) => {
+        openLoader()
+
+        const districtId = parseInt(e.target.selectedOptions[0].attributes.districtid.value)
+
+        let url = "{% url 'get_upazilla' %}"
+        url = `${url}?district_id=${districtId}`
+        const res = await fetch(url)
+        const data = await res.json()
+        const upzilla = data.data
+
+
+        let options = '<option value="">Select Upazilla</option>'
+
+        for (let item of upzilla) {
+            options += `<option value="${item.name}" upazillaid="${item.id}">${item.name_bn}</option>`
+        }
+        // console.log(options)
+        upazillaContainer = document.getElementById('id_upazilla')
+        upazillaContainer.innerHTML = options;
+        closeLoader()
+
+    })
+
+    const upazillaInput = document.getElementById('id_upazilla')
+    upazillaInput.addEventListener('change', async (e) => {
+        openLoader()
+        const upazillaId = parseInt(e.target.selectedOptions[0].attributes.upazillaid.value)
+        const url = 'https://raw.githubusercontent.com/nuhil/bangladesh-geocode/master/unions/unions.json'
+        const res = await fetch(url)
+        const data = await res.json()
+        const unions = data[2].data
+
+        const filtered = unions.filter(item => item.upazilla_id == upazillaId)
+        // console.log(filtered)
+
+        let options = '<option value="">Select Area</option>'
+
+        for (let item of filtered) {
+            options += `<option value="${item.name}">${item.bn_name}</option>`
+        }
+        // console.log(options)
+        thanaContainer = document.getElementById('id_thana')
+        thanaContainer.innerHTML = options;
+
+
+        closeLoader()
+
+    })
+</script>
+
+
+
+{% endblock js %}

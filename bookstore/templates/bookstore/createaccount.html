@@ -1,0 +1,68 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+<style>
+    .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* right: -105%; */
+        z-index: 10000;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="form-container">
+
+    <form class="createaccount" method="post" action="{% url 'createaccount' %}">
+        <h3>Create Account</h3> 
+
+        
+        {% if error %}
+        <p class="text-danger">{{error}}</p>
+        {%endif%}
+
+        {% csrf_token %}
+        
+        <input id="contactno" type="number" name="contactno" value="{{contact_no}}" class="box" readonly>
+
+        <span>Enter your name</span>
+        <input id="username" type="text" name="username" class="box" required>
+      
+        <span>Enter any 6 Digits Password</span>
+        <input id="password" type="password" name="password" class="box" required>
+
+        <input type="submit" value="Create Account" class="btn form-submit">
+
+    </form>
+  
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+    const form =  document.getElementsByTagName("form")[1]
+    form.addEventListener("submit",()=>{
+        openLoader();
+    })
+ </script>
+
+
+{% endblock js %}

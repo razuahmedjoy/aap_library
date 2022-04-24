@@ -1,0 +1,57 @@
+{% load static %}
+
+{% for sub_cat in single_category.sub_category_set.all %}
+<section class="home" id="home">
+
+    <h1 class="heading"> <span>{{sub_cat.name}}</span> </h1>
+
+    <div class="row">
+
+        <div class="swiper books-slider slider-large">
+            <div class="swiper-wrapper">
+
+
+
+
+                {% for book in sub_cat.books_set.all %}
+                <a href="#" class="swiper-slide swiper-slide-active single-book" role="group" aria-label="1 / 6"
+                    style="">
+                    <div class="card mx-auto book-details" style="width: 18rem;"><img src={{book.cover_photo.url}}
+                            alt="{{book.title}}" class="card-img-top" style=""></div>
+                    <div class="card mx-auto book-footer" style="width: 18rem;">
+                        <div class="book-body">
+
+                            <div class="book-title"><strong>{{book.title}}</strong></div>
+                            <h4 class="book-price" style="text-decoration: none;">৳{{book.price}}</h4>
+                        </div>
+
+                    </div>
+
+
+                </a>
+
+                {%endfor %}
+
+
+
+
+
+            </div>
+            <img src="{% static '' %}image/stand.png" class="stand" alt="">
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+{%endfor%}
+
+{%block externaljs%}
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{% static 'js/script.js' %}"></script>
+{%endblock externaljs%}

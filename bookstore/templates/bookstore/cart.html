@@ -1,0 +1,168 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="cart-page">
+    <h3 class="text-center page-title">Cart</h3>
+
+    <div class="cart-container container">
+        <div class="row justify-content-center m-auto">
+           
+            <div id="cartList" class="col-md-8">
+                <div class="cart-items">
+                    {% if usercart %}
+                    {% for item in usercart %}
+                    <div class="item">
+                        <img src="{{item.book.cover_photo.url}}" class="cart-img" alt="">
+                        <div class="info">
+                            <h3>{{item.book.title}}</h3>
+                            <span>${{item.book.price}}</span>
+                        </div>
+
+
+
+                        <div class="quantity-counter d-flex gap-2">
+                            <input id="decreaseBtn" class="cart-quantity-btn" type="button" value="-"
+                                onclick="decrease('{{item.id}}')">
+                            <input class="form-control" type="number" readonly value="{{item.quantity}}"
+                                id="quantity{{item.id}}">
+                            <input class="cart-quantity-btn" type="button" value="+" onclick="increase('{{item.id}}')">
+
+                        </div>
+                        <div>
+                            <button onclick="deleteItem('{{item.id}}')" id="removeItembtn">X</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'checkout' %}"class="btn bg-success">Checkout</a>
+                    </div>
+
+                    {% else %}
+
+                    <h3 class="text-center py-5 alert alert-danger">You Don't have any books In your Shopping Bag. </h3>
+
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    {% include 'bookstore/partials/loader.html' %}
+
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    const increase = (cartItemid) => {
+        // console.log(cartItemid);
+        $.ajax({
+            type: "GET",
+            url: "{% url 'update_cart_item' %}",
+            data: {
+                'cartItemid': cartItemid,
+                'action': 'increase',
+            },
+
+            success: function (response) {
+                // console.log(response)
+                if (response.status == "success") {
+
+                    const selectorId = "quantity" + cartItemid
+                    // console.log(selectorId)
+                    document.getElementById(selectorId).value = response.quantity
+                }
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+
+
+        })
+
+    }
+    const decrease = (cartItemid) => {
+        // console.log(cartItemid);
+        $.ajax({
+            type: "GET",
+            url: "{% url 'update_cart_item' %}",
+            data: {
+                'cartItemid': cartItemid,
+                'action': 'decrease',
+            },
+
+            success: function (response) {
+                // console.log(response)
+                if (response.status == "success") {
+
+                    const selectorId = "quantity" + cartItemid
+                    // console.log(selectorId)
+                    document.getElementById(selectorId).value = response.quantity
+                }
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+
+
+        })
+
+
+    }
+    const deleteItem = (cartItemid) => {
+        // console.log(cartItemid);
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'update_cart_item' %}",
+            data: {
+                'cartItemid': cartItemid,
+                'action': 'delete',
+            },
+
+            success: function (response) {
+
+                const { status, usercart } = response
+                if (status == "success") {
+
+                    document.getElementById("cartList").innerHTML = usercart;
+
+                }
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+
+
+        })
+
+
+    }
+</script>
+
+
+
+{% endblock js %}

@@ -1,0 +1,32 @@
+{% load static %}
+
+{% if usercart %}
+{% for item in usercart %}
+<div class="item">
+    <img src="{{item.book.cover_photo.url}}" class="cart-img" alt="">
+    <div class="info">
+        <h3>{{item.book.title}}</h3>
+        <span>${{item.book.price}}</span>
+    </div>
+
+
+
+    <div class="quantity-counter d-flex gap-2">
+        <input id="decreaseBtn" class="cart-quantity-btn" type="button" value="-"
+            onclick="decrease('{{item.id}}')">
+        <input class="form-control" type="number" readonly value="{{item.quantity}}"
+            id="quantity{{item.id}}">
+        <input class="cart-quantity-btn" type="button" value="+" onclick="increase('{{item.id}}')">
+
+    </div>
+    <div>
+        <button onclick="deleteItem('{{item.id}}')" id="removeItembtn">X</button>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+
+
+<h3 class="text-center py-5 alert alert-danger">You Don't have any books In your Shopping Bag. </h3>
+{%endif %}

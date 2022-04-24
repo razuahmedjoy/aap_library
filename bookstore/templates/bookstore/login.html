@@ -1,0 +1,81 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+<style>
+    .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* right: -105%; */
+        z-index: 10000;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="form-container">
+
+    <form class="login" method="post" action="{% url 'login' %}">
+        <h3>Login</h3> 
+
+        
+        {% if success %}
+        <p class="text-success">{{success}}</p>
+        {%endif%}
+        {% if error %}
+        <p class="text-danger">{{error}}</p>
+        {%endif%}
+
+        {% csrf_token %}
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{request.GET.next}}" />
+        {%endif%}
+      
+        <span>Enter your Contact No</span>
+        <input type="number" name="contact_no" class="box" required>
+      
+        <span>Enter Password</span>
+        <input id="password" type="password" name="password" class="box" required>
+
+        <input type="submit" value="Login" class="btn form-submit">
+        <p>
+            <small>Don't Have any account? <a href="{% url 'register' %}">Create Account Now</a> </small>
+        </p>
+        <p>
+            <small>Forgot your password? <a href="{% url 'passwordreset' %}">Reset Password</a> </small>
+        </p>
+
+    </form>
+  
+
+    {% include 'bookstore/partials/loader.html' %}
+  
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    const form =  document.getElementsByTagName("form")[1]
+    form.addEventListener("submit",()=>{
+        openLoader();
+    })
+ </script>
+
+
+
+{% endblock js %}

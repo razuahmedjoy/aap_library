@@ -1,0 +1,102 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+{%block title%}
+AAPLibrary - {{book.title}}
+{%endblock title%}
+
+
+
+{% block content %}
+
+<div class="single-book-container container">
+    <div class="row py-3 mb-5">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <div class="book-cover-photo">
+                <img src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
+            </div>
+        </div>
+        <div class="col-md-8 p-4">
+            <h2 class="title fw-bold">{{book.title}}</h2>
+
+            <div class="price-box">
+                Price: <span>${{book.price}}</span>
+            </div>
+
+            <div class="category-info" style="font-size:16px;">
+                Categories:
+                {% for cat in book.category.all %}
+                <span class="badge bg-info">{{cat.name}}</span>
+                {% endfor %}
+            </div>
+
+            <div class="add_to_cart">
+                <a href="{% url 'buy_now' %}?id={{book.id}}">
+                    <button class="btn btn-main">Buy Now</button>
+                </a>
+            </div>
+
+            <div class="my-5">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active description-btn" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">Description</button>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                        {{book.description|safe}}</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5 row">
+        <section class="arrivals" id="arrivals">
+
+            <h1 class="heading"> <span>Similar Books</span> </h1>
+
+            <div class="swiper arrivals-slider">
+
+                <div class="swiper-wrapper">
+
+                    {% for cat in book.category.all %}
+
+                    {% for book in cat.books_set.all %}
+
+
+                    <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" class="swiper-slide box">
+                        <div class="image">
+                            <img src="{{book.cover_photo.url}}" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>{{book.title}}</h3>
+                            <div class="price">${{book.price}}</div>
+
+                        </div>
+                    </a>
+                    {%endfor %}
+                    {% endfor %}
+
+
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+<style>
+    .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* right: -105%; */
+        z-index: 10000;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="form-container">
+
+    {% if otp_sent %}
+    <form class="varify-otp" method="post">
+        <h3>Enter the OTP</h3>
+
+        <p class="text-success">6 Digits OTP is sent to your number <strong>{{contact_no}}</strong> </p>
+        {% if error %}
+        <p class="text-danger">{{error}}</p>
+        {%endif%}
+        {% csrf_token %}
+        <input id="contact_no" type="hidden" name="contact_no" value="{{contact_no}}" class="box" required>
+        <input id="serverotp" type="hidden" name="serverotp" value="{{serverotp}}" class="box" required>
+        <span>Enter OTP</span>
+        <input id="userotp" type="number" name="userotp" class="box" required>
+
+        <input id="sendotpbtn" type="submit" value="Verify" class="btn form-submit">
+
+    </form>
+    {%else%}
+    <form class="send-otp-form" method="get">
+        <h3>Create Account</h3>
+
+        {% if error %}
+        <p class="text-danger">{{error}}</p>
+        {%endif%}
+
+        <span>Enter Contact No.</span>
+        <input id="contact_no" type="number" name="contact_no" class="box" placeholder="017......." required>
+
+        <input type="submit" value="Next" class="btn">
+
+        <p>
+            <small>Already Have an account? <a href="{% url 'login' %}">Login Now</a> </small>
+        </p>
+
+    </form>
+    {%endif%}
+
+    {% include 'bookstore/partials/loader.html' %}
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+   const form =  document.getElementsByTagName("form")[1]
+   form.addEventListener("submit",()=>{
+       openLoader();
+   })
+</script>
+
+
+{% endblock js %}
