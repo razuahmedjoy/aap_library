@@ -1,0 +1,3980 @@
+[
+    {
+        "areaId": 4,
+        "area": "Agargaon",
+        "areaBangla": "আগারগাঁও",
+        "cityId": 2
+    },
+    {
+        "areaId": 10,
+        "area": "Azimpur",
+        "areaBangla": "আজিমপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 3,
+        "area": "Adabar",
+        "areaBangla": "আদাবর",
+        "cityId": 2
+    },
+    {
+        "areaId": 726,
+        "area": "Aftabnagar",
+        "areaBangla": "আফতাবনগর",
+        "cityId": 2
+    },
+    {
+        "areaId": 42,
+        "area": "Ibrahimpur",
+        "areaBangla": "ইব্রাহিমপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 707,
+        "area": "Islampur",
+        "areaBangla": "ইসলামপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 36,
+        "area": "Eskaton",
+        "areaBangla": "ইস্কাটন",
+        "cityId": 2
+    },
+    {
+        "areaId": 111,
+        "area": "UttarKhan",
+        "areaBangla": "উত্তর খান",
+        "cityId": 2
+    },
+    {
+        "areaId": 110,
+        "area": "Uttara",
+        "areaBangla": "উত্তরা",
+        "cityId": 2
+    },
+    {
+        "areaId": 31,
+        "area": "ElephantRoad",
+        "areaBangla": "এ্যালিফেন্ট রোড",
+        "cityId": 2
+    },
+    {
+        "areaId": 112,
+        "area": "Wari",
+        "areaBangla": "ওয়ারী",
+        "cityId": 2
+    },
+    {
+        "areaId": 636,
+        "area": "Kadamtoli",
+        "areaBangla": "কদমতলী",
+        "cityId": 2
+    },
+    {
+        "areaId": 49,
+        "area": "Kamalapur",
+        "areaBangla": "কমলাপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 47,
+        "area": "Kalabagan",
+        "areaBangla": "কলাবাগান",
+        "cityId": 2
+    },
+    {
+        "areaId": 48,
+        "area": "Kalyanpur",
+        "areaBangla": "কল্যাণপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 52,
+        "area": "Kawranbazar",
+        "areaBangla": "কাওরানবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 665,
+        "area": "Kakrail",
+        "areaBangla": "কাকরাইল",
+        "cityId": 2
+    },
+    {
+        "areaId": 53,
+        "area": "Kazipara",
+        "areaBangla": "কাজীপাড়া",
+        "cityId": 2
+    },
+    {
+        "areaId": 51,
+        "area": "KathalBagan",
+        "areaBangla": "কাঠালবাগান",
+        "cityId": 2
+    },
+    {
+        "areaId": 46,
+        "area": "Kafrul",
+        "areaBangla": "কাফরুল",
+        "cityId": 2
+    },
+    {
+        "areaId": 50,
+        "area": "Kamrangirchar",
+        "areaBangla": "কামরঙ্গীরচর",
+        "cityId": 2
+    },
+    {
+        "areaId": 722,
+        "area": "Kuril Bishoroad",
+        "areaBangla": "কুড়িল বিশ্বরোড",
+        "cityId": 2
+    },
+    {
+        "areaId": 7,
+        "area": "Keraniganj",
+        "areaBangla": "কেরানীগঞ্জ",
+        "cityId": 2
+    },
+    {
+        "areaId": 57,
+        "area": "Kotwali",
+        "areaBangla": "কোতয়ালী",
+        "cityId": 2
+    },
+    {
+        "areaId": 22,
+        "area": "Cantonment",
+        "areaBangla": "ক্যান্টনমেন্ট",
+        "cityId": 2
+    },
+    {
+        "areaId": 56,
+        "area": "Khilkhet",
+        "areaBangla": "খিলখেত",
+        "cityId": 2
+    },
+    {
+        "areaId": 55,
+        "area": "Khilgaon",
+        "areaBangla": "খিলগাঁও",
+        "cityId": 2
+    },
+    {
+        "areaId": 33,
+        "area": "Gabtali",
+        "areaBangla": "গাবতলী",
+        "cityId": 2
+    },
+    {
+        "areaId": 38,
+        "area": "Gulshan-1",
+        "areaBangla": "গুলশান-১",
+        "cityId": 2
+    },
+    {
+        "areaId": 39,
+        "area": "Gulshan-2",
+        "areaBangla": "গুলশান-২",
+        "cityId": 2
+    },
+    {
+        "areaId": 37,
+        "area": "Gulistan",
+        "areaBangla": "গুলিস্থান",
+        "cityId": 2
+    },
+    {
+        "areaId": 34,
+        "area": "Gandaria",
+        "areaBangla": "গেন্ডারিয়া",
+        "cityId": 2
+    },
+    {
+        "areaId": 35,
+        "area": "Green Road",
+        "areaBangla": "গ্রীন রোড",
+        "cityId": 2
+    },
+    {
+        "areaId": 23,
+        "area": "Choukbazar",
+        "areaBangla": "চকবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 44,
+        "area": "Jigatala",
+        "areaBangla": "জিগাতলা",
+        "cityId": 2
+    },
+    {
+        "areaId": 45,
+        "area": "Jurain",
+        "areaBangla": "জুরাইন",
+        "cityId": 2
+    },
+    {
+        "areaId": 109,
+        "area": "Tikatuli",
+        "areaBangla": "টিকাটুলি",
+        "cityId": 2
+    },
+    {
+        "areaId": 30,
+        "area": "DUcampus",
+        "areaBangla": "ডিইউ ক্যাম্পাস",
+        "cityId": 2
+    },
+    {
+        "areaId": 26,
+        "area": "Demra",
+        "areaBangla": "ডেমরা",
+        "cityId": 2
+    },
+    {
+        "areaId": 644,
+        "area": "Turag",
+        "areaBangla": "তুরাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 108,
+        "area": "Tejkunipara",
+        "areaBangla": "তেজকুনিপাড়া",
+        "cityId": 2
+    },
+    {
+        "areaId": 107,
+        "area": "Tejgaon",
+        "areaBangla": "তেজগাঁও",
+        "cityId": 2
+    },
+    {
+        "areaId": 24,
+        "area": "DakhinKhan",
+        "areaBangla": "দক্ষিণ খান",
+        "cityId": 2
+    },
+    {
+        "areaId": 25,
+        "area": "Dayaganj",
+        "areaBangla": "দয়াগঞ্জ",
+        "cityId": 2
+    },
+    {
+        "areaId": 714,
+        "area": "Daraz Office",
+        "areaBangla": "দারাজ অফিস",
+        "cityId": 2
+    },
+    {
+        "areaId": 54,
+        "area": "Diabaria",
+        "areaBangla": "দিয়াবাড়ী",
+        "cityId": 2
+    },
+    {
+        "areaId": 6,
+        "area": "Dohar",
+        "areaBangla": "দোহার",
+        "cityId": 2
+    },
+    {
+        "areaId": 28,
+        "area": "Dhanmondi",
+        "areaBangla": "ধানমন্ডি",
+        "cityId": 2
+    },
+    {
+        "areaId": 5,
+        "area": "Dhamrai",
+        "areaBangla": "ধামরাই",
+        "cityId": 2
+    },
+    {
+        "areaId": 8,
+        "area": "Nawabganj",
+        "areaBangla": "নবাবগঞ্জ",
+        "cityId": 2
+    },
+    {
+        "areaId": 78,
+        "area": "NayaPaltan",
+        "areaBangla": "নয়া পল্টন",
+        "cityId": 2
+    },
+    {
+        "areaId": 73,
+        "area": "Nakhalpara",
+        "areaBangla": "নাখালপাড়া",
+        "cityId": 2
+    },
+    {
+        "areaId": 74,
+        "area": "Narinda",
+        "areaBangla": "নারিন্দা",
+        "cityId": 2
+    },
+    {
+        "areaId": 79,
+        "area": "NewEskaton",
+        "areaBangla": "নিউ ইস্কাটন",
+        "cityId": 2
+    },
+    {
+        "areaId": 80,
+        "area": "NewMarket",
+        "areaBangla": "নিউ মার্কেট",
+        "cityId": 2
+    },
+    {
+        "areaId": 76,
+        "area": "Nikunjo",
+        "areaBangla": "নিকুঞ্জ",
+        "cityId": 2
+    },
+    {
+        "areaId": 75,
+        "area": "Niketon",
+        "areaBangla": "নিকেতন",
+        "cityId": 2
+    },
+    {
+        "areaId": 81,
+        "area": "Nilkhet",
+        "areaBangla": "নীলক্ষেত",
+        "cityId": 2
+    },
+    {
+        "areaId": 82,
+        "area": "Polashi",
+        "areaBangla": "পলাশী",
+        "cityId": 2
+    },
+    {
+        "areaId": 83,
+        "area": "Pallabi",
+        "areaBangla": "পল্লবী",
+        "cityId": 2
+    },
+    {
+        "areaId": 84,
+        "area": "Panthapath",
+        "areaBangla": "পান্থপথ",
+        "cityId": 2
+    },
+    {
+        "areaId": 86,
+        "area": "PuranaPaltan",
+        "areaBangla": "পুরানা পল্টন",
+        "cityId": 2
+    },
+    {
+        "areaId": 87,
+        "area": "Purbachal",
+        "areaBangla": "পূর্বাচল",
+        "cityId": 2
+    },
+    {
+        "areaId": 85,
+        "area": "Postagola",
+        "areaBangla": "পোস্তগোলা",
+        "cityId": 2
+    },
+    {
+        "areaId": 32,
+        "area": "Farmgate",
+        "areaBangla": "ফার্মগেট",
+        "cityId": 2
+    },
+    {
+        "areaId": 12,
+        "area": "Bakshibazar",
+        "areaBangla": "বকশীবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 15,
+        "area": "Banasree",
+        "areaBangla": "বনশ্রী",
+        "cityId": 2
+    },
+    {
+        "areaId": 13,
+        "area": "Banani",
+        "areaBangla": "বনানী",
+        "cityId": 2
+    },
+    {
+        "areaId": 14,
+        "area": "BananiDOHS",
+        "areaBangla": "বনানী ডিওএইচএস",
+        "cityId": 2
+    },
+    {
+        "areaId": 16,
+        "area": "Bangshal",
+        "areaBangla": "বংশাল",
+        "cityId": 2
+    },
+    {
+        "areaId": 20,
+        "area": "Basundhara",
+        "areaBangla": "বসুন্ধরা",
+        "cityId": 2
+    },
+    {
+        "areaId": 11,
+        "area": "Badda",
+        "areaBangla": "বাড্ডা",
+        "cityId": 2
+    },
+    {
+        "areaId": 17,
+        "area": "Baridhara",
+        "areaBangla": "বারিধারা",
+        "cityId": 2
+    },
+    {
+        "areaId": 18,
+        "area": "BaridharaDOHS",
+        "areaBangla": "বারিধারা ডিওএইচএস",
+        "cityId": 2
+    },
+    {
+        "areaId": 678,
+        "area": "Banglabazar",
+        "areaBangla": "বাংলাবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 659,
+        "area": "Banglamotor",
+        "areaBangla": "বাংলামটর",
+        "cityId": 2
+    },
+    {
+        "areaId": 19,
+        "area": "Basabo",
+        "areaBangla": "বাসাবো",
+        "cityId": 2
+    },
+    {
+        "areaId": 645,
+        "area": "Airport Thana",
+        "areaBangla": "বিমানবন্দর থানা",
+        "cityId": 2
+    },
+    {
+        "areaId": 21,
+        "area": "BUETcampus",
+        "areaBangla": "বুয়েট ক্যাম্পাস",
+        "cityId": 2
+    },
+    {
+        "areaId": 60,
+        "area": "Maghbazar",
+        "areaBangla": "মগবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 72,
+        "area": "Motijheel",
+        "areaBangla": "মতিঝিল",
+        "cityId": 2
+    },
+    {
+        "areaId": 2,
+        "area": "Middle Badda",
+        "areaBangla": "মধ্য বাড্ডা",
+        "cityId": 2
+    },
+    {
+        "areaId": 675,
+        "area": "Moddho Vatara",
+        "areaBangla": "মধ্য ভাটারা",
+        "cityId": 2
+    },
+    {
+        "areaId": 69,
+        "area": "Mohakhali",
+        "areaBangla": "মহাখালী",
+        "cityId": 2
+    },
+    {
+        "areaId": 70,
+        "area": "MohakhaliDOHS",
+        "areaBangla": "মহাখালী ডিওএইচএস",
+        "cityId": 2
+    },
+    {
+        "areaId": 61,
+        "area": "Malibag",
+        "areaBangla": "মালিবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 62,
+        "area": "Mirpur",
+        "areaBangla": "মিরপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 68,
+        "area": "MirpurDOHS",
+        "areaBangla": "মিরপুর ডিওএইচএস",
+        "cityId": 2
+    },
+    {
+        "areaId": 63,
+        "area": "Mirpur-1",
+        "areaBangla": "মিরপুর-১",
+        "cityId": 2
+    },
+    {
+        "areaId": 65,
+        "area": "Mirpur-10",
+        "areaBangla": "মিরপুর-১০",
+        "cityId": 2
+    },
+    {
+        "areaId": 66,
+        "area": "Mirpur-11",
+        "areaBangla": "মিরপুর-১১",
+        "cityId": 2
+    },
+    {
+        "areaId": 67,
+        "area": "Mirpur-12",
+        "areaBangla": "মিরপুর-১২",
+        "cityId": 2
+    },
+    {
+        "areaId": 64,
+        "area": "Mirpur-2",
+        "areaBangla": "মিরপুর-২",
+        "cityId": 2
+    },
+    {
+        "areaId": 677,
+        "area": "Mughda",
+        "areaBangla": "মুগদা",
+        "cityId": 2
+    },
+    {
+        "areaId": 71,
+        "area": "Mohammadpur",
+        "areaBangla": "মোহাম্মদপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 43,
+        "area": "Jatrabari",
+        "areaBangla": "যাত্রাবাড়ী",
+        "cityId": 2
+    },
+    {
+        "areaId": 90,
+        "area": "Ramna",
+        "areaBangla": "রমনা",
+        "cityId": 2
+    },
+    {
+        "areaId": 88,
+        "area": "Rajabazar",
+        "areaBangla": "রাজাবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 89,
+        "area": "Rajarbag",
+        "areaBangla": "রাজারবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 91,
+        "area": "Rampura",
+        "areaBangla": "রামপুরা",
+        "cityId": 2
+    },
+    {
+        "areaId": 92,
+        "area": "Rayerbazar",
+        "areaBangla": "রায়েরবাজার",
+        "cityId": 2
+    },
+    {
+        "areaId": 93,
+        "area": "Rupnagar",
+        "areaBangla": "রূপনগর",
+        "cityId": 2
+    },
+    {
+        "areaId": 58,
+        "area": "Lalbag",
+        "areaBangla": "লালবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 59,
+        "area": "Lalmatia",
+        "areaBangla": "লালমাটিয়া",
+        "cityId": 2
+    },
+    {
+        "areaId": 101,
+        "area": "Shantinagar",
+        "areaBangla": "শান্তিনগর",
+        "cityId": 2
+    },
+    {
+        "areaId": 99,
+        "area": "Shahjadpur",
+        "areaBangla": "শাহজাদপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 98,
+        "area": "Shajahanpur",
+        "areaBangla": "শাহজানপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 97,
+        "area": "Shahbag",
+        "areaBangla": "শাহবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 641,
+        "area": "Shimrail",
+        "areaBangla": "শিমরাইল",
+        "cityId": 2
+    },
+    {
+        "areaId": 104,
+        "area": "Shukrabad",
+        "areaBangla": "শুক্রাবাদ",
+        "cityId": 2
+    },
+    {
+        "areaId": 102,
+        "area": "Sher-e-BanglaNagar",
+        "areaBangla": "শেরে বাংলা নগর",
+        "cityId": 2
+    },
+    {
+        "areaId": 100,
+        "area": "Shampur",
+        "areaBangla": "শ্যামপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 103,
+        "area": "Shyamoli",
+        "areaBangla": "শ্যামলী",
+        "cityId": 2
+    },
+    {
+        "areaId": 95,
+        "area": "Sadarghat",
+        "areaBangla": "সদরঘাট",
+        "cityId": 2
+    },
+    {
+        "areaId": 94,
+        "area": "Sabujbag",
+        "areaBangla": "সবুজবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 9,
+        "area": "Savar",
+        "areaBangla": "সাভার",
+        "cityId": 2
+    },
+    {
+        "areaId": 105,
+        "area": "Siddeswary",
+        "areaBangla": "সিদ্ধেশ্বরী",
+        "cityId": 2
+    },
+    {
+        "areaId": 106,
+        "area": "Sutrapur",
+        "areaBangla": "সূত্রাপুর",
+        "cityId": 2
+    },
+    {
+        "areaId": 96,
+        "area": "Segunbagicha",
+        "areaBangla": "সেগুনবাগিচা",
+        "cityId": 2
+    },
+    {
+        "areaId": 40,
+        "area": "Hazaribagh",
+        "areaBangla": "হাজারীবাগ",
+        "cityId": 2
+    },
+    {
+        "areaId": 660,
+        "area": "Hatirpul",
+        "areaBangla": "হাতিরপুল",
+        "cityId": 2
+    },
+    {
+        "areaId": 313,
+        "area": "Godagari",
+        "areaBangla": "গোদাগাড়ি",
+        "cityId": 4
+    },
+    {
+        "areaId": 311,
+        "area": "Charghat",
+        "areaBangla": "চারঘাট",
+        "cityId": 4
+    },
+    {
+        "areaId": 646,
+        "area": "Cherag Ghat",
+        "areaBangla": "চেরাগঘাট",
+        "cityId": 4
+    },
+    {
+        "areaId": 316,
+        "area": "Tanore",
+        "areaBangla": "তানোর",
+        "cityId": 4
+    },
+    {
+        "areaId": 312,
+        "area": "Durgapur",
+        "areaBangla": "দুর্গাপুর",
+        "cityId": 4
+    },
+    {
+        "areaId": 625,
+        "area": "Poba",
+        "areaBangla": "পবা",
+        "cityId": 4
+    },
+    {
+        "areaId": 315,
+        "area": "Puthia",
+        "areaBangla": "পুটিয়া",
+        "cityId": 4
+    },
+    {
+        "areaId": 310,
+        "area": "Bagmara",
+        "areaBangla": "বাঘমারা",
+        "cityId": 4
+    },
+    {
+        "areaId": 309,
+        "area": "Bagha",
+        "areaBangla": "বাঘা",
+        "cityId": 4
+    },
+    {
+        "areaId": 314,
+        "area": "Mohanpur",
+        "areaBangla": "মোহনপুর",
+        "cityId": 4
+    },
+    {
+        "areaId": 624,
+        "area": "Rajshahi City",
+        "areaBangla": "রাজশাহী সিটি",
+        "cityId": 4
+    },
+    {
+        "areaId": 614,
+        "area": "Kotoali",
+        "areaBangla": "কোতয়ালি",
+        "cityId": 3
+    },
+    {
+        "areaId": 668,
+        "area": "Akbarshah",
+        "areaBangla": "আকবরশাহ",
+        "cityId": 3
+    },
+    {
+        "areaId": 113,
+        "area": "Agrabad",
+        "areaBangla": "আগ্রাবাদ",
+        "cityId": 3
+    },
+    {
+        "areaId": 126,
+        "area": "Anwara",
+        "areaBangla": "আনোয়ারা",
+        "cityId": 3
+    },
+    {
+        "areaId": 711,
+        "area": "Amirabad",
+        "areaBangla": "আমিরাবাদ",
+        "cityId": 3
+    },
+    {
+        "areaId": 617,
+        "area": "Karnafuli",
+        "areaBangla": "কর্ণফুলী",
+        "cityId": 3
+    },
+    {
+        "areaId": 118,
+        "area": "Kazirdewri",
+        "areaBangla": "কাজিরদেউরী",
+        "cityId": 3
+    },
+    {
+        "areaId": 664,
+        "area": "Khatungonj",
+        "areaBangla": "খাতুনগঞ্জ",
+        "cityId": 3
+    },
+    {
+        "areaId": 119,
+        "area": "Khulshi",
+        "areaBangla": "খুলশী",
+        "cityId": 3
+    },
+    {
+        "areaId": 115,
+        "area": "Choukbazar",
+        "areaBangla": "চকবাজার",
+        "cityId": 3
+    },
+    {
+        "areaId": 129,
+        "area": "Chandanaish",
+        "areaBangla": "চন্দনাইশ",
+        "cityId": 3
+    },
+    {
+        "areaId": 114,
+        "area": "Chandgaon R/A",
+        "areaBangla": "চান্দগাঁও",
+        "cityId": 3
+    },
+    {
+        "areaId": 616,
+        "area": "Double Mooring",
+        "areaBangla": "ডাবল মুরিং",
+        "cityId": 3
+    },
+    {
+        "areaId": 123,
+        "area": "Nasirabad",
+        "areaBangla": "নাসিরাবাদ",
+        "cityId": 3
+    },
+    {
+        "areaId": 706,
+        "area": "NewMarket",
+        "areaBangla": "নিউ মার্কেট",
+        "cityId": 3
+    },
+    {
+        "areaId": 651,
+        "area": "New Muring",
+        "areaBangla": "নিউ মুরিং",
+        "cityId": 3
+    },
+    {
+        "areaId": 134,
+        "area": "Patiya",
+        "areaBangla": "পটিয়া",
+        "cityId": 3
+    },
+    {
+        "areaId": 621,
+        "area": "Potenga",
+        "areaBangla": "পতেঙ্গা",
+        "cityId": 3
+    },
+    {
+        "areaId": 124,
+        "area": "Panchlaish",
+        "areaBangla": "পাঁচলাইশ",
+        "cityId": 3
+    },
+    {
+        "areaId": 125,
+        "area": "PatharGhata",
+        "areaBangla": "পাথরঘাটা",
+        "cityId": 3
+    },
+    {
+        "areaId": 613,
+        "area": "Pahartali",
+        "areaBangla": "পাহাড়তলী",
+        "cityId": 3
+    },
+    {
+        "areaId": 130,
+        "area": "Fatikchhari",
+        "areaBangla": "ফটিকছড়ি",
+        "cityId": 3
+    },
+    {
+        "areaId": 615,
+        "area": "Bandar",
+        "areaBangla": "বন্দর",
+        "cityId": 3
+    },
+    {
+        "areaId": 643,
+        "area": "bohoddarhat",
+        "areaBangla": "বহদ্দারহাট",
+        "cityId": 3
+    },
+    {
+        "areaId": 618,
+        "area": "Bakulia",
+        "areaBangla": "বাকুলিয়া",
+        "cityId": 3
+    },
+    {
+        "areaId": 620,
+        "area": "Bayejid",
+        "areaBangla": "বায়েজিদ",
+        "cityId": 3
+    },
+    {
+        "areaId": 127,
+        "area": "Banshkhali",
+        "areaBangla": "বাশঁখালী",
+        "cityId": 3
+    },
+    {
+        "areaId": 128,
+        "area": "Boalkhali",
+        "areaBangla": "বোয়ালখালী",
+        "cityId": 3
+    },
+    {
+        "areaId": 619,
+        "area": "Vujpur",
+        "areaBangla": "ভুজপুর",
+        "cityId": 3
+    },
+    {
+        "areaId": 133,
+        "area": "Mirsharai",
+        "areaBangla": "মীরসরাই",
+        "cityId": 3
+    },
+    {
+        "areaId": 122,
+        "area": "Muradpur",
+        "areaBangla": "মুরাদপুর",
+        "cityId": 3
+    },
+    {
+        "areaId": 136,
+        "area": "Raozan",
+        "areaBangla": "রাউজান",
+        "cityId": 3
+    },
+    {
+        "areaId": 135,
+        "area": "Rangunia",
+        "areaBangla": "রাঙ্গুনিয়া",
+        "cityId": 3
+    },
+    {
+        "areaId": 121,
+        "area": "Love Lane",
+        "areaBangla": "লাভ লেন",
+        "cityId": 3
+    },
+    {
+        "areaId": 120,
+        "area": "Lal Khan Bazar",
+        "areaBangla": "লালখান বাজার",
+        "cityId": 3
+    },
+    {
+        "areaId": 132,
+        "area": "Lohagara",
+        "areaBangla": "লোহাগাড়া",
+        "cityId": 3
+    },
+    {
+        "areaId": 703,
+        "area": "Sadarghat",
+        "areaBangla": "সদরঘাট",
+        "cityId": 3
+    },
+    {
+        "areaId": 137,
+        "area": "Sandwip",
+        "areaBangla": "সন্দ্বীপ",
+        "cityId": 3
+    },
+    {
+        "areaId": 138,
+        "area": "Satkania",
+        "areaBangla": "সাতকানিয়া",
+        "cityId": 3
+    },
+    {
+        "areaId": 139,
+        "area": "Sitakunda",
+        "areaBangla": "সীতাকুন্ডু",
+        "cityId": 3
+    },
+    {
+        "areaId": 131,
+        "area": "Hathazari",
+        "areaBangla": "হাটহাজারী",
+        "cityId": 3
+    },
+    {
+        "areaId": 117,
+        "area": "Hali Sahar",
+        "areaBangla": "হালিশহর",
+        "cityId": 3
+    },
+    {
+        "areaId": 583,
+        "area": "Koyra",
+        "areaBangla": "কয়রা",
+        "cityId": 6
+    },
+    {
+        "areaId": 633,
+        "area": "Khan Jahan Ali",
+        "areaBangla": "খান জাহান আলী",
+        "cityId": 6
+    },
+    {
+        "areaId": 637,
+        "area": "Khalishpur",
+        "areaBangla": "খালিশপুর",
+        "cityId": 6
+    },
+    {
+        "areaId": 588,
+        "area": "Khulna",
+        "areaBangla": "খুলনা",
+        "cityId": 6
+    },
+    {
+        "areaId": 581,
+        "area": "Dumuria",
+        "areaBangla": "ডুমুরিয়া",
+        "cityId": 6
+    },
+    {
+        "areaId": 587,
+        "area": "Terokhada",
+        "areaBangla": "তেরখাদা",
+        "cityId": 6
+    },
+    {
+        "areaId": 580,
+        "area": "Dacop",
+        "areaBangla": "দাকোপ",
+        "cityId": 6
+    },
+    {
+        "areaId": 582,
+        "area": "Dighalia",
+        "areaBangla": "দিঘলিয়া",
+        "cityId": 6
+    },
+    {
+        "areaId": 647,
+        "area": "Doulotpur",
+        "areaBangla": "দৌলতপুর",
+        "cityId": 6
+    },
+    {
+        "areaId": 584,
+        "area": "Paikgachha",
+        "areaBangla": "পাইকগাছা",
+        "cityId": 6
+    },
+    {
+        "areaId": 585,
+        "area": "Phultala",
+        "areaBangla": "ফুলতলা",
+        "cityId": 6
+    },
+    {
+        "areaId": 579,
+        "area": "Batiaghata",
+        "areaBangla": "বটিয়াঘাটা",
+        "cityId": 6
+    },
+    {
+        "areaId": 586,
+        "area": "Rupsha",
+        "areaBangla": "রূপসা",
+        "cityId": 6
+    },
+    {
+        "areaId": 638,
+        "area": "Sonadanga",
+        "areaBangla": "সোনাডাঙ্গা",
+        "cityId": 6
+    },
+    {
+        "areaId": 393,
+        "area": "Agailjhara",
+        "areaBangla": "আগৈলঝারা",
+        "cityId": 43
+    },
+    {
+        "areaId": 403,
+        "area": "Wazirpur",
+        "areaBangla": "উজিরপুর",
+        "cityId": 43
+    },
+    {
+        "areaId": 666,
+        "area": "Airport Model Thana",
+        "areaBangla": "এয়ারপোর্ট মডেল থানা",
+        "cityId": 43
+    },
+    {
+        "areaId": 398,
+        "area": "Gaurnadi",
+        "areaBangla": "গৌরনদী",
+        "cityId": 43
+    },
+    {
+        "areaId": 400,
+        "area": "Barisal Sadar",
+        "areaBangla": "বরিশাল সদর",
+        "cityId": 43
+    },
+    {
+        "areaId": 395,
+        "area": "Bakerganj",
+        "areaBangla": "বাকেরগঞ্জ",
+        "cityId": 43
+    },
+    {
+        "areaId": 397,
+        "area": "Banaripara",
+        "areaBangla": "বানারীপাড়া",
+        "cityId": 43
+    },
+    {
+        "areaId": 394,
+        "area": "Babuganj",
+        "areaBangla": "বাবুগঞ্জ",
+        "cityId": 43
+    },
+    {
+        "areaId": 402,
+        "area": "Muladi",
+        "areaBangla": "মুলাদী",
+        "cityId": 43
+    },
+    {
+        "areaId": 401,
+        "area": "Mehendiganj",
+        "areaBangla": "মেহেন্দিগঞ্জ",
+        "cityId": 43
+    },
+    {
+        "areaId": 399,
+        "area": "Hizla",
+        "areaBangla": "হিজলা",
+        "cityId": 43
+    },
+    {
+        "areaId": 676,
+        "area": "Airport",
+        "areaBangla": "এয়ারপোর্ট",
+        "cityId": 5
+    },
+    {
+        "areaId": 630,
+        "area": "Osmaninagar",
+        "areaBangla": "ওসমানিনগর",
+        "cityId": 5
+    },
+    {
+        "areaId": 548,
+        "area": "Kanaighat",
+        "areaBangla": "কানাইঘাট",
+        "cityId": 5
+    },
+    {
+        "areaId": 543,
+        "area": "Companiganj",
+        "areaBangla": "কোম্পানীগঞ্জ",
+        "cityId": 5
+    },
+    {
+        "areaId": 546,
+        "area": "Gowainghat",
+        "areaBangla": "গোয়াইনঘাট",
+        "cityId": 5
+    },
+    {
+        "areaId": 545,
+        "area": "Golapganj",
+        "areaBangla": "গোলাপগঞ্জ",
+        "cityId": 5
+    },
+    {
+        "areaId": 550,
+        "area": "Zakiganj",
+        "areaBangla": "জকিগঞ্জ",
+        "cityId": 5
+    },
+    {
+        "areaId": 547,
+        "area": "Jaintiapur",
+        "areaBangla": "জৈন্তাপুর",
+        "cityId": 5
+    },
+    {
+        "areaId": 654,
+        "area": "Dokkhin Surma",
+        "areaBangla": "দক্ষিন সুরমা",
+        "cityId": 5
+    },
+    {
+        "areaId": 544,
+        "area": "Fenchuganj",
+        "areaBangla": "ফেঞ্চুগঞ্জ",
+        "cityId": 5
+    },
+    {
+        "areaId": 540,
+        "area": "Balaganj",
+        "areaBangla": "বালাগঞ্জ",
+        "cityId": 5
+    },
+    {
+        "areaId": 541,
+        "area": "Beanibazar",
+        "areaBangla": "বিয়ানীবাজার",
+        "cityId": 5
+    },
+    {
+        "areaId": 542,
+        "area": "Bishwanath",
+        "areaBangla": "বিশ্বনাথ",
+        "cityId": 5
+    },
+    {
+        "areaId": 549,
+        "area": "Sylhet Sadar",
+        "areaBangla": "সিলেট সদর",
+        "cityId": 5
+    },
+    {
+        "areaId": 377,
+        "area": "Kaunia",
+        "areaBangla": "কাউনিয়া",
+        "cityId": 8
+    },
+    {
+        "areaId": 376,
+        "area": "Gangachhara",
+        "areaBangla": "গঙ্গাচরা",
+        "cityId": 8
+    },
+    {
+        "areaId": 383,
+        "area": "Taraganj",
+        "areaBangla": "তারাগঞ্জ",
+        "cityId": 8
+    },
+    {
+        "areaId": 382,
+        "area": "Pirganj",
+        "areaBangla": "পীরগঞ্জ",
+        "cityId": 8
+    },
+    {
+        "areaId": 381,
+        "area": "Pirgachha",
+        "areaBangla": "পীরগাছা",
+        "cityId": 8
+    },
+    {
+        "areaId": 375,
+        "area": "Badarganj",
+        "areaBangla": "বদরগঞ্জ",
+        "cityId": 8
+    },
+    {
+        "areaId": 379,
+        "area": "Mithapukur",
+        "areaBangla": "মিঠাপুকুর",
+        "cityId": 8
+    },
+    {
+        "areaId": 378,
+        "area": "Rangpur Sadar",
+        "areaBangla": "রংপুর সদর",
+        "cityId": 8
+    },
+    {
+        "areaId": 474,
+        "area": "Ukhia",
+        "areaBangla": "উখিয়া",
+        "cityId": 53
+    },
+    {
+        "areaId": 469,
+        "area": "Cox's Bazar Sadar",
+        "areaBangla": "কক্সবাজার সদর",
+        "cityId": 53
+    },
+    {
+        "areaId": 470,
+        "area": "Kutubdia",
+        "areaBangla": "কুতুবদিয়া",
+        "cityId": 53
+    },
+    {
+        "areaId": 468,
+        "area": "Chakaria",
+        "areaBangla": "চকরিয়া",
+        "cityId": 53
+    },
+    {
+        "areaId": 473,
+        "area": "Teknaf",
+        "areaBangla": "টেকনাফ",
+        "cityId": 53
+    },
+    {
+        "areaId": 627,
+        "area": "Pekua",
+        "areaBangla": "পেকুয়া",
+        "cityId": 53
+    },
+    {
+        "areaId": 471,
+        "area": "Maheshkhali",
+        "areaBangla": "মহেশখালী",
+        "cityId": 53
+    },
+    {
+        "areaId": 472,
+        "area": "Ramu",
+        "areaBangla": "রামু",
+        "cityId": 53
+    },
+    {
+        "areaId": 167,
+        "area": "Astagram",
+        "areaBangla": "অষ্টগ্রাম",
+        "cityId": 13
+    },
+    {
+        "areaId": 171,
+        "area": "Itna",
+        "areaBangla": "ইটনা",
+        "cityId": 13
+    },
+    {
+        "areaId": 173,
+        "area": "Katiadi",
+        "areaBangla": "কটিয়াদী",
+        "cityId": 13
+    },
+    {
+        "areaId": 172,
+        "area": "Karimganj",
+        "areaBangla": "করিমগঞ্জ",
+        "cityId": 13
+    },
+    {
+        "areaId": 174,
+        "area": "Kishoreganj Sadar",
+        "areaBangla": "কিশোরগঞ্জ সদর",
+        "cityId": 13
+    },
+    {
+        "areaId": 175,
+        "area": "Kuliarchar",
+        "areaBangla": "কুলিয়ারচর",
+        "cityId": 13
+    },
+    {
+        "areaId": 179,
+        "area": "Tarail",
+        "areaBangla": "তাড়াইল",
+        "cityId": 13
+    },
+    {
+        "areaId": 177,
+        "area": "Nikli",
+        "areaBangla": "নিকলী",
+        "cityId": 13
+    },
+    {
+        "areaId": 178,
+        "area": "Pakundia",
+        "areaBangla": "পাকুন্দিয়া",
+        "cityId": 13
+    },
+    {
+        "areaId": 168,
+        "area": "Bajitpur",
+        "areaBangla": "বাজিতপুর",
+        "cityId": 13
+    },
+    {
+        "areaId": 169,
+        "area": "Bhairab",
+        "areaBangla": "ভৈরব",
+        "cityId": 13
+    },
+    {
+        "areaId": 176,
+        "area": "Mithamain",
+        "areaBangla": "মিঠামইন",
+        "cityId": 13
+    },
+    {
+        "areaId": 170,
+        "area": "Hossainpur",
+        "areaBangla": "হোসেনপুর",
+        "cityId": 13
+    },
+    {
+        "areaId": 355,
+        "area": "Ulipur",
+        "areaBangla": "উলিপুর",
+        "cityId": 36
+    },
+    {
+        "areaId": 351,
+        "area": "Kurigram Sadar",
+        "areaBangla": "কুড়িঁগ্রাম সদর",
+        "cityId": 36
+    },
+    {
+        "areaId": 349,
+        "area": "Chilmari",
+        "areaBangla": "চিলমারী",
+        "cityId": 36
+    },
+    {
+        "areaId": 352,
+        "area": "Nageshwari",
+        "areaBangla": "নাগেশ্বরী",
+        "cityId": 36
+    },
+    {
+        "areaId": 350,
+        "area": "Phulbari",
+        "areaBangla": "ফুলবাড়ি",
+        "cityId": 36
+    },
+    {
+        "areaId": 347,
+        "area": "Bhurungamari",
+        "areaBangla": "ভুরুঙ্গামারী",
+        "cityId": 36
+    },
+    {
+        "areaId": 353,
+        "area": "Rajarhat",
+        "areaBangla": "রাজারহাট",
+        "cityId": 36
+    },
+    {
+        "areaId": 348,
+        "area": "Rajibpur",
+        "areaBangla": "রাজিবপুর",
+        "cityId": 36
+    },
+    {
+        "areaId": 354,
+        "area": "Raomari",
+        "areaBangla": "রৌমারী",
+        "cityId": 36
+    },
+    {
+        "areaId": 463,
+        "area": "Comilla Sadar",
+        "areaBangla": "কুমিল্লা সদর",
+        "cityId": 52
+    },
+    {
+        "areaId": 455,
+        "area": "Chandina",
+        "areaBangla": "চান্দিনা",
+        "cityId": 52
+    },
+    {
+        "areaId": 456,
+        "area": "Chauddagram",
+        "areaBangla": "চৌদ্দগ্রাম",
+        "cityId": 52
+    },
+    {
+        "areaId": 465,
+        "area": "Titas",
+        "areaBangla": "তিতাস",
+        "cityId": 52
+    },
+    {
+        "areaId": 457,
+        "area": "Daudkandi",
+        "areaBangla": "দাউদকান্দি",
+        "cityId": 52
+    },
+    {
+        "areaId": 458,
+        "area": "Debidwar",
+        "areaBangla": "দেবীদার",
+        "cityId": 52
+    },
+    {
+        "areaId": 452,
+        "area": "Barura",
+        "areaBangla": "বরুড়া",
+        "cityId": 52
+    },
+    {
+        "areaId": 454,
+        "area": "Burichong",
+        "areaBangla": "বুড়িচং",
+        "cityId": 52
+    },
+    {
+        "areaId": 453,
+        "area": "Brahmanpara",
+        "areaBangla": "ব্রাহ্মণপাড়া",
+        "cityId": 52
+    },
+    {
+        "areaId": 466,
+        "area": "Monohargonj",
+        "areaBangla": "মনোহরগঞ্জ",
+        "cityId": 52
+    },
+    {
+        "areaId": 667,
+        "area": "Moinamoti",
+        "areaBangla": "ময়নামতি",
+        "cityId": 52
+    },
+    {
+        "areaId": 461,
+        "area": "Muradnagar",
+        "areaBangla": "মুরাদনগর",
+        "cityId": 52
+    },
+    {
+        "areaId": 464,
+        "area": "Meghna",
+        "areaBangla": "মেঘনা",
+        "cityId": 52
+    },
+    {
+        "areaId": 460,
+        "area": "Laksam",
+        "areaBangla": "লাকসাম",
+        "cityId": 52
+    },
+    {
+        "areaId": 462,
+        "area": "Nangalkot",
+        "areaBangla": "লাঙ্গলকোট",
+        "cityId": 52
+    },
+    {
+        "areaId": 712,
+        "area": "Lalmai",
+        "areaBangla": "লালমাই",
+        "cityId": 52
+    },
+    {
+        "areaId": 467,
+        "area": "Sadar South",
+        "areaBangla": "সদর দক্ষিণ",
+        "cityId": 52
+    },
+    {
+        "areaId": 459,
+        "area": "Homna",
+        "areaBangla": "হোমনা",
+        "cityId": 52
+    },
+    {
+        "areaId": 629,
+        "area": "Islami University Thana",
+        "areaBangla": "ইসলামী বিশ্ববিদ্যালয় থানা",
+        "cityId": 68
+    },
+    {
+        "areaId": 592,
+        "area": "Kumarkhali",
+        "areaBangla": "কুমারখালি",
+        "cityId": 68
+    },
+    {
+        "areaId": 593,
+        "area": "Kushtia Sadar",
+        "areaBangla": "কুষ্টিয়া সদর",
+        "cityId": 68
+    },
+    {
+        "areaId": 591,
+        "area": "Khoksa",
+        "areaBangla": "খোকসা",
+        "cityId": 68
+    },
+    {
+        "areaId": 590,
+        "area": "Daulatpur",
+        "areaBangla": "দৌলতপুর",
+        "cityId": 68
+    },
+    {
+        "areaId": 589,
+        "area": "Bheramara",
+        "areaBangla": "ভেড়ামারা",
+        "cityId": 68
+    },
+    {
+        "areaId": 594,
+        "area": "Mirpur",
+        "areaBangla": "মিরপুর",
+        "cityId": 68
+    },
+    {
+        "areaId": 482,
+        "area": "Khagrachhari",
+        "areaBangla": "খাগড়াছড়ি",
+        "cityId": 55
+    },
+    {
+        "areaId": 705,
+        "area": "Guimara",
+        "areaBangla": "গুইমারা",
+        "cityId": 55
+    },
+    {
+        "areaId": 481,
+        "area": "Dighinala",
+        "areaBangla": "দীঘিনালা",
+        "cityId": 55
+    },
+    {
+        "areaId": 487,
+        "area": "Panchhari",
+        "areaBangla": "পানছড়ি",
+        "cityId": 55
+    },
+    {
+        "areaId": 484,
+        "area": "Mahalchhari",
+        "areaBangla": "মহলছড়ি",
+        "cityId": 55
+    },
+    {
+        "areaId": 486,
+        "area": "Matiranga",
+        "areaBangla": "মাটিরাঙ্গা",
+        "cityId": 55
+    },
+    {
+        "areaId": 485,
+        "area": "Manikchhari",
+        "areaBangla": "মানিকছড়ি",
+        "cityId": 55
+    },
+    {
+        "areaId": 488,
+        "area": "Ramgarh",
+        "areaBangla": "রামগড়",
+        "cityId": 55
+    },
+    {
+        "areaId": 483,
+        "area": "Lakshmichhari",
+        "areaBangla": "লক্ষিছড়ি",
+        "cityId": 55
+    },
+    {
+        "areaId": 341,
+        "area": "Gaibandha Sadar",
+        "areaBangla": "গাইবান্ধা সদর",
+        "cityId": 35
+    },
+    {
+        "areaId": 342,
+        "area": "Gobindaganj",
+        "areaBangla": "গোবিন্দগঞ্জ",
+        "cityId": 35
+    },
+    {
+        "areaId": 343,
+        "area": "Palashbari",
+        "areaBangla": "পলাশবাড়ী",
+        "cityId": 35
+    },
+    {
+        "areaId": 340,
+        "area": "Phulchhari",
+        "areaBangla": "ফুলছড়ি",
+        "cityId": 35
+    },
+    {
+        "areaId": 345,
+        "area": "Shaghata",
+        "areaBangla": "সাঘাটা",
+        "cityId": 35
+    },
+    {
+        "areaId": 344,
+        "area": "Sadullapur",
+        "areaBangla": "সাদুল্লাপুর",
+        "cityId": 35
+    },
+    {
+        "areaId": 346,
+        "area": "Sundarganj",
+        "areaBangla": "সুন্দরগঞ্জ",
+        "cityId": 35
+    },
+    {
+        "areaId": 152,
+        "area": "Kapasia",
+        "areaBangla": "কাপাসিয়া",
+        "cityId": 10
+    },
+    {
+        "areaId": 151,
+        "area": "Kaliganj",
+        "areaBangla": "কালিগঞ্জ",
+        "cityId": 10
+    },
+    {
+        "areaId": 150,
+        "area": "Kaliakair",
+        "areaBangla": "কালিয়াকৈর",
+        "cityId": 10
+    },
+    {
+        "areaId": 149,
+        "area": "Gazipur Sadar",
+        "areaBangla": "গাজীপুর সদর",
+        "cityId": 10
+    },
+    {
+        "areaId": 153,
+        "area": "Tongi",
+        "areaBangla": "টঙ্গী",
+        "cityId": 10
+    },
+    {
+        "areaId": 154,
+        "area": "Sreepur",
+        "areaBangla": "শ্রীপুর",
+        "cityId": 10
+    },
+    {
+        "areaId": 720,
+        "area": "City Corporation",
+        "areaBangla": "সিটি কর্পোরেশন",
+        "cityId": 10
+    },
+    {
+        "areaId": 156,
+        "area": "Kashiani",
+        "areaBangla": "কাশিয়ানী",
+        "cityId": 11
+    },
+    {
+        "areaId": 157,
+        "area": "Kotalipara",
+        "areaBangla": "কোটালীপাড়া",
+        "cityId": 11
+    },
+    {
+        "areaId": 155,
+        "area": "Gopalganj Sadar",
+        "areaBangla": "গোপালগঞ্জ সদর",
+        "cityId": 11
+    },
+    {
+        "areaId": 159,
+        "area": "Tungipara",
+        "areaBangla": "টুঙ্গীপাড়া",
+        "cityId": 11
+    },
+    {
+        "areaId": 158,
+        "area": "Moksedpur",
+        "areaBangla": "মোকসেদপুর",
+        "cityId": 11
+    },
+    {
+        "areaId": 448,
+        "area": "Kachua",
+        "areaBangla": "কঁচুয়া",
+        "cityId": 50
+    },
+    {
+        "areaId": 444,
+        "area": "Chandpur Sadar",
+        "areaBangla": "চাঁদপুর সদর",
+        "cityId": 50
+    },
+    {
+        "areaId": 445,
+        "area": "Faridganj",
+        "areaBangla": "ফরিদগঞ্জ",
+        "cityId": 50
+    },
+    {
+        "areaId": 449,
+        "area": "Matlab",
+        "areaBangla": "মতলব",
+        "cityId": 50
+    },
+    {
+        "areaId": 450,
+        "area": "Motlob Uttor",
+        "areaBangla": "মতলব উত্তর",
+        "cityId": 50
+    },
+    {
+        "areaId": 451,
+        "area": "Shahrasti",
+        "areaBangla": "শাহরাস্তি",
+        "cityId": 50
+    },
+    {
+        "areaId": 446,
+        "area": "Haimchar",
+        "areaBangla": "হাইমচর",
+        "cityId": 50
+    },
+    {
+        "areaId": 447,
+        "area": "Haziganj",
+        "areaBangla": "হাজিগঞ্জ",
+        "cityId": 50
+    },
+    {
+        "areaId": 296,
+        "area": "Gomastapur",
+        "areaBangla": "গোমস্তাপুর",
+        "cityId": 30
+    },
+    {
+        "areaId": 298,
+        "area": "Chapai Nawabganj Sadar",
+        "areaBangla": "চাঁপাই নওয়াবগঞ্জ সদর",
+        "cityId": 30
+    },
+    {
+        "areaId": 297,
+        "area": "Nachole",
+        "areaBangla": "নাচোল",
+        "cityId": 30
+    },
+    {
+        "areaId": 295,
+        "area": "Bholahat",
+        "areaBangla": "ভোলাহাট",
+        "cityId": 30
+    },
+    {
+        "areaId": 299,
+        "area": "Shibganj",
+        "areaBangla": "শিবগঞ্জ",
+        "cityId": 30
+    },
+    {
+        "areaId": 560,
+        "area": "Alamdanga",
+        "areaBangla": "আলমডাঙ্গা",
+        "cityId": 64
+    },
+    {
+        "areaId": 561,
+        "area": "Chuadanga Sadar",
+        "areaBangla": "চুয়াডাঙ্গা সদর",
+        "cityId": 64
+    },
+    {
+        "areaId": 564,
+        "area": "Jibannagar",
+        "areaBangla": "জীবননগর",
+        "cityId": 64
+    },
+    {
+        "areaId": 563,
+        "area": "Damurhuda",
+        "areaBangla": "দামুরহুদা",
+        "cityId": 64
+    },
+    {
+        "areaId": 273,
+        "area": "Akkelpur",
+        "areaBangla": "আক্কেলপুর",
+        "cityId": 27
+    },
+    {
+        "areaId": 275,
+        "area": "Kalai",
+        "areaBangla": "কালাই",
+        "cityId": 27
+    },
+    {
+        "areaId": 276,
+        "area": "Khetlal",
+        "areaBangla": "ক্ষেতলাল",
+        "cityId": 27
+    },
+    {
+        "areaId": 274,
+        "area": "Joypurhat Sadar",
+        "areaBangla": "জয়পুরহাট সদর",
+        "cityId": 27
+    },
+    {
+        "areaId": 277,
+        "area": "Panchbibi",
+        "areaBangla": "পাঁচবিবি",
+        "cityId": 27
+    },
+    {
+        "areaId": 162,
+        "area": "Islampur",
+        "areaBangla": "ইসলামপুর",
+        "cityId": 12
+    },
+    {
+        "areaId": 163,
+        "area": "Jamalpur Sadar",
+        "areaBangla": "জামালপুর সদর",
+        "cityId": 12
+    },
+    {
+        "areaId": 161,
+        "area": "Dewanganj",
+        "areaBangla": "দেওয়ানগঞ্জ",
+        "cityId": 12
+    },
+    {
+        "areaId": 160,
+        "area": "Baksiganj",
+        "areaBangla": "বকশীগঞ্জ",
+        "cityId": 12
+    },
+    {
+        "areaId": 164,
+        "area": "Madarganj",
+        "areaBangla": "মাদারগঞ্জ",
+        "cityId": 12
+    },
+    {
+        "areaId": 165,
+        "area": "Melandaha",
+        "areaBangla": "মেলান্দহ",
+        "cityId": 12
+    },
+    {
+        "areaId": 166,
+        "area": "Sarishabari",
+        "areaBangla": "সরিষাবাড়ি",
+        "cityId": 12
+    },
+    {
+        "areaId": 412,
+        "area": "Kathalia",
+        "areaBangla": "কাঁঠালিয়া",
+        "cityId": 45
+    },
+    {
+        "areaId": 411,
+        "area": "Jhalokati Sadar",
+        "areaBangla": "ঝালকাঠি সদর",
+        "cityId": 45
+    },
+    {
+        "areaId": 413,
+        "area": "Nalchity",
+        "areaBangla": "নলছিটি",
+        "cityId": 45
+    },
+    {
+        "areaId": 414,
+        "area": "Rajapur",
+        "areaBangla": "রাজাপুর",
+        "cityId": 45
+    },
+    {
+        "areaId": 575,
+        "area": "Kaliganj",
+        "areaBangla": "কালিগঞ্জ",
+        "cityId": 66
+    },
+    {
+        "areaId": 576,
+        "area": "Kotchandpur",
+        "areaBangla": "কোটচাঁদপুর",
+        "cityId": 66
+    },
+    {
+        "areaId": 574,
+        "area": "Jhenaidah Sadar",
+        "areaBangla": "ঝিনাইদহ সদর",
+        "cityId": 66
+    },
+    {
+        "areaId": 577,
+        "area": "Maheshpur",
+        "areaBangla": "মহেশপুর",
+        "cityId": 66
+    },
+    {
+        "areaId": 578,
+        "area": "Shailkupa",
+        "areaBangla": "শৈলকুপা",
+        "cityId": 66
+    },
+    {
+        "areaId": 573,
+        "area": "Harinakunda",
+        "areaBangla": "হরিণাকুন্ডু",
+        "cityId": 66
+    },
+    {
+        "areaId": 254,
+        "area": "Kalihati",
+        "areaBangla": "কালিহাটি",
+        "cityId": 25
+    },
+    {
+        "areaId": 249,
+        "area": "Gopalpur",
+        "areaBangla": "গোপালপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 253,
+        "area": "Ghatail",
+        "areaBangla": "ঘাটাইল",
+        "cityId": 25
+    },
+    {
+        "areaId": 260,
+        "area": "Tangail Sadar",
+        "areaBangla": "টাঙ্গাইল সদর",
+        "cityId": 25
+    },
+    {
+        "areaId": 252,
+        "area": "Delduar",
+        "areaBangla": "দেলদুয়ার",
+        "cityId": 25
+    },
+    {
+        "areaId": 259,
+        "area": "Dhonbari",
+        "areaBangla": "ধনবাড়ী",
+        "cityId": 25
+    },
+    {
+        "areaId": 257,
+        "area": "Nagarpur",
+        "areaBangla": "নাগরপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 250,
+        "area": "Basail",
+        "areaBangla": "বাসাইল",
+        "cityId": 25
+    },
+    {
+        "areaId": 251,
+        "area": "Bhuapur",
+        "areaBangla": "ভূয়াপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 255,
+        "area": "Madhupur",
+        "areaBangla": "মধুপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 256,
+        "area": "Mirzapur",
+        "areaBangla": "মির্জাপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 258,
+        "area": "Sakhipur",
+        "areaBangla": "সখিপুর",
+        "cityId": 25
+    },
+    {
+        "areaId": 622,
+        "area": "Thakurgaon Sadar",
+        "areaBangla": "ঠাকুরগাঁও সদর",
+        "cityId": 41
+    },
+    {
+        "areaId": 386,
+        "area": "Pirganj",
+        "areaBangla": "পীরগঞ্জ",
+        "cityId": 41
+    },
+    {
+        "areaId": 384,
+        "area": "Baliadangi",
+        "areaBangla": "বালিয়াডাঙ্গি",
+        "cityId": 41
+    },
+    {
+        "areaId": 623,
+        "area": "Ranisankail",
+        "areaBangla": "রাণীশংকৈল",
+        "cityId": 41
+    },
+    {
+        "areaId": 385,
+        "area": "Haripur",
+        "areaBangla": "হরিপুর",
+        "cityId": 41
+    },
+    {
+        "areaId": 334,
+        "area": "Kaharole",
+        "areaBangla": "কাহরোল",
+        "cityId": 34
+    },
+    {
+        "areaId": 335,
+        "area": "Khansama",
+        "areaBangla": "খানসামা",
+        "cityId": 34
+    },
+    {
+        "areaId": 332,
+        "area": "Ghoraghat",
+        "areaBangla": "ঘোড়াঘাট",
+        "cityId": 34
+    },
+    {
+        "areaId": 330,
+        "area": "Chirirbandar",
+        "areaBangla": "চিরিরবন্দর",
+        "cityId": 34
+    },
+    {
+        "areaId": 336,
+        "area": "Dinajpur Sadar",
+        "areaBangla": "দিনাজপুর সদর",
+        "cityId": 34
+    },
+    {
+        "areaId": 337,
+        "area": "Nababganj",
+        "areaBangla": "নবাবগঞ্জ",
+        "cityId": 34
+    },
+    {
+        "areaId": 338,
+        "area": "Parbatipur",
+        "areaBangla": "পার্বতীপুর",
+        "cityId": 34
+    },
+    {
+        "areaId": 331,
+        "area": "Fulbari",
+        "areaBangla": "ফুলবাড়ি",
+        "cityId": 34
+    },
+    {
+        "areaId": 328,
+        "area": "Biral",
+        "areaBangla": "বিরল",
+        "cityId": 34
+    },
+    {
+        "areaId": 326,
+        "area": "Birampur",
+        "areaBangla": "বিরামপুর",
+        "cityId": 34
+    },
+    {
+        "areaId": 327,
+        "area": "Birganj",
+        "areaBangla": "বীরগঞ্জ",
+        "cityId": 34
+    },
+    {
+        "areaId": 329,
+        "area": "Bochaganj",
+        "areaBangla": "বোচাঁগঞ্জ",
+        "cityId": 34
+    },
+    {
+        "areaId": 652,
+        "area": "Setabgonj",
+        "areaBangla": "সেতাবগঞ্জ",
+        "cityId": 34
+    },
+    {
+        "areaId": 333,
+        "area": "Hakimpur",
+        "areaBangla": "হাকিমপুর",
+        "cityId": 34
+    },
+    {
+        "areaId": 278,
+        "area": "Atrai",
+        "areaBangla": "আত্রাই",
+        "cityId": 28
+    },
+    {
+        "areaId": 280,
+        "area": "Dhamoirhat",
+        "areaBangla": "ধামইরহাট",
+        "cityId": 28
+    },
+    {
+        "areaId": 283,
+        "area": "Naogaon Sadar",
+        "areaBangla": "নওগাঁ সদর",
+        "cityId": 28
+    },
+    {
+        "areaId": 284,
+        "area": "Niamatpur",
+        "areaBangla": "নিয়ামতপুর",
+        "cityId": 28
+    },
+    {
+        "areaId": 285,
+        "area": "Patnitala",
+        "areaBangla": "পত্নীতলা",
+        "cityId": 28
+    },
+    {
+        "areaId": 286,
+        "area": "Porsha",
+        "areaBangla": "পরশা",
+        "cityId": 28
+    },
+    {
+        "areaId": 279,
+        "area": "Badalgachi",
+        "areaBangla": "বদলগাছী",
+        "cityId": 28
+    },
+    {
+        "areaId": 281,
+        "area": "Manda",
+        "areaBangla": "মনদা",
+        "cityId": 28
+    },
+    {
+        "areaId": 282,
+        "area": "Mahadevpur",
+        "areaBangla": "মহাদেবপুর",
+        "cityId": 28
+    },
+    {
+        "areaId": 287,
+        "area": "Raninagar",
+        "areaBangla": "রানিনগর",
+        "cityId": 28
+    },
+    {
+        "areaId": 288,
+        "area": "Sapahar",
+        "areaBangla": "সাপাহার",
+        "cityId": 28
+    },
+    {
+        "areaId": 602,
+        "area": "Kalia",
+        "areaBangla": "কালিয়া",
+        "cityId": 71
+    },
+    {
+        "areaId": 604,
+        "area": "Narail Sadar",
+        "areaBangla": "নড়াইল সদর",
+        "cityId": 71
+    },
+    {
+        "areaId": 603,
+        "area": "Lohagara",
+        "areaBangla": "লোহাগরা",
+        "cityId": 71
+    },
+    {
+        "areaId": 218,
+        "area": "Narsingdi Sadar",
+        "areaBangla": "নরসিংদী সদর",
+        "cityId": 20
+    },
+    {
+        "areaId": 219,
+        "area": "Palash",
+        "areaBangla": "পলাশ",
+        "cityId": 20
+    },
+    {
+        "areaId": 216,
+        "area": "Belabo",
+        "areaBangla": "বেলাবো",
+        "cityId": 20
+    },
+    {
+        "areaId": 217,
+        "area": "Monohardi",
+        "areaBangla": "মনোহরদী",
+        "cityId": 20
+    },
+    {
+        "areaId": 708,
+        "area": "Madhabdi",
+        "areaBangla": "মাধবদী",
+        "cityId": 20
+    },
+    {
+        "areaId": 220,
+        "area": "Raipura",
+        "areaBangla": "রায়পুরা",
+        "cityId": 20
+    },
+    {
+        "areaId": 221,
+        "area": "Shibpur",
+        "areaBangla": "শিবপুর",
+        "cityId": 20
+    },
+    {
+        "areaId": 291,
+        "area": "Gurudaspur",
+        "areaBangla": "গুরুদাসপুর",
+        "cityId": 29
+    },
+    {
+        "areaId": 635,
+        "area": "Noldanga",
+        "areaBangla": "নলডাঙ্গা",
+        "cityId": 29
+    },
+    {
+        "areaId": 293,
+        "area": "Natore Sadar",
+        "areaBangla": "নাটোর সদর",
+        "cityId": 29
+    },
+    {
+        "areaId": 290,
+        "area": "Baraigram",
+        "areaBangla": "বড়াইগ্রাম",
+        "cityId": 29
+    },
+    {
+        "areaId": 289,
+        "area": "Bagatipara",
+        "areaBangla": "বাগাতিপাড়া",
+        "cityId": 29
+    },
+    {
+        "areaId": 292,
+        "area": "Lalpur",
+        "areaBangla": "লালপুর",
+        "cityId": 29
+    },
+    {
+        "areaId": 294,
+        "area": "Singra",
+        "areaBangla": "সিংড়া",
+        "cityId": 29
+    },
+    {
+        "areaId": 209,
+        "area": "Araihazar",
+        "areaBangla": "আড়াইহাজার",
+        "cityId": 18
+    },
+    {
+        "areaId": 211,
+        "area": "Narayanganj Sadar",
+        "areaBangla": "নারায়ণগঞ্জ সদর",
+        "cityId": 18
+    },
+    {
+        "areaId": 214,
+        "area": "Fatullah",
+        "areaBangla": "ফতুল্লা",
+        "cityId": 18
+    },
+    {
+        "areaId": 210,
+        "area": "Bandar",
+        "areaBangla": "বন্দর",
+        "cityId": 18
+    },
+    {
+        "areaId": 212,
+        "area": "Rupganj",
+        "areaBangla": "রূপগঞ্জ",
+        "cityId": 18
+    },
+    {
+        "areaId": 215,
+        "area": "Siddhirganj",
+        "areaBangla": "সিদ্ধিরগঞ্জ",
+        "cityId": 18
+    },
+    {
+        "areaId": 213,
+        "area": "Sonargaon",
+        "areaBangla": "সোনারগাঁও",
+        "cityId": 18
+    },
+    {
+        "areaId": 367,
+        "area": "Kishoreganj",
+        "areaBangla": "কিশোরগঞ্জ",
+        "cityId": 38
+    },
+    {
+        "areaId": 366,
+        "area": "Jaldhaka",
+        "areaBangla": "জলঢাকা",
+        "cityId": 38
+    },
+    {
+        "areaId": 364,
+        "area": "Dimla",
+        "areaBangla": "ডিমলা",
+        "cityId": 38
+    },
+    {
+        "areaId": 365,
+        "area": "Domar",
+        "areaBangla": "ডোমার",
+        "cityId": 38
+    },
+    {
+        "areaId": 368,
+        "area": "Nilphamari Sadar",
+        "areaBangla": "নীলফামারী সদর",
+        "cityId": 38
+    },
+    {
+        "areaId": 369,
+        "area": "Saidpur",
+        "areaBangla": "সৈয়দপুর",
+        "cityId": 38
+    },
+    {
+        "areaId": 223,
+        "area": "Atpara",
+        "areaBangla": "আটপাড়া",
+        "cityId": 21
+    },
+    {
+        "areaId": 227,
+        "area": "Kalmakanda",
+        "areaBangla": "কলমাকান্দা",
+        "cityId": 21
+    },
+    {
+        "areaId": 228,
+        "area": "Kendua",
+        "areaBangla": "কেন্দুয়া",
+        "cityId": 21
+    },
+    {
+        "areaId": 226,
+        "area": "Khaliajuri",
+        "areaBangla": "খালিয়াজুরী",
+        "cityId": 21
+    },
+    {
+        "areaId": 225,
+        "area": "Durgapur",
+        "areaBangla": "দূর্গাপুর",
+        "cityId": 21
+    },
+    {
+        "areaId": 231,
+        "area": "Netrokona Sadar",
+        "areaBangla": "নেত্রকোনা সদর",
+        "cityId": 21
+    },
+    {
+        "areaId": 232,
+        "area": "Purbadhala",
+        "areaBangla": "পূর্বধলা",
+        "cityId": 21
+    },
+    {
+        "areaId": 224,
+        "area": "Barhatta",
+        "areaBangla": "বারহাট্টা",
+        "cityId": 21
+    },
+    {
+        "areaId": 229,
+        "area": "Madan",
+        "areaBangla": "মদন",
+        "cityId": 21
+    },
+    {
+        "areaId": 230,
+        "area": "Mohanganj",
+        "areaBangla": "মোহনগঞ্জ",
+        "cityId": 21
+    },
+    {
+        "areaId": 502,
+        "area": "Kabirhat",
+        "areaBangla": "কবিরহাট",
+        "cityId": 57
+    },
+    {
+        "areaId": 497,
+        "area": "Companiganj",
+        "areaBangla": "কোম্পানীগঞ্জ",
+        "cityId": 57
+    },
+    {
+        "areaId": 496,
+        "area": "Chatkhil",
+        "areaBangla": "চাটখিল",
+        "cityId": 57
+    },
+    {
+        "areaId": 640,
+        "area": "Choumohoni",
+        "areaBangla": "চৌমহনী",
+        "cityId": 57
+    },
+    {
+        "areaId": 495,
+        "area": "Noakhali Sadar",
+        "areaBangla": "নোয়াখালী সদর",
+        "cityId": 57
+    },
+    {
+        "areaId": 494,
+        "area": "Begumganj",
+        "areaBangla": "বেগমগঞ্জ",
+        "cityId": 57
+    },
+    {
+        "areaId": 501,
+        "area": "Subarnachar",
+        "areaBangla": "সূবর্ণচর",
+        "cityId": 57
+    },
+    {
+        "areaId": 499,
+        "area": "Senbagh",
+        "areaBangla": "সেনবাগ",
+        "cityId": 57
+    },
+    {
+        "areaId": 500,
+        "area": "Sonaimuri",
+        "areaBangla": "সোনাইমুড়ি",
+        "cityId": 57
+    },
+    {
+        "areaId": 498,
+        "area": "Hatiya",
+        "areaBangla": "হাতিয়া",
+        "cityId": 57
+    },
+    {
+        "areaId": 370,
+        "area": "Atwari",
+        "areaBangla": "আটোয়ারী",
+        "cityId": 39
+    },
+    {
+        "areaId": 374,
+        "area": "Tetulia",
+        "areaBangla": "তেতুলিয়া",
+        "cityId": 39
+    },
+    {
+        "areaId": 372,
+        "area": "Debiganj",
+        "areaBangla": "দেবীগঞ্জ",
+        "cityId": 39
+    },
+    {
+        "areaId": 373,
+        "area": "Panchagarh Sadar",
+        "areaBangla": "পঞ্চগড় সদর",
+        "cityId": 39
+    },
+    {
+        "areaId": 371,
+        "area": "Boda",
+        "areaBangla": "বোদা",
+        "cityId": 39
+    },
+    {
+        "areaId": 418,
+        "area": "Kolapara",
+        "areaBangla": "কলাপারা",
+        "cityId": 46
+    },
+    {
+        "areaId": 417,
+        "area": "Galachipa",
+        "areaBangla": "গলাচিপা",
+        "cityId": 46
+    },
+    {
+        "areaId": 416,
+        "area": "Doshmina",
+        "areaBangla": "দশমিনা",
+        "cityId": 46
+    },
+    {
+        "areaId": 655,
+        "area": "Dumki",
+        "areaBangla": "দুমকি",
+        "cityId": 46
+    },
+    {
+        "areaId": 420,
+        "area": "Patuakhali Sadar",
+        "areaBangla": "পটুয়াখালী সদর",
+        "cityId": 46
+    },
+    {
+        "areaId": 415,
+        "area": "Bauphal",
+        "areaBangla": "বাউফল",
+        "cityId": 46
+    },
+    {
+        "areaId": 419,
+        "area": "Mirzaganj",
+        "areaBangla": "মির্জাগঞ্জ",
+        "cityId": 46
+    },
+    {
+        "areaId": 656,
+        "area": "Rangabali",
+        "areaBangla": "রাঙ্গাবালি",
+        "cityId": 46
+    },
+    {
+        "areaId": 300,
+        "area": "Atgharia",
+        "areaBangla": "আটঘড়িয়া",
+        "cityId": 31
+    },
+    {
+        "areaId": 305,
+        "area": "Ishwardi",
+        "areaBangla": "ঈশ্বরদী",
+        "cityId": 31
+    },
+    {
+        "areaId": 303,
+        "area": "Chatmohar",
+        "areaBangla": "চাটমোহর",
+        "cityId": 31
+    },
+    {
+        "areaId": 306,
+        "area": "Pabna Sadar",
+        "areaBangla": "পাবনা সদর",
+        "cityId": 31
+    },
+    {
+        "areaId": 304,
+        "area": "Faridpur",
+        "areaBangla": "ফরিদপুর",
+        "cityId": 31
+    },
+    {
+        "areaId": 301,
+        "area": "Bera",
+        "areaBangla": "বেড়া",
+        "cityId": 31
+    },
+    {
+        "areaId": 302,
+        "area": "Bhangura",
+        "areaBangla": "ভাঙ্গুড়া",
+        "cityId": 31
+    },
+    {
+        "areaId": 307,
+        "area": "Santhia",
+        "areaBangla": "সাথিয়া",
+        "cityId": 31
+    },
+    {
+        "areaId": 308,
+        "area": "Sujanagar",
+        "areaBangla": "সুজানগর",
+        "cityId": 31
+    },
+    {
+        "areaId": 422,
+        "area": "Kawkhali",
+        "areaBangla": "কাওখালী",
+        "cityId": 47
+    },
+    {
+        "areaId": 427,
+        "area": "Zianagor",
+        "areaBangla": "জিয়ানগর",
+        "cityId": 47
+    },
+    {
+        "areaId": 424,
+        "area": "Nazirpur",
+        "areaBangla": "নাজিরপুর",
+        "cityId": 47
+    },
+    {
+        "areaId": 426,
+        "area": "Nesarabad (Swarupkati)",
+        "areaBangla": "নেসারাবাদ (স্বরুপকাঠি)",
+        "cityId": 47
+    },
+    {
+        "areaId": 425,
+        "area": "Pirojpur Sadar",
+        "areaBangla": "পিরোজপুর সদর",
+        "cityId": 47
+    },
+    {
+        "areaId": 421,
+        "area": "Vhandaria",
+        "areaBangla": "ভান্ডারিয়া",
+        "cityId": 47
+    },
+    {
+        "areaId": 423,
+        "area": "Mathbaria",
+        "areaBangla": "মঠবাড়িয়া",
+        "cityId": 47
+    },
+    {
+        "areaId": 657,
+        "area": "Rangabali",
+        "areaBangla": "রাঙ্গাবালি",
+        "cityId": 47
+    },
+    {
+        "areaId": 140,
+        "area": "Alfadanga",
+        "areaBangla": "আলফাডাঙ্গা",
+        "cityId": 9
+    },
+    {
+        "areaId": 632,
+        "area": "Kotoali",
+        "areaBangla": "কোতয়ালি",
+        "cityId": 9
+    },
+    {
+        "areaId": 143,
+        "area": "Charbhadrasan",
+        "areaBangla": "চরভদ্রাসন",
+        "cityId": 9
+    },
+    {
+        "areaId": 146,
+        "area": "Nagarkanda",
+        "areaBangla": "নগরকান্দা",
+        "cityId": 9
+    },
+    {
+        "areaId": 144,
+        "area": "Faridpur Sadar",
+        "areaBangla": "ফরিদপুর সদর",
+        "cityId": 9
+    },
+    {
+        "areaId": 142,
+        "area": "Boalmari",
+        "areaBangla": "বোয়ালমারী",
+        "cityId": 9
+    },
+    {
+        "areaId": 141,
+        "area": "Bhanga",
+        "areaBangla": "ভাঙ্গা",
+        "cityId": 9
+    },
+    {
+        "areaId": 145,
+        "area": "Madhukhali",
+        "areaBangla": "মধুখালী",
+        "cityId": 9
+    },
+    {
+        "areaId": 147,
+        "area": "Sadarpur",
+        "areaBangla": "সদরপুর",
+        "cityId": 9
+    },
+    {
+        "areaId": 148,
+        "area": "Saltha",
+        "areaBangla": "সালথা",
+        "cityId": 9
+    },
+    {
+        "areaId": 475,
+        "area": "Chhagalnaiya",
+        "areaBangla": "ছাগলনাইয়া",
+        "cityId": 54
+    },
+    {
+        "areaId": 476,
+        "area": "Daganbhuiyan",
+        "areaBangla": "দাগনভূঞা",
+        "cityId": 54
+    },
+    {
+        "areaId": 478,
+        "area": "Parshuram",
+        "areaBangla": "পরশুরাম",
+        "cityId": 54
+    },
+    {
+        "areaId": 480,
+        "area": "Fulgazi",
+        "areaBangla": "ফুলগাজী",
+        "cityId": 54
+    },
+    {
+        "areaId": 477,
+        "area": "Feni Sadar",
+        "areaBangla": "ফেনী সদর",
+        "cityId": 54
+    },
+    {
+        "areaId": 479,
+        "area": "Sonagazi",
+        "areaBangla": "সোনাগাজী",
+        "cityId": 54
+    },
+    {
+        "areaId": 261,
+        "area": "Adamdighi",
+        "areaBangla": "আদমদীঘি",
+        "cityId": 26
+    },
+    {
+        "areaId": 266,
+        "area": "Kahaloo",
+        "areaBangla": "কাহালু",
+        "cityId": 26
+    },
+    {
+        "areaId": 265,
+        "area": "Gabtali",
+        "areaBangla": "গাবতলী",
+        "cityId": 26
+    },
+    {
+        "areaId": 264,
+        "area": "Dupchanchia",
+        "areaBangla": "দুপচাচিয়া",
+        "cityId": 26
+    },
+    {
+        "areaId": 263,
+        "area": "Dhunat",
+        "areaBangla": "ধুনট",
+        "cityId": 26
+    },
+    {
+        "areaId": 267,
+        "area": "Nandigram",
+        "areaBangla": "নন্দীগ্রাম",
+        "cityId": 26
+    },
+    {
+        "areaId": 262,
+        "area": "Bogra Sadar",
+        "areaBangla": "বগুড়া সদর",
+        "cityId": 26
+    },
+    {
+        "areaId": 269,
+        "area": "Sahajanpur",
+        "areaBangla": "শাহাজানপুর",
+        "cityId": 26
+    },
+    {
+        "areaId": 271,
+        "area": "Shibganj",
+        "areaBangla": "শিবগঞ্জ",
+        "cityId": 26
+    },
+    {
+        "areaId": 270,
+        "area": "Sherpur",
+        "areaBangla": "শেরপুর",
+        "cityId": 26
+    },
+    {
+        "areaId": 268,
+        "area": "Sariakandi",
+        "areaBangla": "সারিয়াকান্দি",
+        "cityId": 26
+    },
+    {
+        "areaId": 272,
+        "area": "Sonatala",
+        "areaBangla": "সোনাতলা",
+        "cityId": 26
+    },
+    {
+        "areaId": 388,
+        "area": "Amtali",
+        "areaBangla": "আমতলি",
+        "cityId": 42
+    },
+    {
+        "areaId": 716,
+        "area": "Taltoli",
+        "areaBangla": "তালতলী",
+        "cityId": 42
+    },
+    {
+        "areaId": 392,
+        "area": "Patharghata",
+        "areaBangla": "পাথরঘাটা",
+        "cityId": 42
+    },
+    {
+        "areaId": 628,
+        "area": "Barguna Sadar",
+        "areaBangla": "বরগুনা সদর",
+        "cityId": 42
+    },
+    {
+        "areaId": 389,
+        "area": "Bamna",
+        "areaBangla": "বামনা",
+        "cityId": 42
+    },
+    {
+        "areaId": 391,
+        "area": "Betagi",
+        "areaBangla": "বেতাগী",
+        "cityId": 42
+    },
+    {
+        "areaId": 554,
+        "area": "Kachua",
+        "areaBangla": "কচুয়া",
+        "cityId": 63
+    },
+    {
+        "areaId": 552,
+        "area": "Chitalmari",
+        "areaBangla": "চিতলমারি",
+        "cityId": 63
+    },
+    {
+        "areaId": 553,
+        "area": "Fakirhat",
+        "areaBangla": "ফকিরহাট",
+        "cityId": 63
+    },
+    {
+        "areaId": 551,
+        "area": "Bagerhat Sadar",
+        "areaBangla": "বাগেরহাট  সদর",
+        "cityId": 63
+    },
+    {
+        "areaId": 556,
+        "area": "Mongla",
+        "areaBangla": "মংলা",
+        "cityId": 63
+    },
+    {
+        "areaId": 557,
+        "area": "Morrelganj",
+        "areaBangla": "মোড়েলগঞ্জ",
+        "cityId": 63
+    },
+    {
+        "areaId": 555,
+        "area": "Mollahat",
+        "areaBangla": "মোল্লাহাট",
+        "cityId": 63
+    },
+    {
+        "areaId": 558,
+        "area": "Rampal",
+        "areaBangla": "রামপাল",
+        "cityId": 63
+    },
+    {
+        "areaId": 559,
+        "area": "Sarankhola",
+        "areaBangla": "শরণখোলা",
+        "cityId": 63
+    },
+    {
+        "areaId": 428,
+        "area": "Ali Kadam",
+        "areaBangla": "আলি কদম",
+        "cityId": 48
+    },
+    {
+        "areaId": 434,
+        "area": "Thanchi",
+        "areaBangla": "থানচি",
+        "cityId": 48
+    },
+    {
+        "areaId": 431,
+        "area": "Naikhanchari",
+        "areaBangla": "নাইখংছড়ি",
+        "cityId": 48
+    },
+    {
+        "areaId": 429,
+        "area": "Bandarban Sadar",
+        "areaBangla": "বান্দরবন সদর",
+        "cityId": 48
+    },
+    {
+        "areaId": 433,
+        "area": "Ruma",
+        "areaBangla": "রুমা",
+        "cityId": 48
+    },
+    {
+        "areaId": 432,
+        "area": "Rowangchhari",
+        "areaBangla": "রোয়াংছড়ি",
+        "cityId": 48
+    },
+    {
+        "areaId": 430,
+        "area": "Lama",
+        "areaBangla": "লামা",
+        "cityId": 48
+    },
+    {
+        "areaId": 435,
+        "area": "Akhaura",
+        "areaBangla": "আখাউড়া",
+        "cityId": 49
+    },
+    {
+        "areaId": 442,
+        "area": "Ashuganj",
+        "areaBangla": "আশুগঞ্জ",
+        "cityId": 49
+    },
+    {
+        "areaId": 438,
+        "area": "Kasba",
+        "areaBangla": "কসবা",
+        "cityId": 49
+    },
+    {
+        "areaId": 439,
+        "area": "Nabinagar",
+        "areaBangla": "নবীনগর",
+        "cityId": 49
+    },
+    {
+        "areaId": 440,
+        "area": "Nasirnagar",
+        "areaBangla": "নাসিরনগর",
+        "cityId": 49
+    },
+    {
+        "areaId": 436,
+        "area": "Bancharampur",
+        "areaBangla": "বাঞ্চারামপুর",
+        "cityId": 49
+    },
+    {
+        "areaId": 443,
+        "area": "Bijoynagar   (New)",
+        "areaBangla": "বিজয়নগর (নতুন)",
+        "cityId": 49
+    },
+    {
+        "areaId": 437,
+        "area": "Brahmanbaria Sadar",
+        "areaBangla": "ব্রাহ্মণবাড়িয়া সদর",
+        "cityId": 49
+    },
+    {
+        "areaId": 441,
+        "area": "Sarail",
+        "areaBangla": "সরাইল",
+        "cityId": 49
+    },
+    {
+        "areaId": 406,
+        "area": "Char Fasson",
+        "areaBangla": "চর ফ্যাশন",
+        "cityId": 44
+    },
+    {
+        "areaId": 410,
+        "area": "Tozumoddin",
+        "areaBangla": "তজুমদ্দিন",
+        "cityId": 44
+    },
+    {
+        "areaId": 718,
+        "area": "Dulherhat",
+        "areaBangla": "দুলারহাট",
+        "cityId": 44
+    },
+    {
+        "areaId": 407,
+        "area": "Daulatkhan",
+        "areaBangla": "দৌলতখান",
+        "cityId": 44
+    },
+    {
+        "areaId": 405,
+        "area": "Burhanuddin",
+        "areaBangla": "বোরহানউদ্দিন",
+        "cityId": 44
+    },
+    {
+        "areaId": 404,
+        "area": "Bhola Sadar",
+        "areaBangla": "ভোলা সদর",
+        "cityId": 44
+    },
+    {
+        "areaId": 409,
+        "area": "Manpura",
+        "areaBangla": "মনপুরা",
+        "cityId": 44
+    },
+    {
+        "areaId": 408,
+        "area": "Lalmohan",
+        "areaBangla": "লালমোহন",
+        "cityId": 44
+    },
+    {
+        "areaId": 203,
+        "area": "Ishwarganj",
+        "areaBangla": "ঈশ্বরগঞ্জ",
+        "cityId": 17
+    },
+    {
+        "areaId": 200,
+        "area": "Gaffargaon",
+        "areaBangla": "গফরগাঁও",
+        "cityId": 17
+    },
+    {
+        "areaId": 201,
+        "area": "Gauripur",
+        "areaBangla": "গৌরীপুর",
+        "cityId": 17
+    },
+    {
+        "areaId": 717,
+        "area": "Tarakanda",
+        "areaBangla": "তারাকান্দা",
+        "cityId": 17
+    },
+    {
+        "areaId": 208,
+        "area": "Trishal",
+        "areaBangla": "ত্রিশাল",
+        "cityId": 17
+    },
+    {
+        "areaId": 198,
+        "area": "Dhobaura",
+        "areaBangla": "ধোবাউড়া",
+        "cityId": 17
+    },
+    {
+        "areaId": 206,
+        "area": "Nandail",
+        "areaBangla": "নান্দাইল",
+        "cityId": 17
+    },
+    {
+        "areaId": 207,
+        "area": "Phulpur",
+        "areaBangla": "ফুলপুর",
+        "cityId": 17
+    },
+    {
+        "areaId": 199,
+        "area": "Fulbaria",
+        "areaBangla": "ফুলবাড়ীয়া",
+        "cityId": 17
+    },
+    {
+        "areaId": 197,
+        "area": "Bhaluka",
+        "areaBangla": "ভালুকা",
+        "cityId": 17
+    },
+    {
+        "areaId": 204,
+        "area": "Mymensingh Sadar",
+        "areaBangla": "ময়মনসিংহ সদর",
+        "cityId": 17
+    },
+    {
+        "areaId": 205,
+        "area": "Muktagachha",
+        "areaBangla": "মুক্তাগাছা",
+        "cityId": 17
+    },
+    {
+        "areaId": 202,
+        "area": "Haluaghat",
+        "areaBangla": "হালুয়াঘাট",
+        "cityId": 17
+    },
+    {
+        "areaId": 595,
+        "area": "Magura Sadar",
+        "areaBangla": "মাগুরা সদর",
+        "cityId": 69
+    },
+    {
+        "areaId": 596,
+        "area": "Mohammadpur",
+        "areaBangla": "মোহাম্মদপুর",
+        "cityId": 69
+    },
+    {
+        "areaId": 597,
+        "area": "Shalikha",
+        "areaBangla": "শালিখা",
+        "cityId": 69
+    },
+    {
+        "areaId": 598,
+        "area": "Sreepur",
+        "areaBangla": "শ্রীপুর",
+        "cityId": 69
+    },
+    {
+        "areaId": 182,
+        "area": "Kalkini",
+        "areaBangla": "কালকিনি",
+        "cityId": 14
+    },
+    {
+        "areaId": 710,
+        "area": "Dashar Thana Area",
+        "areaBangla": "ডাসার থানা এরিয়া",
+        "cityId": 14
+    },
+    {
+        "areaId": 181,
+        "area": "Madaripur Sadar",
+        "areaBangla": "মাদারীপুর সদর",
+        "cityId": 14
+    },
+    {
+        "areaId": 180,
+        "area": "Rajoir",
+        "areaBangla": "রাজৈর",
+        "cityId": 14
+    },
+    {
+        "areaId": 183,
+        "area": "Shibchar",
+        "areaBangla": "শিবচর",
+        "cityId": 14
+    },
+    {
+        "areaId": 185,
+        "area": "Ghior",
+        "areaBangla": "ঘিওর",
+        "cityId": 15
+    },
+    {
+        "areaId": 184,
+        "area": "Daulatpur",
+        "areaBangla": "দৌলতপুর",
+        "cityId": 15
+    },
+    {
+        "areaId": 187,
+        "area": "Manikgonj Sadar",
+        "areaBangla": "মানিকগঞ্জ সদর",
+        "cityId": 15
+    },
+    {
+        "areaId": 189,
+        "area": "Shivalaya",
+        "areaBangla": "শিবালয়",
+        "cityId": 15
+    },
+    {
+        "areaId": 188,
+        "area": "Saturia",
+        "areaBangla": "সাটুরিয়া",
+        "cityId": 15
+    },
+    {
+        "areaId": 190,
+        "area": "Singair",
+        "areaBangla": "সিংগাইর",
+        "cityId": 15
+    },
+    {
+        "areaId": 186,
+        "area": "Harirampur",
+        "areaBangla": "হরিরামপুর",
+        "cityId": 15
+    },
+    {
+        "areaId": 191,
+        "area": "Gazaria",
+        "areaBangla": "গজারিয়া",
+        "cityId": 16
+    },
+    {
+        "areaId": 196,
+        "area": "Tongibari",
+        "areaBangla": "টংগীবাড়ি",
+        "cityId": 16
+    },
+    {
+        "areaId": 193,
+        "area": "Munshiganj Sadar",
+        "areaBangla": "মুন্সিগঞ্জ সদর",
+        "cityId": 16
+    },
+    {
+        "areaId": 192,
+        "area": "Lohaganj",
+        "areaBangla": "লৌহজং",
+        "cityId": 16
+    },
+    {
+        "areaId": 195,
+        "area": "Sreenagar",
+        "areaBangla": "শ্রীনগর",
+        "cityId": 16
+    },
+    {
+        "areaId": 194,
+        "area": "Sirajdikhan",
+        "areaBangla": "সিরাজদিখান",
+        "cityId": 16
+    },
+    {
+        "areaId": 599,
+        "area": "Gangni",
+        "areaBangla": "গাঙনী",
+        "cityId": 70
+    },
+    {
+        "areaId": 601,
+        "area": "Mujibnagar",
+        "areaBangla": "মুজিবনগর",
+        "cityId": 70
+    },
+    {
+        "areaId": 600,
+        "area": "Meherpur Sadar",
+        "areaBangla": "মেহেরপুর সদর",
+        "cityId": 70
+    },
+    {
+        "areaId": 522,
+        "area": "Komolgonj",
+        "areaBangla": "কমলগঞ্জ",
+        "cityId": 60
+    },
+    {
+        "areaId": 524,
+        "area": "Kulaura",
+        "areaBangla": "কুলাউড়া",
+        "cityId": 60
+    },
+    {
+        "areaId": 528,
+        "area": "Juri",
+        "areaBangla": "জুরি",
+        "cityId": 60
+    },
+    {
+        "areaId": 521,
+        "area": "Barlekha",
+        "areaBangla": "বড়লেখা",
+        "cityId": 60
+    },
+    {
+        "areaId": 525,
+        "area": "Maulvibazar Sadar",
+        "areaBangla": "মৌলভীবাজার সদর",
+        "cityId": 60
+    },
+    {
+        "areaId": 526,
+        "area": "Rajnagar",
+        "areaBangla": "রাজনগর",
+        "cityId": 60
+    },
+    {
+        "areaId": 527,
+        "area": "Sreemangal",
+        "areaBangla": "শ্রীমঙ্গল",
+        "cityId": 60
+    },
+    {
+        "areaId": 565,
+        "area": "Avoynagar",
+        "areaBangla": "অভয়নগর",
+        "cityId": 65
+    },
+    {
+        "areaId": 569,
+        "area": "Keshabpur",
+        "areaBangla": "কেশবপুর",
+        "cityId": 65
+    },
+    {
+        "areaId": 567,
+        "area": "Chaugachha",
+        "areaBangla": "চৌগাছা",
+        "cityId": 65
+    },
+    {
+        "areaId": 568,
+        "area": "Jhikargachha",
+        "areaBangla": "ঝিকরগাছা",
+        "cityId": 65
+    },
+    {
+        "areaId": 566,
+        "area": "Bagherpara",
+        "areaBangla": "বাঘারপাড়া",
+        "cityId": 65
+    },
+    {
+        "areaId": 631,
+        "area": "Benapol",
+        "areaBangla": "বেনাপোল",
+        "cityId": 65
+    },
+    {
+        "areaId": 571,
+        "area": "Manirampur",
+        "areaBangla": "মনিরামপুর",
+        "cityId": 65
+    },
+    {
+        "areaId": 570,
+        "area": "Jessore Sadar",
+        "areaBangla": "যশোর সদর",
+        "cityId": 65
+    },
+    {
+        "areaId": 572,
+        "area": "Sharsha",
+        "areaBangla": "শার্শা",
+        "cityId": 65
+    },
+    {
+        "areaId": 505,
+        "area": "Kawkhali (Betbunia)",
+        "areaBangla": "কাউখালী",
+        "cityId": 58
+    },
+    {
+        "areaId": 507,
+        "area": "Kaptai",
+        "areaBangla": "কাপ্তাই",
+        "cityId": 58
+    },
+    {
+        "areaId": 508,
+        "area": "Juraichari",
+        "areaBangla": "জুরাছড়ি",
+        "cityId": 58
+    },
+    {
+        "areaId": 510,
+        "area": "Nanierchar",
+        "areaBangla": "নানিয়ারচর",
+        "cityId": 58
+    },
+    {
+        "areaId": 504,
+        "area": "Barkal",
+        "areaBangla": "বরকল",
+        "cityId": 58
+    },
+    {
+        "areaId": 503,
+        "area": "Baghaichari",
+        "areaBangla": "বাঘাইছড়ি",
+        "cityId": 58
+    },
+    {
+        "areaId": 506,
+        "area": "Belaichari",
+        "areaBangla": "বিলাইছড়ি",
+        "cityId": 58
+    },
+    {
+        "areaId": 512,
+        "area": "Rangamati Sadar",
+        "areaBangla": "রাঙ্গামাটি সদর",
+        "cityId": 58
+    },
+    {
+        "areaId": 511,
+        "area": "Rajasthali",
+        "areaBangla": "রাজস্থলী",
+        "cityId": 58
+    },
+    {
+        "areaId": 509,
+        "area": "Langadu",
+        "areaBangla": "লংগদু",
+        "cityId": 58
+    },
+    {
+        "areaId": 709,
+        "area": "Kalukhali",
+        "areaBangla": "কালুখালী",
+        "cityId": 22
+    },
+    {
+        "areaId": 234,
+        "area": "Goalandaghat",
+        "areaBangla": "গোয়ালন্দঘাট",
+        "cityId": 22
+    },
+    {
+        "areaId": 235,
+        "area": "Pangsha",
+        "areaBangla": "পাংশা",
+        "cityId": 22
+    },
+    {
+        "areaId": 233,
+        "area": "Baliakandi",
+        "areaBangla": "বালিয়াকান্দি",
+        "cityId": 22
+    },
+    {
+        "areaId": 236,
+        "area": "Rajbari Sadar",
+        "areaBangla": "রাজবাড়ী সদর",
+        "cityId": 22
+    },
+    {
+        "areaId": 493,
+        "area": "Kamal Nagar",
+        "areaBangla": "কমলনগর",
+        "cityId": 56
+    },
+    {
+        "areaId": 491,
+        "area": "Ramganj",
+        "areaBangla": "রামগঞ্জ",
+        "cityId": 56
+    },
+    {
+        "areaId": 492,
+        "area": "Ramgati",
+        "areaBangla": "রামগতি",
+        "cityId": 56
+    },
+    {
+        "areaId": 490,
+        "area": "Raipur",
+        "areaBangla": "রায়পুর",
+        "cityId": 56
+    },
+    {
+        "areaId": 489,
+        "area": "Lakshmipur Sadar",
+        "areaBangla": "লক্ষীপুর সদর",
+        "cityId": 56
+    },
+    {
+        "areaId": 358,
+        "area": "Aditmari",
+        "areaBangla": "আদিতমারি",
+        "cityId": 37
+    },
+    {
+        "areaId": 361,
+        "area": "Kaliganj",
+        "areaBangla": "কালিগঞ্জ",
+        "cityId": 37
+    },
+    {
+        "areaId": 363,
+        "area": "Patgram",
+        "areaBangla": "পাটগ্রাম",
+        "cityId": 37
+    },
+    {
+        "areaId": 362,
+        "area": "Lalmonirhat Sadar",
+        "areaBangla": "লালমনিরহাট সদর",
+        "cityId": 37
+    },
+    {
+        "areaId": 359,
+        "area": "Hatibandha",
+        "areaBangla": "হাতিবান্ধা",
+        "cityId": 37
+    },
+    {
+        "areaId": 239,
+        "area": "Gosairhat",
+        "areaBangla": "গোশাইরহাট",
+        "cityId": 23
+    },
+    {
+        "areaId": 242,
+        "area": "Jajira",
+        "areaBangla": "জাজিরা",
+        "cityId": 23
+    },
+    {
+        "areaId": 238,
+        "area": "Damudya",
+        "areaBangla": "ডামুড্যা",
+        "cityId": 23
+    },
+    {
+        "areaId": 240,
+        "area": "Naria",
+        "areaBangla": "নড়িয়া",
+        "cityId": 23
+    },
+    {
+        "areaId": 639,
+        "area": "Palong Thana Area",
+        "areaBangla": "পালং থানা এরিয়া",
+        "cityId": 23
+    },
+    {
+        "areaId": 237,
+        "area": "Bhedarganj",
+        "areaBangla": "ভেদরগঞ্জ",
+        "cityId": 23
+    },
+    {
+        "areaId": 241,
+        "area": "Shariatpur Sadar",
+        "areaBangla": "শরিয়তপুর সদর",
+        "cityId": 23
+    },
+    {
+        "areaId": 243,
+        "area": "Sokhipur  Thana Area",
+        "areaBangla": "সখিপুর থানা এরিয়া",
+        "cityId": 23
+    },
+    {
+        "areaId": 244,
+        "area": "Jhenaigati",
+        "areaBangla": "ঝিনাইগাতি",
+        "cityId": 24
+    },
+    {
+        "areaId": 245,
+        "area": "Nakla",
+        "areaBangla": "নকলা",
+        "cityId": 24
+    },
+    {
+        "areaId": 246,
+        "area": "Nalitabari",
+        "areaBangla": "নালিতাবাড়ি",
+        "cityId": 24
+    },
+    {
+        "areaId": 247,
+        "area": "Sherpur Sadar",
+        "areaBangla": "শেরপুর সদর",
+        "cityId": 24
+    },
+    {
+        "areaId": 248,
+        "area": "Sreebardi",
+        "areaBangla": "শ্রীবরদী",
+        "cityId": 24
+    },
+    {
+        "areaId": 605,
+        "area": "Assasuni",
+        "areaBangla": "আশাশুনি",
+        "cityId": 72
+    },
+    {
+        "areaId": 607,
+        "area": "Kalaroa",
+        "areaBangla": "কলারোয়া",
+        "cityId": 72
+    },
+    {
+        "areaId": 608,
+        "area": "Kaliganj",
+        "areaBangla": "কালিগঞ্জ",
+        "cityId": 72
+    },
+    {
+        "areaId": 611,
+        "area": "Tala",
+        "areaBangla": "তালা",
+        "cityId": 72
+    },
+    {
+        "areaId": 606,
+        "area": "Debhata",
+        "areaBangla": "দেবহাটা",
+        "cityId": 72
+    },
+    {
+        "areaId": 658,
+        "area": "Patkelghata",
+        "areaBangla": "পাটকেলঘাটা",
+        "cityId": 72
+    },
+    {
+        "areaId": 610,
+        "area": "Shyamnagar",
+        "areaBangla": "শ্যামনগর",
+        "cityId": 72
+    },
+    {
+        "areaId": 609,
+        "area": "Satkhira Sadar",
+        "areaBangla": "সাতক্ষীরা সদর",
+        "cityId": 72
+    },
+    {
+        "areaId": 325,
+        "area": "Ullahpara",
+        "areaBangla": "উল্লাপাড়া",
+        "cityId": 33
+    },
+    {
+        "areaId": 719,
+        "area": "Enayetpur",
+        "areaBangla": "এনায়েতপুর",
+        "cityId": 33
+    },
+    {
+        "areaId": 320,
+        "area": "Kazipur",
+        "areaBangla": "কাজিপুর",
+        "cityId": 33
+    },
+    {
+        "areaId": 319,
+        "area": "Kamarkhanda",
+        "areaBangla": "কামারখন্দ",
+        "cityId": 33
+    },
+    {
+        "areaId": 318,
+        "area": "Chauhali",
+        "areaBangla": "চৌহালি",
+        "cityId": 33
+    },
+    {
+        "areaId": 324,
+        "area": "Tarash",
+        "areaBangla": "তারাস",
+        "cityId": 33
+    },
+    {
+        "areaId": 317,
+        "area": "Belkuchi",
+        "areaBangla": "বেলকুচি",
+        "cityId": 33
+    },
+    {
+        "areaId": 321,
+        "area": "Ranigonj",
+        "areaBangla": "রানীগঞ্জ",
+        "cityId": 33
+    },
+    {
+        "areaId": 634,
+        "area": "Raiganj",
+        "areaBangla": "রায়গঞ্জ",
+        "cityId": 33
+    },
+    {
+        "areaId": 322,
+        "area": "Shahjadpur",
+        "areaBangla": "শাহাজাদপুর",
+        "cityId": 33
+    },
+    {
+        "areaId": 323,
+        "area": "Sirajgonj Sadar",
+        "areaBangla": "সিরাজগঞ্জ সদর",
+        "cityId": 33
+    },
+    {
+        "areaId": 530,
+        "area": "Chhatak",
+        "areaBangla": "ছাতক",
+        "cityId": 61
+    },
+    {
+        "areaId": 535,
+        "area": "Jagannathpur",
+        "areaBangla": "জগন্নাথপুর",
+        "cityId": 61
+    },
+    {
+        "areaId": 536,
+        "area": "Jamalganj",
+        "areaBangla": "জামালগঞ্জ",
+        "cityId": 61
+    },
+    {
+        "areaId": 539,
+        "area": "Tahirpur",
+        "areaBangla": "তাহিরপুর",
+        "cityId": 61
+    },
+    {
+        "areaId": 713,
+        "area": "Dakshin Sunamganj",
+        "areaBangla": "দক্ষিণ সুনামগঞ্জ",
+        "cityId": 61
+    },
+    {
+        "areaId": 531,
+        "area": "Derai",
+        "areaBangla": "দিরাই",
+        "cityId": 61
+    },
+    {
+        "areaId": 534,
+        "area": "Dowarabazar",
+        "areaBangla": "দোয়ারাবাজার",
+        "cityId": 61
+    },
+    {
+        "areaId": 532,
+        "area": "Dharampasha",
+        "areaBangla": "ধর্মপাশা",
+        "cityId": 61
+    },
+    {
+        "areaId": 529,
+        "area": "Bishwamvarpur",
+        "areaBangla": "বিশ্বম্ভরপুর",
+        "cityId": 61
+    },
+    {
+        "areaId": 537,
+        "area": "Sullah",
+        "areaBangla": "শাল্লা",
+        "cityId": 61
+    },
+    {
+        "areaId": 538,
+        "area": "Sunamganj Sadar",
+        "areaBangla": "সুনামগঞ্জ সদর",
+        "cityId": 61
+    },
+    {
+        "areaId": 513,
+        "area": "Ajmiriganj",
+        "areaBangla": "আজমিরীগঞ্জ",
+        "cityId": 59
+    },
+    {
+        "areaId": 516,
+        "area": "Chunarughat",
+        "areaBangla": "চুনারুঘাট",
+        "cityId": 59
+    },
+    {
+        "areaId": 520,
+        "area": "Nabiganj",
+        "areaBangla": "নবীগঞ্জ",
+        "cityId": 59
+    },
+    {
+        "areaId": 515,
+        "area": "Baniyachong",
+        "areaBangla": "বানিয়াচং",
+        "cityId": 59
+    },
+    {
+        "areaId": 514,
+        "area": "Bahubal",
+        "areaBangla": "বাহুবল",
+        "cityId": 59
+    },
+    {
+        "areaId": 519,
+        "area": "Madhabpur",
+        "areaBangla": "মাধবপুর",
+        "cityId": 59
+    },
+    {
+        "areaId": 518,
+        "area": "Lakhai",
+        "areaBangla": "লাখাই",
+        "cityId": 59
+    },
+    {
+        "areaId": 679,
+        "area": "Shayestagonj",
+        "areaBangla": "শায়েস্তাগঞ্জ",
+        "cityId": 59
+    },
+    {
+        "areaId": 517,
+        "area": "Habiganj Sadar",
+        "areaBangla": "হবিগঞ্জ সদর",
+        "cityId": 59
+    }
+]

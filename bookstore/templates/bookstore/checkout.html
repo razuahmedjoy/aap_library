@@ -166,7 +166,7 @@
         const res = await fetch("{% url 'get_districts' %}")
         const data = await res.json()
         const districts = data.data
-        console.log(districts)
+        // console.log(districts)
 
         // const newAr = []
         // for(let item of districts){
@@ -180,7 +180,7 @@
         let options = '<option value="">Select District</option>'
 
         for (let item of districts) {
-            options += `<option value="${item.name}" districtid="${item.id}">${item.name_bn}</option>`
+            options += `<option value="${item.city}" districtid="${item.cityId}">${item.cityBangla}</option>`
         }
         // console.log(options)
         districtContainer = document.getElementById('id_district')
@@ -197,53 +197,26 @@
         if (districtId != "") {
             openLoader()
         }
-        let url = "{% url 'get_upazilla' %}"
+        let url = "{% url 'get_area' %}"
         url = `${url}?district_id=${districtId}`
         const res = await fetch(url)
         const data = await res.json()
         const upzilla = data.data
 
 
-        let options = '<option value="">Select Upazilla</option>'
+        let options = '<option value="">Select area</option>'
 
         for (let item of upzilla) {
-            options += `<option value="${item.name}" upazillaid="${item.id}">${item.name_bn}</option>`
+            options += `<option value="${item.area}" areaid="${item.areaId}">${item.areaBangla}</option>`
         }
         // console.log(options)
-        upazillaContainer = document.getElementById('id_upazilla')
-        upazillaContainer.innerHTML = options;
+        areaContainer = document.getElementById('id_area')
+        areaContainer.innerHTML = options;
         closeLoader()
 
     })
 
-    const upazillaInput = document.getElementById('id_upazilla')
-    upazillaInput.addEventListener('change', async (e) => {
-
-        const upazillaId = parseInt(e.target.selectedOptions[0].attributes.upazillaid.value)
-        if (upazillaId != "") {
-            openLoader()
-        }
-        const url = 'https://raw.githubusercontent.com/nuhil/bangladesh-geocode/master/unions/unions.json'
-        const res = await fetch(url)
-        const data = await res.json()
-        const unions = data[2].data
-
-        const filtered = unions.filter(item => item.upazilla_id == upazillaId)
-        // console.log(filtered)
-
-        let options = '<option value="">Select Area</option>'
-
-        for (let item of filtered) {
-            options += `<option value="${item.name}">${item.bn_name}</option>`
-        }
-        // console.log(options)
-        thanaContainer = document.getElementById('id_thana')
-        thanaContainer.innerHTML = options;
-
-
-        closeLoader()
-
-    })
+    
 </script>
 
 

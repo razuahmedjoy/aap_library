@@ -500,7 +500,11 @@ section {
   text-decoration: line-through;
 }
 
-.swiper-button-next,
+.swiper-button-next, .swiper-button-prev {
+  
+  top: 40%;
+}
+/* .swiper-button-next,
 .swiper-button-prev {
   border: var(--border-hover);
   height: 4rem;
@@ -518,7 +522,7 @@ section {
 .swiper-button-prev:hover {
   background: var(--black);
   color: #fff;
-}
+} */
 
 .newsletter {
   background: url(../image/letter-bg.jpg) no-repeat;

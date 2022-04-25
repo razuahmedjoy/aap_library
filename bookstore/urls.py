@@ -35,5 +35,5 @@ urlpatterns = [
     
     # location api
     path('get_districts', get_districts, name="get_districts" ),
-    path('get_upazilla', get_upazilla, name="get_upazilla" ),
+    path('get_area', get_area, name="get_area" ),
 ]

@@ -47,12 +47,13 @@ window.onscroll = () =>{
 // }
 
 var swiper = new Swiper(".books-slider", {
-  loop:true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 9500,
-    disableOnInteraction: false,
+  // loop:true,
+  // centeredSlides: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
+
   breakpoints: {
     0: {
       slidesPerView: 1,
@@ -66,11 +67,15 @@ var swiper = new Swiper(".books-slider", {
   },
 });
 var swiper = new Swiper(".slider-large", {
-  loop:true,
-  autoplay: {
-    delay: 4500,
-    disableOnInteraction: false,
+  // loop:true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
+  // autoplay: {
+  //   delay: 4500,
+  //   disableOnInteraction: false,
+  // },
   breakpoints: {
     0: {
       slidesPerView: 2,

@@ -1,0 +1,322 @@
+[
+    {
+        "cityId": 2,
+        "city": "Dhaka",
+        "cityBangla": "ঢাকা"
+    },
+    {
+        "cityId": 4,
+        "city": "Rajshahi",
+        "cityBangla": "রাজশাহী"
+    },
+    {
+        "cityId": 3,
+        "city": "Chittagong",
+        "cityBangla": "চট্টগ্রাম"
+    },
+    {
+        "cityId": 6,
+        "city": "Khulna",
+        "cityBangla": "খুলনা"
+    },
+    {
+        "cityId": 43,
+        "city": "Barisal",
+        "cityBangla": "বরিশাল"
+    },
+    {
+        "cityId": 5,
+        "city": "Sylhet",
+        "cityBangla": "সিলেট"
+    },
+    {
+        "cityId": 8,
+        "city": "Rangpur",
+        "cityBangla": "রংপুর"
+    },
+    {
+        "cityId": 53,
+        "city": "Cox's Bazar",
+        "cityBangla": "কক্সবাজার"
+    },
+    {
+        "cityId": 13,
+        "city": "Kishoreganj",
+        "cityBangla": "কিশোরগঞ্জ"
+    },
+    {
+        "cityId": 36,
+        "city": "Kurigram",
+        "cityBangla": "কুড়িঁগ্রাম"
+    },
+    {
+        "cityId": 52,
+        "city": "Comilla",
+        "cityBangla": "কুমিল্লা"
+    },
+    {
+        "cityId": 68,
+        "city": "Kushtia",
+        "cityBangla": "কুষ্টিয়া"
+    },
+    {
+        "cityId": 55,
+        "city": "Khagrachari",
+        "cityBangla": "খাগড়াছড়ি"
+    },
+    {
+        "cityId": 35,
+        "city": "Gaibandha",
+        "cityBangla": "গাইবান্ধা "
+    },
+    {
+        "cityId": 10,
+        "city": "Gazipur",
+        "cityBangla": "গাজীপুর"
+    },
+    {
+        "cityId": 11,
+        "city": "Gopalganj",
+        "cityBangla": "গোপালগঞ্জ "
+    },
+    {
+        "cityId": 50,
+        "city": "Chandpur",
+        "cityBangla": "চাঁদপুর"
+    },
+    {
+        "cityId": 30,
+        "city": "Chapai Nawabganj",
+        "cityBangla": "চাঁপাইনবাবগঞ্জ"
+    },
+    {
+        "cityId": 64,
+        "city": "Chuadanga",
+        "cityBangla": "চুয়াডাঙ্গা "
+    },
+    {
+        "cityId": 27,
+        "city": "Joypurhat",
+        "cityBangla": "জয়পুরহাট"
+    },
+    {
+        "cityId": 12,
+        "city": "Jamalpur",
+        "cityBangla": "জামালপুর "
+    },
+    {
+        "cityId": 45,
+        "city": "Jhalokati",
+        "cityBangla": "ঝালকাঠি"
+    },
+    {
+        "cityId": 66,
+        "city": "Jhenaidah",
+        "cityBangla": "ঝিনাইদহ"
+    },
+    {
+        "cityId": 25,
+        "city": "Tangail",
+        "cityBangla": "টাঙ্গাইল"
+    },
+    {
+        "cityId": 41,
+        "city": "Thakurgaon",
+        "cityBangla": "ঠাকুরগাঁও "
+    },
+    {
+        "cityId": 34,
+        "city": "Dinajpur",
+        "cityBangla": "দিনাজপুর"
+    },
+    {
+        "cityId": 28,
+        "city": "Naogaon",
+        "cityBangla": "নওগাঁ"
+    },
+    {
+        "cityId": 71,
+        "city": "Narail",
+        "cityBangla": "নড়াইল "
+    },
+    {
+        "cityId": 20,
+        "city": "Narsingdi",
+        "cityBangla": "নরসিংদী "
+    },
+    {
+        "cityId": 29,
+        "city": "Natore",
+        "cityBangla": "নাটোর"
+    },
+    {
+        "cityId": 18,
+        "city": "Narayanganj",
+        "cityBangla": "নারায়ণগঞ্জ"
+    },
+    {
+        "cityId": 38,
+        "city": "Nilphamari",
+        "cityBangla": "নীলফামারী"
+    },
+    {
+        "cityId": 21,
+        "city": "Netrokona",
+        "cityBangla": "নেত্রকোনা"
+    },
+    {
+        "cityId": 57,
+        "city": "Noakhali",
+        "cityBangla": "নোয়াখালী"
+    },
+    {
+        "cityId": 39,
+        "city": "Panchagarh",
+        "cityBangla": "পঞ্চগড়"
+    },
+    {
+        "cityId": 46,
+        "city": "Patuakhali",
+        "cityBangla": "পটুয়াখালী"
+    },
+    {
+        "cityId": 31,
+        "city": "Pabna",
+        "cityBangla": "পাবনা"
+    },
+    {
+        "cityId": 47,
+        "city": "Pirojpur",
+        "cityBangla": "পিরোজপুর"
+    },
+    {
+        "cityId": 9,
+        "city": "Faridpur",
+        "cityBangla": "ফরিদপুর"
+    },
+    {
+        "cityId": 54,
+        "city": "Feni",
+        "cityBangla": "ফেনী"
+    },
+    {
+        "cityId": 26,
+        "city": "Bogra",
+        "cityBangla": "বগুড়া"
+    },
+    {
+        "cityId": 42,
+        "city": "Barguna",
+        "cityBangla": "বরগুনা"
+    },
+    {
+        "cityId": 63,
+        "city": "Bagerhat",
+        "cityBangla": "বাগেরহাট "
+    },
+    {
+        "cityId": 48,
+        "city": "Bandarban",
+        "cityBangla": "বান্দরবান"
+    },
+    {
+        "cityId": 49,
+        "city": "Brahmanbaria",
+        "cityBangla": "ব্রাহ্মণবাড়িয়া"
+    },
+    {
+        "cityId": 44,
+        "city": "Bhola",
+        "cityBangla": "ভোলা"
+    },
+    {
+        "cityId": 17,
+        "city": "Mymensingh",
+        "cityBangla": "ময়মনসিংহ"
+    },
+    {
+        "cityId": 69,
+        "city": "Magura",
+        "cityBangla": "মাগুরা"
+    },
+    {
+        "cityId": 14,
+        "city": "Madaripur",
+        "cityBangla": "মাদারীপুর"
+    },
+    {
+        "cityId": 15,
+        "city": "Manikganj",
+        "cityBangla": "মানিকগঞ্জ"
+    },
+    {
+        "cityId": 16,
+        "city": "Munshiganj",
+        "cityBangla": "মুন্সিগঞ্জ"
+    },
+    {
+        "cityId": 70,
+        "city": "Meherpur",
+        "cityBangla": "মেহেরপুর"
+    },
+    {
+        "cityId": 60,
+        "city": "Maulvibazar",
+        "cityBangla": "মৌলভী বাজার "
+    },
+    {
+        "cityId": 65,
+        "city": "Jessore",
+        "cityBangla": "যশোর"
+    },
+    {
+        "cityId": 58,
+        "city": "Rangamati",
+        "cityBangla": "রাঙ্গামাটি "
+    },
+    {
+        "cityId": 22,
+        "city": "Rajbari",
+        "cityBangla": "রাজবাড়ী"
+    },
+    {
+        "cityId": 56,
+        "city": "Lakshmipur",
+        "cityBangla": "লক্ষ্মীপুর"
+    },
+    {
+        "cityId": 37,
+        "city": "Lalmonirhat",
+        "cityBangla": "লালমনিরহাট"
+    },
+    {
+        "cityId": 23,
+        "city": "Shariatpur",
+        "cityBangla": "শরিয়তপুর"
+    },
+    {
+        "cityId": 24,
+        "city": "Sherpur",
+        "cityBangla": "শেরপুর"
+    },
+    {
+        "cityId": 72,
+        "city": "Satkhira",
+        "cityBangla": "সাতক্ষীরা  "
+    },
+    {
+        "cityId": 33,
+        "city": "Sirajgonj",
+        "cityBangla": "সিরাজগঞ্জ"
+    },
+    {
+        "cityId": 61,
+        "city": "Sunamganj",
+        "cityBangla": "সুনামগঞ্জ "
+    },
+    {
+        "cityId": 59,
+        "city": "Habiganj",
+        "cityBangla": "হবিগঞ্জ"
+    }
+]

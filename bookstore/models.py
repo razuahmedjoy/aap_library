@@ -75,8 +75,7 @@ class Customers(models.Model):
 class Address(models.Model):
     user = models.ForeignKey(Customers,on_delete=models.SET_NULL,null=True)
     district = models.CharField(max_length=50)
-    upazilla = models.CharField(max_length=50)
-    thana = models.CharField(max_length=50)
+    area = models.CharField(max_length=50)
     address = models.CharField(max_length=50,null=True,blank=True)
     contact_no = models.CharField(max_length=50,null=True,blank=True)
 
@@ -140,7 +139,7 @@ class Order(models.Model):
         return self.customer.name
     
     def get_shipping_address(self):
-        return f"{self.address.address}, {self.address.upazilla}, {self.address.thana}, {self.address.district}"
+        return f"{self.address.address}, {self.address.area}, {self.address.district}"
 
 
 class OrderedProducts(models.Model):

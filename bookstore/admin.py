@@ -33,7 +33,8 @@ admin.site.register(Books,BooksAdmin)
 
 
 class CustomersAdmin(admin.ModelAdmin):
-    readonly_fields = ('user',)
+    # readonly_fields = (,)
+    pass
 
 admin.site.register(Customers,CustomersAdmin)
 
@@ -67,7 +68,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('payment__transaction_id',)
 
     def get_address(self,obj):
-        return f"{obj.address.district}-{obj.address.upazilla},{obj.address.thana},{obj.address.address}"
+        return f"{obj.address.district}-{obj.address.area},{obj.address.address}"
 
     def payment_details(self,obj):
         return f"({obj.payment.payment_method})- ({obj.payment.sender_number}) - TRXID: {obj.payment.transaction_id}"

@@ -169,8 +169,7 @@ def checkout(request):
     if request.method == 'POST':
         
         district = request.POST['district']
-        upazilla = request.POST['upazilla']
-        thana = request.POST['thana']
+        area = request.POST['area']
         address = request.POST['address']
         contact_no = request.POST['contact_no']
         payment_method = request.POST['payment_method']
@@ -190,7 +189,7 @@ def checkout(request):
         newPayment.save()
 
         # set address
-        newOrderAddress = Address(user=customer,district=district,upazilla=upazilla,thana=thana,address=address,contact_no=contact_no)
+        newOrderAddress = Address(user=customer,district=district,area=area,address=address,contact_no=contact_no)
         newOrderAddress.save()
 
 
