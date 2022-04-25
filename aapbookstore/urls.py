@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('bookstore.urls')),
-    path('secret/aapadminaap/', admin.site.urls),
+    path('secreta/aapadminaap/', admin.site.urls),
 
   
 ]
