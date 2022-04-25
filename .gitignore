@@ -2,4 +2,4 @@
 db.sqlite3
 
 /aapbookstore/settings.py
-settings_dev.py
+aapbookstore/settings_prod.py
