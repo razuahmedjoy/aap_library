@@ -1,5 +1,4 @@
 /bookenv
 db.sqlite3
 
-/aapbookstore/settings.py
-aapbookstore/settings_prod.py
+aapbookstore/settings_dev.py
