@@ -101,6 +101,33 @@ def buy_now(request):
     
     return redirect('cart')
 
+# add to cart view
+@login_required(login_url="login")
+def add_to_cart(request):
+    if request.is_ajax():
+        bookid = request.GET.get("bookid")
+        action = request.GET.get("action")
+
+        try:
+            book = Books.objects.get(pk=bookid)
+        except:
+            book = None
+
+        if action == "add_to_cart":
+            if book is not None:
+                try:
+                    cart = Cart.objects.get(user=request.user.customers, book=book)
+                    user_cart = Cart.objects.filter(user__contact_no=request.user.username)
+                    return JsonResponse({"status": "exists", "message": "Book already added to cart"})
+                except:
+                    cart = Cart(user=request.user.customers, book=book, quantity=1)
+                    cart.save()
+                    user_cart = Cart.objects.filter(user__contact_no=request.user.username)
+                    return JsonResponse({"status": "success", "count": len(user_cart)})
+    
+    else:
+        raise Exception("Error")
+
 def update_cart_item(request):
     if request.is_ajax():
         cart_item_id = request.GET.get('cartItemid')
