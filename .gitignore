@@ -2,6 +2,10 @@
 db.sqlite3
 /media
 /static
-aapbookstore/settings_dev.py
-/venv
 /aapbookstore/settigs.py
+/aapbookstore/settings_dev.py
+/venv
+<<<<<<< HEAD
+/aapbookstore/settigs.py
+=======
+>>>>>>> Ariful-Va-Developed
