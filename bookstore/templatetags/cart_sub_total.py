@@ -24,5 +24,5 @@ def cart_sub_total(usercart):
 
 @register.simple_tag
 def total_cart_item(user):
-    cart = Cart.objects.filter(user=user)
+    cart = Cart.objects.filter(user__contact_no=user.username)
     return len(cart)

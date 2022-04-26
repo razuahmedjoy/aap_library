@@ -15,7 +15,7 @@
             <div id="search-btn" class="fas fa-search"></div>
             <!-- <a href="#" class="fas fa-heart"></a> -->
             <a href="{% url 'cart' %}" class="fas fa-shopping-cart">
-                <span class="total-items">{% total_cart_item request.user.customers %}</span>
+                <span class="total-items">{% total_cart_item request.user %}</span>
             </a>
 
             {% if request.user.is_authenticated %}
