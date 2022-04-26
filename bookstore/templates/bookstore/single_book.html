@@ -7,6 +7,13 @@
 AAPLibrary - {{book.title}}
 {%endblock title%}
 
+{% block style %}
+<style>
+    .exist {
+        font-size: large;
+    }
+</style>
+{% endblock style %}
 
 
 {% block content %}
@@ -36,6 +43,12 @@ AAPLibrary - {{book.title}}
                 <a href="{% url 'buy_now' %}?id={{book.id}}">
                     <button class="btn btn-main">Buy Now</button>
                 </a>
+                <button class="btn btn-main" onclick="addtoCart('{{book.id}}')">Add to Cart</button>
+            </div>
+
+            <br>
+
+            <div class="exist">       
             </div>
 
             <div class="my-5">
@@ -100,3 +113,45 @@ AAPLibrary - {{book.title}}
 </div>
 
 {% endblock %}
+
+
+
+{% block js %}
+
+<!-- codes for add to cart functionality -->
+
+<script>
+    const addtoCart = (bookId) => {
+        $.ajax({
+            type: "GET",
+            url: "{% url 'add_to_cart' %}",
+            data: {
+                'bookid': bookId,
+                'action': 'add_to_cart',
+
+            },
+
+            success: function (response) {
+                const {status, count, message} = response
+                if (status == "success") {
+                    spanItem = document.querySelector('.total-items').innerHTML = count
+                }
+                if (status == "exists") {
+                    document.querySelector(".exist").innerHTML = `<div class="alert alert-danger d-flex align-items-center" role="alert">${message}</div>`
+                }
+
+                
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+        });
+
+    }
+
+</script>
+
+
+<!-- codes for add to cart functionality -->
+
+{% endblock js %}

@@ -29,6 +29,10 @@ urlpatterns = [
     path('update_cart_item', update_cart_item, name="update_cart_item" ),
     path('checkout', checkout, name="checkout" ),
 
+
+    #add to cart
+    path('add_to_cart', add_to_cart, name="add_to_cart" ),
+
     # ajax
     path('api/get_book_by_category', get_all_books, name="get_books_by_cat" ),
     
