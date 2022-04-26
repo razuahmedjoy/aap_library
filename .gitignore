@@ -4,4 +4,4 @@ db.sqlite3
 /static
 aapbookstore/settings_dev.py
 /venv
-aapbookstore/settigs.py
+/aapbookstore/settigs.py
