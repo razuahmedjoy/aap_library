@@ -7,4 +7,8 @@ db.sqlite3
 /venv
 /aapbookstore/settigs.py
 
+<<<<<<< HEAD
 # added in main branch by rupa
+=======
+# Added some lines by rupa in git ignore
+>>>>>>> e319c4518d890dc1ff659c7304d60404723060d0
