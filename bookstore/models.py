@@ -37,6 +37,10 @@ class Books(models.Model):
 
     
     title = models.CharField(max_length=250,blank=True,null=True)
+    author = models.CharField(max_length=100,blank=True,null=True)
+    publisher = models.CharField(max_length=50,blank=True,null=True)
+    mrp_price = models.CharField(max_length=20,blank=True,null=True)
+
     cover_photo = models.ImageField(null=True, blank=True,upload_to=book_cover_photo)
     price = models.IntegerField(null=True, blank=True)
     category = models.ManyToManyField(Sub_Category, blank=True)
@@ -159,6 +163,7 @@ class OrderedProducts(models.Model):
 
 class WebSettings(models.Model):
     payment_instruction = RichTextField()
+    shipping_charge = models.IntegerField(default=50)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"

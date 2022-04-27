@@ -6,7 +6,7 @@
     <img src="{{item.book.cover_photo.url}}" class="cart-img" alt="">
     <div class="info">
         <h3>{{item.book.title}}</h3>
-        <span>${{item.book.price}}</span>
+        <span>Tk. {{item.book.price}}</span>
     </div>
 
 
@@ -24,6 +24,11 @@
     </div>
 </div>
 {% endfor %}
+
+<div class="d-flex justify-content-center">
+    <a href="{% url 'checkout' %}"class="btn bg-success">Checkout</a>
+</div>
+
 
 {% else %}
 

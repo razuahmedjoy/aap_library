@@ -19,8 +19,8 @@
   border: none;
   text-decoration: none;
   text-transform: capitalize;
-  transition: all 0.2s linear;
-  transition: width none;
+  /* transition: all 0.2s linear;
+  transition: width none; */
 }
 
 html {
@@ -362,6 +362,7 @@ section {
 }
 .home .row .books-slider a {
   margin-bottom: 15px;
+  transition: all 0.2s linear;
 }
 .home .row .books-slider a:hover {
   transform: scale(0.9);
