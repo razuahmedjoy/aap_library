@@ -6,3 +6,5 @@ db.sqlite3
 /aapbookstore/settings_dev.py
 /venv
 /aapbookstore/settigs.py
+
+# Added some lines by rupa in git ignore
