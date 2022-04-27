@@ -65,10 +65,10 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{item.book.title}}</div>
-                                <span>{{item.quantity}} x ৳{{item.price}}</span>
+                                <span>{{item.quantity}} x Tk.  {{item.price}}</span>
                             </div>
                             <span class="badge bg-primary rounded-pill">
-                                ৳{{item.total_amount}}
+                                Tk.  {{item.total_amount}}
                             </span>
                         </li>
                         {%endfor%}
@@ -78,11 +78,25 @@
 
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
+                                <h5 class="fw-bold">Shipping Charge</h5>
+
+                            </div>
+                            <span class="badge bg-warning rounded-pill">
+                                Tk.  {% get_shipping_charge %}
+                            </span>
+                        </li>
+
+
+                    </ul>
+                    <ul class="list-group list-group">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
                                 <h2 class="fw-bold">SubTotal</h2>
 
                             </div>
                             <span class="badge bg-danger rounded-pill">
-                                ৳{% cart_sub_total usercart %}
+                                Tk.  {% cart_sub_total usercart %}
                             </span>
                         </li>
 
@@ -160,7 +174,7 @@
 {% block js %}
 <script>
     $('select').attr('required',1);
-    openLoader()
+   
     window.onload = async () => {
 
         const res = await fetch("{% url 'get_districts' %}")
@@ -185,7 +199,7 @@
         // console.log(options)
         districtContainer = document.getElementById('id_district')
         districtContainer.innerHTML = options;
-        closeLoader()
+    
 
     }
 
@@ -195,7 +209,7 @@
 
         const districtId = parseInt(e.target.selectedOptions[0].attributes.districtid.value)
         if (districtId != "") {
-            openLoader()
+     
         }
         let url = "{% url 'get_area' %}"
         url = `${url}?district_id=${districtId}`
@@ -212,7 +226,7 @@
         // console.log(options)
         areaContainer = document.getElementById('id_area')
         areaContainer.innerHTML = options;
-        closeLoader()
+     
 
     })
 

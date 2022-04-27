@@ -84,7 +84,7 @@ var swiper = new Swiper(".slider-large", {
       slidesPerView: 3,
     },
     1024: {
-      slidesPerView: 3,
+      slidesPerView: 4,
     },
   },
 });

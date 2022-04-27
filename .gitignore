@@ -2,4 +2,13 @@
 db.sqlite3
 /media
 /static
-aapbookstore/settings_dev.py
+/aapbookstore/settigs.py
+/aapbookstore/settings_dev.py
+/venv
+/aapbookstore/settigs.py
+
+# added in main branch by rupa
+# Added some lines by rupa in git ignore
+
+
+# did some changes in main by joy

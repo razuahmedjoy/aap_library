@@ -7,38 +7,92 @@
 AAPLibrary - {{book.title}}
 {%endblock title%}
 
+{% block style %}
+<style>
+    .exist {
+        font-size: large;
+    }
+
+    .row.py-3.mb-5.singlebook-container {
+        border: solid 1px #dfdfdf;
+        margin-top: 2rem;
+        box-shadow: 0px 0px 10px 3px #e9e4e4;
+        border-radius: 10px;
+    }
+    .mrp{
+        font-size: 15px;
+        text-decoration: line-through;
+    }
+    .single-book-title{
+        font-size: 3rem;
+    }
+    .author,.publisher,.category-info{
+        font-size: 1.4rem;
+        margin-bottom: .5rem;
+    }
+</style>
+{% endblock style %}
 
 
 {% block content %}
 
 <div class="single-book-container container">
-    <div class="row py-3 mb-5">
+    <div class="row py-3 mb-5 singlebook-container">
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="book-cover-photo">
                 <img src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
             </div>
         </div>
         <div class="col-md-8 p-4">
-            <h2 class="title fw-bold">{{book.title}}</h2>
+            <h2 class="single-book-title fw-bold">{{book.title}}</h2>
+            <div class="book-data mt-3 mb-4">
+                <p class="author"> <span class="fw-bold">Author:</span>  {{book.author}}</p>
 
-            <div class="price-box">
-                Price: <span>${{book.price}}</span>
+                <p class="publisher"><span class="fw-bold">Publishers:</span> {{book.publisher}}</p>
+                <div class="category-info" style="font-size:16px;">
+                    <span class="fw-bold">Categories:</span>
+                    {% for cat in book.category.all %}
+                    <span class="badge bg-info">{{cat.name}}</span>
+                    {% endfor %}
+                </div>
+    
             </div>
-
-            <div class="category-info" style="font-size:16px;">
-                Categories:
-                {% for cat in book.category.all %}
-                <span class="badge bg-info">{{cat.name}}</span>
-                {% endfor %}
-            </div>
+            <div class="price-box mrp mb-0">
+                <span>Tk.{{book.mrp_price}}</span>
+             </div>
+             <div class="price-box m-0">
+                <span>Tk. {{book.price}}</span>
+             </div>
+             <div class="stock-notification">
+                 {% if book.in_stock %}
+                 <h5 class="text-success"><i class="fas fa-check-circle"></i> Book in Stock</h5>
+                 {%else %}
+                 <h5 class="text-danger"><i class="fas fa-times-circle"></i> Out Of Stock</h5>
+                 {%endif%}
+             </div>
+            
 
             <div class="add_to_cart">
                 <a href="{% url 'buy_now' %}?id={{book.id}}">
-                    <button class="btn btn-main">Buy Now</button>
+                    <button class="btn btn-main" {% if not book.in_stock %} disabled {%endif%}>Buy Now</button>
                 </a>
+                <button class="btn btn-main" {% if request.user.is_authenticated %} onclick="addtoCart('{{book.id}}')"
+                    {% else %} onclick="navigateToLogin()" {% endif %} {% if not book.in_stock %} disabled {%endif%}>Add to Cart</button>
             </div>
 
-            <div class="my-5">
+            <br>
+
+            <div class="exist">
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="row py-3 mb-5 singlebook-container">
+        <div class="col-md-12">
+            <!-- <h1 class="text-center">Book Details</h1> -->
+            <div class="pt-0 pb-5 px-2">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active description-btn" id="pills-home-tab" data-bs-toggle="pill"
@@ -77,7 +131,7 @@ AAPLibrary - {{book.title}}
                         </div>
                         <div class="content">
                             <h3>{{book.title}}</h3>
-                            <div class="price">${{book.price}}</div>
+                            <div class="price">Tk. {{book.price}}</div>
 
                         </div>
                     </a>
@@ -100,3 +154,50 @@ AAPLibrary - {{book.title}}
 </div>
 
 {% endblock %}
+
+
+
+{% block js %}
+
+<!-- codes for add to cart functionality -->
+
+<script>
+    const navigateToLogin = () => {
+        const fromUrl = window.location.pathname
+        window.location = `{% url 'login' %}?next=${fromUrl}`;
+    }
+    const addtoCart = (bookId) => {
+        console.log(bookId);
+        $.ajax({
+            type: "GET",
+            url: "{% url 'add_to_cart' %}",
+            data: {
+                'bookid': bookId,
+                'action': 'add_to_cart',
+
+            },
+
+            success: function (response) {
+                const { status, count, message } = response
+                if (status == "success") {
+                    spanItem = document.querySelector('.total-items').innerHTML = count
+                }
+                if (status == "exists") {
+                    document.querySelector(".exist").innerHTML = `<div class="alert alert-danger d-flex align-items-center" role="alert">${message}</div>`
+                }
+
+
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+        });
+
+    }
+
+</script>
+
+
+<!-- codes for add to cart functionality -->
+
+{% endblock js %}
