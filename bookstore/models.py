@@ -196,6 +196,9 @@ class Review(models.Model):
     comment = models.TextField()
     ratings = models.CharField(choices=RATING_CHOICES, max_length=10, default='5')
 
+    def __str__(self):
+        return f"{self.book.title} - {self.user.name} - {self.ratings}"
+
 
 
 class QnA(models.Model):

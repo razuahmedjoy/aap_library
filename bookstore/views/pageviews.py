@@ -18,7 +18,7 @@ from django.utils.crypto import get_random_string
 
 
 # import custom forms
-from bookstore.forms import AddressForm, PaymentForm, QnAForm, ReviewForm
+from bookstore.forms import *
 
 
 def book_store_home(request):
@@ -65,8 +65,9 @@ def single_book(request, id, book_slug):
                 book = Books.objects.get(pk=id)
             except:
                 return redirect("book_store_home")
-                
+
             review_form = ReviewForm()
+            # review_form = None
             qna_form = QnAForm()
 
             context = {

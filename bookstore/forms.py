@@ -1,6 +1,6 @@
 from dataclasses import field
 from django import forms
-from .models import Address, Payment, QnA, Review
+from .models import *
 
 class AddressForm(forms.ModelForm):
 
