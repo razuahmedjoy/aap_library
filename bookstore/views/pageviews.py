@@ -59,18 +59,24 @@ def single_book(request, id, book_slug):
     if request.user.is_authenticated:
         current_customer = Customers.objects.get(user=request.user)
         orders = Order.objects.filter(customer=current_customer)
+
         if id and book_slug:
             try:
                 book = Books.objects.get(pk=id)
-                context = {
-                    "book": book,
-                    "review_form": ReviewForm,
-                    "orders": orders,
-                    "qa_form": QnAForm,
-                }
-                return render(request, "bookstore/single_book.html", context)
             except:
                 return redirect("book_store_home")
+                
+            review_form = ReviewForm()
+            qna_form = QnAForm()
+
+            context = {
+                "book": book,
+                "review_form": review_form,
+                "orders": orders,
+                "qa_form": qna_form,
+            }
+            
+            return render(request, "bookstore/single_book.html", context)
     
     else:
         if id and book_slug:

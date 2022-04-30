@@ -200,7 +200,7 @@ AAPLibrary - {{book.title}}
                     {% for b in order.orderedproducts_set.all %}
 
                     {% if b.id == book.id %}
-                    {% if order.status == "Completed"%}
+                    {% if order.status == "Completed" %}
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         Write A review
@@ -247,7 +247,7 @@ AAPLibrary - {{book.title}}
             <div class="swiper arrivals-slider">
 
                 <div class="swiper-wrapper">
-                    {% for review in book.reviews.all %}
+                    {% for review in book.review_set.all %}
                     <div class="card mb-3 swiper-slide box" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4 review_image">
@@ -288,11 +288,11 @@ AAPLibrary - {{book.title}}
                 </li>
             </ul>
             <div class="tab-content">
-               {% if request.user.is_authenticated %}
-               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qa_modal">
-                Ask A Question
-            </button>
-            {% endif %}
+                {% if request.user.is_authenticated %}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qa_modal">
+                    Ask A Question
+                </button>
+                {% endif %}
             </div>
 
 
@@ -401,7 +401,7 @@ AAPLibrary - {{book.title}}
             },
 
             success: function (response) {
-                const {status, count, message} = response
+                const { status, count, message } = response
                 if (status == "success") {
                     spanItem = document.querySelector('.total-items').innerHTML = count
                 }
