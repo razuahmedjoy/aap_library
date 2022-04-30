@@ -3,6 +3,11 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
+
+# This shows all review for a book
+class ReviewInline(admin.TabularInline):
+    model = Review
+
 class Main_CategoryAdmin(admin.ModelAdmin):
     list_display = ('__str__','slug',)
     prepopulated_fields = {"slug": ("name",)}
@@ -25,9 +30,21 @@ class BooksAdmin(admin.ModelAdmin):
     get_category.main_category = "Main Category"
 
 
+    inlines = [
+        ReviewInline,
+    ]
+
+
 admin.site.register(Main_Category,Main_CategoryAdmin)
 admin.site.register(Sub_Category,Sub_CategoryAdmin)
 admin.site.register(Books,BooksAdmin)
+# review admin 
+admin.site.register(Review)
+
+# QA admin
+admin.site.register(QnA)
+
+
 
 
 
@@ -100,3 +117,7 @@ admin.site.register(OrderedProducts,OrderedProductsAdmin)
 
 
 admin.site.register(WebSettings)
+
+
+
+
