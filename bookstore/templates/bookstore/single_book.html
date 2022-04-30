@@ -1,7 +1,7 @@
 {% extends "bookstore/base.html" %}
 {%load static%}
 
-
+{% load crispy_forms_tags %}
 
 {%block title%}
 AAPLibrary - {{book.title}}
@@ -9,6 +9,43 @@ AAPLibrary - {{book.title}}
 
 {% block style %}
 <style>
+    .fa {
+        color: gold;
+    }
+
+    .review_image {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    #myTab {
+        font-size: large;
+    }
+
+    .tab-content {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .review_info h5 {
+        font-size: large;
+    }
+
+    .review_info p {
+        font-size: 1.5rem;
+
+    }
+
+    .qa_section .card {
+        padding: 0.5em;
+        margin: 0.5em;
+    }
+
+
+
+
     .exist {
         font-size: large;
     }
@@ -19,14 +56,19 @@ AAPLibrary - {{book.title}}
         box-shadow: 0px 0px 10px 3px #e9e4e4;
         border-radius: 10px;
     }
-    .mrp{
+
+    .mrp {
         font-size: 15px;
         text-decoration: line-through;
     }
-    .single-book-title{
+
+    .single-book-title {
         font-size: 3rem;
     }
-    .author,.publisher,.category-info{
+
+    .author,
+    .publisher,
+    .category-info {
         font-size: 1.4rem;
         margin-bottom: .5rem;
     }
@@ -46,7 +88,7 @@ AAPLibrary - {{book.title}}
         <div class="col-md-8 p-4">
             <h2 class="single-book-title fw-bold">{{book.title}}</h2>
             <div class="book-data mt-3 mb-4">
-                <p class="author"> <span class="fw-bold">Author:</span>  {{book.author}}</p>
+                <p class="author"> <span class="fw-bold">Author:</span> {{book.author}}</p>
 
                 <p class="publisher"><span class="fw-bold">Publishers:</span> {{book.publisher}}</p>
                 <div class="category-info" style="font-size:16px;">
@@ -55,29 +97,30 @@ AAPLibrary - {{book.title}}
                     <span class="badge bg-info">{{cat.name}}</span>
                     {% endfor %}
                 </div>
-    
+
             </div>
             <div class="price-box mrp mb-0">
                 <span>Tk.{{book.mrp_price}}</span>
-             </div>
-             <div class="price-box m-0">
+            </div>
+            <div class="price-box m-0">
                 <span>Tk. {{book.price}}</span>
-             </div>
-             <div class="stock-notification">
-                 {% if book.in_stock %}
-                 <h5 class="text-success"><i class="fas fa-check-circle"></i> Book in Stock</h5>
-                 {%else %}
-                 <h5 class="text-danger"><i class="fas fa-times-circle"></i> Out Of Stock</h5>
-                 {%endif%}
-             </div>
-            
+            </div>
+            <div class="stock-notification">
+                {% if book.in_stock %}
+                <h5 class="text-success"><i class="fas fa-check-circle"></i> Book in Stock</h5>
+                {%else %}
+                <h5 class="text-danger"><i class="fas fa-times-circle"></i> Out Of Stock</h5>
+                {%endif%}
+            </div>
+
 
             <div class="add_to_cart">
                 <a href="{% url 'buy_now' %}?id={{book.id}}">
                     <button class="btn btn-main" {% if not book.in_stock %} disabled {%endif%}>Buy Now</button>
                 </a>
                 <button class="btn btn-main" {% if request.user.is_authenticated %} onclick="addtoCart('{{book.id}}')"
-                    {% else %} onclick="navigateToLogin()" {% endif %} {% if not book.in_stock %} disabled {%endif%}>Add to Cart</button>
+                    {% else %} onclick="navigateToLogin()" {% endif %} {% if not book.in_stock %} disabled {%endif%}>Add
+                    to Cart</button>
             </div>
 
             <br>
@@ -85,7 +128,7 @@ AAPLibrary - {{book.title}}
             <div class="exist">
             </div>
 
-            
+
         </div>
     </div>
 
@@ -124,7 +167,6 @@ AAPLibrary - {{book.title}}
 
                     {% for book in cat.books_set.all %}
 
-
                     <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" class="swiper-slide box">
                         <div class="image">
                             <img src="{{book.cover_photo.url}}" alt="">
@@ -137,8 +179,93 @@ AAPLibrary - {{book.title}}
                     </a>
                     {%endfor %}
                     {% endfor %}
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Review section -->
+        <section>
+            <div class="review_section">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                            aria-selected="true">Ratings and Reviews</a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="tab-content" id="myTabContent">
+                    {% if request.user.is_authenticated %}
+                    {% for order in orders %}
+                    {% for b in order.orderedproducts_set.all %}
+
+                    {% if b.id == book.id %}
+                    {% if order.status == "Completed"%}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Write A review
+                    </button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary" disabled data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Write A review
+                    </button>
+                    {%endif%}
+                    {% endif %}
+                    {%endfor %}
+                    {% endfor %}
+                </div>
+                <hr>
+            </div>
+
+            <!-- modal for review submit -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'write_review' book.id %}" method="post" id="review">
+                                {% csrf_token %}
+                                {{review_form|crispy}}
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" form="review">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal for review submit -->
 
 
+            {% endif %}
+            <div class="swiper arrivals-slider">
+
+                <div class="swiper-wrapper">
+                    {% for review in book.reviews.all %}
+                    <div class="card mb-3 swiper-slide box" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 review_image">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                    class="rounded-circle" width="60">
+                            </div>
+                            <div class="col-md-8 review_info">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{review.user.name}}</h5>
+                                    <p>{{review.ratings}} <i class="fa fa-star" aria-hidden="true"></i></p>
+                                    <hr>
+                                    <p class="card-text">{{review.comment}}</p>
+                                    <p class="card-text"><small class="text-muted">{{review.reviewed_at}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
 
                 </div>
@@ -147,6 +274,102 @@ AAPLibrary - {{book.title}}
 
 
         </section>
+
+        <!-- Review section end-->
+
+
+        <!-- Q & A section -->
+
+        <section class="qa_section">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                        aria-selected="true">Q & A</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+               {% if request.user.is_authenticated %}
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qa_modal">
+                Ask A Question
+            </button>
+            {% endif %}
+            </div>
+
+
+            <!-- modal for question submit -->
+            <div class="modal fade" id="qa_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="qa_modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'write_question' book.id %}" method="post" id="qa">
+                                {% csrf_token %}
+                                {{qa_form|crispy}}
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" form="qa">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal for question submit -->
+
+
+            <br>
+
+            {% for qa in book.questions.all %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4 review_image">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                            width="60">
+                    </div>
+                    <div class="col-md-8 review_info">
+                        <div class="card">
+                            <div class="card-header">
+                                Question
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>{{qa.question}}</p>
+                                    <footer class="blockquote-footer">Asked by {{qa.user.name}}</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        {% if qa.answer %}
+                        <div class="card">
+                            <div class="card-header">
+                                Answer
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>{{qa.answer}}</p>
+                                    <footer class="blockquote-footer">Answered By AALibrary</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p>This question hasn't been answered yet</p>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </section>
+
+        <!-- Q & A section end -->
+
 
     </div>
 </div>
@@ -178,7 +401,7 @@ AAPLibrary - {{book.title}}
             },
 
             success: function (response) {
-                const { status, count, message } = response
+                const {status, count, message} = response
                 if (status == "success") {
                     spanItem = document.querySelector('.total-items').innerHTML = count
                 }

@@ -1,3 +1,7 @@
+from operator import mod
+from pickle import TRUE
+from pyexpat import model
+from random import choices
 from django.db import models
 from django.contrib.auth.models import User
 import os
@@ -6,6 +10,7 @@ from django.conf import settings
 import uuid
 
 from ckeditor.fields import RichTextField
+from django.forms import CharField, ChoiceField
 # Create your models here.
 
 class Main_Category(models.Model):
@@ -119,6 +124,8 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"{self.payment_method}-{self.transaction_id}-{self.total_amount}"
+
+
 class Order(models.Model):
     STATUS = (
         ('Pending', 'Pending'),
@@ -167,3 +174,36 @@ class WebSettings(models.Model):
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
+
+
+
+# review model
+
+
+
+class Review(models.Model):
+    RATING_CHOICES = (
+        ('1', 1),
+        ('2', 2),
+        ('3', 3),
+        ('4', 4),
+        ('5', 5),
+    )
+
+    book = models.ForeignKey(Books, on_delete=models.CASCADE, null=True, blank=True, related_name="reviews")
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
+    reviewed_at = models.DateField(auto_now_add=True)
+    comment = models.TextField()
+    ratings = models.CharField(choices=RATING_CHOICES, max_length=10, default='5')
+
+
+
+class QnA(models.Model):
+    book = models.ForeignKey(Books, on_delete=models.CASCADE, null=True, blank=True, related_name="questions")
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
+    question = models.CharField(max_length=160)
+    answer = models.TextField(blank=True)
+
+
+   
+    
