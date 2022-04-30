@@ -171,6 +171,7 @@ class OrderedProducts(models.Model):
 class WebSettings(models.Model):
     payment_instruction = RichTextField()
     shipping_charge = models.IntegerField(default=50)
+    web_logo = models.ImageField(upload_to="web_logo/",null=True,blank=True)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
@@ -197,7 +198,7 @@ class Review(models.Model):
     ratings = models.CharField(choices=RATING_CHOICES, max_length=10, default='5')
 
     def __str__(self):
-        return f"{self.book.title} - {self.user.name} - {self.ratings}"
+        return f"{self.book.title} - {self.ratings}"
 
 
 
@@ -206,6 +207,9 @@ class QnA(models.Model):
     user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
     question = models.CharField(max_length=160)
     answer = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.book.title} - {self.user.name}"
 
 
    

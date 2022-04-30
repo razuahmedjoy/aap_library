@@ -17,8 +17,11 @@ class Sub_CategoryAdmin(admin.ModelAdmin):
 class BooksAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
-    list_display = ('__str__', 'main_category','get_category','price',)
+    list_display = ('__str__', 'main_category','get_category','price','in_stock',)
     list_filter = ('category','category__parent_category')
+
+    list_editable = ('price','in_stock',)
+
     def get_category(self, obj):
         return ", ".join([p.name for p in obj.category.all()])
     
@@ -34,10 +37,6 @@ class BooksAdmin(admin.ModelAdmin):
 admin.site.register(Main_Category,Main_CategoryAdmin)
 admin.site.register(Sub_Category,Sub_CategoryAdmin)
 admin.site.register(Books,BooksAdmin)
-
-
-
-
 
 
 class CustomersAdmin(admin.ModelAdmin):
@@ -71,6 +70,9 @@ class OrderAdmin(admin.ModelAdmin):
     
     list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status')
     readonly_fields = ('customer','grand_total','order_id','address','payment','contact_no')
+
+    list_editable = ('status',)
+
     inlines = [OrderedBooksAdmin]
 
     search_fields = ('payment__transaction_id',)
@@ -109,11 +111,21 @@ admin.site.register(OrderedProducts,OrderedProductsAdmin)
 
 admin.site.register(WebSettings)
 
+
 # review admin 
-admin.site.register(Review)
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('__str__','user','comment',)
+    readonly_fields = ('book','user',)
+
+admin.site.register(Review,ReviewAdmin)
 
 # QA admin
-admin.site.register(QnA)
+
+class QnAAdmin(admin.ModelAdmin):
+    list_display = ('__str__','question','answer',)
+    readonly_fields = ('book','user',)
+admin.site.register(QnA,QnAAdmin)
 
 
 
