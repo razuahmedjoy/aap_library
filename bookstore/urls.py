@@ -33,6 +33,13 @@ urlpatterns = [
     #add to cart
     path('add_to_cart', add_to_cart, name="add_to_cart" ),
 
+    # user review
+    path('write_review/<int:id>', write_review, name="write_review"),
+
+    # ask a question
+    path('write_question/<int:id>', write_question, name="write_question"),
+
+
     # ajax
     path('api/get_book_by_category', get_all_books, name="get_books_by_cat" ),
     
