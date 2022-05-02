@@ -1,5 +1,6 @@
+from dataclasses import field
 from django import forms
-from .models import Address, Payment
+from .models import *
 
 class AddressForm(forms.ModelForm):
 
@@ -20,3 +21,21 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
         fields = ('sender_number','transaction_id')
+
+
+
+# Review Form
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('comment', 'ratings')
+
+
+
+
+# QA Form
+class QnAForm(forms.ModelForm):
+    class Meta:
+        model = QnA
+        fields = ('question',)

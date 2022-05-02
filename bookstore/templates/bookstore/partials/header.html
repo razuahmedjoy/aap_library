@@ -4,7 +4,15 @@
 
     <div class="header-1">
 
-        <a href="/" class="logo"> <i class="fas fa-book"></i> AAPLIBRARY </a>
+        <a href="/" class="logo"> 
+            {% if web_settings.web_logo %}
+            <img src="{{web_settings.web_logo.url}}" width="150px" class="img-fluid" alt="AAPLIBRARY">
+
+            {% else %}
+            <i class="fas fa-book"></i> AAPLIBRARY 
+
+            {% endif %}
+        </a>
 
         <form action="" class="search-form">
             <input type="search" name="" placeholder="search here..." id="search-box">
