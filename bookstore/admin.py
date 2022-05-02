@@ -14,6 +14,13 @@ class Sub_CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('__str__','parent_category','slug',)
 
+
+class PreviewImagesTabularAdmin(admin.TabularInline):
+    model = BookPreviewImages
+    fields = ("book", "preview_photo",)
+
+    
+
 class BooksAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
@@ -21,6 +28,8 @@ class BooksAdmin(admin.ModelAdmin):
     list_filter = ('category','category__parent_category')
 
     list_editable = ('price','in_stock',)
+
+    inlines = [PreviewImagesTabularAdmin]
 
     def get_category(self, obj):
         return ", ".join([p.name for p in obj.category.all()])

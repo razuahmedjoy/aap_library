@@ -180,14 +180,19 @@ section {
 }
 
 .header .header-2 .navbar a {
+  border: 1px solid #d7d6dd;
   color: #fff;
   display: inline-block;
   padding: 1.2rem;
   font-size: 1.7rem;
 }
 
+.active-menu{
+  background: #2a5183;
+}
+
 .header .header-2 .navbar a:hover {
-  background: var(--dark-color);
+  background: #2a5183;
 }
 
 .header .header-2.active {

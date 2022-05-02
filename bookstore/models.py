@@ -71,6 +71,38 @@ class Books(models.Model):
             pic.save(self.cover_photo.path)
 
 
+class BookPreviewImages(models.Model):
+
+    def book_preview_image(instance,filename):
+        ext = filename.split('.')[-1]
+        filename = "%s.%s" % ('preview', ext)
+        
+        full_path = os.path.join(settings.MEDIA_ROOT,filename)
+        if os.path.exists(full_path):
+            os.remove(full_path)
+            
+        return os.path.join(f'books/preview/{instance.book.title}',filename)
+
+    book = models.ForeignKey(Books,on_delete=models.CASCADE,null=True,blank=True)
+    preview_photo = models.ImageField(upload_to=book_preview_image,null=True,blank=True)
+
+    def __str__(self):
+        return self.book.title
+
+    def get_image(self):
+        return self.preview_photo.url
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        SIZE = 800, 1400
+
+        if self.preview_photo:
+            pic = Image.open(self.preview_photo.path)
+            pic.thumbnail(SIZE,Image.LANCZOS)
+            pic.save(self.preview_photo.path)
+    
+
 class Customers(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
