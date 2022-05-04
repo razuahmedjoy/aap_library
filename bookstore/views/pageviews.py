@@ -23,6 +23,7 @@ from bookstore.forms import *
 
 def book_store_home(request):
     single_category = None
+    all_category = None
     if "cat_id" in request.GET:
         cat_id = request.GET.get("cat_id")
         try:
@@ -31,11 +32,11 @@ def book_store_home(request):
             pass
     else:
         try:
-            single_category = Main_Category.objects.first()
+            all_category = Main_Category.objects.all()
         except:
             pass
 
-    context = {"single_category": single_category, "title": "Home-AAPLibrary"}
+    context = {"single_category": single_category, "all_category":all_category, "title": "Home-AAPLibrary"}
     return render(request, "bookstore/home.html", context)
 
 

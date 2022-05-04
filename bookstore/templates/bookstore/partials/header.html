@@ -67,7 +67,7 @@
         <nav class="navbar">
             {% if categories %}
             {% for category in categories %}
-            <a onClick="openLoader()" href="/?cat_id={{category.id}}">{{category.name}}</a>
+            <a class="{% if single_category %}{% if single_category.id == category.id %}active-menu{%endif %}{%endif %}" onClick="openLoader()" href="/?cat_id={{category.id}}">{{category.name}}</a>
             {%endfor%}
             {% endif %}
         </nav>
