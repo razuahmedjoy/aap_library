@@ -15,6 +15,7 @@ urlpatterns = [
     path('createaccount/', createaccount, name="createaccount" ),
     path('login/', login_view, name="login" ),
     path('logout/', LogoutView, name="logout" ),
+    path('search_books/', search_books, name="search_books" ),
     path('passwordreset/', passwordresetView, name="passwordreset" ),
 
 

@@ -8,12 +8,16 @@ from django.contrib.auth.models import User
 from time import time
 from django.conf import settings
 
+
 from django.urls import reverse
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 
+from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 # Create your views here.
 
 
@@ -54,6 +58,24 @@ def get_all_books(request):
             return
     else:
         return HttpResponse("<h1>Not Found </h1>s")
+
+
+@csrf_exempt
+def search_books(request):
+    if request.is_ajax():
+        txt = request.POST.get("txt")
+        print(txt)
+        try:
+            books = Books.objects.filter(Q(title__icontains=txt) | Q(publisher__icontains=txt))
+           
+            books = serializers.serialize('json', books)
+           
+            return JsonResponse({"status":"success","books": books})
+
+
+        except:
+            pass
+    return JsonResponse({"status":"failed"})
 
 
 def single_book(request, id, book_slug):

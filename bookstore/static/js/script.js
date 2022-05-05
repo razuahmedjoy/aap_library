@@ -1,6 +1,6 @@
 searchForm = document.querySelector('.search-form');
 
-document.querySelector('#search-btn').onclick = () =>{
+document.querySelector('#search-btn').onclick = () => {
   searchForm.classList.toggle('active');
 }
 
@@ -14,13 +14,13 @@ let loginForm = document.querySelector('.login-form-container');
 //   loginForm.classList.remove('active');
 // }
 
-window.onscroll = () =>{
+window.onscroll = () => {
 
   searchForm.classList.remove('active');
 
-  if(window.scrollY > 80){
+  if (window.scrollY > 80) {
     document.querySelector('.header .header-2').classList.add('active');
-  }else{
+  } else {
     document.querySelector('.header .header-2').classList.remove('active');
   }
 
@@ -91,7 +91,7 @@ var swiper = new Swiper(".slider-large", {
 
 var swiper = new Swiper(".featured-slider", {
   spaceBetween: 10,
-  loop:true,
+  loop: true,
   centeredSlides: true,
   autoplay: {
     delay: 9500,
@@ -119,7 +119,7 @@ var swiper = new Swiper(".featured-slider", {
 
 var swiper = new Swiper(".arrivals-slider", {
   spaceBetween: 10,
-  loop:true,
+  loop: true,
   centeredSlides: true,
   autoplay: {
     delay: 9500,
@@ -158,8 +158,8 @@ var swiper = new Swiper(".review-slider", {
 
 var swiper = new Swiper(".reviews-slider", {
   spaceBetween: 10,
-  grabCursor:true,
-  loop:true,
+  grabCursor: true,
+  loop: true,
   centeredSlides: true,
   autoplay: {
     delay: 9500,
@@ -180,8 +180,8 @@ var swiper = new Swiper(".reviews-slider", {
 
 var swiper = new Swiper(".blogs-slider", {
   spaceBetween: 10,
-  grabCursor:true,
-  loop:true,
+  grabCursor: true,
+  loop: true,
   centeredSlides: true,
   autoplay: {
     delay: 9500,
@@ -200,3 +200,41 @@ var swiper = new Swiper(".blogs-slider", {
   },
 });
 
+$("#search-box").keyup((e) => {
+  const searchTxt = e.target.value;
+  if (searchTxt.length >= 3) {
+    const getBooks = async () => {
+      const url = "/search_books/"
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          'txt': searchTxt,
+        },
+
+        success: function (response) {
+          // console.log(response);
+
+          const { status, books } = response
+          if (status == "success") {
+            const bookList = JSON.parse(books);
+            for(book of bookList) {
+              console.log(book.fields);
+            }
+            
+
+          }
+        },
+        failure: function (e) {
+          console.log(e)
+        }
+
+
+      })
+
+    }
+    getBooks();
+  }
+
+})
