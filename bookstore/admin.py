@@ -99,6 +99,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Order,OrderAdmin)
 
+admin.site.register(SavedAddress)
+
 
 
 class PaymentAdmin(admin.ModelAdmin):

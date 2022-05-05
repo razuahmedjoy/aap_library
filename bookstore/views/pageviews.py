@@ -10,6 +10,8 @@ from django.conf import settings
 
 from django.urls import reverse
 
+
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
@@ -36,7 +38,11 @@ def book_store_home(request):
         except:
             pass
 
-    context = {"single_category": single_category, "all_category":all_category, "title": "Home-AAPLibrary"}
+    context = {
+        "single_category": single_category,
+        "all_category": all_category,
+        "title": "Home-AAPLibrary",
+    }
     return render(request, "bookstore/home.html", context)
 
 
@@ -77,9 +83,9 @@ def single_book(request, id, book_slug):
                 "orders": orders,
                 "qa_form": qna_form,
             }
-            
+
             return render(request, "bookstore/single_book.html", context)
-    
+
     else:
         if id and book_slug:
             try:
@@ -91,8 +97,6 @@ def single_book(request, id, book_slug):
             except:
                 return redirect("book_store_home")
 
-
-    
     return HttpResponse("something wrong")
 
 
@@ -246,6 +250,7 @@ def checkout(request):
         web_settings = WebSettings.objects.last()
     except:
         web_settings = None
+        
 
     if request.method == "POST":
 
@@ -328,3 +333,80 @@ def checkout(request):
     }
 
     return render(request, "bookstore/checkout.html", context)
+
+
+
+@login_required(login_url="login")
+def default_address(request):
+    current_user = request.user
+    addressForm = AddressForm(instance=current_user)
+    customer = request.user.customers
+
+    if request.is_ajax():
+        action = request.GET.get("action")
+        if action == "updateaddress":
+            address = SavedAddress.objects.get(user=current_user.customers)
+            return JsonResponse({"status": "success", "district": address.district, 
+            "area": address.area, "address": address.address, "contact": address.contact_no})
+
+   
+
+    if request.method == "GET":
+        return render(
+            request,
+            "bookstore/addressbook",
+            {
+                "addressForm": addressForm,
+            },
+        )
+
+    if request.method == "POST":
+
+        try:
+            address = SavedAddress.objects.get(user=current_user.customers)
+            address.district = request.POST["district"]
+            address.area = request.POST["area"]
+            address.address = request.POST["address"]
+            address.contact_no = request.POST["contact_no"]
+            address.save()
+            return render(
+            request,
+            "bookstore/addressbook",
+            {
+                "addressForm": addressForm,
+                "message" : "Address Edited Succesfully!"
+            },
+        )
+
+        
+        except:
+            district = request.POST["district"]
+            area = request.POST["area"]
+            address = request.POST["address"]
+            contact_no = request.POST["contact_no"]
+            saved_a = SavedAddress(user=customer, district=district, area=area,address=address, contact_no=contact_no)
+            saved_a.save()
+
+            return render(
+            request,
+            "bookstore/addressbook",
+            {
+                "addressForm": addressForm,
+                "message" : "New Address Added Succesfully!"
+            },
+        )
+
+
+            
+
+
+
+        
+        
+            
+        
+        
+
+   
+        
+           
