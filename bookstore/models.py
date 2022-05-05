@@ -238,11 +238,25 @@ class QnA(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE, null=True, blank=True, related_name="questions")
     user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
     question = models.CharField(max_length=160)
+    date = models.DateTimeField(auto_now_add=True, null=True)
     answer = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.book.title} - {self.user.name}"
 
 
+
+
+class SavedAddress(models.Model):
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, related_name="saved_address")
+    name = models.CharField(max_length=160)
+    district = models.CharField(max_length=50)
+    area = models.CharField(max_length=50)
+    address = models.CharField(max_length=50,null=True,blank=True)
+    contact_no = models.CharField(max_length=50,null=True,blank=True)
+
+    def __str__(self):
+        return self.user.name
+        
    
     
