@@ -45,6 +45,10 @@
     .payment-instruction {
         font-size: 1.2rem;
     }
+
+    .address_loader {
+        margin-bottom: 2em;
+    }
 </style>
 {%endblock style%}
 
@@ -65,10 +69,10 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{item.book.title}}</div>
-                                <span>{{item.quantity}} x Tk.  {{item.price}}</span>
+                                <span>{{item.quantity}} x Tk. {{item.price}}</span>
                             </div>
                             <span class="badge bg-primary rounded-pill">
-                                Tk.  {{item.total_amount}}
+                                Tk. {{item.total_amount}}
                             </span>
                         </li>
                         {%endfor%}
@@ -82,7 +86,7 @@
 
                             </div>
                             <span class="badge bg-warning rounded-pill">
-                                Tk.  {% get_shipping_charge %}
+                                Tk. {% get_shipping_charge %}
                             </span>
                         </li>
 
@@ -96,7 +100,7 @@
 
                             </div>
                             <span class="badge bg-danger rounded-pill">
-                                Tk.  {% cart_sub_total usercart %}
+                                Tk. {% cart_sub_total usercart %}
                             </span>
                         </li>
 
@@ -107,7 +111,7 @@
                 </div>
             </div>
             <div id="cartList" class="col-md-8">
-                <form method="POST">
+                <form method="POST" id="address_form">
 
                     {% csrf_token %}
                     <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
@@ -115,13 +119,13 @@
 
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Shipping Address</h3>
-
-                            {{ addressForm|crispy }}
-
+                                {{ addressForm|crispy }}
                         </div>
+                        
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
-                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}</div>
+                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
+                            </div>
 
                             <div class="payment-method-input">
                                 <p>Select Any Payment Method</p>
@@ -150,19 +154,14 @@
                             <input type="submit" class="form-control" value="Confirm Order">
 
                         </div>
-
-
-
                     </div>
                 </form>
+                <div class="address_loader">
+                    <button class="btn btn-primary" id="load_default">Default Address</button>
+                    <button class="btn btn-primary" id="reset_default">Reset</button>
+                </div>
+               
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 
@@ -171,10 +170,14 @@
 </div>
 {% endblock %}
 
+
+
+
+
 {% block js %}
 <script>
-    $('select').attr('required',1);
-   
+    $('select').attr('required', 1);
+
     window.onload = async () => {
 
         const res = await fetch("{% url 'get_districts' %}")
@@ -199,7 +202,7 @@
         // console.log(options)
         districtContainer = document.getElementById('id_district')
         districtContainer.innerHTML = options;
-    
+
 
     }
 
@@ -209,7 +212,7 @@
 
         const districtId = parseInt(e.target.selectedOptions[0].attributes.districtid.value)
         if (districtId != "") {
-     
+
         }
         let url = "{% url 'get_area' %}"
         url = `${url}?district_id=${districtId}`
@@ -226,12 +229,56 @@
         // console.log(options)
         areaContainer = document.getElementById('id_area')
         areaContainer.innerHTML = options;
-     
+
 
     })
 
-    
+
+  
+
+
+    /// this function loads saved address 
+    document.querySelector("#load_default").addEventListener('click', function () {
+        $.ajax({
+            url: "{% url 'addressbook' %}",
+            type: 'GET',
+            data: {
+                'action': 'updateaddress',
+            },
+
+            success: function (status) {
+                const district = document.getElementById('id_district');
+                const area = document.getElementById('id_area');
+                const address = document.getElementById('id_address');
+                const contact = document.getElementById('id_contact_no');
+
+                district.value = status.district;
+
+
+                /// value input does not work for area
+                options = `<option value="#" areaid="#">${status.area}</option>`;
+                area.innerHTML = options;
+
+                address.value = status.address;
+                contact.value = status.contact;
+
+            },
+            failure: function (e) {
+                console.log(e)
+            }
+        });
+
+    })
+
+    document.querySelector("#reset_default").addEventListener('click', function () {
+        document.getElementById("address_form").reset();
+        const area = document.getElementById('id_area');
+        area.innerHTML = "";
+    })
+
 </script>
+
+
 
 
 

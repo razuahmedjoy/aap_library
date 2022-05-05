@@ -29,6 +29,7 @@ urlpatterns = [
     path('buy_now/', buy_now, name="buy_now" ),
     path('update_cart_item', update_cart_item, name="update_cart_item" ),
     path('checkout', checkout, name="checkout" ),
+    path("addressbook/", default_address, name="addressbook"),
 
 
     #add to cart

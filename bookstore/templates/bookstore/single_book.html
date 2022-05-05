@@ -84,6 +84,15 @@ AAPLibrary - {{book.title}}
         color: #fff;
         padding: .75rem 1.2rem;
     }
+
+    .qna p {
+        font-size: large;
+        
+    }
+
+    .qna {
+        padding: 1em;
+    }
 </style>
 {% endblock style %}
 
@@ -380,44 +389,22 @@ AAPLibrary - {{book.title}}
             <br>
 
             {% for qa in book.questions.all %}
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4 review_image">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
-                            width="60">
-                    </div>
-                    <div class="col-md-8 review_info">
-                        <div class="card">
-                            <div class="card-header">
-                                Question
-                            </div>
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>{{qa.question}}</p>
-                                    <footer class="blockquote-footer">Asked by {{qa.user.name}}</footer>
-                                </blockquote>
-                            </div>
-                        </div>
-                        {% if qa.answer %}
-                        <div class="card">
-                            <div class="card-header">
-                                Answer
-                            </div>
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>{{qa.answer}}</p>
-                                    <footer class="blockquote-footer">Answered By AALibrary</footer>
-                                </blockquote>
-                            </div>
-                        </div>
-                        {% else %}
-                        <p>This question hasn't been answered yet</p>
-                        {% endif %}
-
-
-                    </div>
-                </div>
+            <div class="qna">
+                <p>
+                    Date : {{qa.date}}
+                </p>
+                <p>
+                  {{qa.user}} : {{qa.question}}
+                </p>
+                {% if qa.answer %}
+                <p>
+                    AALibrary : {{qa.answer}}
+                </p>
+                {% else %}
+                <p>This Question Hasn't Been Answered Yet</p>
+                {% endif %}
             </div>
+            <hr>
             {% endfor %}
 
 
