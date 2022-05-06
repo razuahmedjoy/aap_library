@@ -53,7 +53,9 @@ class Books(models.Model):
     in_stock = models.BooleanField(default=True)
     description = models.TextField(null=True, blank=True)
     book_id = models.UUIDField(default=uuid.uuid4,unique=True)
+    pdf = models.FileField(null=True, blank=True, upload_to='books/pdf/')
     created_at = models.DateTimeField(auto_now_add=True)
+
 
 
     def __str__(self):

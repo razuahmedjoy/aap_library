@@ -193,7 +193,9 @@ AAPLibrary - {{book.title}}
             <div class="modal-content">
                 
                 <div class="modal-header">
-                    <a href="#" target="_blank"  class="modal-title btn btn-primary border-0">Download PDF</a>
+                    {% if book.pdf %}
+                    <a href="{{book.pdf.url}}" target="_blank"  class="modal-title btn btn-primary border-0">Download PDF</a>
+                    {%endif %}
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="border: solid 8px grey;padding: 0;">
