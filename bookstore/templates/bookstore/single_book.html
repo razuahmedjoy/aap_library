@@ -194,9 +194,9 @@ AAPLibrary - {{book.title}}
                 
                 <div class="modal-header">
                     {% if book.pdf %}
-                    <a href="{{book.pdf.url}}" target="_blank"  class="modal-title btn btn-primary border-0">Download PDF</a>
+                    <a href="{{book.pdf.url}}" target="_blank"  class="modal-title btn btn-primary border-0 py-2 px-3 rounded-0">Download PDF</a>
                     {%endif %}
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close fs-3 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="border: solid 8px grey;padding: 0;">
 
@@ -213,10 +213,7 @@ AAPLibrary - {{book.title}}
                        
                    
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary border-0" data-bs-dismiss="modal">Close</button>
-                   
-                </div>
+              
             </div>
         </div>
     </div>
