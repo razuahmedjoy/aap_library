@@ -122,6 +122,18 @@ def single_book(request, id, book_slug):
     return HttpResponse("something wrong")
 
 
+
+
+
+
+def all_books(request):
+    return HttpResponse("in development")
+
+
+
+
+
+
 @login_required(login_url="login")
 def write_review(request, id):
     if request.method == "POST":
@@ -361,7 +373,7 @@ def checkout(request):
 @login_required(login_url="login")
 def default_address(request):
     current_user = request.user
-    addressForm = AddressForm(instance=current_user)
+    addressForm = AddressForm()
     customer = request.user.customers
 
     if request.is_ajax():
@@ -376,7 +388,7 @@ def default_address(request):
     if request.method == "GET":
         return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
             },
@@ -393,7 +405,7 @@ def default_address(request):
             address.save()
             return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
                 "message" : "Address Edited Succesfully!"
@@ -411,7 +423,7 @@ def default_address(request):
 
             return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
                 "message" : "New Address Added Succesfully!"

@@ -9,6 +9,7 @@ from .locations import *
 urlpatterns = [
     path('', book_store_home, name="book_store_home" ),
     path('book/<int:id>/<str:book_slug>/', single_book, name="single_book" ),
+    path('all-books', all_books, name="all_books" ),
 
     # authentication
     path('register/', register, name="register" ),

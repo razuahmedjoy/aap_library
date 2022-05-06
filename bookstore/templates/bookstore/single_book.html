@@ -83,6 +83,8 @@ AAPLibrary - {{book.title}}
         background: #2a5183;
         color: #fff;
         padding: .75rem 1.2rem;
+        border-radius: 0 0px 30px 0;
+        top:75%;
     }
 
     .qna p {
@@ -105,9 +107,9 @@ AAPLibrary - {{book.title}}
             <div class="book-cover-photo position-relative">
                 <img src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
                 {% if book.bookpreviewimages_set.all %}
-                <span type="button" class="position-absolute preview-btn start-0 top-0 fs-5 mt-0" data-bs-toggle="modal"
+                <span type="button" class="position-absolute preview-btn start-0 fs-5 mt-0 px-5" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
-                    একটু পড়ে দেখুন
+                    পড়ে দেখুন
                 </span>
                 {%endif%}
 
@@ -187,22 +189,30 @@ AAPLibrary - {{book.title}}
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
+                
                 <div class="modal-header">
+                    <a href="#" target="_blank"  class="modal-title btn btn-primary border-0">Download PDF</a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    
+                <div class="modal-body" style="border: solid 8px grey;padding: 0;">
+
+                   
                         {% for x in book.bookpreviewimages_set.all %}
                       
                         <img src="{% static 'image/preview-loading.gif'%}" data-src="{{x.get_image}}" alt="" class="img-fluid w-100 lazyload" /> 
+                        <hr>
                         {%endfor%}
                         
+
+                  
+                    
+                       
                    
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary border-0" data-bs-dismiss="modal">Close</button>
                    
                 </div>
             </div>
