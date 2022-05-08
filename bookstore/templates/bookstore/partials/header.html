@@ -4,20 +4,41 @@
 
     <div class="header-1">
 
-        <a href="/" class="logo"> 
+        <a href="/" class="logo">
             {% if web_settings.web_logo %}
             <img src="{{web_settings.web_logo.url}}" width="150px" class="img-fluid" alt="AAPLIBRARY">
 
             {% else %}
-            <i class="fas fa-book"></i> AAPLIBRARY 
+            <i class="fas fa-book"></i> AAPLIBRARY
 
             {% endif %}
         </a>
 
-        <form action="" class="search-form">
-            <input type="search" name="" placeholder="search here..." id="search-box">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
+
+        <div>
+
+            <form class="search-form" action="" style="z-index: 100;">
+                
+                <div class="d-flex justify-content-between w-100">
+                    
+                    <input type="search" name="" placeholder="search here..." id="search-box">
+                    <label for="search-box" class="fas fa-search"></label>
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+            </form>
+            
+        </div>
+
+
+
+
+
 
         <div class="icons d-flex align-items-center">
             <div id="search-btn" class="fas fa-search"></div>
@@ -35,7 +56,7 @@
             <ul class="dropdown-menu header-user-navigation" aria-labelledby="navbarDropdown">
 
                 <li><a class="dropdown-item ms-0" href="{% url 'profile' %}">My Account</a></li>
-              
+
                 <li><a class="dropdown-item ms-0" href="{% url 'logout' %}">Logout</a></li>
 
 
@@ -67,7 +88,8 @@
         <nav class="navbar">
             {% if categories %}
             {% for category in categories %}
-            <a class="{% if single_category %}{% if single_category.id == category.id %}active-menu{%endif %}{%endif %}" onClick="openLoader()" href="/?cat_id={{category.id}}">{{category.name}}</a>
+            <a class="{% if single_category %}{% if single_category.id == category.id %}active-menu{%endif %}{%endif %}"
+                onClick="openLoader()" href="/?cat_id={{category.id}}">{{category.name}}</a>
             {%endfor%}
             {% endif %}
         </nav>

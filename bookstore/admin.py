@@ -99,7 +99,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Order,OrderAdmin)
 
-admin.site.register(SavedAddress)
+
 
 
 
@@ -142,3 +142,4 @@ admin.site.register(QnA,QnAAdmin)
 
 
 
+admin.site.register(SavedAddress)

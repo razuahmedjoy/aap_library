@@ -118,8 +118,15 @@
                     <div class="row cart-items">
 
                         <div class="col-md-6">
+                            
                             <h3 class="text-center page-title">Shipping Address</h3>
+                         
                                 {{ addressForm|crispy }}
+
+                                <div class="address_loader">
+                                    <button class="btn btn-primary border-0 outline-0" id="load_default">Saved Address</button>
+                                    <button class="btn btn-primary border-0 outline-0" id="reset_default">Reset</button>
+                                </div>
                         </div>
                         
                         <div class="col-md-6">
@@ -151,15 +158,12 @@
 
                             {{paymentForm |crispy }}
 
-                            <input type="submit" class="form-control" value="Confirm Order">
+                            <input type="submit" class="form-control btn-primary" value="Confirm Order">
 
                         </div>
                     </div>
                 </form>
-                <div class="address_loader">
-                    <button class="btn btn-primary" id="load_default">Default Address</button>
-                    <button class="btn btn-primary" id="reset_default">Reset</button>
-                </div>
+              
                
             </div>
         </div>

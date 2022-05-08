@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from time import time
 from django.conf import settings
 
+
 from django.urls import reverse
 
 
@@ -16,6 +17,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 
+from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 # Create your views here.
 
 
@@ -62,6 +66,24 @@ def get_all_books(request):
         return HttpResponse("<h1>Not Found </h1>s")
 
 
+@csrf_exempt
+def search_books(request):
+    if request.is_ajax():
+        txt = request.POST.get("txt")
+        print(txt)
+        try:
+            books = Books.objects.filter(Q(title__icontains=txt) | Q(publisher__icontains=txt))
+           
+            books = serializers.serialize('json', books)
+           
+            return JsonResponse({"status":"success","books": books})
+
+
+        except:
+            pass
+    return JsonResponse({"status":"failed"})
+
+
 def single_book(request, id, book_slug):
     if request.user.is_authenticated:
         current_customer = Customers.objects.get(user=request.user)
@@ -98,6 +120,18 @@ def single_book(request, id, book_slug):
                 return redirect("book_store_home")
 
     return HttpResponse("something wrong")
+
+
+
+
+
+
+def all_books(request):
+    return HttpResponse("in development")
+
+
+
+
 
 
 @login_required(login_url="login")
@@ -339,7 +373,7 @@ def checkout(request):
 @login_required(login_url="login")
 def default_address(request):
     current_user = request.user
-    addressForm = AddressForm(instance=current_user)
+    addressForm = AddressForm()
     customer = request.user.customers
 
     if request.is_ajax():
@@ -354,7 +388,7 @@ def default_address(request):
     if request.method == "GET":
         return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
             },
@@ -371,7 +405,7 @@ def default_address(request):
             address.save()
             return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
                 "message" : "Address Edited Succesfully!"
@@ -389,7 +423,7 @@ def default_address(request):
 
             return render(
             request,
-            "bookstore/addressbook",
+            "bookstore/addressbook.html",
             {
                 "addressForm": addressForm,
                 "message" : "New Address Added Succesfully!"
