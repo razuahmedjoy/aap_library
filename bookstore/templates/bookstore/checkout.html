@@ -48,7 +48,45 @@
 
     .address_loader {
         margin-bottom: 2em;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
+    .address_loader button {
+        font-size: 1.5rem;
+        background-color: #002060;
+        color: white;
+        padding: .5em;
+        border: 2px solid #7c92b9;
+
+
+    }
+
+    .address_loader i {
+        color: #1e95ad;
+        font-size: 3rem;
+        margin-left: 1em;
+    }
+
+    .address_loader i:hover {
+        cursor: pointer;
+    }
+
+    .shipping-underline {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        margin-bottom: 1;
+    }
+
+    #price-span {
+        text-transform: none;
+
+    }
+
+ 
 </style>
 {%endblock style%}
 
@@ -69,7 +107,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{item.book.title}}</div>
-                                <span>{{item.quantity}} x Tk. {{item.price}}</span>
+                                <span id="price-span">{{item.quantity}} x Tk. {{item.price}}</span>
                             </div>
                             <span class="badge bg-primary rounded-pill">
                                 Tk. {{item.total_amount}}
@@ -118,17 +156,16 @@
                     <div class="row cart-items">
 
                         <div class="col-md-6">
-                            
-                            <h3 class="text-center page-title">Shipping Address</h3>
-                         
-                                {{ addressForm|crispy }}
 
-                                <div class="address_loader">
-                                    <button class="btn btn-primary border-0 outline-0" id="load_default">Saved Address</button>
-                                    <button class="btn btn-primary border-0 outline-0" id="reset_default">Reset</button>
-                                </div>
+                            <h3 class="text-center page-title">Shipping Address</h3> 
+                            <div class="shipping-underline"></div>
+                            <div class="address_loader">
+                                <button type="button" id="load_default">Use Saved Address</button>
+                                <i class="fas fa-undo" title="Click here to reset address" id="reset_default"></i>
+                            </div>
+                            {{ addressForm|crispy }}
                         </div>
-                        
+
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
@@ -158,13 +195,13 @@
 
                             {{paymentForm |crispy }}
 
-                            <input type="submit" class="form-control btn-primary" value="Confirm Order">
+                            <input type="submit" class="form-control btn btn-primary" value="Confirm Order">
 
                         </div>
                     </div>
                 </form>
-              
-               
+
+
             </div>
         </div>
     </div>
@@ -238,7 +275,7 @@
     })
 
 
-  
+
 
 
     /// this function loads saved address 

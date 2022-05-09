@@ -8,9 +8,10 @@ from django.contrib.auth.models import User
 from time import time
 from django.conf import settings
 
+from django.core.exceptions import ObjectDoesNotExist
+
 
 from django.urls import reverse
-
 
 
 from django.contrib.auth import authenticate, login, logout
@@ -20,6 +21,7 @@ from django.utils.crypto import get_random_string
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+
 # Create your views here.
 
 
@@ -72,16 +74,17 @@ def search_books(request):
         txt = request.POST.get("txt")
         print(txt)
         try:
-            books = Books.objects.filter(Q(title__icontains=txt) | Q(publisher__icontains=txt))
-           
-            books = serializers.serialize('json', books)
-           
-            return JsonResponse({"status":"success","books": books})
+            books = Books.objects.filter(
+                Q(title__icontains=txt) | Q(publisher__icontains=txt)
+            )
 
+            books = serializers.serialize("json", books)
+
+            return JsonResponse({"status": "success", "books": books})
 
         except:
             pass
-    return JsonResponse({"status":"failed"})
+    return JsonResponse({"status": "failed"})
 
 
 def single_book(request, id, book_slug):
@@ -122,16 +125,8 @@ def single_book(request, id, book_slug):
     return HttpResponse("something wrong")
 
 
-
-
-
-
 def all_books(request):
     return HttpResponse("in development")
-
-
-
-
 
 
 @login_required(login_url="login")
@@ -284,7 +279,6 @@ def checkout(request):
         web_settings = WebSettings.objects.last()
     except:
         web_settings = None
-        
 
     if request.method == "POST":
 
@@ -369,7 +363,6 @@ def checkout(request):
     return render(request, "bookstore/checkout.html", context)
 
 
-
 @login_required(login_url="login")
 def default_address(request):
     current_user = request.user
@@ -380,19 +373,35 @@ def default_address(request):
         action = request.GET.get("action")
         if action == "updateaddress":
             address = SavedAddress.objects.get(user=current_user.customers)
-            return JsonResponse({"status": "success", "district": address.district, 
-            "area": address.area, "address": address.address, "contact": address.contact_no})
-
-   
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "district": address.district,
+                    "area": address.area,
+                    "address": address.address,
+                    "contact": address.contact_no,
+                }
+            )
 
     if request.method == "GET":
-        return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-            },
-        )
+        try:
+            user_address = SavedAddress.objects.get(user=current_user.customers)
+            return render(
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "user_address": user_address,
+                },
+            )
+        except ObjectDoesNotExist:
+            return render(
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                },
+            )
 
     if request.method == "POST":
 
@@ -404,43 +413,36 @@ def default_address(request):
             address.contact_no = request.POST["contact_no"]
             address.save()
             return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-                "message" : "Address Edited Succesfully!"
-            },
-        )
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "message": "Address Edited Succesfully!",
+                    "user_address": address,
+                },
+            )
 
-        
         except:
             district = request.POST["district"]
             area = request.POST["area"]
             address = request.POST["address"]
             contact_no = request.POST["contact_no"]
-            saved_a = SavedAddress(user=customer, district=district, area=area,address=address, contact_no=contact_no)
+            saved_a = SavedAddress(
+                user=customer,
+                district=district,
+                area=area,
+                address=address,
+                contact_no=contact_no,
+            )
             saved_a.save()
+            new_address = SavedAddress.objects.get(user=current_user.customers)
 
             return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-                "message" : "New Address Added Succesfully!"
-            },
-        )
-
-
-            
-
-
-
-        
-        
-            
-        
-        
-
-   
-        
-           
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "message": "New Address Added Succesfully!",
+                    "user_address": new_address,
+                },
+            )

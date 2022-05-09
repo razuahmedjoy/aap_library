@@ -95,6 +95,15 @@ AAPLibrary - {{book.title}}
     .qna {
         padding: 1em;
     }
+
+
+    .question {
+        font-weight: bold;
+    }
+
+    .answer {
+        margin-left: 1.5em;
+    }
 </style>
 {% endblock style %}
 
@@ -402,15 +411,15 @@ AAPLibrary - {{book.title}}
                 <p>
                     Date : {{qa.date}}
                 </p>
-                <p>
+                <p class="question">
                   {{qa.user}} : {{qa.question}}
                 </p>
                 {% if qa.answer %}
-                <p>
+                <p class="answer">
                     AALibrary : {{qa.answer}}
                 </p>
                 {% else %}
-                <p>This Question Hasn't Been Answered Yet</p>
+                <p class="answer">This Question Hasn't Been Answered Yet</p>
                 {% endif %}
             </div>
             <hr>
