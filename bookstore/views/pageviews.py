@@ -1,3 +1,4 @@
+from email import message
 from xml.dom import ValidationErr
 from django.forms import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -5,12 +6,14 @@ from django.shortcuts import get_object_or_404, redirect, render
 from bookstore.models import *
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
+from django.contrib import messages
 from time import time
 from django.conf import settings
 
+from django.core.exceptions import ObjectDoesNotExist
+
 
 from django.urls import reverse
-
 
 
 from django.contrib.auth import authenticate, login, logout
@@ -20,6 +23,7 @@ from django.utils.crypto import get_random_string
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+
 # Create your views here.
 
 
@@ -72,16 +76,17 @@ def search_books(request):
         txt = request.POST.get("txt")
         print(txt)
         try:
-            books = Books.objects.filter(Q(title__icontains=txt) | Q(publisher__icontains=txt))
-           
-            books = serializers.serialize('json', books)
-           
-            return JsonResponse({"status":"success","books": books})
+            books = Books.objects.filter(
+                Q(title__icontains=txt) | Q(publisher__icontains=txt)
+            )
 
+            books = serializers.serialize("json", books)
+
+            return JsonResponse({"status": "success", "books": books})
 
         except:
             pass
-    return JsonResponse({"status":"failed"})
+    return JsonResponse({"status": "failed"})
 
 
 def single_book(request, id, book_slug):
@@ -122,16 +127,8 @@ def single_book(request, id, book_slug):
     return HttpResponse("something wrong")
 
 
-
-
-
-
 def all_books(request):
     return HttpResponse("in development")
-
-
-
-
 
 
 @login_required(login_url="login")
@@ -187,14 +184,32 @@ def buy_now(request):
     except:
         book = None
     if book is not None:
+        exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
+        all_cart = Cart.objects.filter(user=request.user.customers)
         try:
             cart = Cart.objects.get(user=request.user.customers, book=book)
             cart.quantity += 1
             cart.save()
         except:
 
-            cart = Cart(user=request.user.customers, book=book, quantity=1)
-            cart.save()
+            
+            if book.exchangeable and len(all_cart) < 1:
+                if request.user.customers.store_credit >= 1:
+                    cart = Cart(user=request.user.customers, book=book, quantity=1)
+                    cart.save()
+                else:
+                    messages.add_message(request, messages.ERROR, 'Your Excangle Credit is : 0')
+                    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+            # can not buy book if exchangeable books in cart
+            elif not book.exchangeable and len(exh_cart) < 1:
+                cart = Cart(user=request.user.customers, book=book, quantity=1)
+                cart.save()
+
+            else:
+                messages.add_message(request, messages.ERROR, 'Remove other books from cart')
+                return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
     return redirect("cart")
 
@@ -213,21 +228,61 @@ def add_to_cart(request):
 
         if action == "add_to_cart":
             if book is not None:
+
+                # checking if exchangeable books are in cart
+                exh_cart = Cart.objects.filter(
+                    book__in=Books.objects.filter(exchangeable=True)
+                )
+                all_cart = Cart.objects.filter(user=request.user.customers)
+
+
                 try:
                     cart = Cart.objects.get(user=request.user.customers, book=book)
                     user_cart = Cart.objects.filter(
                         user__contact_no=request.user.username
                     )
+
                     return JsonResponse(
                         {"status": "exists", "message": "Book already added to cart"}
                     )
                 except:
-                    cart = Cart(user=request.user.customers, book=book, quantity=1)
-                    cart.save()
-                    user_cart = Cart.objects.filter(
-                        user__contact_no=request.user.username
-                    )
-                    return JsonResponse({"status": "success", "count": len(user_cart)})
+
+                    # exchangeable and normal books can't be in same cart
+                    if book.exchangeable and len(all_cart) < 1:
+                        if request.user.customers.store_credit >= 1:
+                            cart = Cart(user=request.user.customers, book=book, quantity=1)
+                            cart.save()
+                            user_cart = Cart.objects.filter(
+                                user__contact_no=request.user.username
+                            )
+                            return JsonResponse(
+                                {"status": "success", "count": len(user_cart)}
+                            )
+
+                        else:
+                            return JsonResponse(
+                                {"status": "low_credit", "message": "Your Excangle Credit is : 0"}
+                            )
+
+
+    
+                    elif not book.exchangeable and len(exh_cart) < 1:
+                        cart = Cart(user=request.user.customers, book=book, quantity=1)
+                        cart.save()
+                        user_cart = Cart.objects.filter(
+                            user__contact_no=request.user.username
+                        )
+                        return JsonResponse(
+                            {"status": "success", "count": len(user_cart)}
+                        )
+
+                    else:
+                        return JsonResponse(
+                            {
+                                "status": "edit_required",
+                                "message": "Remove other books from cart",
+                            }
+                        )
 
     else:
         raise Exception("Error")
@@ -280,11 +335,12 @@ def checkout(request):
     paymentForm = PaymentForm(instance=current_user)
 
     usercart = Cart.objects.filter(user=request.user.customers)
+    exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
+
     try:
         web_settings = WebSettings.objects.last()
     except:
         web_settings = None
-        
 
     if request.method == "POST":
 
@@ -359,7 +415,22 @@ def checkout(request):
             "You dont have any product on your cart. Please Add some product"
         )
 
-    context = {
+    
+    # show diffrent checkout if book is exchangeable
+    if exh_cart:
+        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id" : 0})
+        context = {
+        "usercart": usercart,
+        "addressForm": addressForm,
+        "paymentForm": exh_form,
+        "web_settings": web_settings,
+        "exh_cart" : True,
+        }
+        return render(request, "bookstore/checkout.html", context)
+    
+    else:
+
+        context = {
         "usercart": usercart,
         "addressForm": addressForm,
         "paymentForm": paymentForm,
@@ -368,6 +439,12 @@ def checkout(request):
 
     return render(request, "bookstore/checkout.html", context)
 
+
+
+
+
+
+   
 
 
 @login_required(login_url="login")
@@ -380,19 +457,35 @@ def default_address(request):
         action = request.GET.get("action")
         if action == "updateaddress":
             address = SavedAddress.objects.get(user=current_user.customers)
-            return JsonResponse({"status": "success", "district": address.district, 
-            "area": address.area, "address": address.address, "contact": address.contact_no})
-
-   
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "district": address.district,
+                    "area": address.area,
+                    "address": address.address,
+                    "contact": address.contact_no,
+                }
+            )
 
     if request.method == "GET":
-        return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-            },
-        )
+        try:
+            user_address = SavedAddress.objects.get(user=current_user.customers)
+            return render(
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "user_address": user_address,
+                },
+            )
+        except ObjectDoesNotExist:
+            return render(
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                },
+            )
 
     if request.method == "POST":
 
@@ -404,43 +497,36 @@ def default_address(request):
             address.contact_no = request.POST["contact_no"]
             address.save()
             return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-                "message" : "Address Edited Succesfully!"
-            },
-        )
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "message": "Address Edited Succesfully!",
+                    "user_address": address,
+                },
+            )
 
-        
         except:
             district = request.POST["district"]
             area = request.POST["area"]
             address = request.POST["address"]
             contact_no = request.POST["contact_no"]
-            saved_a = SavedAddress(user=customer, district=district, area=area,address=address, contact_no=contact_no)
+            saved_a = SavedAddress(
+                user=customer,
+                district=district,
+                area=area,
+                address=address,
+                contact_no=contact_no,
+            )
             saved_a.save()
+            new_address = SavedAddress.objects.get(user=current_user.customers)
 
             return render(
-            request,
-            "bookstore/addressbook.html",
-            {
-                "addressForm": addressForm,
-                "message" : "New Address Added Succesfully!"
-            },
-        )
-
-
-            
-
-
-
-        
-        
-            
-        
-        
-
-   
-        
-           
+                request,
+                "bookstore/addressbook.html",
+                {
+                    "addressForm": addressForm,
+                    "message": "New Address Added Succesfully!",
+                    "user_address": new_address,
+                },
+            )
