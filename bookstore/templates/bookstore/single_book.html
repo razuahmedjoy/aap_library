@@ -119,12 +119,18 @@ AAPLibrary - {{book.title}}
     <div class="row py-3 mb-5 singlebook-container">
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="book-cover-photo position-relative">
-                <img src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
+              
                 {% if book.bookpreviewimages_set.all %}
-                <span type="button" class="position-absolute preview-btn start-0 fs-5 mt-0 px-5" data-bs-toggle="modal"
+                <img type="button" src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                
+                <span type="button" class="position-absolute preview-btn start-0 fs-3 mt-0 px-5" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     পড়ে দেখুন
                 </span>
+
+                {%else %}
+                <img  src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
                 {%endif%}
 
             </div>
@@ -134,7 +140,7 @@ AAPLibrary - {{book.title}}
             <div class="book-data mt-3 mb-4">
                 <p class="author"> <span class="fw-bold">Author:</span> {{book.author}}</p>
 
-                <p class="publisher"><span class="fw-bold">Publishers:</span> {{book.publisher}}</p>
+                <p class="publisher"><span class="fw-bold">Publisher:</span> {{book.publisher}}</p>
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}

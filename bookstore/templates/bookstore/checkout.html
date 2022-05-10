@@ -253,7 +253,7 @@
         let options = '<option value="">Select District</option>'
 
         for (let item of districts) {
-            options += `<option value="${item.city}" districtid="${item.cityId}">${item.cityBangla}</option>`
+            options += `<option value="${item.cityBangla}" districtid="${item.cityId}">${item.cityBangla}</option>`
         }
         // console.log(options)
         districtContainer = document.getElementById('id_district')
@@ -280,7 +280,7 @@
         let options = '<option value="">Select area</option>'
 
         for (let item of upzilla) {
-            options += `<option value="${item.area}" areaid="${item.areaId}">${item.areaBangla}</option>`
+            options += `<option value="${item.areaBangla}" areaid="${item.areaId}">${item.areaBangla}</option>`
         }
         // console.log(options)
         areaContainer = document.getElementById('id_area')
