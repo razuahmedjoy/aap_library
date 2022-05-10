@@ -62,6 +62,23 @@
 
     <div class="cart-container container">
         <div class="row justify-content-center m-auto">
+            <div class="col-md-3 address">
+                {% if user_address %}
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                      Current Saved Address
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">District - {{user_address.district}} </li>
+                      <li class="list-group-item">Area - {{user_address.area}}</li>
+                      <li class="list-group-item">Road Or House No - {{user_address.address}}</li>
+                      <li class="list-group-item">Contact No - {{user_address.contact_no}}</li>
+                    </ul>
+                  </div>
+                  {% else %}
+                  <h1>You haven't saved an address yet!</h1>
+                  {% endif %}
+            </div>
             <div class="col-md-6 address">
                 {% if message %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
