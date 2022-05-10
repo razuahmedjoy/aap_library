@@ -107,7 +107,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{item.book.title}}</div>
-                                <span id="price-span">{{item.quantity}} x Tk. {{item.price}}</span>
+                                <span id="price-span">{{item.quantity}} × Tk. {{item.price}}</span>
                             </div>
                             <span class="badge bg-primary rounded-pill">
                                 Tk. {{item.total_amount}}
@@ -168,12 +168,24 @@
 
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
+                            {% if not exh_cart %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
                             </div>
+                            {% endif %}
 
                             <div class="payment-method-input">
+                                {% if not exh_cart %}
                                 <p>Select Any Payment Method</p>
+                                {% endif %}
                                 <div class="input">
+                                    {% if exh_cart %}
+                                    <div class="form-check form-check-inline">
+
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Exchange"
+                                            value="Exchange" checked>
+                                        <label class="form-check-label" for="Exchange">Paying With Exchange Credit</label>
+                                    </div>
+                                    {% else %}
                                     <div class="form-check form-check-inline">
 
                                         <input class="form-check-input" type="radio" name="payment_method" id="bKash"
@@ -191,9 +203,12 @@
                                         <label class="form-check-label" for="Rocket">Rocket</label>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
 
-                            {{paymentForm |crispy }}
+                            <div {% if exh_cart %} style="display: none;" {% endif %}>
+                                {{paymentForm |crispy }}
+                            </div>
 
                             <input type="submit" class="form-control btn btn-primary" value="Confirm Order">
 
@@ -297,7 +312,7 @@
 
 
                 /// value input does not work for area
-                options = `<option value="#" areaid="#">${status.area}</option>`;
+                options = `<option value="${status.area}" areaid="${status.area}">${status.area}</option>`;
                 area.innerHTML = options;
 
                 address.value = status.address;
