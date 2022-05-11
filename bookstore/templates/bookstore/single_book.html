@@ -84,16 +84,30 @@ AAPLibrary - {{book.title}}
         color: #fff;
         padding: .75rem 1.2rem;
         border-radius: 0 0px 30px 0;
-        top:75%;
+        top: 75%;
     }
 
     .qna p {
         font-size: large;
-        
+
     }
 
     .qna {
         padding: 1em;
+    }
+
+
+    .question {
+        font-weight: bold;
+    }
+
+    .answer {
+        margin-left: 1.5em;
+    }
+
+    .exchangeable {
+        font-size: 1rem;
+        margin-bottom: 0.5em;
     }
 </style>
 {% endblock style %}
@@ -105,12 +119,18 @@ AAPLibrary - {{book.title}}
     <div class="row py-3 mb-5 singlebook-container">
         <div class="col-md-4 d-flex justify-content-center align-items-center">
             <div class="book-cover-photo position-relative">
-                <img src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
+              
                 {% if book.bookpreviewimages_set.all %}
-                <span type="button" class="position-absolute preview-btn start-0 fs-5 mt-0 px-5" data-bs-toggle="modal"
+                <img type="button" src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                
+                <span type="button" class="position-absolute preview-btn start-0 fs-3 mt-0 px-5" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     পড়ে দেখুন
                 </span>
+
+                {%else %}
+                <img  src="{{book.cover_photo.url}}" class="img-fluid img-thumbnail w-100 h-100 p-1" alt="">
                 {%endif%}
 
             </div>
@@ -120,7 +140,7 @@ AAPLibrary - {{book.title}}
             <div class="book-data mt-3 mb-4">
                 <p class="author"> <span class="fw-bold">Author:</span> {{book.author}}</p>
 
-                <p class="publisher"><span class="fw-bold">Publishers:</span> {{book.publisher}}</p>
+                <p class="publisher"><span class="fw-bold">Publisher:</span> {{book.publisher}}</p>
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}
@@ -132,9 +152,13 @@ AAPLibrary - {{book.title}}
             <div class="price-box mrp mb-0">
                 <span>Tk.{{book.mrp_price}}</span>
             </div>
+            {% if book.exchangeable %}
+            <span class="badge bg-success exchangeable">Exchangeable</span>
+            {% else %}
             <div class="price-box m-0">
                 <span>Tk. {{book.price}}</span>
             </div>
+            {% endif %}
             <div class="stock-notification">
                 {% if book.in_stock %}
                 <h5 class="text-success"><i class="fas fa-check-circle"></i> Book in Stock</h5>
@@ -154,8 +178,14 @@ AAPLibrary - {{book.title}}
             </div>
 
             <br>
-
             <div class="exist">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
 
 
@@ -191,29 +221,32 @@ AAPLibrary - {{book.title}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                
+
                 <div class="modal-header">
                     {% if book.pdf %}
-                    <a href="{{book.pdf.url}}" target="_blank"  class="modal-title btn btn-primary border-0 py-2 px-3 rounded-0">Download PDF</a>
+                    <a href="{{book.pdf.url}}" target="_blank"
+                        class="modal-title btn btn-primary border-0 py-2 px-3 rounded-0">Download PDF</a>
                     {%endif %}
-                    <button type="button" class="btn-close fs-3 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close fs-3 me-2" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="border: solid 8px grey;padding: 0;">
 
-                   
-                        {% for x in book.bookpreviewimages_set.all %}
-                      
-                        <img src="{% static 'image/preview-loading.gif'%}" data-src="{{x.get_image}}" alt="" class="img-fluid w-100 lazyload" /> 
-                        <hr>
-                        {%endfor%}
-                        
 
-                  
-                    
-                       
-                   
+                    {% for x in book.bookpreviewimages_set.all %}
+
+                    <img src="{% static 'image/preview-loading.gif'%}" data-src="{{x.get_image}}" alt=""
+                        class="img-fluid w-100 lazyload" />
+                    <hr>
+                    {%endfor%}
+
+
+
+
+
+
                 </div>
-              
+
             </div>
         </div>
     </div>
@@ -402,15 +435,15 @@ AAPLibrary - {{book.title}}
                 <p>
                     Date : {{qa.date}}
                 </p>
-                <p>
-                  {{qa.user}} : {{qa.question}}
+                <p class="question">
+                    {{qa.user}} : {{qa.question}}
                 </p>
                 {% if qa.answer %}
-                <p>
+                <p class="answer">
                     AALibrary : {{qa.answer}}
                 </p>
                 {% else %}
-                <p>This Question Hasn't Been Answered Yet</p>
+                <p class="answer">This Question Hasn't Been Answered Yet</p>
                 {% endif %}
             </div>
             <hr>
@@ -441,7 +474,6 @@ AAPLibrary - {{book.title}}
         window.location = `{% url 'login' %}?next=${fromUrl}`;
     }
     const addtoCart = (bookId) => {
-        console.log(bookId);
         $.ajax({
             type: "GET",
             url: "{% url 'add_to_cart' %}",
@@ -452,11 +484,17 @@ AAPLibrary - {{book.title}}
             },
 
             success: function (response) {
-                const { status, count, message } = response
+                const {status, count, message} = response
                 if (status == "success") {
                     spanItem = document.querySelector('.total-items').innerHTML = count
                 }
                 if (status == "exists") {
+                    document.querySelector(".exist").innerHTML = `<div class="alert alert-danger d-flex align-items-center" role="alert">${message}</div>`
+                }
+                if (status == "edit_required") {
+                    document.querySelector(".exist").innerHTML = `<div class="alert alert-danger d-flex align-items-center" role="alert">${message}</div>`
+                }
+                if (status == "low_credit") {
                     document.querySelector(".exist").innerHTML = `<div class="alert alert-danger d-flex align-items-center" role="alert">${message}</div>`
                 }
 
@@ -466,6 +504,7 @@ AAPLibrary - {{book.title}}
                 console.log(e)
             }
         });
+
 
     }
 

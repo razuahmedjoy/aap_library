@@ -51,10 +51,11 @@ class Books(models.Model):
     category = models.ManyToManyField(Sub_Category, blank=True)
     slug = models.SlugField(max_length=255,allow_unicode=True)
     in_stock = models.BooleanField(default=True)
-    description = models.TextField(null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
     book_id = models.UUIDField(default=uuid.uuid4,unique=True)
     pdf = models.FileField(null=True, blank=True, upload_to='books/pdf/')
     created_at = models.DateTimeField(auto_now_add=True)
+    exchangeable = models.BooleanField(default=False)
 
 
 
@@ -110,6 +111,7 @@ class Customers(models.Model):
     name = models.CharField(max_length=255)
     contact_no = models.CharField(max_length=20)
     email = models.EmailField(max_length=50,null=True,blank=True)
+    store_credit = models.IntegerField(default=0)
 
 
     def __str__(self):

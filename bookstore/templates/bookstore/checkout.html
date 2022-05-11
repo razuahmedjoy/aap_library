@@ -48,7 +48,45 @@
 
     .address_loader {
         margin-bottom: 2em;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
+    .address_loader button {
+        font-size: 1.5rem;
+        background-color: #002060;
+        color: white;
+        padding: .5em;
+        border: 2px solid #7c92b9;
+
+
+    }
+
+    .address_loader i {
+        color: #1e95ad;
+        font-size: 3rem;
+        margin-left: 1em;
+    }
+
+    .address_loader i:hover {
+        cursor: pointer;
+    }
+
+    .shipping-underline {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        margin-bottom: 1;
+    }
+
+    #price-span {
+        text-transform: none;
+
+    }
+
+ 
 </style>
 {%endblock style%}
 
@@ -69,7 +107,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{{item.book.title}}</div>
-                                <span>{{item.quantity}} x Tk. {{item.price}}</span>
+                                <span id="price-span">{{item.quantity}} × Tk. {{item.price}}</span>
                             </div>
                             <span class="badge bg-primary rounded-pill">
                                 Tk. {{item.total_amount}}
@@ -118,25 +156,36 @@
                     <div class="row cart-items">
 
                         <div class="col-md-6">
-                            
-                            <h3 class="text-center page-title">Shipping Address</h3>
-                         
-                                {{ addressForm|crispy }}
 
-                                <div class="address_loader">
-                                    <button class="btn btn-primary border-0 outline-0" id="load_default">Saved Address</button>
-                                    <button class="btn btn-primary border-0 outline-0" id="reset_default">Reset</button>
-                                </div>
+                            <h3 class="text-center page-title">Shipping Address</h3> 
+                            <div class="shipping-underline"></div>
+                            <div class="address_loader">
+                                <button type="button" id="load_default">Use Saved Address</button>
+                                <i class="fas fa-undo" title="Click here to reset address" id="reset_default"></i>
+                            </div>
+                            {{ addressForm|crispy }}
                         </div>
-                        
+
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
+                            {% if not exh_cart %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
                             </div>
+                            {% endif %}
 
                             <div class="payment-method-input">
+                                {% if not exh_cart %}
                                 <p>Select Any Payment Method</p>
+                                {% endif %}
                                 <div class="input">
+                                    {% if exh_cart %}
+                                    <div class="form-check form-check-inline">
+
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Exchange"
+                                            value="Exchange" checked>
+                                        <label class="form-check-label" for="Exchange">Paying With Exchange Credit</label>
+                                    </div>
+                                    {% else %}
                                     <div class="form-check form-check-inline">
 
                                         <input class="form-check-input" type="radio" name="payment_method" id="bKash"
@@ -154,17 +203,20 @@
                                         <label class="form-check-label" for="Rocket">Rocket</label>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
 
-                            {{paymentForm |crispy }}
+                            <div {% if exh_cart %} style="display: none;" {% endif %}>
+                                {{paymentForm |crispy }}
+                            </div>
 
-                            <input type="submit" class="form-control btn-primary" value="Confirm Order">
+                            <input type="submit" class="form-control btn btn-primary" value="Confirm Order">
 
                         </div>
                     </div>
                 </form>
-              
-               
+
+
             </div>
         </div>
     </div>
@@ -201,7 +253,7 @@
         let options = '<option value="">Select District</option>'
 
         for (let item of districts) {
-            options += `<option value="${item.city}" districtid="${item.cityId}">${item.cityBangla}</option>`
+            options += `<option value="${item.cityBangla}" districtid="${item.cityId}">${item.cityBangla}</option>`
         }
         // console.log(options)
         districtContainer = document.getElementById('id_district')
@@ -228,7 +280,7 @@
         let options = '<option value="">Select area</option>'
 
         for (let item of upzilla) {
-            options += `<option value="${item.area}" areaid="${item.areaId}">${item.areaBangla}</option>`
+            options += `<option value="${item.areaBangla}" areaid="${item.areaId}">${item.areaBangla}</option>`
         }
         // console.log(options)
         areaContainer = document.getElementById('id_area')
@@ -238,7 +290,7 @@
     })
 
 
-  
+
 
 
     /// this function loads saved address 
@@ -260,7 +312,7 @@
 
 
                 /// value input does not work for area
-                options = `<option value="#" areaid="#">${status.area}</option>`;
+                options = `<option value="${status.area}" areaid="${status.area}">${status.area}</option>`;
                 area.innerHTML = options;
 
                 address.value = status.address;
