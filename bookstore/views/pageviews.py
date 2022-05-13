@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.urls import reverse
 
+from django.db.models import Sum
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -391,6 +392,16 @@ def checkout(request):
         )
         newOrder.save()
 
+
+        # deduct store credit on succesful order
+        if exh_cart:
+            total_books = usercart.aggregate(Sum('quantity'))['quantity__sum']
+            cstmr = request.user.customers
+            cstmr.store_credit -= total_books
+            cstmr.save()
+
+        
+
         for item in usercart:
             orderd_product = OrderedProducts()
             orderd_product.order = newOrder
@@ -418,6 +429,10 @@ def checkout(request):
     
     # show diffrent checkout if book is exchangeable
     if exh_cart:
+        total_books = usercart.aggregate(Sum('quantity'))['quantity__sum']
+        cstmr = request.user.customers
+        store_credit = cstmr.store_credit
+
         exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id" : 0})
         context = {
         "usercart": usercart,
@@ -426,10 +441,16 @@ def checkout(request):
         "web_settings": web_settings,
         "exh_cart" : True,
         }
+
+
+        # show error if store credit is not enough
+        if store_credit < total_books:
+            messages.add_message(request, messages.ERROR, 'Your store credit is less than total books')
+            return HttpResponseRedirect('cart')
+
         return render(request, "bookstore/checkout.html", context)
     
     else:
-
         context = {
         "usercart": usercart,
         "addressForm": addressForm,
