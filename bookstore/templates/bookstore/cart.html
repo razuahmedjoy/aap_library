@@ -59,6 +59,16 @@
                     <h3 class="text-center py-5 alert alert-danger">You Don't have any books In your Shopping Bag. </h3>
 
                     {% endif %}
+                    
+                </div>
+                <div style="font-size: large;">
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 </div>
             </div>
 
