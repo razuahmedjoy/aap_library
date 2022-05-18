@@ -1,0 +1,148 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+{% load crispy_forms_tags %}
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+  .form-group {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+
+  }
+
+  .exchange-box {
+    padding: 0.5em;
+    margin: 1em;
+    border: 1px solid gray;
+    border-radius: 1%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+  }
+
+  .buttonHolder {
+    text-align: center;
+  }
+
+  .exchange textarea {
+    height: 5rem;
+  }
+
+  .exchange input {
+    font-size: 1.5rem;
+  }
+
+  body {
+    background-color: #f0f4fa !important;
+  }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="container">
+  <br>
+  <a href="{% url 'profile' %}" class="btn btn-outline-secondary bg-dark btn-sm text-light">Back To Profile</a>
+  <div class="row justify-content-center m-auto">
+    <div class="col-md-8">
+
+      <div class="row exchange-box">
+        <div class="col-md-6 exchange">
+          <h3 class="text-center page-title">Submit Exchange Request Below</h3>
+          <hr>
+          <form action="{% url 'exchange' %}" method="post">
+            {{exchange_form|crispy}}
+            {% csrf_token %}
+            <div class="buttonHolder">
+              <button type="submit" class="btn btn-primary">Submit Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row exchange-box">
+        <h3 class="text-center page-title">এক্সচেঞ্জ নীতিমালা</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error repudiandae minus corrupti. Nulla tempore
+          cumque adipisci harum, repellendus est fuga dolorem nam ea sit deserunt iusto ut earum qui excepturi sint
+          ullam at! Nostrum modi iure quis at minima esse obcaecati, repellendus laboriosam blanditiis voluptatum enim
+          dolorum quisquam autem eius ipsa ab facere, eos, reprehenderit animi labore ipsum officiis? Delectus
+          corporis assumenda aut quam sapiente nesciunt excepturi veniam optio deserunt beatae consequatur, tempore
+          repudiandae incidunt ducimus quae sint ab quia animi nostrum numquam omnis saepe provident error fuga?
+          Tenetur dignissimos obcaecati accusantium maiores eos nobis eaque voluptas consectetur harum corrupti quis
+          temporibus quod aspernatur, cupiditate, deserunt rem voluptate recusandae! Atque nemo facilis cumque odio
+          blanditiis dignissimos accusamus quae quod voluptatibus, ipsum dolorem id quos nostrum, consequatur, animi
+          praesentium explicabo eveniet iure ut? Recusandae aliquid est repellat fugit dolores officiis quibusdam, sed
+          maiores porro, excepturi reprehenderit aspernatur placeat. Dolore qui similique eaque. Quas modi quia
+          ducimus ipsum excepturi, magnam at cupiditate maiores quo, suscipit commodi nobis consequuntur sequi a
+          assumenda, ipsam accusantium perspiciatis possimus tempore illum omnis. Eveniet nobis commodi, ratione
+          aperiam illo ad. Esse magni ut suscipit, quos, officiis facilis voluptatum magnam, tempore doloremque
+          impedit culpa accusamus sapiente hic cupiditate.
+        </p>
+
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade ExchangeModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">এক্সচেঞ্জ নীতিমালা</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quia esse necessitatibus ex culpa
+                ducimus illo quasi porro doloribus, veniam iusto! Dolorem aliquam rerum atque veritatis distinctio
+                explicabo tempora, rem quae consequatur perferendis labore laboriosam, illum sequi sed expedita
+                pariatur tenetur molestiae cupiditate nemo dolore blanditiis deserunt est magnam ducimus.
+              </p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-bs-dismiss="modal" class="btn btn-primary">বুঝতে পেরেছি</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block js %}
+<script>
+  $(window).on('load', function () {
+    $('.ExchangeModal').modal('show');
+  });
+
+  // $('.btn-close').click(function () {
+  //   window.location.href = "{% url 'profile' %}"
+  //   return false;
+  // });
+
+</script>
+
+
+
+{% endblock js %}
