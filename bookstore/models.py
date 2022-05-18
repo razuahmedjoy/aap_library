@@ -261,6 +261,30 @@ class SavedAddress(models.Model):
 
     def __str__(self):
         return self.user.name
+
+
+
+class Exchange(models.Model):
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Received', 'Received'),
+        ('Completed', 'Completed'),
+        ('Canceled', 'Canceled'),
+    )
+
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, related_name="exchange")
+    full_name = models.CharField(max_length=64)
+    mobile_no = models.CharField(max_length=15)
+    number_of_books = models.IntegerField()
+    sending_date = models.DateField()
+    status = models.CharField(max_length=10,choices=STATUS, default='Pending')
+    comment = models.TextField(blank=True)
+
+
+    def __str__(self):
+        return self.user.name
+
+    
         
    
     

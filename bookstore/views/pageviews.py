@@ -199,7 +199,7 @@ def buy_now(request):
                     cart = Cart(user=request.user.customers, book=book, quantity=1)
                     cart.save()
                 else:
-                    messages.add_message(request, messages.ERROR, 'Your Excangle Credit is : 0')
+                    messages.add_message(request, messages.ERROR, 'Your Exchange Credit is : 0')
                     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 
@@ -262,7 +262,7 @@ def add_to_cart(request):
 
                         else:
                             return JsonResponse(
-                                {"status": "low_credit", "message": "Your Excangle Credit is : 0"}
+                                {"status": "low_credit", "message": "Your Exchange Credit is : 0"}
                             )
 
 
@@ -276,6 +276,7 @@ def add_to_cart(request):
                         return JsonResponse(
                             {"status": "success", "count": len(user_cart)}
                         )
+                    
 
                     else:
                         return JsonResponse(
@@ -445,7 +446,7 @@ def checkout(request):
 
         # show error if store credit is not enough
         if store_credit < total_books:
-            messages.add_message(request, messages.ERROR, 'Your store credit is less than total books')
+            messages.add_message(request, messages.ERROR, 'Your Exchange credit is less than total books')
             return HttpResponseRedirect('cart')
 
         return render(request, "bookstore/checkout.html", context)
@@ -551,3 +552,36 @@ def default_address(request):
                     "user_address": new_address,
                 },
             )
+
+
+
+
+
+
+@login_required(login_url="login")
+def exchange(request):
+    if request.method == "POST":
+        user = Customers.objects.get(user=request.user)
+        full_name = request.POST.get("full_name")
+        mobile_no = request.POST.get("mobile_no")
+        book_amount = request.POST.get("number_of_books")
+        sending_date = request.POST.get("sending_date")
+        comment = request.POST.get("comment")
+        exchange_request = Exchange(user=user, full_name = full_name,
+        mobile_no=mobile_no, book_amount=book_amount, sending_date=sending_date, comment=comment)
+        try:
+            exchange_request.full_clean()
+            exchange_request.save()
+            messages.add_message(request, messages.SUCCESS, 'You Exchange Request is Received')
+            return redirect("profile")
+
+        except ValidationError:
+            pass
+    
+
+
+
+    exchange_form = ExchangeForm()
+    return render(request, "bookstore/exchange.html", {
+        "exchange_form" : exchange_form
+    })
