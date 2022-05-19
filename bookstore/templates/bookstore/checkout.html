@@ -118,9 +118,16 @@
                                 <h5 class="fw-bold">Shipping Charge</h5>
 
                             </div>
+                            {% if exh_cart %}
+                            <span class="badge bg-warning rounded-pill">
+                                Tk. 0
+                            </span>
+                            {% else %}
                             <span class="badge bg-warning rounded-pill">
                                 Tk. {% get_shipping_charge %}
                             </span>
+                            {% endif %}
+                            
                         </li>
 
 
@@ -132,9 +139,15 @@
                                 <h2 class="fw-bold">SubTotal</h2>
 
                             </div>
+                            {% if exh_cart %}
+                            <span class="badge bg-danger rounded-pill">
+                                Tk. 0
+                            </span>
+                            {% else %}
                             <span class="badge bg-danger rounded-pill">
                                 Tk. {% cart_sub_total usercart %}
                             </span>
+                            {% endif %}
                         </li>
 
 
@@ -147,7 +160,11 @@
                 <form method="POST" id="address_form">
 
                     {% csrf_token %}
+                    {% if exh_cart %}
+                    <input type="hidden" name="total_amount" value="0">
+                    {% else %}
                     <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
+                    {% endif %}
                     <div class="row cart-items">
 
                         <div class="col-md-6">

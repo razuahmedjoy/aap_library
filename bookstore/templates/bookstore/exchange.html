@@ -43,6 +43,13 @@
   body {
     background-color: #f0f4fa !important;
   }
+
+  .rules {
+    text-align: center;
+    max-width: 45ch;
+    font-size: 1.5rem;
+  }
+  
 </style>
 {%endblock style%}
 
@@ -71,23 +78,11 @@
 
       <div class="row exchange-box">
         <h3 class="text-center page-title">এক্সচেঞ্জ নীতিমালা</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error repudiandae minus corrupti. Nulla tempore
-          cumque adipisci harum, repellendus est fuga dolorem nam ea sit deserunt iusto ut earum qui excepturi sint
-          ullam at! Nostrum modi iure quis at minima esse obcaecati, repellendus laboriosam blanditiis voluptatum enim
-          dolorum quisquam autem eius ipsa ab facere, eos, reprehenderit animi labore ipsum officiis? Delectus
-          corporis assumenda aut quam sapiente nesciunt excepturi veniam optio deserunt beatae consequatur, tempore
-          repudiandae incidunt ducimus quae sint ab quia animi nostrum numquam omnis saepe provident error fuga?
-          Tenetur dignissimos obcaecati accusantium maiores eos nobis eaque voluptas consectetur harum corrupti quis
-          temporibus quod aspernatur, cupiditate, deserunt rem voluptate recusandae! Atque nemo facilis cumque odio
-          blanditiis dignissimos accusamus quae quod voluptatibus, ipsum dolorem id quos nostrum, consequatur, animi
-          praesentium explicabo eveniet iure ut? Recusandae aliquid est repellat fugit dolores officiis quibusdam, sed
-          maiores porro, excepturi reprehenderit aspernatur placeat. Dolore qui similique eaque. Quas modi quia
-          ducimus ipsum excepturi, magnam at cupiditate maiores quo, suscipit commodi nobis consequuntur sequi a
-          assumenda, ipsam accusantium perspiciatis possimus tempore illum omnis. Eveniet nobis commodi, ratione
-          aperiam illo ad. Esse magni ut suscipit, quos, officiis facilis voluptatum magnam, tempore doloremque
-          impedit culpa accusamus sapiente hic cupiditate.
-        </p>
+        <article class="rules">
+          <p>
+            {{web_settings.exchange_rules}}
+          </p>
+        </article>
 
       </div>
 
@@ -102,11 +97,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quia esse necessitatibus ex culpa
-                ducimus illo quasi porro doloribus, veniam iusto! Dolorem aliquam rerum atque veritatis distinctio
-                explicabo tempora, rem quae consequatur perferendis labore laboriosam, illum sequi sed expedita
-                pariatur tenetur molestiae cupiditate nemo dolore blanditiis deserunt est magnam ducimus.
+              <p class="rules">
+                {{web_settings.exchange_rules}} 
               </p>
 
             </div>
