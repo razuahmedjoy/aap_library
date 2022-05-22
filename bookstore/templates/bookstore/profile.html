@@ -135,7 +135,11 @@
         font-size: 1.2rem;
     }
 
-    
+    .exchange-row {
+        justify-content: flex-end;
+        margin-top: 1em;
+
+    }
 </style>
 
 {%endblock style%}
@@ -146,6 +150,15 @@
 <div class="profile">
     <div class="container">
         <div class="main-body">
+            <div style="font-size: large;">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
 
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
@@ -160,24 +173,20 @@
                                 </div>
                                 <div class="d-grid gap-2">
                                     <button type="button" class="btn btn-primary">
-                                        Your Exchange Credit : <span id="credit">{{customer.store_credit}}</span> </button>
+                                        Your Exchange Credit : <span id="credit">{{customer.store_credit}}</span>
+                                    </button>
                                     <a href="{% url 'addressbook' %}" class="btn btn-primary">Your Saved Address</a>
-                                  </div>
+                                    <a href="{% url 'exchange' %}" class="btn btn-primary">Exchange Request</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-
                 </div>
+
                 <div class="col-md-8">
-
-
-
-
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">My Orders</h2>
-
                             <div class="order-list">
                                 <div class="w-100 mt-5">
                                     <div class="d-flex justify-content-center row">
@@ -187,34 +196,74 @@
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-
                                                                 <th>ID</th>
                                                                 <th>Total</th>
-                                                                <th>Payment Method</th>
-                                                                <th>TrxID</th>
+                                                                <th>Payment Method/TxnID</th>
                                                                 <th>Date</th>
                                                                 <th>Books</th>
+                                                                <th>Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-body">
                                                             {% for order in orders %}
                                                             <tr class="cell-1">
-
                                                                 <td>{{order.order_id}}</td>
-                                                                <td>Tk.   {{order.grand_total}}</td>
-                                                                <td>{{order.payment.payment_method}}
-                                                                </td>
-                                                                <td>{{order.payment.transaction_id}}</td>
+                                                                <td>Tk. {{order.grand_total}}</td>
+                                                                <td>{{order.payment.payment_method}} -
+                                                                    {{order.payment.transaction_id}}</td>
                                                                 <td>{{order.created_at}}</td>
                                                                 <td>
                                                                     {% for book in order.orderedproducts_set.all %}
-                                                                   {{book}} x {{book.quantity}}<br>
+                                                                    {{book}} x {{book.quantity}}<br>
                                                                     {%endfor %}
                                                                 </td>
+                                                                <td>{{order.status}}</td>
                                                             </tr>
                                                             {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row exchange-row">
+                <div class="col-md-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">My Exchanges</h2>
+                            <div>
+                                <div class="w-100 mt-5">
+                                    <div class="d-flex justify-content-center row">
+                                        <div class="col-md-12">
+                                            <div class="rounded">
+                                                <div class="table-responsive table-borderless">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Mobile No</th>
+                                                                <th>Total Books</th>
+                                                                <th>Date</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-body">
+                                                            {% for exh in customer.exchange.all %}
+                                                            <tr class="cell-1">
+                                                                <td>{{exh.full_name}}</td>
+                                                                <td>{{exh.mobile_no}}</td>
+                                                                <td>{{exh.number_of_books}}</td>                       
+                                                                <td>{{exh.sending_date}}</td>
+                                                                <td>{{exh.status}}</td>
+                                                            </tr>
+                                                            {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -227,11 +276,7 @@
                         </div>
                     </div>
 
-
                 </div>
-
-
-
             </div>
         </div>
 

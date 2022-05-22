@@ -136,7 +136,11 @@ admin.site.register(Review,ReviewAdmin)
 class QnAAdmin(admin.ModelAdmin):
     list_display = ('__str__','question','answer',)
     readonly_fields = ('book','user',)
+
+
 admin.site.register(QnA,QnAAdmin)
+
+admin.site.register(Exchange)
 
 
 

@@ -152,13 +152,9 @@ AAPLibrary - {{book.title}}
             <div class="price-box mrp mb-0">
                 <span>Tk.{{book.mrp_price}}</span>
             </div>
-            {% if book.exchangeable %}
-            <span class="badge bg-success exchangeable">Exchangeable</span>
-            {% else %}
             <div class="price-box m-0">
                 <span>Tk. {{book.price}}</span>
             </div>
-            {% endif %}
             <div class="stock-notification">
                 {% if book.in_stock %}
                 <h5 class="text-success"><i class="fas fa-check-circle"></i> Book in Stock</h5>

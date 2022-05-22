@@ -39,3 +39,31 @@ class QnAForm(forms.ModelForm):
     class Meta:
         model = QnA
         fields = ('question',)
+
+
+# Exchange Form
+
+class DatePickerInput(forms.DateInput):
+        input_type = 'date'
+        
+
+class ExchangeForm(forms.ModelForm):
+    
+    class Meta:
+        model = Exchange
+        fields = ('full_name', 'mobile_no', 'number_of_books', 'sending_date', 'comment')
+    
+
+        widgets = {
+            'sending_date' : DatePickerInput(),
+            
+        }
+
+        labels = {
+            "number_of_books" : "How Many Books?",
+            "comment" : "Comment (If Any)"
+        }
+
+        
+
+       
