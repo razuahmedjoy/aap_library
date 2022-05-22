@@ -1,0 +1,140 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+{% load crispy_forms_tags %}
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+  .form-group {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+
+  }
+
+  .exchange-box {
+    padding: 0.5em;
+    margin: 1em;
+    border: 1px solid gray;
+    border-radius: 1%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+  }
+
+  .buttonHolder {
+    text-align: center;
+  }
+
+  .exchange textarea {
+    height: 5rem;
+  }
+
+  .exchange input {
+    font-size: 1.5rem;
+  }
+
+  body {
+    background-color: #f0f4fa !important;
+  }
+
+  .rules {
+    text-align: center;
+    max-width: 45ch;
+    font-size: 1.5rem;
+  }
+  
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="container">
+  <br>
+  <a href="{% url 'profile' %}" class="btn btn-outline-secondary bg-dark btn-sm text-light">Back To Profile</a>
+  <div class="row justify-content-center m-auto">
+    <div class="col-md-8">
+
+      <div class="row exchange-box">
+        <div class="col-md-6 exchange">
+          <h3 class="text-center page-title">Submit Exchange Request Below</h3>
+          <hr>
+          <form action="{% url 'exchange' %}" method="post">
+            {{exchange_form|crispy}}
+            {% csrf_token %}
+            <div class="buttonHolder">
+              <button type="submit" class="btn btn-primary">Submit Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row exchange-box">
+        <h3 class="text-center page-title">এক্সচেঞ্জ নীতিমালা</h3>
+        <article class="rules">
+          <p>
+            {{web_settings.exchange_rules}}
+          </p>
+        </article>
+
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade ExchangeModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">এক্সচেঞ্জ নীতিমালা</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="rules">
+                {{web_settings.exchange_rules}} 
+              </p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-bs-dismiss="modal" class="btn btn-primary">বুঝতে পেরেছি</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+
+
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block js %}
+<script>
+  $(window).on('load', function () {
+    $('.ExchangeModal').modal('show');
+  });
+
+  // $('.btn-close').click(function () {
+  //   window.location.href = "{% url 'profile' %}"
+  //   return false;
+  // });
+
+</script>
+
+
+
+{% endblock js %}

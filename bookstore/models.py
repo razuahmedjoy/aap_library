@@ -2,6 +2,7 @@ from operator import mod
 from pickle import TRUE
 from pyexpat import model
 from random import choices
+from tkinter.tix import Tree
 from django.db import models
 from django.contrib.auth.models import User
 import os
@@ -208,6 +209,7 @@ class WebSettings(models.Model):
     payment_instruction = RichTextField()
     shipping_charge = models.IntegerField(default=50)
     web_logo = models.ImageField(upload_to="web_logo/",null=True,blank=True)
+    exchange_rules = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
@@ -261,6 +263,30 @@ class SavedAddress(models.Model):
 
     def __str__(self):
         return self.user.name
+
+
+
+class Exchange(models.Model):
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Received', 'Received'),
+        ('Completed', 'Completed'),
+        ('Canceled', 'Canceled'),
+    )
+
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, related_name="exchange")
+    full_name = models.CharField(max_length=64)
+    mobile_no = models.CharField(max_length=15)
+    number_of_books = models.IntegerField()
+    sending_date = models.DateField()
+    status = models.CharField(max_length=10,choices=STATUS, default='Pending')
+    comment = models.TextField(blank=True)
+
+
+    def __str__(self):
+        return self.user.name
+
+    
         
    
     

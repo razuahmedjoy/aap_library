@@ -193,15 +193,15 @@ def buy_now(request):
             cart.save()
         except:
 
-            
             if book.exchangeable and len(all_cart) < 1:
                 if request.user.customers.store_credit >= 1:
                     cart = Cart(user=request.user.customers, book=book, quantity=1)
                     cart.save()
                 else:
-                    messages.add_message(request, messages.ERROR, 'Your Excangle Credit is : 0')
+                    messages.add_message(
+                        request, messages.ERROR, "Your Exchange Credit is : 0"
+                    )
                     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
 
             # can not buy book if exchangeable books in cart
             elif not book.exchangeable and len(exh_cart) < 1:
@@ -209,8 +209,17 @@ def buy_now(request):
                 cart.save()
 
             else:
-                messages.add_message(request, messages.ERROR, 'Remove other books from cart')
-                return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+                if len(exh_cart) >= 1:
+                    messages.add_message(
+                        request, messages.ERROR, "Remove exchangeable books from cart"
+                    )
+                    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+                else:
+                    messages.add_message(
+                        request, messages.ERROR, "Remove regular books from cart"
+                    )
+                    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
     return redirect("cart")
 
@@ -236,7 +245,6 @@ def add_to_cart(request):
                 )
                 all_cart = Cart.objects.filter(user=request.user.customers)
 
-
                 try:
                     cart = Cart.objects.get(user=request.user.customers, book=book)
                     user_cart = Cart.objects.filter(
@@ -251,7 +259,9 @@ def add_to_cart(request):
                     # exchangeable and normal books can't be in same cart
                     if book.exchangeable and len(all_cart) < 1:
                         if request.user.customers.store_credit >= 1:
-                            cart = Cart(user=request.user.customers, book=book, quantity=1)
+                            cart = Cart(
+                                user=request.user.customers, book=book, quantity=1
+                            )
                             cart.save()
                             user_cart = Cart.objects.filter(
                                 user__contact_no=request.user.username
@@ -262,11 +272,12 @@ def add_to_cart(request):
 
                         else:
                             return JsonResponse(
-                                {"status": "low_credit", "message": "Your Excangle Credit is : 0"}
+                                {
+                                    "status": "low_credit",
+                                    "message": "Your Exchange Credit is : 0",
+                                }
                             )
 
-
-    
                     elif not book.exchangeable and len(exh_cart) < 1:
                         cart = Cart(user=request.user.customers, book=book, quantity=1)
                         cart.save()
@@ -278,12 +289,21 @@ def add_to_cart(request):
                         )
 
                     else:
-                        return JsonResponse(
-                            {
-                                "status": "edit_required",
-                                "message": "Remove other books from cart",
-                            }
-                        )
+                        if len(exh_cart) >= 1:
+                            return JsonResponse(
+                                {
+                                    "status": "edit_required",
+                                    "message": "Remove exchangeable books from cart",
+                                }
+                            )
+
+                        else:
+                            return JsonResponse(
+                                {
+                                    "status": "edit_required",
+                                    "message": "Remove regular books from cart",
+                                }
+                            )
 
     else:
         raise Exception("Error")
@@ -392,15 +412,12 @@ def checkout(request):
         )
         newOrder.save()
 
-
         # deduct store credit on succesful order
         if exh_cart:
-            total_books = usercart.aggregate(Sum('quantity'))['quantity__sum']
+            total_books = usercart.aggregate(Sum("quantity"))["quantity__sum"]
             cstmr = request.user.customers
             cstmr.store_credit -= total_books
             cstmr.save()
-
-        
 
         for item in usercart:
             orderd_product = OrderedProducts()
@@ -426,46 +443,39 @@ def checkout(request):
             "You dont have any product on your cart. Please Add some product"
         )
 
-    
     # show diffrent checkout if book is exchangeable
     if exh_cart:
-        total_books = usercart.aggregate(Sum('quantity'))['quantity__sum']
+        total_books = usercart.aggregate(Sum("quantity"))["quantity__sum"]
         cstmr = request.user.customers
         store_credit = cstmr.store_credit
 
-        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id" : 0})
+        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id": 0})
         context = {
-        "usercart": usercart,
-        "addressForm": addressForm,
-        "paymentForm": exh_form,
-        "web_settings": web_settings,
-        "exh_cart" : True,
+            "usercart": usercart,
+            "addressForm": addressForm,
+            "paymentForm": exh_form,
+            "web_settings": web_settings,
+            "exh_cart": True,
         }
-
 
         # show error if store credit is not enough
         if store_credit < total_books:
-            messages.add_message(request, messages.ERROR, 'Your store credit is less than total books')
-            return HttpResponseRedirect('cart')
+            messages.add_message(
+                request, messages.ERROR, "Your Exchange credit is less than total books"
+            )
+            return HttpResponseRedirect("cart")
 
         return render(request, "bookstore/checkout.html", context)
-    
+
     else:
         context = {
-        "usercart": usercart,
-        "addressForm": addressForm,
-        "paymentForm": paymentForm,
-        "web_settings": web_settings,
-    }
+            "usercart": usercart,
+            "addressForm": addressForm,
+            "paymentForm": paymentForm,
+            "web_settings": web_settings,
+        }
 
     return render(request, "bookstore/checkout.html", context)
-
-
-
-
-
-
-   
 
 
 @login_required(login_url="login")
@@ -551,3 +561,43 @@ def default_address(request):
                     "user_address": new_address,
                 },
             )
+
+
+@login_required(login_url="login")
+def exchange(request):
+    web_settings = WebSettings.objects.last()
+    if request.method == "POST":
+        user = Customers.objects.get(user=request.user)
+        full_name = request.POST.get("full_name")
+        mobile_no = request.POST.get("mobile_no")
+        book_amount = request.POST.get("number_of_books")
+        sending_date = request.POST.get("sending_date")
+        comment = request.POST.get("comment")
+        exchange_request = Exchange(
+            user=user,
+            full_name=full_name,
+            mobile_no=mobile_no,
+            book_amount=book_amount,
+            sending_date=sending_date,
+            comment=comment,
+        )
+        try:
+            exchange_request.full_clean()
+            exchange_request.save()
+            messages.add_message(
+                request, messages.SUCCESS, "You Exchange Request is Received"
+            )
+            return redirect("profile")
+
+        except ValidationError:
+            pass
+
+    exchange_form = ExchangeForm()
+    return render(
+        request,
+        "bookstore/exchange.html",
+        {
+            "exchange_form": exchange_form,
+            "web_settings": web_settings,
+        },
+    )
