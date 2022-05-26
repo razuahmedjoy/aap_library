@@ -5,7 +5,7 @@
 
     <h1 class="heading d-flex bg-white p-3 mx-3 justify-content-between"> 
         <span>{{sub_cat.name}}</span> 
-        <a class="btn btn-primary border-0 py-2 px-4 rounded-0"href="{% url 'all_books' %}">সবগুলো</a>
+        <a class="btn btn-primary border-0 py-2 px-4 rounded-0"href="{% url 'all_books' pk=sub_cat.name %}">সবগুলো</a>
     </h1>
 
     <div class="row">
