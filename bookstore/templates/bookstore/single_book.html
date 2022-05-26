@@ -138,9 +138,20 @@ AAPLibrary - {{book.title}}
         <div class="col-md-8 p-4">
             <h2 class="single-book-title fw-bold">{{book.title}}</h2>
             <div class="book-data mt-3 mb-4">
-                <p class="author"> <span class="fw-bold">Author:</span> {{book.author}}</p>
-
-                <p class="publisher"><span class="fw-bold">Publisher:</span> {{book.publisher}}</p>
+                <p class="author"> <span class="fw-bold">Author:</span>
+                    {% if book.author %}
+                    <a href="{% url 'author_books' book.author.id %}"> {{book.author}}</a>
+                    {% else %}
+                    {{book.author}}     
+                    {% endif %}
+                </p>
+                <p class="publisher"><span class="fw-bold">Publisher:</span>
+                    {% if book.publisher %}
+                    <a href="{% url 'author_books' book.author.id %}"> {{book.publisher}}</a>
+                    {% else %}
+                    {{book.publisher}}
+                    {% endif %}
+                </p>
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}
