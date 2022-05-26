@@ -155,7 +155,7 @@ AAPLibrary - {{book.title}}
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}
-                    <span class="badge bg-info">{{cat.name}}</span>
+                    <span class="badge bg-info" ><a style="color: white;" href="{% url 'all_books' cat.id %}">{{cat.name}}</a></span>
                     {% endfor %}
                 </div>
 
