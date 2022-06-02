@@ -34,20 +34,6 @@ class Sub_Category(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Publisher(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 
 # model for author
 class Author(models.Model):
