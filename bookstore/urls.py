@@ -9,7 +9,16 @@ from .locations import *
 urlpatterns = [
     path('', book_store_home, name="book_store_home" ),
     path('book/<int:id>/<str:book_slug>/', single_book, name="single_book" ),
-    path('all-books', all_books, name="all_books" ),
+
+    # all book url
+    path('all-books/<str:pk>', all_books, name="all_books" ),
+
+
+    # author and pub urls
+    path('author/<str:pk>/', author_books, name="author_books" ),
+    path('publisher/<str:pk>/', publisher_books, name="publisher_books" ),
+
+
 
     # authentication
     path('register/', register, name="register" ),

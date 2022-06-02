@@ -28,6 +28,24 @@ class Sub_Category(models.Model):
     def __str__(self):
         return self.name
 
+
+
+# model for author
+class Author(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=255,allow_unicode=True,unique=True)
+
+    def __str__(self):
+        return self.name
+
+# model for publisher
+class Publisher(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=255,allow_unicode=True,unique=True) 
+
+    def __str__(self):
+        return self.name
+
 class Books(models.Model):
 
     def book_cover_photo(instance,filename):
@@ -40,10 +58,16 @@ class Books(models.Model):
             
         return os.path.join('books/',filename)
 
-    
     title = models.CharField(max_length=250,blank=True,null=True)
-    author = models.CharField(max_length=100,blank=True,null=True)
-    publisher = models.CharField(max_length=50,blank=True,null=True)
+
+    # changed author and publisher to foreignkey
+    author = models.ForeignKey(
+        Author, on_delete=models.PROTECT, null=True, related_name="books", blank=True)
+    publisher = models.ForeignKey(
+        Publisher, on_delete=models.PROTECT, null=True, related_name="books", blank=True)
+
+
+
     mrp_price = models.CharField(max_length=20,blank=True,null=True)
 
     cover_photo = models.ImageField(null=True, blank=True,upload_to=book_cover_photo)

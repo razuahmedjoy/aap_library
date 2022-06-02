@@ -128,8 +128,25 @@ def single_book(request, id, book_slug):
     return HttpResponse("something wrong")
 
 
-def all_books(request):
-    return HttpResponse("in development")
+def all_books(request, pk):
+    category = Sub_Category.objects.get(slug=pk)
+    return render(
+        request,
+        "bookstore/allbook.html",
+        {
+            "cat": category,
+        },
+    )
+
+def author_books(request, pk):
+    author = Author.objects.get(slug=pk)
+    return render(request, "bookstore/authorandpub.html", {"books": author.books.all})
+
+
+def publisher_books(request, pk):
+    pub = Publisher.objects.get(slug=pk)
+
+    return render(request, "bookstore/authorandpub.html", {"books": pub.books.all})
 
 
 @login_required(login_url="login")

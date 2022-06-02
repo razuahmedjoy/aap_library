@@ -1,0 +1,77 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+    .book-img {
+        height: 25rem;
+    }
+
+    body {
+        background-color: #f0f4fa !important;
+    }
+
+    #book {
+        margin-bottom: 1em;
+    }
+
+    .row {
+        background-color: white;
+        border: 1px solid grey;
+        border-radius: 1%;
+        margin: 1em;
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row row-cols-2 row-cols-md-4 g-4  ">
+   
+        {% for book in cat.books_set.all %}
+        <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" id="book">
+            <div class="card mx-auto book-details" style="width: 18rem;">
+                <img src="{% static 'image/loading.gif'%}" data-src={{book.cover_photo.url}} alt="{{book.title}}"
+                    class="card-img-top lazyload book-img">
+            </div>
+            <div class="card mx-auto book-footer" style="width: 18rem;">
+                <div class="book-body">
+                    <div class="book-title"><strong>{{book.title}}</strong></div>
+                    <h4 class="book-price" style="text-decoration: none; text-align: center;">Tk. {{book.price}}</h4>
+                </div>
+            </div>
+        </a>
+        {%endfor %}
+
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block js %}
+
+
+
+{% endblock js %}
