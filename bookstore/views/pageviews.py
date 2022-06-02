@@ -594,7 +594,7 @@ def exchange(request):
             user=user,
             full_name=full_name,
             mobile_no=mobile_no,
-            book_amount=book_amount,
+            number_of_books=book_amount,
             sending_date=sending_date,
             comment=comment,
         )
