@@ -1,8 +1,6 @@
 {% extends "bookstore/base.html" %}
 {%load static%}
 
-
-
 {% if title %}
 {%block title%}
 {{title}}
@@ -39,8 +37,8 @@
 <div class="container">
     <br>
     <div class="row row-cols-2 row-cols-md-4 g-4  ">
-        {% for sub_cat in cat.sub_category_set.all %}
-        {% for book in sub_cat.books_set.all %}
+   
+        {% for book in cat.books_set.all %}
         <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" id="book">
             <div class="card mx-auto book-details" style="width: 18rem;">
                 <img src="{% static 'image/loading.gif'%}" data-src={{book.cover_photo.url}} alt="{{book.title}}"
@@ -54,24 +52,8 @@
             </div>
         </a>
         {%endfor %}
-        {%endfor%}
 
     </div>
 </div>
 
-
-
-
-
-
 {% endblock %}
-
-
-
-
-
-{% block js %}
-
-
-
-{% endblock js %}

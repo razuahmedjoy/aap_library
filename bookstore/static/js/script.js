@@ -47,7 +47,7 @@ window.onscroll = () => {
 // }
 
 var swiper = new Swiper(".books-slider", {
-  // loop:true,
+  loop:true,
   // centeredSlides: true,
   navigation: {
     nextEl: ".swiper-button-next",
@@ -67,7 +67,7 @@ var swiper = new Swiper(".books-slider", {
   },
 });
 var swiper = new Swiper(".slider-large", {
-  // loop:true,
+  loop:true,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",

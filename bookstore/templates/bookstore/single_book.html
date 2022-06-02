@@ -140,14 +140,14 @@ AAPLibrary - {{book.title}}
             <div class="book-data mt-3 mb-4">
                 <p class="author"> <span class="fw-bold">Author:</span>
                     {% if book.author %}
-                    <a href="{% url 'author_books' book.author.id %}"> {{book.author}}</a>
+                    <a href="{% url 'author_books' book.author.slug %}"> {{book.author}}</a>
                     {% else %}
                     {{book.author}}     
                     {% endif %}
                 </p>
                 <p class="publisher"><span class="fw-bold">Publisher:</span>
                     {% if book.publisher %}
-                    <a href="{% url 'author_books' book.author.id %}"> {{book.publisher}}</a>
+                    <a href="{% url 'publisher_books' book.publisher.slug %}"> {{book.publisher}}</a>
                     {% else %}
                     {{book.publisher}}
                     {% endif %}

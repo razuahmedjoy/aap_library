@@ -138,8 +138,28 @@
     .exchange-row {
         justify-content: flex-end;
         margin-top: 1em;
+    }
+
+
+    .CourierModal iframe {
+        width: 100%;
 
     }
+
+    .track:hover {
+        cursor: pointer;
+    
+
+    }
+
+    #track-info {
+        background-color: #0dcaf0;
+        padding: 0.5em;
+        font-weight: bold;
+        font-size: small;
+    }
+
+ 
 </style>
 
 {%endblock style%}
@@ -159,6 +179,27 @@
                 {% endfor %}
                 {% endif %}
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade CourierModal" id="staticBackdrop"  data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Courier Tracking</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                                <iframe height="600" src="https://pcm.scsapps.xyz/?fbclid=IwAR1HJUePTWxGKf8jSdcpwRnJ8GAd0-nOHtIqclyp2s28WILsG1MwvidnQTo" frameborder="0"></iframe>
+                               <p id="track-info">
+                                CN Number এর উপর ক্লিক করে Receiver Contact দিবে, এরপর তোমার মোবাইল নাম্বার লিখে সার্চ দিলে Order Status দেখতে পারবে।
+                               </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
 
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
@@ -217,7 +258,8 @@
                                                                     {{book}} x {{book.quantity}}<br>
                                                                     {%endfor %}
                                                                 </td>
-                                                                <td>{{order.status}}</td>
+                                                                <td>{{order.status}} <span data-bs-toggle="modal"
+                                                                    data-bs-target=".CourierModal" class="badge bg-dark text-light track">Track Here</span></td>
                                                             </tr>
                                                             {% endfor %}
                                                         </tbody>
@@ -259,9 +301,10 @@
                                                             <tr class="cell-1">
                                                                 <td>{{exh.full_name}}</td>
                                                                 <td>{{exh.mobile_no}}</td>
-                                                                <td>{{exh.number_of_books}}</td>                       
+                                                                <td>{{exh.number_of_books}}</td>
                                                                 <td>{{exh.sending_date}}</td>
                                                                 <td>{{exh.status}}</td>
+                                                    
                                                             </tr>
                                                             {% endfor %}
                                                         </tbody>
