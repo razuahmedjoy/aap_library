@@ -129,8 +129,8 @@ def single_book(request, id, book_slug):
     return HttpResponse("something wrong")
 
 
-def all_books(request, id):
-    category = Main_Category.objects.get(id=id)
+def all_books(request, pk):
+    category = Sub_Category.objects.get(slug=pk)
     return render(
         request,
         "bookstore/allbook.html",
@@ -139,15 +139,13 @@ def all_books(request, id):
         },
     )
 
-
-def author_books(request, id):
-    author = Author.objects.get(id=id)
-
+def author_books(request, pk):
+    author = Author.objects.get(slug=pk)
     return render(request, "bookstore/authorandpub.html", {"books": author.books.all})
 
 
 def publisher_books(request, pk):
-    pub = Publisher.objects.get(id=id)
+    pub = Publisher.objects.get(slug=pk)
 
     return render(request, "bookstore/authorandpub.html", {"books": pub.books.all})
 
@@ -597,7 +595,7 @@ def exchange(request):
             user=user,
             full_name=full_name,
             mobile_no=mobile_no,
-            book_amount=book_amount,
+            number_of_books=book_amount,
             sending_date=sending_date,
             comment=comment,
         )

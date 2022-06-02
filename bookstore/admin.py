@@ -150,3 +150,17 @@ admin.site.register(Publisher)
 
 
 admin.site.register(SavedAddress)
+
+
+
+# author and publisher admin 
+
+class AuhtorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+class PublisherAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+
+admin.site.register(Author, AuhtorAdmin)
+admin.site.register(Publisher, PublisherAdmin)
