@@ -142,12 +142,6 @@ admin.site.register(QnA,QnAAdmin)
 
 admin.site.register(Exchange)
 
-admin.site.register(Author)
-admin.site.register(Publisher)
-
-
-
-
 
 admin.site.register(SavedAddress)
 

@@ -4,11 +4,14 @@ db.sqlite3
 /static
 /aapbookstore/settigs.py
 /aapbookstore/settings_dev.py
+bookstore\views\__pycache__
+aapbookstore\__pycache__
+bookstore\templatetags\__pycache__
 /venv
 /aapbookstore/settigs.py
 /bookstore/migrations
 /bookstore/__pycache__
-
+aapbookstore\__pycache__
 # added in main branch by rupa
 # Added some lines by rupa in git ignore
 
