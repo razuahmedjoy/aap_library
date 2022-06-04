@@ -58,8 +58,8 @@ def book_store_home(request):
 
 def get_all_books(request):
     if request.is_ajax():
-        cat_slug = request.POST.get("category")
-        single_category = Main_Category.objects.get(slug=cat_slug)
+        cat_id = request.POST.get("cat_id")
+        single_category = Main_Category.objects.get(id=cat_id)
         if single_category:
             context = {
                 "single_category": single_category,
