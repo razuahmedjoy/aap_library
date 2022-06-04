@@ -58,8 +58,8 @@ def book_store_home(request):
 
 def get_all_books(request):
     if request.is_ajax():
-        cat_id = request.POST.get("cat_id")
-        single_category = Main_Category.objects.get(id=cat_id)
+        cat_slug = request.POST.get("category")
+        single_category = Main_Category.objects.get(slug=cat_slug)
         if single_category:
             context = {
                 "single_category": single_category,
@@ -141,13 +141,20 @@ def all_books(request, pk):
 
 def author_books(request, pk):
     author = Author.objects.get(slug=pk)
-    return render(request, "bookstore/authorandpub.html", {"books": author.books.all})
+    return render(request, "bookstore/authorandpub.html", {
+        "books": author.books.all,
+        "name" : author.name 
+        })
 
 
 def publisher_books(request, pk):
     pub = Publisher.objects.get(slug=pk)
 
-    return render(request, "bookstore/authorandpub.html", {"books": pub.books.all})
+    return render(request, "bookstore/authorandpub.html", {
+        "books": pub.books.all,
+        "name" : pub.name
+        
+        })
 
 
 @login_required(login_url="login")
