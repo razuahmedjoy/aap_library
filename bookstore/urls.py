@@ -27,6 +27,9 @@ urlpatterns = [
     path('logout/', LogoutView, name="logout" ),
     path('search_books/', search_books, name="search_books" ),
     path('passwordreset/', passwordresetView, name="passwordreset" ),
+    path('resetpass/', resetpassView, name="resetpass"),
+
+    
 
 
      # user profile
