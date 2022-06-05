@@ -49,7 +49,11 @@
     </form>
     {%else%}
     <form class="send-otp-form" method="get">
+        {% if reset %}
+        <h3>Reset Password</h3>
+        {% else %}
         <h3>Create Account</h3>
+        {% endif %}
 
         {% if error %}
         <p class="text-danger">{{error}}</p>
@@ -60,9 +64,11 @@
 
         <input type="submit" value="Next" class="btn">
 
+        {% if not reset %}
         <p>
             <small>Already Have an account? <a href="{% url 'login' %}">Login Now</a> </small>
         </p>
+        {% endif %}
 
     </form>
     {%endif%}

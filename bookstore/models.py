@@ -38,6 +38,9 @@ class Sub_Category(models.Model):
 class Author(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=255, allow_unicode=True, unique=True)
+    details = models.TextField(null=True, blank=True)
+    photo = models.ImageField(null=True, blank=True, upload_to='authors')
+
 
     def __str__(self):
         return self.name
@@ -47,6 +50,8 @@ class Author(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=255, allow_unicode=True, unique=True)
+    details = models.TextField(null=True, blank=True)
+    photo = models.ImageField(null=True, blank=True, upload_to='publishers')
 
     def __str__(self):
         return self.name

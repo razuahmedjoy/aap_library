@@ -111,9 +111,63 @@ def createaccount(request):
 
 
 def passwordresetView(request):
-    return HttpResponse("will done later")
+    error = ""
+    context = {
+        "title": "",
+        "error": error,
+        "reset" : True,
+    }
+
+    if request.method == 'POST':
+        serverotp = request.POST.get("serverotp")
+        userotp = request.POST.get("userotp")
+        contact_no = request.POST.get("contact_no")
+        if serverotp == userotp:
+
+            context["contact_no"] = contact_no
+            return render(request, "bookstore/createaccount.html", context)
+
+        else:
+            context["error"] = "Invalid OTP, Please enter correct OTP"
+            context["otp_sent"] = True
+            context["serverotp"] = serverotp
+            context["contact_no"] = contact_no
+
+    if request.method == 'GET':
+        if "contact_no" in request.GET:
+            contact_no = request.GET.get("contact_no")
+            
+            if len(contact_no) == 11:
+                try:
+                    User.objects.get(username=contact_no)     
+                    contact_no_for_sms = "88"+str(contact_no)
+                    otp = random.randint(100000, 999999)
+                    message = f"Your Academic Admission Library OTP is {otp}"
+
+                    sms_response = send_sms(contact_no_for_sms, message)
+
+                    if sms_response == '1101':
+                        context['serverotp'] = otp
+                        context['contact_no'] = contact_no
+                        context['otp_sent'] = True
+
+                    else:
+                        context['error'] = "Something error in sms provider"
+                except:
+                    context['error'] = "No Account is Registered with this number"
 
 
+
+            else:
+                context['error'] = "Contact No. Should be 11 Digits (01234567899)"
+
+
+
+    return render(request, 'bookstore/register.html', context)
+
+
+
+ 
 def login_view(request):
 
     if request.user.is_authenticated:
@@ -141,3 +195,45 @@ def login_view(request):
 def LogoutView(request):
     logout(request)
     return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+def resetpassView(request):
+    context = {}
+    if request.method == 'POST':
+        contact_no = request.POST.get('contactno')
+        password = request.POST.get('password')
+
+        user = User.objects.get(username=contact_no)
+
+        user.set_password(password)
+        user.save()
+
+        context['success'] = "Your Password Has Been Succesfully Reset, Login With Your New Password"
+        context['title'] = "Login"
+
+        return render(request, 'bookstore/login.html', context)
+
+        
+    else:
+        return HttpResponseRedirect('/')
+
+
+
+
+
+
+
+
+
+
