@@ -17,6 +17,8 @@ urlpatterns = [
     # author and pub urls
     path('author/<str:pk>/', author_books, name="author_books" ),
     path('publisher/<str:pk>/', publisher_books, name="publisher_books" ),
+    path('all-authors/', author_list, name="author_list" ),
+    path('all-publishers/', publisher_list, name="publihser_list" ),
 
 
 
@@ -27,6 +29,9 @@ urlpatterns = [
     path('logout/', LogoutView, name="logout" ),
     path('search_books/', search_books, name="search_books" ),
     path('passwordreset/', passwordresetView, name="passwordreset" ),
+    path('resetpass/', resetpassView, name="resetpass"),
+
+    
 
 
      # user profile

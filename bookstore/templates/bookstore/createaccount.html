@@ -30,8 +30,13 @@
 
 <div class="form-container">
 
-    <form class="createaccount" method="post" action="{% url 'createaccount' %}">
+    <form class="createaccount" method="post" {% if reset %}action="{% url 'resetpass' %}"{% else %}action="{% url 'createaccount' %}"{% endif %}>
+        {% if reset %}
+        <h3>Reset Your Password</h3> 
+
+        {% else %}
         <h3>Create Account</h3> 
+        {% endif %}
 
         
         {% if error %}
@@ -42,13 +47,23 @@
         
         <input id="contactno" type="number" name="contactno" value="{{contact_no}}" class="box" readonly>
 
+        {% if not reset %}
+
         <span>Enter your name</span>
         <input id="username" type="text" name="username" class="box" required>
+
+        {% endif %}
       
         <span>Enter any 6 Digits Password</span>
         <input id="password" type="password" name="password" class="box" required>
 
+        {% if reset %}
+        <input type="submit" value="Reset Password" class="btn form-submit">
+        {% else %}
+
         <input type="submit" value="Create Account" class="btn form-submit">
+
+        {% endif %}
 
     </form>
   

@@ -141,13 +141,21 @@ def all_books(request, pk):
 
 def author_books(request, pk):
     author = Author.objects.get(slug=pk)
-    return render(request, "bookstore/authorandpub.html", {"books": author.books.all})
+    return render(request, "bookstore/authorandpub.html", {
+        "books": author.books.all,
+        "ap" : author, 
+        "author" : True,
+        })
 
 
 def publisher_books(request, pk):
     pub = Publisher.objects.get(slug=pk)
 
-    return render(request, "bookstore/authorandpub.html", {"books": pub.books.all})
+    return render(request, "bookstore/authorandpub.html", {
+        "books": pub.books.all,
+        "ap" : pub,
+        
+        })
 
 
 @login_required(login_url="login")
@@ -619,3 +627,21 @@ def exchange(request):
             "web_settings": web_settings,
         },
     )
+
+
+
+def author_list(request):
+    all = Author.objects.all()
+    return render(request, "bookstore/anplist.html", {
+        "anps": all,
+        "author": True,
+
+    })
+
+
+def publisher_list(request):
+    all = Publisher.objects.all()
+    return render(request, "bookstore/anplist.html", {
+        "anps": all,
+
+    })

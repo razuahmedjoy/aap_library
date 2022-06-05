@@ -1,0 +1,100 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+
+    body {
+        background-color: #f0f4fa !important;
+    }
+
+
+
+    .row {
+        background-color: white;
+        border: 1px solid grey;
+        border-radius: 5px;
+        margin: 1em;
+    }
+
+    .anp {
+        padding: 2em;
+        background-color: #01003d;
+        color: white;
+    }
+
+    .anp p {
+        font-size: small;
+    }
+
+    .anp img {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    @media screen and (max-width: 800px) {
+        .anp {
+            flex-direction: column;
+        }
+
+        .anp img {
+            width: 8rem;
+            height: 8rem;
+            margin-bottom: 2em;
+        }
+    }
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div style="font-size: large">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'book_store_home' %}">HOME</a></li>
+                {% if author %}
+                <li class="breadcrumb-item active" aria-current="page">All Authors</li>
+                {% else %}
+                <li class="breadcrumb-item active" aria-current="page">All Publishers</li>
+                {% endif %}
+            </ol>
+        </nav>
+        <button onclick="history.back()" class="btn btn-outline-secondary bg-dark btn-sm text-light">Previous Page</button>
+    </div>
+
+    <!-- breadcrumbs -->
+
+    {% for ap in anps %}
+    <a  {% if author %} href="{% url 'author_books' ap.slug %}" {% else %} href="{% url 'publisher_books' ap.slug %}" {% endif %} >
+        <div class="row anp">
+            <div class="col-2">
+                <img src="{% static 'image/loading.gif'%}" data-src={{ap.photo.url}} alt="{{book.title}}"
+                    class="lazyload rounded-circle">
+            </div>
+            <div class="col-10">
+                <h4>{{ap.name}}</h4>
+                <hr>
+                <p>{{ap.details}}</p>
+            </div>
+        </div>
+
+    </a>
+    
+    {% endfor %}
+
+    
+
+{% endblock %}
+
