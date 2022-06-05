@@ -30,6 +30,33 @@
         border-radius: 5px;
         margin: 1em;
     }
+
+    .anp {
+        padding: 2em;
+        background-color: #01003d;
+        color: white;
+    }
+
+    .anp p {
+        font-size: small;
+    }
+
+    .anp img {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    @media screen and (max-width: 800px) {
+        .anp {
+            flex-direction: column;
+        }
+
+        .anp img {
+            width: 8rem;
+            height: 8rem;
+            margin-bottom: 2em;
+        }
+    }
 </style>
 {%endblock style%}
 
@@ -41,28 +68,50 @@
     <div style="font-size: large">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'book_store_home' %}">HOME</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{name}}</li>
+                <li class="breadcrumb-item"><a href="{% url 'book_store_home' %}">HOME</a></li>
+                {% if author %}
+                <li class="breadcrumb-item"><a href="{% url 'author_list' %}">Authors</a></li>
+                {% else %}
+                <li class="breadcrumb-item"><a href="{% url 'publihser_list' %}">Publishers</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page">{{ap.name}}</li>
             </ol>
-          </nav>
+        </nav>
     </div>
-    <div class="row row-cols-2 row-cols-md-4 g-4  ">
-     
-        {% for book in books %}
-        <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" id="book">
-            <div class="card mx-auto book-details" style="width: 18rem;">
-                <img src="{% static 'image/loading.gif'%}" data-src={{book.cover_photo.url}} alt="{{book.title}}"
-                    class="card-img-top lazyload book-img">
-            </div>
-            <div class="card mx-auto book-footer" style="width: 18rem;">
-                <div class="book-body">
-                    <div class="book-title"><strong>{{book.title}}</strong></div>
-                    <h4 class="book-price" style="text-decoration: none; text-align: center;">Tk. {{book.price}}</h4>
-                </div>
-            </div>
-        </a>
-        {%endfor %}
 
+    <div class="row anp">
+        <div class="col-2">
+            <img src="{% static 'image/loading.gif'%}" data-src={{ap.photo.url}} alt="{{book.title}}"
+                class="lazyload rounded-circle">
+        </div>
+        <div class="col-10">
+            <h4>{{ap.name}}</h4>
+            <hr>
+            <p>{{ap.details}}</p>
+        </div>
+    </div>
+
+    
+
+    <div>
+        <h1 style="text-align: center ;" class="display-6">Showing All Books of - {{ap.name}}</h1>
+        <div class="row row-cols-2 row-cols-md-4 g-4  ">
+            {% for book in books %}
+            <a href="{% url 'single_book' id=book.id book_slug=book.slug %}" id="book">
+                <div class="card mx-auto book-details" style="width: 18rem;">
+                    <img src="{% static 'image/loading.gif'%}" data-src={{book.cover_photo.url}} alt="{{book.title}}"
+                        class="card-img-top lazyload book-img">
+                </div>
+                <div class="card mx-auto book-footer" style="width: 18rem;">
+                    <div class="book-body">
+                        <div class="book-title"><strong>{{book.title}}</strong></div>
+                        <h4 class="book-price" style="text-decoration: none; text-align: center;">Tk. {{book.price}}</h4>
+                    </div>
+                </div>
+            </a>
+            {%endfor %}
+    
+        </div>
     </div>
 </div>
 
