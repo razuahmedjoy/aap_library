@@ -89,6 +89,7 @@ class Books(models.Model):
     pdf = models.FileField(null=True, blank=True, upload_to="books/pdf/")
     created_at = models.DateTimeField(auto_now_add=True)
     exchangeable = models.BooleanField(default=False)
+    serial_number = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.title

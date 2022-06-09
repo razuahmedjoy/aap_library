@@ -24,10 +24,10 @@ class PreviewImagesTabularAdmin(admin.TabularInline):
 class BooksAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
-    list_display = ('__str__', 'main_category','get_category','price','in_stock',)
+    list_display = ('__str__', 'main_category','get_category','price','in_stock','serial_number')
     list_filter = ('category','category__parent_category')
 
-    list_editable = ('price','in_stock',)
+    list_editable = ('price','in_stock','serial_number')
 
     inlines = [PreviewImagesTabularAdmin]
 
