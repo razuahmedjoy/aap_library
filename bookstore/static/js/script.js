@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
               }
-              else{
+              else {
                 innterList = `<li class="text-danger">
                 No Books Found
             </li>`
@@ -337,4 +337,15 @@ $("#search-box").keyup((e) => {
     getBooks();
   }
 
+})
+
+
+
+document.getElementById("searchBtn").addEventListener("click", (e) => {
+  if(e.path[1].searchTxt.value.length > 1){
+
+    e.path[1].submit();
+  }else{
+    alert("Please enter something to search")
+  }
 })

@@ -34,9 +34,13 @@
 
 
         <div class="searchbox">
-            <form autocomplete="off" class="search">
-                <input type="" id="srch" placeholder="বাংলায় সার্চ করুন" autocomplete="off">
-                <label for="srch" class="fas fa-search"></label>
+            <form autocomplete="off" class="search" action="/all-books/search">
+                <input required type="" id="srch" name="searchTxt" placeholder="বাংলায় সার্চ করুন" autocomplete="off">
+                    
+                    <label id="searchBtn" for="srch" class="fas fa-search">
+                      
+                    </label>
+      
 
                 <div id="searchResult" class="results">
               

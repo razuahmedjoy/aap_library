@@ -76,14 +76,15 @@ def get_all_books(request):
 def search_books(request):
     if request.is_ajax():
         txt = request.POST.get("txt")
-   
+
         try:
             books = Books.objects.filter(
-                Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(author__name__icontains=txt)
+                Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(
+                    author__name__icontains=txt)
             )
-            
+
             books = serializers.serialize("json", books)
-    
+
             return JsonResponse({"status": "success", "books": books})
 
         except:
@@ -131,6 +132,22 @@ def single_book(request, id, book_slug):
 
 
 def all_books(request, pk):
+    if pk == "search":
+        txt = request.GET.get("searchTxt")
+        books = Books.objects.filter(
+            Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(
+                author__name__icontains=txt)
+        )
+
+        return render(
+            request,
+            "bookstore/searchresult.html",
+            {
+                "books": books,
+                "searchTxt" : txt,
+            },
+        )
+
     category = Sub_Category.objects.get(slug=pk)
     return render(
         request,
@@ -140,13 +157,14 @@ def all_books(request, pk):
         },
     )
 
+
 def author_books(request, pk):
     author = Author.objects.get(slug=pk)
     return render(request, "bookstore/authorandpub.html", {
         "books": author.books.all,
-        "ap" : author, 
-        "author" : True,
-        })
+        "ap": author,
+        "author": True,
+    })
 
 
 def publisher_books(request, pk):
@@ -154,9 +172,9 @@ def publisher_books(request, pk):
 
     return render(request, "bookstore/authorandpub.html", {
         "books": pub.books.all,
-        "ap" : pub,
-        
-        })
+        "ap": pub,
+
+    })
 
 
 @login_required(login_url="login")
@@ -212,7 +230,8 @@ def buy_now(request):
     except:
         book = None
     if book is not None:
-        exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
+        exh_cart = Cart.objects.filter(
+            book__in=Books.objects.filter(exchangeable=True))
         all_cart = Cart.objects.filter(user=request.user.customers)
         try:
             cart = Cart.objects.get(user=request.user.customers, book=book)
@@ -222,7 +241,8 @@ def buy_now(request):
 
             if book.exchangeable and len(all_cart) < 1:
                 if request.user.customers.store_credit >= 1:
-                    cart = Cart(user=request.user.customers, book=book, quantity=1)
+                    cart = Cart(user=request.user.customers,
+                                book=book, quantity=1)
                     cart.save()
                 else:
                     messages.add_message(
@@ -273,7 +293,8 @@ def add_to_cart(request):
                 all_cart = Cart.objects.filter(user=request.user.customers)
 
                 try:
-                    cart = Cart.objects.get(user=request.user.customers, book=book)
+                    cart = Cart.objects.get(
+                        user=request.user.customers, book=book)
                     user_cart = Cart.objects.filter(
                         user__contact_no=request.user.username
                     )
@@ -306,7 +327,8 @@ def add_to_cart(request):
                             )
 
                     elif not book.exchangeable and len(exh_cart) < 1:
-                        cart = Cart(user=request.user.customers, book=book, quantity=1)
+                        cart = Cart(user=request.user.customers,
+                                    book=book, quantity=1)
                         cart.save()
                         user_cart = Cart.objects.filter(
                             user__contact_no=request.user.username
@@ -347,7 +369,8 @@ def update_cart_item(request):
                 cart.delete()
                 usercart = Cart.objects.filter(user=request.user.customers)
                 context = {"usercart": usercart}
-                usercartList = render_to_string("bookstore/renderedcart.html", context)
+                usercartList = render_to_string(
+                    "bookstore/renderedcart.html", context)
 
                 return JsonResponse({"status": "success", "usercart": usercartList})
 
@@ -383,7 +406,8 @@ def checkout(request):
     paymentForm = PaymentForm(instance=current_user)
 
     usercart = Cart.objects.filter(user=request.user.customers)
-    exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
+    exh_cart = Cart.objects.filter(
+        book__in=Books.objects.filter(exchangeable=True))
 
     try:
         web_settings = WebSettings.objects.last()
@@ -476,7 +500,8 @@ def checkout(request):
         cstmr = request.user.customers
         store_credit = cstmr.store_credit
 
-        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id": 0})
+        exh_form = PaymentForm(
+            initial={"sender_number": 0, "transaction_id": 0})
         context = {
             "usercart": usercart,
             "addressForm": addressForm,
@@ -527,7 +552,8 @@ def default_address(request):
 
     if request.method == "GET":
         try:
-            user_address = SavedAddress.objects.get(user=current_user.customers)
+            user_address = SavedAddress.objects.get(
+                user=current_user.customers)
             return render(
                 request,
                 "bookstore/addressbook.html",
@@ -619,11 +645,9 @@ def exchange(request):
 
             except ValidationError:
                 pass
-    
+
         else:
             return redirect('login')
-
-        
 
     exchange_form = ExchangeForm()
     return render(
@@ -634,7 +658,6 @@ def exchange(request):
             "web_settings": web_settings,
         },
     )
-
 
 
 def author_list(request):
