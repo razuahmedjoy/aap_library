@@ -589,34 +589,40 @@ def default_address(request):
             )
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def exchange(request):
     web_settings = WebSettings.objects.last()
     if request.method == "POST":
-        user = Customers.objects.get(user=request.user)
-        full_name = request.POST.get("full_name")
-        mobile_no = request.POST.get("mobile_no")
-        book_amount = request.POST.get("number_of_books")
-        sending_date = request.POST.get("sending_date")
-        comment = request.POST.get("comment")
-        exchange_request = Exchange(
-            user=user,
-            full_name=full_name,
-            mobile_no=mobile_no,
-            number_of_books=book_amount,
-            sending_date=sending_date,
-            comment=comment,
-        )
-        try:
-            exchange_request.full_clean()
-            exchange_request.save()
-            messages.add_message(
-                request, messages.SUCCESS, "You Exchange Request is Received"
+        if request.user.is_authenticated:
+            user = Customers.objects.get(user=request.user)
+            full_name = request.POST.get("full_name")
+            mobile_no = request.POST.get("mobile_no")
+            book_amount = request.POST.get("number_of_books")
+            sending_date = request.POST.get("sending_date")
+            comment = request.POST.get("comment")
+            exchange_request = Exchange(
+                user=user,
+                full_name=full_name,
+                mobile_no=mobile_no,
+                number_of_books=book_amount,
+                sending_date=sending_date,
+                comment=comment,
             )
-            return redirect("profile")
+            try:
+                exchange_request.full_clean()
+                exchange_request.save()
+                messages.add_message(
+                    request, messages.SUCCESS, "You Exchange Request is Received"
+                )
+                return redirect("profile")
 
-        except ValidationError:
-            pass
+            except ValidationError:
+                pass
+    
+        else:
+            return redirect('login')
+
+        
 
     exchange_form = ExchangeForm()
     return render(
