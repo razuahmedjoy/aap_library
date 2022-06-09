@@ -15,7 +15,7 @@
         </a>
 
 
-        <div>
+        <!-- <div>
 
             <form class="search-form" action="" style="z-index: 100;">
                 
@@ -28,10 +28,29 @@
                     
                     
                 </div>
-                
-                
-                
+        </div> -->
+
+        
+
+
+        <div class="searchbox">
+            <form action="" class="search">
+                <input type="" id="srch" placeholder="Search here">
+                <label for="srch" class="fas fa-search"></label>
+
+                <div class="results">
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Neque temporibus similique id numquam?</li>
+                    <li>Est voluptatum quis ab quod.</li>
+                    <li>Praesentium quo dignissimos fuga repellat?</li>
+                    <li>Ut repellat laboriosam deleniti voluptatum.</li>
+                    
+                </div>
+ 
             </form>
+ 
+
+           
             
         </div>
 
@@ -85,13 +104,26 @@
 
     <div class="header-2">
 
-        <nav class="navbar">
+        <nav class="navbar" style="position: relative;">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle text-left" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Home
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="{% url 'author_list' %}">Authors</a></li>
+                  <li><a class="dropdown-item" href="{% url 'publihser_list' %}">Publishers</a></li>
+                  <li><a class="dropdown-item" href="{% url 'exchange' %}">Exchange</a></li>
+                </ul>
+              </div>
+        
             {% if categories %}
             {% for category in categories %}
             <a class="{% if single_category %}{% if single_category.id == category.id %}active-menu{%endif %}{%endif %}"
                 onClick="openLoader()" href="/?cat_id={{category.id}}">{{category.name}}</a>
             {%endfor%}
             {% endif %}
+
+          
         </nav>
     </div>
 

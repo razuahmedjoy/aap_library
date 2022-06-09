@@ -30,10 +30,31 @@
         padding: 2em;
         background-color: #01003d;
         color: white;
+        flex-direction: row !important;
     }
 
-    .anp p {
-        font-size: small;
+    .vall {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        height: 100%;
+    }
+
+    .vall button {
+        font-size: large;
+        border: 1px solid white;
+        text-align: center;
+        background: white;
+        color: black;
+        border-radius: 5px;
+        width: 50%;
+        height: 5rem;
+        margin-bottom: 2em;
+    }
+
+    .anp h4 {
+        font-size: large;
     }
 
     .anp img {
@@ -86,7 +107,10 @@
             <div class="col-10">
                 <h4>{{ap.name}}</h4>
                 <hr>
-                <p>{{ap.details}}</p>
+                <div class="vall">
+                    <button>View All</button>
+                </div>
+                
             </div>
         </div>
 
