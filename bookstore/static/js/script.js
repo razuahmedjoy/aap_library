@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <a href="/book/${book.pk}/${fields.slug}">
                       <span name="title">
                          ${fields.title}
-                         <span class="text-sm">Author: ${fields.author.name}</span>
+                        
                       </span>
                       <span class="price">bdt ${fields.price}</span>
                       </a>
