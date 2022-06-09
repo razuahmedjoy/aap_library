@@ -76,17 +76,18 @@ def get_all_books(request):
 def search_books(request):
     if request.is_ajax():
         txt = request.POST.get("txt")
-        print(txt)
+   
         try:
             books = Books.objects.filter(
-                Q(title__icontains=txt) | Q(publisher__icontains=txt)
+                Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(author__name__icontains=txt)
             )
-
+            
             books = serializers.serialize("json", books)
-
+    
             return JsonResponse({"status": "success", "books": books})
 
         except:
+            print("here")
             pass
     return JsonResponse({"status": "failed"})
 

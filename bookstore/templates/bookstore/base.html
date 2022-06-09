@@ -80,8 +80,16 @@
             z-index: 2;
         }
 
-        .results.active li {
+        .results.active li{
             display: block;
+        
+
+        }
+        .results li a{
+            display: flex;
+            justify-content: space-between;
+            color: black;
+            
 
         }
 
@@ -90,9 +98,14 @@
             list-style: none;
             width: 100%;
             border-radius: 3px;
-            padding: 0.5em;
+            padding: 1.5rem 0.5em;
             display: none;
             font-size: small;
+            cursor: pointer;
+            font-size: 16px;
+
+            border-bottom: .5px solid var(--green);
+
 
         }
 
@@ -222,26 +235,7 @@
             loader.classList.toggle('d-none');
         }
 
-        // searchbox js
-
-        const search = document.getElementById('srch');
-        const results = document.querySelector('.results');
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-
-            search.onkeyup = () => {
-                if (search.value.length > 0) {
-                    results.classList.add('active')
-                } else {
-                    results.classList.remove('active')
-                }
-
-
-            }
-
-
-        })
+     
 
 
     </script>

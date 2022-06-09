@@ -1026,6 +1026,14 @@ a.fas.fa-shopping-cart {
     top: 115%;
   }
 
+
+  /* search box */
+
+.results ul li{
+  cursor: pointer;
+}
+
+
   .home .row .content {
     text-align: center;
   }

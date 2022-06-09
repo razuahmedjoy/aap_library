@@ -50,7 +50,7 @@ window.onscroll = () => {
 // }
 
 var swiper = new Swiper(".books-slider", {
-  loop:true,
+  loop: true,
   // centeredSlides: true,
   navigation: {
     nextEl: ".swiper-button-next",
@@ -70,7 +70,7 @@ var swiper = new Swiper(".books-slider", {
   },
 });
 var swiper = new Swiper(".slider-large", {
-  loop:true,
+  loop: true,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -203,6 +203,103 @@ var swiper = new Swiper(".blogs-slider", {
   },
 });
 
+
+
+// searchbox js
+
+const search = document.getElementById('srch');
+const results = document.querySelector('.results');
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+  search.onkeyup = () => {
+    if (search.value.length >= 2) {
+
+      const searchTxt = search.value;
+
+
+
+      const getBooks = async () => {
+        const url = "/search_books/"
+
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: {
+            'txt': searchTxt,
+          },
+
+          success: function (response) {
+            // console.log(response);
+
+            const { status, books } = response
+            if (status == "success") {
+              const bookList = JSON.parse(books);
+              let innterList = ''
+              if (bookList.length > 0) {
+
+                for (let book of bookList) {
+
+                  const { fields } = book;
+                  innterList += `<li>
+                      <a href="/book/${book.pk}/${fields.slug}">
+                      <span name="title">
+                         ${fields.title}
+                         <span class="text-sm">Author: ${fields.author.name}</span>
+                      </span>
+                      <span class="price">bdt ${fields.price}</span>
+                      </a>
+                  </li>`
+
+
+                }
+
+              }
+              else{
+                innterList = `<li class="text-danger">
+                No Books Found
+            </li>`
+              }
+
+              results.innerHTML = innterList;
+              results.classList.add('active')
+
+
+            }
+          },
+          failure: function (e) {
+            console.log(e)
+          }
+
+
+        })
+
+      }
+      getBooks();
+
+
+
+
+
+
+    } else {
+
+
+      results.classList.remove('active')
+    }
+
+
+  }
+
+
+})
+
+
+
+
+
+
 $("#search-box").keyup((e) => {
   const searchTxt = e.target.value;
   if (searchTxt.length >= 3) {
@@ -222,10 +319,10 @@ $("#search-box").keyup((e) => {
           const { status, books } = response
           if (status == "success") {
             const bookList = JSON.parse(books);
-            for(book of bookList) {
+            for (book of bookList) {
               console.log(book.fields);
             }
-            
+
 
           }
         },
