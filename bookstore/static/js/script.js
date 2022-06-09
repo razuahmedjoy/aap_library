@@ -1,7 +1,8 @@
-searchForm = document.querySelector('.search-form');
+searchForm = document.querySelector('.searchbox');
 
 document.querySelector('#search-btn').onclick = () => {
   searchForm.classList.toggle('active');
+
 }
 
 let loginForm = document.querySelector('.login-form-container');
@@ -25,6 +26,8 @@ window.onscroll = () => {
   }
 
 }
+
+
 
 // window.onload = () =>{
 

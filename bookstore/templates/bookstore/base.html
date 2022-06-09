@@ -26,9 +26,159 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
     <style>
-        .logo{
+        .logo {
             text-transform: uppercase;
         }
+
+
+
+        /* search result styles */
+        .search {
+            position: relative;
+            background: white;
+            border-radius: 5px;
+            
+        }
+
+        .search label {
+            position: absolute;
+            font-size: 2.5rem;
+            padding-right: 1.5rem;
+            color: var(--black);
+            cursor: pointer;
+            top: 25%;
+            transform: translateX(-100%);
+           
+        }
+
+
+        .search label:hover {
+            color: var(--green);
+
+        }
+
+        .search input {  
+            height: 5rem;
+            width: 100%;
+            outline: none;
+            border: none;
+            padding: 1em;
+            font-size: 1.5rem;
+            box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+        }
+
+        .results {
+            width: 100%;    
+            position: absolute;
+           
+        }
+
+        
+        .results.active {
+            background: white;
+            animation: fade-in 500ms forwards;
+            z-index: 2;
+        }
+
+        .results.active li {
+            display: block;
+
+        }
+
+
+        .results li {
+            list-style: none;
+            width: 100%;
+            border-radius: 3px;
+            padding: 0.5em;
+            display: none;
+            font-size: small;
+
+        }
+
+        .results li:hover {
+            background-color: rgb(207, 202, 202);
+        }
+
+        .searchbox {
+            width: 50%;
+        }
+
+
+        .searchbox.active {
+            display: block;
+            position: absolute;
+            margin-top: 15rem;
+            z-index: 2;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+
+
+
+        .header-2 .dropdown {
+          position: absolute;
+          left: 0;
+          margin-left: 10%;
+        }
+
+        .header-2 .dropdown a {
+            color: black !important;
+            border: none !important;
+        }
+
+        .dropdown button {
+            border: 1px solid white !important;
+            /* padding: 1em !important; 
+            */
+           
+        }
+
+    
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+      
+
+
+        @media (max-width: 768px) {
+            .searchbox {
+                display: none;
+            }
+
+            .dropdown button {
+                font-size: 1.2rem !important;
+                padding: 1em !important;
+            }
+
+        }
+
+        @media (max-width: 460px) {
+            .dropdown {     
+                margin-left: 1% !important;
+            }
+
+            .dropdown button {
+                font-size: 1.2rem !important;
+                padding: 1em !important;
+               
+            }
+
+        }
+
+        /* search result styles  ends*/
+
     </style>
     {% block style %}
     {% endblock style %}
@@ -39,7 +189,7 @@
 
     {% include 'bookstore/partials/header.html' %}
 
- 
+
 
 
 
@@ -50,7 +200,9 @@
     {% include 'bookstore/partials/footer.html' %}
 
     <script type="text/javascript" src="{% static  '' %}js/jquery-1.12.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     {%block externaljs%}
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script src="{% static  '' %}js/lazysizes.min.js" async=""></script>
@@ -69,6 +221,27 @@
             const loader = document.getElementById('loader');
             loader.classList.toggle('d-none');
         }
+
+        // searchbox js
+
+        const search = document.getElementById('srch');
+        const results = document.querySelector('.results');
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            search.onkeyup = () => {
+                if (search.value.length > 0) {
+                    results.classList.add('active')
+                } else {
+                    results.classList.remove('active')
+                }
+
+
+            }
+
+
+        })
 
 
     </script>
