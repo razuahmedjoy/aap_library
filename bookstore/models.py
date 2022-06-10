@@ -90,6 +90,7 @@ class Books(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     exchangeable = models.BooleanField(default=False)
     serial_number = models.IntegerField(null=True, blank=True)
+    preparation = models.CharField(max_length=260,null=True, blank=True)
 
     def __str__(self):
         return self.title
