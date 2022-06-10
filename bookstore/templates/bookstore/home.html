@@ -50,7 +50,7 @@
 
 
 
-                {% for book in sub_cat.books_set.all %}
+               {% for book in sub_cat.books_set.all|dictsort:"serial_number" %}
                 <a href="{% url 'single_book' id=book.id book_slug=book.slug %}"
                     class="swiper-slide swiper-slide-active single-book" role="group" aria-label="1 / 6" style="">
                     <div class="card mx-auto book-details" style="width: 18rem;">
@@ -59,7 +59,7 @@
                     <div class="card mx-auto book-footer" style="width: 18rem;">
                         <div class="book-body">
 
-                            <div class="book-title"><strong>{{book.title}}</strong></div>
+                            <div class="book-title"><strong>{{book.title|truncatechars:30}}</strong></div>
                             <h4 class="book-price" style="text-decoration: none;">Tk. {{book.price}}</h4>
                         </div>
 
@@ -111,7 +111,7 @@
 
 
 
-                {% for book in sub_cat.books_set.all %}
+                {% for book in sub_cat.books_set.all|dictsort:"serial_number" %}
                 <a href="{% url 'single_book' id=book.id book_slug=book.slug %}"
                     class="swiper-slide swiper-slide-active single-book" role="group" aria-label="1 / 6" style="">
                     <div class="card mx-auto book-details" style="width: 18rem;">

@@ -48,7 +48,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -80,9 +80,8 @@ section {
 
 .heading span {
   font-size: 3rem;
-  
-  color: var(--black);
 
+  color: var(--black);
 }
 
 .btn {
@@ -185,7 +184,7 @@ section {
   font-size: 1.7rem;
 }
 
-.active-menu{
+.active-menu {
   background: #2a5183;
 }
 
@@ -372,7 +371,7 @@ section {
 }
 
 .book-title {
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   color: #000;
   padding: 5px;
   display: flex;
@@ -504,8 +503,8 @@ section {
   text-decoration: line-through;
 }
 
-.swiper-button-next, .swiper-button-prev {
-  
+.swiper-button-next,
+.swiper-button-prev {
   top: 40%;
 }
 /* .swiper-button-next,
@@ -889,9 +888,7 @@ div#pills-home {
   -o-border-radius: 5px !important;
 }
 
-
-
-.header-user-navigation li a{
+.header-user-navigation li a {
   font-size: 1.8rem !important;
 }
 
@@ -916,7 +913,7 @@ div#pills-home {
   align-items: center;
   height: 80px;
   margin-bottom: 1rem;
-  border: solid .5px #979797;
+  border: solid 0.5px #979797;
   padding: 1.5rem;
   border-radius: 20px;
 }
@@ -925,33 +922,32 @@ div#pills-home {
 }
 
 .cart-quantity-btn {
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
-  border: .5px solid var(--green);
+  border: 0.5px solid var(--green);
   font-size: 1.5rem;
 }
 
-.info{
+.info {
   flex: 2;
-
 }
-.total-price{
+.total-price {
   flex: 1;
 }
 
-.quantity-counter{
+.quantity-counter {
   flex: 2;
 }
 button#removeItembtn {
   font-size: 1.2rem;
 
-  padding: 0.2rem .5rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 50%;
   background: var(--green);
   color: #ffff;
   margin-left: 10px;
 }
-.page-title{
+.page-title {
   margin: 2rem auto;
   text-transform: uppercase;
   font-size: 2rem;
@@ -1026,6 +1022,12 @@ a.fas.fa-shopping-cart {
     top: 115%;
   }
 
+  /* search box */
+
+  .results ul li {
+    cursor: pointer;
+  }
+
   .home .row .content {
     text-align: center;
   }
@@ -1048,7 +1050,14 @@ a.fas.fa-shopping-cart {
   html {
     font-size: 50%;
   }
-  header-buttons:last-child{
+  header-buttons:last-child {
     display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 25%;
   }
 }
