@@ -6,7 +6,7 @@ class AddressForm(forms.ModelForm):
 
     district = forms.ChoiceField(required=True,label="জেলা")
     area = forms.ChoiceField(required=True,label="অঞ্চল")
-    address = forms.CharField(max_length=255,required=True, label="নিকটস্থ সুন্দরবন কুরিয়ার")
+    address = forms.CharField(required=True, label="নিকটস্থ সুন্দরবন কুরিয়ার")
     contact_no = forms.IntegerField(required=True)
     
     class Meta:
