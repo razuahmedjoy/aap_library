@@ -143,11 +143,19 @@
             border: none !important;
         }
 
-        .dropdown button {
+        .dropdown button, .online-lib-btn {
             border: 1px solid white !important;
             /* padding: 1em !important; 
             */
            
+        }
+
+        .online-lib-btn {
+            position: absolute;
+            right: 0 !important;
+            margin-right: 10% !important;
+            font-size: 1.5rem !important;
+
         }
 
     
@@ -170,26 +178,46 @@
                 display: none;
             }
 
+            .header-2 .dropdown {
+                margin-left: 2% !important;
+            }
+
             .dropdown button {
                 font-size: 1.2rem !important;
                 padding: 1em !important;
+            }
+
+            .online-lib-btn {
+                font-size: 1.3rem !important;
+                padding: 1em !important;
+                margin: 0.5em !important;
+               
+                
             }
 
         }
 
         @media (max-width: 460px) {
-            .dropdown {     
-                margin-left: 1% !important;
-            }
+            
 
             .dropdown button {
                 font-size: 1.2rem !important;
-                padding: 1em !important;
+                padding: 1em !important;    
+            }
+
+            .online-lib-btn {
+                font-size: 1.2rem !important;
+                padding: 1em;
+          
                
+                
             }
 
         }
 
+   
+
+        
         /* search result styles  ends*/
 
     </style>
