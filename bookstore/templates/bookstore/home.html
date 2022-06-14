@@ -20,6 +20,13 @@
     section.home{
         padding-bottom: 0;
     }
+
+
+    .center-header {
+       text-align: center;
+       margin-bottom: 0.5em;
+        
+    }
 </style>
 {%endblock style%}
 
@@ -36,6 +43,13 @@
 
 {% for sub_cat in cat.sub_category_set.all %}
 <section class="home" id="home">
+    {% if sub_cat.parent_category.name == 'EAP' %}
+    <h1 class="center-header">Engineering Admission Preparation</h1>
+    {% elif  sub_cat.parent_category.name == 'VAP' %}
+    <h1 class="center-header">Varisty Admission Preparation</h1>
+    {% elif  sub_cat.parent_category.name == 'MAP' %}
+    <h1 class="center-header">Medical Admission Preparation</h1>
+    {% endif %}
 
     <h1 class="heading d-flex bg-white p-3 mx-3 justify-content-between"> 
         <span>{{sub_cat.name}}</span> 
@@ -50,7 +64,7 @@
 
 
 
-                {% for book in sub_cat.books_set.all %}
+               {% for book in sub_cat.books_set.all|dictsort:"serial_number" %}
                 <a href="{% url 'single_book' id=book.id book_slug=book.slug %}"
                     class="swiper-slide swiper-slide-active single-book" role="group" aria-label="1 / 6" style="">
                     <div class="card mx-auto book-details" style="width: 18rem;">
@@ -59,7 +73,7 @@
                     <div class="card mx-auto book-footer" style="width: 18rem;">
                         <div class="book-body">
 
-                            <div class="book-title"><strong>{{book.title}}</strong></div>
+                            <div class="book-title"><strong>{{book.title|truncatechars:30}}</strong></div>
                             <h4 class="book-price" style="text-decoration: none;">Tk. {{book.price}}</h4>
                         </div>
 
@@ -95,8 +109,17 @@
 
 
 
+
 {% for sub_cat in single_category.sub_category_set.all %}
 <section class="home" id="home">
+    {% if single_category.name == 'EAP' %}
+    <h1 class="center-header">Engineering Admission Preparation</h1>
+    {% elif single_category.name == 'VAP' %}
+    <h1 class="center-header">Varisty Admission Preparation</h1>
+    {% elif single_category.name == 'MAP' %}
+    <h1 class="center-header">Medical Admission Preparation</h1>
+    {% endif %}
+
 
     <h1 class="heading d-flex bg-white p-3 mx-3 justify-content-between"> 
         <span>{{sub_cat.name}}</span> 
@@ -111,7 +134,7 @@
 
 
 
-                {% for book in sub_cat.books_set.all %}
+                {% for book in sub_cat.books_set.all|dictsort:"serial_number" %}
                 <a href="{% url 'single_book' id=book.id book_slug=book.slug %}"
                     class="swiper-slide swiper-slide-active single-book" role="group" aria-label="1 / 6" style="">
                     <div class="card mx-auto book-details" style="width: 18rem;">

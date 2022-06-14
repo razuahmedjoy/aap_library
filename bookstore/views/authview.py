@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from django.contrib.auth import authenticate, login,logout
+from django.contrib import messages
 
 
 from django.contrib.auth.models import User
@@ -100,12 +101,18 @@ def createaccount(request):
                              contact_no=contact_no)
         customer.save()
 
-        context['success'] = "Your account succefully created. Login Now using the contact no and password"
-        context['title'] = "Login"
+        user = authenticate(request, username=contact_no, password=password)
+       
+        login(request, user)
+        messages.add_message(request, messages.SUCCESS, "Your account has been created successfully.")
+        return redirect("profile")
 
-        return render(request, 'bookstore/login.html', context)
+        # context['success'] = "Your account succefully created. Login Now using the contact no and password"
+        # context['title'] = "Login"
 
-        return HttpResponse({"data": request.POST})
+        # return render(request, 'bookstore/login.html', context)
+
+        # return HttpResponse({"data": request.POST})
     else:
         return HttpResponseRedirect('/')
 
