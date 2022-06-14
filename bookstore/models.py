@@ -18,6 +18,10 @@ from django.forms import CharField, ChoiceField
 class Main_Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, allow_unicode=True, unique=True)
+    position = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        ordering = ('position', )
 
     def __str__(self):
         return self.name
@@ -292,7 +296,7 @@ class SavedAddress(models.Model):
     name = models.CharField(max_length=160)
     district = models.CharField(max_length=50)
     area = models.CharField(max_length=50)
-    address = models.CharField(max_length=50, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
     contact_no = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):

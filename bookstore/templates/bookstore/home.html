@@ -21,12 +21,11 @@
         padding-bottom: 0;
     }
 
+
     .center-header {
-        text-align: center;
-        background: #2c3e50;
-        color: white;
-        width: 50%;
-        margin-left: 25%;
+       text-align: center;
+       margin-bottom: 0.5em;
+        
     }
 </style>
 {%endblock style%}
@@ -40,12 +39,17 @@
 
 {% if all_category %}
 
-<h1 class="center-header">MAP=Medical Admission Preparation</h1>
-
 {% for cat in all_category %}
 
 {% for sub_cat in cat.sub_category_set.all %}
 <section class="home" id="home">
+    {% if sub_cat.parent_category.name == 'EAP' %}
+    <h1 class="center-header">Engineering Admission Preparation</h1>
+    {% elif  sub_cat.parent_category.name == 'VAP' %}
+    <h1 class="center-header">Varisty Admission Preparation</h1>
+    {% elif  sub_cat.parent_category.name == 'MAP' %}
+    <h1 class="center-header">Medical Admission Preparation</h1>
+    {% endif %}
 
     <h1 class="heading d-flex bg-white p-3 mx-3 justify-content-between"> 
         <span>{{sub_cat.name}}</span> 
@@ -103,18 +107,19 @@
 
 {% else %}
 
-{% if single_category.name == 'EAP' %}
-<h1 class="center-header">EAP=Engineering Admission Preparation</h1>
-{% elif single_category.name == 'VAP' %}
-<h1 class="center-header">VAP=Varisty Admission Preparation</h1>
-{% elif single_category.name == 'MAP' %}
-<h1 class="center-header">MAP=Medical Admission Preparation</h1>
-{% endif %}
 
 
 
 {% for sub_cat in single_category.sub_category_set.all %}
 <section class="home" id="home">
+    {% if single_category.name == 'EAP' %}
+    <h1 class="center-header">Engineering Admission Preparation</h1>
+    {% elif single_category.name == 'VAP' %}
+    <h1 class="center-header">Varisty Admission Preparation</h1>
+    {% elif single_category.name == 'MAP' %}
+    <h1 class="center-header">Medical Admission Preparation</h1>
+    {% endif %}
+
 
     <h1 class="heading d-flex bg-white p-3 mx-3 justify-content-between"> 
         <span>{{sub_cat.name}}</span> 
