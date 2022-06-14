@@ -182,8 +182,11 @@
                             <h3 class="text-center page-title">Payment Details</h3>
                             {% if not exh_cart %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold;">তোমাকে মোট সেন্ড মানি করতে হবে -  {% cart_sub_total usercart %} TK.</span>
                             </div>
                             {% endif %}
+
+                           
 
                             <div class="payment-method-input">
                                 {% if not exh_cart %}
