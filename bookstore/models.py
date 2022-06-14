@@ -153,7 +153,7 @@ class Address(models.Model):
     user = models.ForeignKey(Customers, on_delete=models.SET_NULL, null=True)
     district = models.CharField(max_length=50)
     area = models.CharField(max_length=50)
-    address = models.CharField(max_length=50, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
     contact_no = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
