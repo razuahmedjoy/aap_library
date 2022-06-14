@@ -156,6 +156,7 @@ AAPLibrary - {{book.title}}
                     {{book.publisher}}
                     {% endif %}
                 </p>
+                <p class="publisher"><span class="fw-bold">Preparation : {{book.preparation}}</span></p>
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}
