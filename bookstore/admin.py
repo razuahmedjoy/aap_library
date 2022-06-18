@@ -96,10 +96,18 @@ class OrderAdmin(admin.ModelAdmin):
 
     def ordered_books(self, obj):
         book_list = []
-        print(obj.ordered_books.all())
         for book in obj.ordered_books.all():
-            b = f"{book}({book.quantity})"
-            book_list.append(b)
+            if book.quantity > 1:
+                b = f"{book}({book.quantity})"
+                book_list.append(b)
+            else:
+                b = f"{book}"
+                book_list.append(b)
+
+
+            
+            
+            
         
         return book_list
         # return f""
