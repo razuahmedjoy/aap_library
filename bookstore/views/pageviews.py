@@ -1,5 +1,8 @@
 from email import message
+from errno import ESTALE
+from os import device_encoding
 from unicodedata import name
+from uuid import uuid4
 from xml.dom import ValidationErr
 from django.forms import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -79,8 +82,9 @@ def search_books(request):
 
         try:
             books = Books.objects.filter(
-                Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(
-                    author__name__icontains=txt)
+                Q(title__icontains=txt)
+                | Q(publisher__name__icontains=txt)
+                | Q(author__name__icontains=txt)
             )
 
             books = serializers.serialize("json", books)
@@ -135,8 +139,9 @@ def all_books(request, pk):
     if pk == "search":
         txt = request.GET.get("searchTxt")
         books = Books.objects.filter(
-            Q(title__icontains=txt) | Q(publisher__name__icontains=txt) | Q(
-                author__name__icontains=txt)
+            Q(title__icontains=txt)
+            | Q(publisher__name__icontains=txt)
+            | Q(author__name__icontains=txt)
         )
 
         return render(
@@ -144,7 +149,7 @@ def all_books(request, pk):
             "bookstore/searchresult.html",
             {
                 "books": books,
-                "searchTxt" : txt,
+                "searchTxt": txt,
             },
         )
 
@@ -160,21 +165,28 @@ def all_books(request, pk):
 
 def author_books(request, pk):
     author = Author.objects.get(slug=pk)
-    return render(request, "bookstore/authorandpub.html", {
-        "books": author.books.all,
-        "ap": author,
-        "author": True,
-    })
+    return render(
+        request,
+        "bookstore/authorandpub.html",
+        {
+            "books": author.books.all,
+            "ap": author,
+            "author": True,
+        },
+    )
 
 
 def publisher_books(request, pk):
     pub = Publisher.objects.get(slug=pk)
 
-    return render(request, "bookstore/authorandpub.html", {
-        "books": pub.books.all,
-        "ap": pub,
-
-    })
+    return render(
+        request,
+        "bookstore/authorandpub.html",
+        {
+            "books": pub.books.all,
+            "ap": pub,
+        },
+    )
 
 
 @login_required(login_url="login")
@@ -212,101 +224,157 @@ def write_question(request, id):
             pass
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def cart(request):
+    try:
+        customer = request.user.customers
+
+    except:
+        device = request.COOKIES["device"]
+        customer, created = Customers.objects.get_or_create(device=device, name="guest-auto")
+
     context = {}
-    usercart = Cart.objects.filter(user=request.user.customers)
+    usercart = Cart.objects.filter(user=customer)
     context["usercart"] = usercart
     return render(request, "bookstore/cart.html", context)
     pass
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def buy_now(request):
-
     bookid = request.GET.get("id")
     try:
         book = Books.objects.get(pk=bookid)
     except:
         book = None
     if book is not None:
-        exh_cart = Cart.objects.filter(
-            book__in=Books.objects.filter(exchangeable=True))
-        all_cart = Cart.objects.filter(user=request.user.customers)
-        try:
-            cart = Cart.objects.get(user=request.user.customers, book=book)
-            cart.quantity += 1
-            cart.save()
-        except:
-
-            if book.exchangeable and len(all_cart) < 1:
-                if request.user.customers.store_credit >= 1:
-                    cart = Cart(user=request.user.customers,
-                                book=book, quantity=1)
-                    cart.save()
-                else:
-                    messages.add_message(
-                        request, messages.ERROR, "Your Exchange Credit is : 0"
-                    )
-                    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
-            # can not buy book if exchangeable books in cart
-            elif not book.exchangeable and len(exh_cart) < 1:
-                cart = Cart(user=request.user.customers, book=book, quantity=1)
+        if request.user.is_authenticated:
+            exh_cart = Cart.objects.filter(
+                book__in=Books.objects.filter(exchangeable=True)
+            )
+            all_cart = Cart.objects.filter(user=request.user.customers)
+            try:
+                cart = Cart.objects.get(user=request.user.customers, book=book)
+                cart.quantity += 1
                 cart.save()
+            except:
 
-            else:
-                if len(exh_cart) >= 1:
+                if book.exchangeable and len(all_cart) < 1:
+                    if request.user.customers.store_credit >= 1:
+                        cart = Cart(user=request.user.customers, book=book, quantity=1)
+                        cart.save()
+                    else:
+                        messages.add_message(
+                            request, messages.ERROR, "Your Exchange Credit is : 0"
+                        )
+                        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+                # can not buy book if exchangeable books in cart
+                elif not book.exchangeable and len(exh_cart) < 1:
+                    cart = Cart(user=request.user.customers, book=book, quantity=1)
+                    cart.save()
+
+                else:
+                    if len(exh_cart) >= 1:
+                        messages.add_message(
+                            request,
+                            messages.ERROR,
+                            "Remove exchangeable books from cart",
+                        )
+                        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+                    else:
+                        messages.add_message(
+                            request, messages.ERROR, "Remove regular books from cart"
+                        )
+                        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+        # Logic for Guest user
+        else:
+            device = request.COOKIES["device"]
+            customer, created = Customers.objects.get_or_create(
+                device=device, name="guest-auto"
+            )
+
+            try:
+                cart = Cart.objects.get(user=customer, book=book)
+                cart.quantity += 1
+                cart.save()
+            except:
+                if book.exchangeable:
                     messages.add_message(
-                        request, messages.ERROR, "Remove exchangeable books from cart"
+                        request, messages.ERROR, "Log in or Register to buy Exchangeable Books"
                     )
+
                     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
                 else:
-                    messages.add_message(
-                        request, messages.ERROR, "Remove regular books from cart"
-                    )
-                    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
+                    cart = Cart(user=customer, book=book, quantity=1)
+                    cart.save()
+                    
     return redirect("cart")
 
 
 # add to cart view
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def add_to_cart(request):
-    if request.is_ajax():
-        bookid = request.GET.get("bookid")
-        action = request.GET.get("action")
+    if request.user.is_authenticated:
+        if request.is_ajax():
+            bookid = request.GET.get("bookid")
+            action = request.GET.get("action")
 
-        try:
-            book = Books.objects.get(pk=bookid)
-        except:
-            book = None
+            try:
+                book = Books.objects.get(pk=bookid)
+            except:
+                book = None
 
-        if action == "add_to_cart":
-            if book is not None:
+            if action == "add_to_cart":
+                if book is not None:
 
-                # checking if exchangeable books are in cart
-                exh_cart = Cart.objects.filter(
-                    book__in=Books.objects.filter(exchangeable=True)
-                )
-                all_cart = Cart.objects.filter(user=request.user.customers)
-
-                try:
-                    cart = Cart.objects.get(
-                        user=request.user.customers, book=book)
-                    user_cart = Cart.objects.filter(
-                        user__contact_no=request.user.username
+                    # checking if exchangeable books are in cart
+                    exh_cart = Cart.objects.filter(
+                        book__in=Books.objects.filter(exchangeable=True)
                     )
+                    all_cart = Cart.objects.filter(user=request.user.customers)
 
-                    return JsonResponse(
-                        {"status": "exists", "message": "Book already added to cart"}
-                    )
-                except:
+                    try:
+                        cart = Cart.objects.get(user=request.user.customers, book=book)
+                        user_cart = Cart.objects.filter(
+                            user__contact_no=request.user.username
+                        )
 
-                    # exchangeable and normal books can't be in same cart
-                    if book.exchangeable and len(all_cart) < 1:
-                        if request.user.customers.store_credit >= 1:
+                        return JsonResponse(
+                            {
+                                "status": "exists",
+                                "message": "Book already added to cart",
+                            }
+                        )
+                    except:
+
+                        # exchangeable and normal books can't be in same cart
+                        if book.exchangeable and len(all_cart) < 1:
+                            if request.user.customers.store_credit >= 1:
+                                cart = Cart(
+                                    user=request.user.customers, book=book, quantity=1
+                                )
+                                cart.save()
+                                user_cart = Cart.objects.filter(
+                                    user__contact_no=request.user.username
+                                )
+                                return JsonResponse(
+                                    {"status": "success", "count": len(user_cart)}
+                                )
+
+                            else:
+                                return JsonResponse(
+                                    {
+                                        "status": "low_credit",
+                                        "message": "Your Exchange Credit is : 0",
+                                    }
+                                )
+
+                        elif not book.exchangeable and len(exh_cart) < 1:
                             cart = Cart(
                                 user=request.user.customers, book=book, quantity=1
                             )
@@ -319,47 +387,84 @@ def add_to_cart(request):
                             )
 
                         else:
-                            return JsonResponse(
-                                {
-                                    "status": "low_credit",
-                                    "message": "Your Exchange Credit is : 0",
-                                }
-                            )
+                            if len(exh_cart) >= 1:
+                                return JsonResponse(
+                                    {
+                                        "status": "edit_required",
+                                        "message": "Remove exchangeable books from cart",
+                                    }
+                                )
 
-                    elif not book.exchangeable and len(exh_cart) < 1:
-                        cart = Cart(user=request.user.customers,
-                                    book=book, quantity=1)
-                        cart.save()
-                        user_cart = Cart.objects.filter(
-                            user__contact_no=request.user.username
-                        )
+                            else:
+                                return JsonResponse(
+                                    {
+                                        "status": "edit_required",
+                                        "message": "Remove regular books from cart",
+                                    }
+                                )
+
+        else:
+            raise Exception("Error")
+
+    # Logic for guest users
+    else:
+        if request.is_ajax():
+            bookid = request.GET.get("bookid")
+            action = request.GET.get("action")
+
+            try:
+                book = Books.objects.get(pk=bookid)
+            except:
+                book = None
+
+            if action == "add_to_cart":
+                if book is not None:
+                    device = request.COOKIES["device"]
+                    customer, created = Customers.objects.get_or_create(
+                        device=device, name="guest-auto"
+                    )
+                    try:
+                        cart = Cart.objects.get(user=customer, book=book)
+                        user_cart = Cart.objects.filter(user=customer)
                         return JsonResponse(
-                            {"status": "success", "count": len(user_cart)}
+                            {
+                                "status": "exists",
+                                "message": "Book already added to cart",
+                            }
                         )
 
-                    else:
-                        if len(exh_cart) >= 1:
+                    except:
+                        if not book.exchangeable:
+                            cart = Cart(user=customer, book=book, quantity=1)
+                            cart.save()
+                            user_cart = Cart.objects.filter(user=customer)
                             return JsonResponse(
-                                {
-                                    "status": "edit_required",
-                                    "message": "Remove exchangeable books from cart",
-                                }
+                                {"status": "success", "count": len(user_cart)}
                             )
 
                         else:
                             return JsonResponse(
                                 {
                                     "status": "edit_required",
-                                    "message": "Remove regular books from cart",
+                                    "message": "Log in or Register to buy Exchangeable Books",
                                 }
                             )
 
-    else:
-        raise Exception("Error")
+        else:
+            raise Exception("Error")
 
 
 def update_cart_item(request):
     if request.is_ajax():
+        try:
+            usercart = Cart.objects.filter(user=request.user.customers)
+        except:
+            device = request.COOKIES["device"]
+            customer, created = Customers.objects.get_or_create(
+                device=device, name="guest-auto"
+            )
+            usercart = Cart.objects.filter(user=customer)
+
         cart_item_id = request.GET.get("cartItemid")
         action = request.GET.get("action")
         try:
@@ -367,10 +472,8 @@ def update_cart_item(request):
 
             if action == "delete":
                 cart.delete()
-                usercart = Cart.objects.filter(user=request.user.customers)
                 context = {"usercart": usercart}
-                usercartList = render_to_string(
-                    "bookstore/renderedcart.html", context)
+                usercartList = render_to_string("bookstore/renderedcart.html", context)
 
                 return JsonResponse({"status": "success", "usercart": usercartList})
 
@@ -406,8 +509,7 @@ def checkout(request):
     paymentForm = PaymentForm(instance=current_user)
 
     usercart = Cart.objects.filter(user=request.user.customers)
-    exh_cart = Cart.objects.filter(
-        book__in=Books.objects.filter(exchangeable=True))
+    exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
 
     try:
         web_settings = WebSettings.objects.last()
@@ -438,7 +540,11 @@ def checkout(request):
         )
 
         # generate orderid
-        order_id = f"AAP-{get_random_string(8).upper()}{int(time())}"
+
+        t = str(time())
+    
+
+        order_id = f"AAP-{get_random_string(3).upper()}{t[-3:]}"
         newPayment.order_id = order_id
         newPayment.save()
 
@@ -500,8 +606,7 @@ def checkout(request):
         cstmr = request.user.customers
         store_credit = cstmr.store_credit
 
-        exh_form = PaymentForm(
-            initial={"sender_number": 0, "transaction_id": 0})
+        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id": 0})
         context = {
             "usercart": usercart,
             "addressForm": addressForm,
@@ -552,8 +657,7 @@ def default_address(request):
 
     if request.method == "GET":
         try:
-            user_address = SavedAddress.objects.get(
-                user=current_user.customers)
+            user_address = SavedAddress.objects.get(user=current_user.customers)
             return render(
                 request,
                 "bookstore/addressbook.html",
@@ -647,7 +751,7 @@ def exchange(request):
                 pass
 
         else:
-            return redirect('login')
+            return redirect("login")
 
     exchange_form = ExchangeForm()
     return render(
@@ -662,16 +766,156 @@ def exchange(request):
 
 def author_list(request):
     all = Author.objects.all()
-    return render(request, "bookstore/anplist.html", {
-        "anps": all,
-        "author": True,
-
-    })
+    return render(
+        request,
+        "bookstore/anplist.html",
+        {
+            "anps": all,
+            "author": True,
+        },
+    )
 
 
 def publisher_list(request):
     all = Publisher.objects.all()
-    return render(request, "bookstore/anplist.html", {
-        "anps": all,
+    return render(
+        request,
+        "bookstore/anplist.html",
+        {
+            "anps": all,
+        },
+    )
 
-    })
+
+
+
+# function for guest checkout 
+
+def guest_checkout(request):
+    device = request.COOKIES["device"]
+    customer, created = Customers.objects.get_or_create(
+                device=device, name="guest-auto")
+
+    addressForm = AddressForm()
+    paymentForm = PaymentForm()
+    nameForm = GuestNameForm()
+
+    usercart = Cart.objects.filter(user=customer)
+   
+
+    try:
+        web_settings = WebSettings.objects.last()
+    except:
+        web_settings = None
+
+    if request.method == "POST":
+        district = request.POST["district"]
+        area = request.POST["area"]
+        address = request.POST["address"]
+        contact_no = request.POST["contact_no"]
+        payment_method = request.POST["payment_method"]
+        sender_number = request.POST["sender_number"]
+        transaction_id = request.POST["transaction_id"]
+        total_amount = int(request.POST["total_amount"])
+        guest_name = request.POST["guest_name"]
+
+  
+
+        customer.name = (f"{guest_name} - Guest")
+        customer.save()
+
+        # create payment
+        newPayment = Payment(
+            customer=customer,
+            sender_number=sender_number,
+            payment_method=payment_method,
+            transaction_id=transaction_id,
+            total_amount=total_amount,
+        )
+
+        # generate orderid
+        t = str(time())
+        order_id = f"AAP-{get_random_string(3).upper()}{t[-3:]}"
+        newPayment.order_id = order_id
+        newPayment.save()
+
+        # set address
+        newOrderAddress = Address(
+            user=customer,
+            district=district,
+            area=area,
+            address=address,
+            contact_no=contact_no,
+        )
+        newOrderAddress.save()
+
+        # create order
+        newOrder = Order(
+            customer=customer,
+            contact_no=contact_no,
+            grand_total=total_amount,
+            address=newOrderAddress,
+            order_id=order_id,
+            payment=newPayment,
+        )
+        newOrder.save()
+
+     
+        for item in usercart:
+            orderd_product = OrderedProducts()
+            orderd_product.order = newOrder
+            orderd_product.customer = customer
+            orderd_product.books = item.book
+            orderd_product.quantity = item.quantity
+            orderd_product.price = item.price
+            orderd_product.total_amount = item.total_amount
+            orderd_product.save()
+
+        Cart.objects.filter(user=customer).delete()
+        order = newOrder
+
+        context = {
+            "order_id": order_id,
+            "order": order,
+            "guest" : True,
+        }
+        return render(request, "bookstore/ordercomplete.html", context)
+
+    if len(usercart) == 0:
+        return HttpResponse(
+            "You dont have any product on your cart. Please Add some product"
+        )
+
+
+
+    else:
+        context = {
+            "usercart": usercart,
+            "addressForm": addressForm,
+            "paymentForm": paymentForm,
+            "web_settings": web_settings,
+            "nameForm" : nameForm,
+        }
+
+    return render(request, "bookstore/guestcheckout.html", context)
+    
+
+
+def tracking(request):
+    if request.method == "GET":
+        orderid = request.GET.get('orderid')
+        if orderid is not None:
+            try:
+                order = Order.objects.get(order_id=orderid)
+                return render(request, "bookstore/tracking.html", {
+                    "order" : order,
+                })
+            except:
+                 messages.add_message(
+                request, messages.ERROR, "No order found, please check again"
+            )
+    
+    
+    return render(request, "bookstore/tracking.html")
+
+    

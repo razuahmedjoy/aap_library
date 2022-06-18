@@ -1,3 +1,4 @@
+from email import message
 from django.conf import settings
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -176,10 +177,16 @@ def passwordresetView(request):
 
  
 def login_view(request):
+    context = {}
+
+    name = request.GET.get('next')
+    if name is not None:
+        if "/checkout" in name:
+            context['message'] = True
 
     if request.user.is_authenticated:
         return redirect('/')
-    context = {}
+    
 
     if request.method == 'POST':
         username = request.POST['contact_no']

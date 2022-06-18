@@ -77,20 +77,32 @@ class OrderedBooksAdmin(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     
-    list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status')
+    list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status', 'created_at', 'ordered_books')
     readonly_fields = ('customer','grand_total','order_id','address','payment','contact_no')
 
     list_editable = ('status',)
 
     inlines = [OrderedBooksAdmin]
 
+
+
     search_fields = ('payment__transaction_id',)
 
     def get_address(self,obj):
-        return f"{obj.address.district}-{obj.address.area},{obj.address.address}"
+        return f"{obj.address.address}, {obj.address.area}, {obj.address.district}"
 
     def payment_details(self,obj):
         return f"({obj.payment.payment_method})- ({obj.payment.sender_number}) - TRXID: {obj.payment.transaction_id}"
+
+    def ordered_books(self, obj):
+        book_list = []
+        print(obj.ordered_books.all())
+        for book in obj.ordered_books.all():
+            b = f"{book} x {book.quantity}"
+            book_list.append(b)
+        
+        return book_list
+        # return f""
     
     get_address.short_description = "Shipping"
 

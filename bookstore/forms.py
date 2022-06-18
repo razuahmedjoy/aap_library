@@ -7,7 +7,7 @@ class AddressForm(forms.ModelForm):
     district = forms.ChoiceField(required=True,label="জেলা")
     area = forms.ChoiceField(required=True,label="অঞ্চল")
     address = forms.CharField(required=True, label="নিকটস্থ সুন্দরবন কুরিয়ার")
-    contact_no = forms.IntegerField(required=True)
+    contact_no = forms.IntegerField(required=True, label="ফোন নাম্বার")
     
     class Meta:
         model = Address
@@ -16,13 +16,21 @@ class AddressForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     
     sender_number = forms.IntegerField(required=True,label="Sender Number")
-    transaction_id = forms.CharField(required=True,label="Transaction ID")
+    transaction_id = forms.CharField(required=True,label="Transaction ID or Your Name")
     
     class Meta:
         model = Payment
         fields = ('sender_number','transaction_id')
 
 
+class GuestNameForm(forms.ModelForm):
+    guest_name = forms.CharField(required=True, label="নাম")
+    
+    class Meta:
+        model = Customers
+        exclude = ('user', 'name', 'contact_no', 'email', 'store_credit',
+        'device')
+    
 
 # Review Form
 

@@ -11,6 +11,22 @@
 {% endif %}
 
 {%block style%}
+<style>
+    .btn-con {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+       
+    }
+
+    .guest-btn {
+        text-align: center;
+       
+        font-size: small;
+    }
+
+   
+</style>
 
 {%endblock style%}
 
@@ -50,9 +66,22 @@
                     </div>
                     {% endfor %}
 
-                    <div class="d-flex justify-content-center">
-                        <a href="{% url 'checkout' %}"class="btn bg-success">Checkout</a>
+                    {% if request.user.is_authenticated %}
+                    <div class="d-flex justify-content-center btn-con">
+                        <a href="{% url 'checkout' %}"class="btn btn-main">Checkout</a>
                     </div>
+
+                    {% else %}
+
+                    <div class="d-flex justify-content-center btn-con">
+                        <a href="{% url 'checkout' %}"class="btn btn-main">Checkout</a>
+                        <h3>OR</h3>
+                        <div class="guest-btn">
+                            <a href="{% url 'guest_checkout' %}"class="btn bg-success guest-btn">Checkout As Guest</a>
+                        </div>
+                        
+                    </div>
+                    {% endif %}
 
                     {% else %}
 
