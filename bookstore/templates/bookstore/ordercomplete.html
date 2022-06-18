@@ -34,20 +34,29 @@ p{
                 </div>
                 <div class="card-body p-4">
                   <div class="d-flex justify-content-between align-items-center mb-4">
-                    <p class="lead fw-normal mb-0">ORDER ID: <strong>{{order_id}}</strong> </p>
+                    <p style="font-size: large;" class="lead fw-normal mb-0">ORDER ID: <strong>{{order_id}}</strong> </p>
+
+  
                     <p class="text-muted mb-0">{{order.created_at}}</p>
                   </div>
            
       
                   <div class="d-flex justify-content-between flex-column pt-2">
                     <p class="fw-bold mb-0">Order Details</p>
+                    <p class="mb-0"> <strong>Name :</strong> {{order.customer}}</p>
                     <p class="mb-0"> <strong>Contact No :</strong> {{order.contact_no}}</p>
+                    <p class="mb-0"> <strong>Ordered Books :</strong> {% for book in order.ordered_books.all %} {{book}} <span style="text-transform: lowercase;">x</span> {{book.quantity}}, {% endfor%}</p>
                     <p class="mb-0"><strong>Shipping Address :</strong> {{order.get_shipping_address}}</p>
                     <p class="mb-0"><strong>Payment Method :</strong> {{order.payment.payment_method}}</p>
                     
                     
                   </div><br>
+                  {% if guest %}
+                  <p>We will manually Check Your payment and Update it. You can check order details & Track Order Status From "Track Order" Page In Homepage.</p>
+                  <p><b>Please save your order ID for tracking.</b></p>
+                  {% else %}
                   <p>We will manually Check Your payment and Update it. You can Check Order Details From Your Account Dashboard Also.</p>
+                  {% endif %}
                   <p class="text-muted mb-0">If You Find Any Information Wrong, Contact Us As Soon As Possible.</p>
       
                 
@@ -66,10 +75,9 @@ p{
 </div>
 {% endblock %}
 
-{% block js %}
-<script>
 
-</script>
+{% block js %}
+
 
 
 

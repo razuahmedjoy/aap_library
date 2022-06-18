@@ -65,7 +65,11 @@
             <div id="search-btn" class="fas fa-search"></div>
             <!-- <a href="#" class="fas fa-heart"></a> -->
             <a href="{% url 'cart' %}" class="fas fa-shopping-cart">
+                {% if request.user.is_authenticated %}
                 <span class="total-items">{% total_cart_item request.user %}</span>
+                {% else %}
+                <span class="total-items">{{guest_cart}}</span>
+                {% endif %}
             </a>
 
             {% if request.user.is_authenticated %}
@@ -116,6 +120,8 @@
                     <li><a class="dropdown-item" href="{% url 'author_list' %}">Authors</a></li>
                     <li><a class="dropdown-item" href="{% url 'publihser_list' %}">Publishers</a></li>
                     <li><a class="dropdown-item" href="{% url 'exchange' %}">Exchange</a></li>
+                    <li><a class="dropdown-item" href="{% url 'tracking' %}">Track Order</a></li>
+                    <li><a class="dropdown-item" target="_blank" href="https://www.aapathshala.com/library/">Online Library</a></li>
                 </ul>
             </div>
 
@@ -128,7 +134,7 @@
 
 
             
-            <a href="https://www.aapathshala.com/library/" target="_blank" class="btn btn-default online-lib-btn">অনলাইন লাইব্রেরী</a>
+            <a href="{% url 'tracking' %}" class="btn btn-default online-lib-btn">Track</a>
             
 
         

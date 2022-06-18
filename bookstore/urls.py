@@ -44,8 +44,13 @@ urlpatterns = [
     path('buy_now/', buy_now, name="buy_now" ),
     path('update_cart_item', update_cart_item, name="update_cart_item" ),
     path('checkout', checkout, name="checkout" ),
+    path('guest_checkout', guest_checkout, name="guest_checkout" ),
     path("addressbook/", default_address, name="addressbook"),
     path("exchange/", exchange, name="exchange"),
+
+
+    # track
+    path('tracking', tracking, name="tracking" ),
 
 
     #add to cart
