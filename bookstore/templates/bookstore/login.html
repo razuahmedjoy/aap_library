@@ -33,7 +33,7 @@
     <form class="login" method="post" action="{% url 'login' %}">
 
         {% if message %}
-        <a href="{% url 'cart' %}"class="btn bg-success guest-btn">Or Continue As Guest</a>
+        <a href="{% url 'guest_checkout' %}"class="btn bg-success guest-btn">Or Continue Without Login</a>
         {% endif %}
         <h3>Login</h3> 
 
@@ -64,7 +64,7 @@
             <small>Forgot your password? <a href="{% url 'passwordreset' %}">Reset Password</a> </small>
         </p>
         {% if message %}
-        <a href="{% url 'cart' %}"class="btn bg-success guest-btn">Or Continue As Guest</a>
+        <a href="{% url 'guest_checkout' %}"class="btn bg-success guest-btn">Or Continue Without Login</a>
         {% endif %}
 
     </form>
