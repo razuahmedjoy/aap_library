@@ -143,12 +143,14 @@ class BookPreviewImages(models.Model):
             pic.save(self.preview_photo.path)
 
 
+# Changed customer mode; fields to null and blank
 class Customers(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    contact_no = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    contact_no = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
-    store_credit = models.IntegerField(default=0)
+    store_credit = models.IntegerField(default=0, null=True, blank=True)
+    device = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -228,7 +230,7 @@ class Order(models.Model):
 
 
 class OrderedProducts(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="ordered_books")
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
     books = models.ForeignKey(Books, on_delete=models.CASCADE)
     quantity = models.IntegerField()

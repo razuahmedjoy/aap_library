@@ -1,0 +1,215 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+<style>
+    .row {
+        justify-content: center;
+
+    }
+
+    .trk {
+        margin: 1em;
+        font-size: 1.5rem;
+        padding: 0.5em;
+        /* margin-bottom: 5; */
+    }
+
+    .CourierModal iframe {
+        width: 100%;
+
+    }
+
+    .track:hover {
+        cursor: pointer;
+
+
+    }
+
+    #track-info {
+        background-color: #0dcaf0;
+        padding: 0.5em;
+        font-weight: bold;
+        font-size: small;
+    }
+
+    .track-form {
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 1em;
+        font-size: large;
+    }
+
+    .track-form input {
+        font-size: large;
+    }
+
+    .track-form .alert {
+        margin-top: 0.5em;
+    }
+
+    .prev {
+        margin-top: 1em;
+    }
+
+    .trk-status {
+        border: 1px solid grey;
+        border-radius: 5px;
+        text-align: center;
+
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+ 
+
+
+    
+</style>
+{%endblock style%}
+
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'book_store_home' %}" class="btn btn-outline-secondary bg-dark btn-sm text-light prev">Back To Home</a>
+    <div class="row">
+    
+        <!-- Modal -->
+        <div class="modal fade CourierModal" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Courier Tracking</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="track-info">
+                            CN Number এর উপর ক্লিক করে Receiver Contact দিবে, এরপর তোমার মোবাইল নাম্বার লিখে সার্চ দিলে
+                            Order Status দেখতে পারবে।
+                        </p>
+                        <iframe height="600"
+                            src="https://pcm.scsapps.xyz/?fbclid=IwAR1HJUePTWxGKf8jSdcpwRnJ8GAd0-nOHtIqclyp2s28WILsG1MwvidnQTo"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        <!-- Modal -->
+    
+        {% if not order %}
+    
+        <div class="col-md-6 trk">
+            <form class="track-form" method="get">
+                <div class="mb-3">
+                  <h3>Track Order Details</h3>
+                  <input type="text" class="form-control" placeholder="Enter Your Order ID Here" name="orderid">
+                  <div id="emailHelp" class="form-text">Example : AAP-*******</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Track</button>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+                {% endif %}
+            </form>
+            
+        </div>
+
+        <div class="col-md-6 trk trk-status">
+            <h3>মোবাইল নাম্বার দিয়ে Order Status চেক করতে নিচে ক্লিক কর</h3>
+            <hr>
+            <button type="button" data-bs-toggle="modal"
+                data-bs-target=".CourierModal" class="btn btn-outline-secondary bg-dark btn-sm text-light">Track Order Status</button>
+
+        </div>
+    
+        {% endif %}
+        
+    
+    
+    
+        {% if order %}
+    
+    
+        <div class="col-md-8 trk">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Your Order Details</h2>
+                    <div class="order-list">
+                        <div class="w-100 mt-5">
+                            <div class="d-flex justify-content-center row">
+                                <div class="col-md-12">
+                                    <div class="rounded">
+                                        <div class="table-responsive table-borderless">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Total</th>
+                                                        <th>Payment Method/TxnID</th>
+                                                        <th>Date</th>
+                                                        <th>Books</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-body">
+                                                    <tr class="cell-1">
+                                                        <td>{{order.order_id}}</td>
+                                                        <td>Tk. {{order.grand_total}}</td>
+                                                        <td>{{order.payment.payment_method}} -
+                                                            {{order.payment.transaction_id}}</td>
+                                                        <td>{{order.created_at}}</td>
+                                                        <td>
+                                                            {% for book in order.ordered_books.all %}
+                                                            {{book}} x {{book.quantity}}<br>
+                                                            {%endfor %}
+                                                        </td>
+                                                        <td>{{order.status}} <span data-bs-toggle="modal"
+                                                                data-bs-target=".CourierModal"
+                                                                class="badge bg-dark text-light track">Track Here</span>
+                                                        </td>
+                                                    </tr>
+    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    
+        {% endif %}
+    
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock js %}

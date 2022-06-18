@@ -156,11 +156,11 @@ AAPLibrary - {{book.title}}
                     {{book.publisher}}
                     {% endif %}
                 </p>
-                <p class="publisher"><span class="fw-bold">Preparation : {{book.preparation}}</span></p>
+                <p class="publisher"><span>Preparation : {{book.preparation}}</span></p>
                 <div class="category-info" style="font-size:16px;">
                     <span class="fw-bold">Categories:</span>
                     {% for cat in book.category.all %}
-                    <span class="badge bg-info" ><a style="color: white;" onClick="openLoader()" href="/?cat_id={{cat.id}}">{{cat.name}}</a></span>
+                    <span class="badge bg-info" ><a style="color: white;"  href="{% url 'all_books' cat.slug %}">{{cat.name}}</a></span>
                     {% endfor %}
                 </div>
 
@@ -184,8 +184,8 @@ AAPLibrary - {{book.title}}
                 <a href="{% url 'buy_now' %}?id={{book.id}}">
                     <button class="btn btn-main" {% if not book.in_stock %} disabled {%endif%}>Buy Now</button>
                 </a>
-                <button class="btn btn-main" {% if request.user.is_authenticated %} onclick="addtoCart('{{book.id}}')"
-                    {% else %} onclick="navigateToLogin()" {% endif %} {% if not book.in_stock %} disabled {%endif%}>Add
+                <button class="btn btn-main" onclick="addtoCart('{{book.id}}')"
+                 {% if not book.in_stock %} disabled {%endif%}>Add
                     to Cart</button>
             </div>
 

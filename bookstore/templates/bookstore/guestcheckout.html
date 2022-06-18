@@ -46,33 +46,6 @@
         font-size: 1.2rem;
     }
 
-    .address_loader {
-        margin-bottom: 2em;
-        padding: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .address_loader button {
-        font-size: 1.5rem;
-        background-color: #002060;
-        color: white;
-        padding: .5em;
-        border: 2px solid #7c92b9;
-
-
-    }
-
-    .address_loader i {
-        color: #1e95ad;
-        font-size: 3rem;
-        margin-left: 1em;
-    }
-
-    .address_loader i:hover {
-        cursor: pointer;
-    }
 
     .shipping-underline {
         width: 100%;
@@ -118,15 +91,11 @@
                                 <h5 class="fw-bold">Shipping Charge</h5>
 
                             </div>
-                            {% if exh_cart %}
-                            <span class="badge bg-warning rounded-pill">
-                                Tk. 0
-                            </span>
-                            {% else %}
+                           
                             <span class="badge bg-warning rounded-pill">
                                 Tk. {% get_shipping_charge %}
                             </span>
-                            {% endif %}
+                          
                             
                         </li>
 
@@ -138,16 +107,11 @@
                             <div class="ms-2 me-auto">
                                 <h2 class="fw-bold">SubTotal</h2>
 
-                            </div>
-                            {% if exh_cart %}
-                            <span class="badge bg-danger rounded-pill">
-                                Tk. 0
-                            </span>
-                            {% else %}
+                            </div>    
                             <span class="badge bg-danger rounded-pill">
                                 Tk. {% cart_sub_total usercart %}
                             </span>
-                            {% endif %}
+ 
                         </li>
 
 
@@ -159,48 +123,34 @@
             <div id="cartList" class="col-md-8">
                 <form method="POST" id="address_form">
 
-                    {% csrf_token %}
-                    {% if exh_cart %}
-                    <input type="hidden" name="total_amount" value="0">
-                    {% else %}
+                    {% csrf_token %}            
                     <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
-                    {% endif %}
                     <div class="row cart-items">
 
                         <div class="col-md-6">
 
                             <h3 class="text-center page-title">Shipping Address</h3> 
                             <div class="shipping-underline"></div>
-                            <div class="address_loader">
-                                <button type="button" id="load_default">Use Saved Address</button>
-                                <i class="fas fa-undo" title="Click here to reset address" id="reset_default"></i>
-                            </div>
-                            {{ addressForm|crispy }}
+                            {{nameForm|crispy}}
+                            {{ addressForm|crispy }}       
                         </div>
 
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
-                            {% if not exh_cart %}
+                         
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -  {% cart_sub_total usercart %} TK.</span>
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold;">তোমাকে মোট সেন্ড মানি করতে হবে -  {% cart_sub_total usercart %} TK.</span>
                             </div>
-                            {% endif %}
+                       
 
                            
 
                             <div class="payment-method-input">
-                                {% if not exh_cart %}
+                
                                 <p>Select Any Payment Method</p>
-                                {% endif %}
+                            
                                 <div class="input">
-                                    {% if exh_cart %}
-                                    <div class="form-check form-check-inline">
-
-                                        <input class="form-check-input" type="radio" name="payment_method" id="Exchange"
-                                            value="Exchange" checked>
-                                        <label class="form-check-label" for="Exchange">Paying With Exchange Credit</label>
-                                    </div>
-                                    {% else %}
+                                
                                     <div class="form-check form-check-inline">
 
                                         <input class="form-check-input" type="radio" name="payment_method" id="bKash"
@@ -218,10 +168,9 @@
                                         <label class="form-check-label" for="Rocket">Rocket</label>
                                     </div>
                                 </div>
-                                {% endif %}
                             </div>
 
-                            <div {% if exh_cart %} style="display: none;" {% endif %}>
+                            <div>
                                 {{paymentForm |crispy }}
                             </div>
 
@@ -254,17 +203,6 @@
         const res = await fetch("{% url 'get_districts' %}")
         const data = await res.json()
         const districts = data.data
-        // console.log(districts)
-
-        // const newAr = []
-        // for(let item of districts){
-        //     const newData ={}
-        //     newData['id'] = item.id; 
-        //     newData['name'] = item.name;
-        //     newData['name_bn'] = item.bn_name;
-        //     newAr.push(newData)
-        // }
-        // console.log(JSON.stringify(newAr))
         let options = '<option value="">Select District</option>'
 
         for (let item of districts) {
@@ -306,46 +244,6 @@
 
 
 
-
-
-    /// this function loads saved address 
-    document.querySelector("#load_default").addEventListener('click', function () {
-        $.ajax({
-            url: "{% url 'addressbook' %}",
-            type: 'GET',
-            data: {
-                'action': 'updateaddress',
-            },
-
-            success: function (status) {
-                const district = document.getElementById('id_district');
-                const area = document.getElementById('id_area');
-                const address = document.getElementById('id_address');
-                const contact = document.getElementById('id_contact_no');
-
-                district.value = status.district;
-
-
-                /// value input does not work for area
-                options = `<option value="${status.area}" areaid="${status.area}">${status.area}</option>`;
-                area.innerHTML = options;
-
-                address.value = status.address;
-                contact.value = status.contact;
-
-            },
-            failure: function (e) {
-                console.log(e)
-            }
-        });
-
-    })
-
-    document.querySelector("#reset_default").addEventListener('click', function () {
-        document.getElementById("address_form").reset();
-        const area = document.getElementById('id_area');
-        area.innerHTML = "";
-    })
 
 </script>
 

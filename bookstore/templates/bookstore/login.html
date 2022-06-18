@@ -31,6 +31,10 @@
 <div class="form-container">
 
     <form class="login" method="post" action="{% url 'login' %}">
+
+        {% if message %}
+        <a href="{% url 'cart' %}"class="btn bg-success guest-btn">Or Continue As Guest</a>
+        {% endif %}
         <h3>Login</h3> 
 
         
@@ -59,6 +63,9 @@
         <p>
             <small>Forgot your password? <a href="{% url 'passwordreset' %}">Reset Password</a> </small>
         </p>
+        {% if message %}
+        <a href="{% url 'cart' %}"class="btn bg-success guest-btn">Or Continue As Guest</a>
+        {% endif %}
 
     </form>
   
