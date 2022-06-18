@@ -1,0 +1,254 @@
+{% extends "bookstore/base.html" %}
+{%load static%}
+{% load crispy_forms_tags %}
+{% load cart_sub_total %}
+
+
+
+{% if title %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{% endif %}
+
+{%block style%}
+
+<style>
+    .form-group {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+
+    }
+
+    select,
+    input {
+        font-size: 1.8rem !important;
+    }
+
+    .list-group {
+
+        font-size: 1.5rem;
+    }
+
+    .input {
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1.5rem 0;
+    }
+
+    .payment-method-input p {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+    }
+
+    .payment-instruction {
+        font-size: 1.2rem;
+    }
+
+
+    .shipping-underline {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        margin-bottom: 1em;
+    }
+
+ 
+</style>
+{%endblock style%}
+
+
+{% block content %}
+
+<div class="cart-page">
+    <h3 class="text-center page-title">Checkout</h3>
+
+    <div class="cart-container container">
+        <a href="{% url 'cart' %}" class="btn btn-outline-secondary bg-dark btn-sm text-light">Back To Cart</a>
+        <div class="row justify-content-center m-auto">
+
+            <div id="cartList" class="col-md-4">
+                <div class="cart-items">
+                    <ol class="list-group list-group-numbered">
+                        {% for item in usercart %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{item.book.title}}</div>
+                                <span id="price-span">{{item.quantity}} × Tk. {{item.price}}</span>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">
+                                Tk. {{item.total_amount}}
+                            </span>
+                        </li>
+                        {%endfor%}
+
+                    </ol>
+                    <ul class="list-group list-group">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <h5 class="fw-bold">Shipping Charge</h5>
+
+                            </div>
+                           
+                            <span class="badge bg-warning rounded-pill">
+                                Tk. {% get_shipping_charge %}
+                            </span>
+                          
+                            
+                        </li>
+
+
+                    </ul>
+                    <ul class="list-group list-group">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <h2 class="fw-bold">SubTotal</h2>
+
+                            </div>    
+                            <span class="badge bg-danger rounded-pill">
+                                Tk. {% cart_sub_total usercart %}
+                            </span>
+ 
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+            </div>
+            <div id="cartList" class="col-md-8">
+                <form method="POST" id="address_form">
+
+                    {% csrf_token %}            
+                    <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
+                    <div class="row cart-items">
+
+                        <div class="col-md-6">
+
+                            <h3 class="text-center page-title">Shipping Address</h3> 
+                            <div class="shipping-underline"></div>
+                            {{nameForm|crispy}}
+                            {{ addressForm|crispy }}       
+                        </div>
+
+                        <div class="col-md-6">
+                            <h3 class="text-center page-title">Payment Details</h3>
+                         
+                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold;">তোমাকে মোট সেন্ড মানি করতে হবে -  {% cart_sub_total usercart %} TK.</span>
+                            </div>
+                       
+
+                           
+
+                            <div class="payment-method-input">
+                
+                                <p>Select Any Payment Method</p>
+                            
+                                <div class="input">
+                                
+                                    <div class="form-check form-check-inline">
+
+                                        <input class="form-check-input" type="radio" name="payment_method" id="bKash"
+                                            value="bKash" checked>
+                                        <label class="form-check-label" for="bKash">bKash</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Nagad"
+                                            value="Nagad">
+                                        <label class="form-check-label" for="Nagad">Nagad</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="Rocket"
+                                            value="Rocket">
+                                        <label class="form-check-label" for="Rocket">Rocket</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                {{paymentForm |crispy }}
+                            </div>
+
+                            <input type="submit" class="form-control btn btn-primary" value="Confirm Order">
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    {% include 'bookstore/partials/loader.html' %}
+
+</div>
+{% endblock %}
+
+
+
+
+
+{% block js %}
+<script>
+    $('select').attr('required', 1);
+
+    window.onload = async () => {
+
+        const res = await fetch("{% url 'get_districts' %}")
+        const data = await res.json()
+        const districts = data.data
+        let options = '<option value="">Select District</option>'
+
+        for (let item of districts) {
+            options += `<option value="${item.cityBangla}" districtid="${item.cityId}">${item.cityBangla}</option>`
+        }
+        // console.log(options)
+        districtContainer = document.getElementById('id_district')
+        districtContainer.innerHTML = options;
+
+
+    }
+
+    const districtInput = document.getElementById('id_district')
+    districtInput.addEventListener("change", async (e) => {
+
+
+        const districtId = parseInt(e.target.selectedOptions[0].attributes.districtid.value)
+        if (districtId != "") {
+
+        }
+        let url = "{% url 'get_area' %}"
+        url = `${url}?district_id=${districtId}`
+        const res = await fetch(url)
+        const data = await res.json()
+        const upzilla = data.data
+
+
+        let options = '<option value="">Select area</option>'
+
+        for (let item of upzilla) {
+            options += `<option value="${item.areaBangla}" areaid="${item.areaId}">${item.areaBangla}</option>`
+        }
+        // console.log(options)
+        areaContainer = document.getElementById('id_area')
+        areaContainer.innerHTML = options;
+
+
+    })
+
+
+
+
+</script>
+
+
+
+
+
+{% endblock js %}
