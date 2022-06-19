@@ -478,7 +478,16 @@ def update_cart_item(request):
                 return JsonResponse({"status": "success", "usercart": usercartList})
 
             if action == "increase":
-                cart.quantity += 1
+                if cart.book.exchangeable:
+                    if cart.quantity < cart.book.exchangeable_stock:
+                        cart.quantity += 1
+                    else:
+                        return JsonResponse({"status": "no_stock", "message": f"Only {cart.book.exchangeable_stock} {cart.book} available!"})
+
+                else:
+                    cart.quantity += 1
+
+                
             if action == "decrease":
                 if cart.quantity > 1:
                     cart.quantity -= 1
@@ -577,6 +586,9 @@ def checkout(request):
             cstmr.save()
 
         for item in usercart:
+            if item.book.exchangeable:
+                item.book.exchangeable_stock -= item.quantity
+                item.book.save()
             orderd_product = OrderedProducts()
             orderd_product.order = newOrder
             orderd_product.customer = customer

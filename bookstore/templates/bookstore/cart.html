@@ -16,16 +16,18 @@
         align-items: center;
         flex-direction: column;
         text-align: center;
-       
+
     }
 
     .guest-btn {
         text-align: center;
-       
+
         font-size: small;
     }
 
-   
+    .msg {
+        font-size: large;
+    }
 </style>
 
 {%endblock style%}
@@ -38,10 +40,13 @@
 
     <div class="cart-container container">
         <div class="row justify-content-center m-auto">
-           
+
             <div id="cartList" class="col-md-8">
                 <div class="cart-items">
                     {% if usercart %}
+                    <div class="msg">
+
+                    </div>
                     {% for item in usercart %}
                     <div class="item">
                         <img src="{{item.book.cover_photo.url}}" class="cart-img" alt="">
@@ -59,27 +64,30 @@
                                 id="quantity{{item.id}}">
                             <input class="cart-quantity-btn" type="button" value="+" onclick="increase('{{item.id}}')">
 
+
                         </div>
                         <div>
                             <button onclick="deleteItem('{{item.id}}')" id="removeItembtn">X</button>
                         </div>
                     </div>
+
+
                     {% endfor %}
 
                     {% if request.user.is_authenticated %}
                     <div class="d-flex justify-content-center btn-con">
-                        <a href="{% url 'checkout' %}"class="btn btn-main">Checkout</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-main">Checkout</a>
                     </div>
 
                     {% else %}
 
                     <div class="d-flex justify-content-center btn-con">
-                        <a href="{% url 'checkout' %}"class="btn btn-main">Checkout</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-main">Checkout</a>
                         <h3>OR</h3>
                         <div class="guest-btn">
-                            <a href="{% url 'guest_checkout' %}"class="btn bg-success guest-btn">Checkout As Guest</a>
+                            <a href="{% url 'guest_checkout' %}" class="btn bg-success guest-btn">Checkout As Guest</a>
                         </div>
-                        
+
                     </div>
                     {% endif %}
 
@@ -88,16 +96,16 @@
                     <h3 class="text-center py-5 alert alert-danger">You Don't have any books In your Shopping Bag. </h3>
 
                     {% endif %}
-                    
+
                 </div>
                 <div style="font-size: large;">
                     {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-danger" role="alert">
-                            {{message}}
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        {{message}}
+                    </div>
                     {% endfor %}
-                {% endif %}
+                    {% endif %}
                 </div>
             </div>
 
@@ -133,6 +141,12 @@
                     const selectorId = "quantity" + cartItemid
                     // console.log(selectorId)
                     document.getElementById(selectorId).value = response.quantity
+                }
+
+                if (response.status == "no_stock") {
+                    document.querySelector(".msg").innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">${response.message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`
                 }
             },
             failure: function (e) {
@@ -184,7 +198,7 @@
 
             success: function (response) {
 
-                const { status, usercart } = response
+                const {status, usercart} = response
                 if (status == "success") {
 
                     document.getElementById("cartList").innerHTML = usercart;
