@@ -93,6 +93,7 @@ class Books(models.Model):
     pdf = models.FileField(null=True, blank=True, upload_to="books/pdf/")
     created_at = models.DateTimeField(auto_now_add=True)
     exchangeable = models.BooleanField(default=False)
+    exchangeable_stock = models.IntegerField(blank=True, null=True)
     serial_number = models.IntegerField(null=True, blank=True)
     preparation = models.CharField(max_length=260,null=True, blank=True)
 
