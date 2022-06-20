@@ -249,10 +249,10 @@ def buy_now(request):
         book = None
     if book is not None:
         if request.user.is_authenticated:
-            exh_cart = Cart.objects.filter(
+            all_cart = Cart.objects.filter(user=request.user.customers)
+            exh_cart = all_cart.filter(
                 book__in=Books.objects.filter(exchangeable=True)
             )
-            all_cart = Cart.objects.filter(user=request.user.customers)
             try:
                 cart = Cart.objects.get(user=request.user.customers, book=book)
                 cart.quantity += 1
@@ -332,11 +332,12 @@ def add_to_cart(request):
             if action == "add_to_cart":
                 if book is not None:
 
-                    # checking if exchangeable books are in cart
-                    exh_cart = Cart.objects.filter(
-                        book__in=Books.objects.filter(exchangeable=True)
-                    )
+                    
                     all_cart = Cart.objects.filter(user=request.user.customers)
+
+                    # checking if exchangeable books are in cart
+                    exh_cart = all_cart.filter(
+                        book__in=Books.objects.filter(exchangeable=True), )
 
                     try:
                         cart = Cart.objects.get(user=request.user.customers, book=book)
@@ -518,7 +519,7 @@ def checkout(request):
     paymentForm = PaymentForm(instance=current_user)
 
     usercart = Cart.objects.filter(user=request.user.customers)
-    exh_cart = Cart.objects.filter(book__in=Books.objects.filter(exchangeable=True))
+    exh_cart = usercart.filter(book__in=Books.objects.filter(exchangeable=True))
 
     try:
         web_settings = WebSettings.objects.last()
