@@ -288,6 +288,10 @@ class QnA(models.Model):
     date = models.DateTimeField(auto_now_add=True, null=True)
     answer = models.TextField(blank=True)
 
+
+    class Meta:
+        ordering = ('-date', )
+
     def __str__(self):
         return f"{self.book.title} - {self.user.name}"
 
