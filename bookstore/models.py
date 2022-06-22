@@ -1,16 +1,14 @@
-from operator import mod
-from pickle import TRUE
-from pyexpat import model
-from random import choices
+from email import message
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User
 import os
 from PIL import Image
 from django.conf import settings
 import uuid
-
 from ckeditor.fields import RichTextField
-from django.forms import CharField, ChoiceField
+
 
 # Create your models here.
 
@@ -99,6 +97,10 @@ class Books(models.Model):
 
     def __str__(self):
         return self.title
+
+    
+    # class Meta:
+    #     ordering = ('serial_number', )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -230,6 +232,29 @@ class Order(models.Model):
         return f"{self.address.address}, {self.address.area}, {self.address.district}"
 
 
+# Order notification 
+@receiver(post_save, sender=Order)
+def after_order_change(sender, instance, created, **kwargs):
+    if not created:
+        if instance.status == "Paid":
+            new_notif = Notification.objects.create(user=instance.customer, 
+            message=f"We’ve confirmed your payment For Order ({instance.order_id}).Thank you for Ordering with us.You can track your order status from my account page.")
+            new_notif.save()
+        
+        if instance.status == "Preaparing":
+            new_notif = Notification.objects.create(user=instance.customer, 
+            message=f"Your order ({instance.order_id}) has been received. To Confirm your order please complete your payment within 2Hours, otherwise your order will be cancelled.To complete order please send ({instance.grand_total})TK amount to 01610427497(Bkash/­Nagad/Rocket)")
+            new_notif.save()
+        
+        if instance.status == "Completed":
+            new_notif = Notification.objects.create(user=instance.customer, 
+            message=f"Your order ({instance.order_id}) has been delivered. Thank you for Ordering with us.You can give a review at the bottom of your ordered books")
+            new_notif.save()
+
+
+
+
+
 class OrderedProducts(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="ordered_books")
     customer = models.ForeignKey(Customers, on_delete=models.CASCADE)
@@ -249,7 +274,7 @@ class WebSettings(models.Model):
     payment_instruction = RichTextField()
     shipping_charge = models.IntegerField(default=50)
     web_logo = models.ImageField(upload_to="web_logo/", null=True, blank=True)
-    exchange_rules = models.TextField(blank=True, null=True)
+    exchange_rules = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
@@ -271,12 +296,15 @@ class Review(models.Model):
         Books, on_delete=models.CASCADE, null=True, blank=True, related_name="reviews"
     )
     user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
-    reviewed_at = models.DateField(auto_now_add=True)
+    reviewed_at = models.DateField(auto_now_add=True, blank=True, null=True)
     comment = models.TextField()
     ratings = models.CharField(choices=RATING_CHOICES, max_length=10, default="5")
 
     def __str__(self):
         return f"{self.book.title} - {self.ratings}"
+
+    class Meta:
+        ordering = ('-reviewed_at', )
 
 
 class QnA(models.Model):
@@ -285,7 +313,7 @@ class QnA(models.Model):
     )
     user = models.ForeignKey(Customers, on_delete=models.CASCADE, null=True, blank=True)
     question = models.CharField(max_length=160)
-    date = models.DateTimeField(auto_now_add=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     answer = models.TextField(blank=True)
 
 
@@ -294,6 +322,16 @@ class QnA(models.Model):
 
     def __str__(self):
         return f"{self.book.title} - {self.user.name}"
+
+
+# Qna notification 
+@receiver(post_save, sender=QnA)
+def after_qna_change(sender, instance, created, **kwargs):
+    if not created:
+        msg = f"Your question About ({instance.book}) has been Answered By AAP. Your Question Answer is : {instance.answer}"
+        new_notif = Notification.objects.create(user=instance.user, message=msg, answered=True)
+        new_notif.save()
+
 
 
 class SavedAddress(models.Model):
@@ -311,12 +349,17 @@ class SavedAddress(models.Model):
 
 
 class Exchange(models.Model):
+
     STATUS = (
         ("Pending", "Pending"),
+        ("Granted", "Granted"),
         ("Received", "Received"),
+        ("Preaparing", "Preaparing"),
+        ("OnShipping", "OnShipping"),
         ("Completed", "Completed"),
         ("Canceled", "Canceled"),
     )
+  
 
     user = models.ForeignKey(
         Customers, on_delete=models.CASCADE, related_name="exchange"
@@ -330,3 +373,64 @@ class Exchange(models.Model):
 
     def __str__(self):
         return self.user.name
+
+# Exchange notification 
+@receiver(post_save, sender=Exchange)
+def after_exchange_change(sender, instance, created, **kwargs):
+    if not created:
+        if instance.status == "Preaparing":
+            new_notif = Notification.objects.create(user=instance.user, 
+            message="তোমার এক্সচেঞ্জ রিকুয়েস্ট গ্রহন করা হয়েছে। তোমাকে এখন বইগুলো নিকটস্থ কুরিয়ারে গিয়ে আমাদের ঠিকানায় পাঠাতে হবে। কুরিয়ারে পাঠানোর তথ্য= নামঃ পাঠশালা লাইব্রেরি, ঠিকানাঃ রাজা বাজার,ঢাকা এবং নাম্বারঃ 01610427498")
+            new_notif.save()
+        
+        if instance.status == "Received":
+            new_notif = Notification.objects.create(user=instance.user, 
+            message="তোমার এক্সচেঞ্জ রিকুয়েস্ট এর বইগুলো আমরা গ্রহন করেছি। তোমার পাঠানো বইগুলো যাচাই করে আমরা তোমাকে সমতুল্য ক্রেডিট তোমার একাউন্টে দিয়েছি। তুমি My Account অপশনে গিয়ে তোমার প্রাপ্য ক্রেডিট দেখতে পারবে। ক্রেডিট দিয়ে তুমি এক্সচেঞ্জ সেকশন থেকে বই নিতে পারবে।")
+            new_notif.save()
+
+
+# user notification
+class Notification(models.Model):
+    user = models.ForeignKey(Customers, on_delete=models.CASCADE, related_name="notifications")
+    message = models.CharField(max_length=260, blank=True, null=True)
+    read = models.BooleanField(default=False)
+    answered = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def serialize(self):
+        return {
+            "message": self.message,
+            "date" : self.date,
+            "answered" : self.answered,
+            "read": self.read,
+            "id": self.id,
+            "name" : self.user.name,
+        }
+
+    class Meta:
+        ordering = ('-date', )
+
+
+
+
+
+class AdminNoification(models.Model):
+    notification = models.TextField(blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return "Admin Notification - Don't reload unless save is complete"
+
+
+
+
+# # Send Admin notification 
+# @receiver(post_save, sender=AdminNoification)
+# def send_admin_notification(sender, instance, created, **kwargs):
+#     customer = Customers.objects.filter(device__isnull=True)
+#     for c in customer:
+#         new_notif = Notification.objects.create(user=c, message=instance.notification)
+#         new_notif.save()
+        
+
+   

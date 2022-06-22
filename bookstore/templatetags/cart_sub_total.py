@@ -1,6 +1,6 @@
 from django import template
 register = template.Library()
-from bookstore.models import Cart,WebSettings
+from bookstore.models import Cart, Notification,WebSettings
 
 @register.simple_tag
 def get_shipping_charge():
@@ -25,4 +25,10 @@ def cart_sub_total(usercart):
 @register.simple_tag
 def total_cart_item(user):
     cart = Cart.objects.filter(user__contact_no=user.username)
+    return len(cart)
+
+
+@register.simple_tag
+def unread_notification(user):
+    cart = Notification.objects.filter(user__contact_no=user.username, read=False)
     return len(cart)
