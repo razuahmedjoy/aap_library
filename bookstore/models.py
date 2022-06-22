@@ -249,7 +249,7 @@ class WebSettings(models.Model):
     payment_instruction = RichTextField()
     shipping_charge = models.IntegerField(default=50)
     web_logo = models.ImageField(upload_to="web_logo/", null=True, blank=True)
-    exchange_rules = models.TextField(blank=True, null=True)
+    exchange_rules = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
