@@ -237,8 +237,9 @@ def buy_now(request):
         book = None
     if book is not None:
         if request.user.is_authenticated:
-            all_cart = Cart.objects.filter(user=request.user.customers)
-            exh_cart = all_cart.filter(
+            all_cart = Cart.objects.filter(user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
+            u_cart = Cart.objects.filter(user=request.user.customers)
+            exh_cart = u_cart.filter(
                 book__in=Books.objects.filter(exchangeable=True)
             )
             try:
@@ -319,12 +320,11 @@ def add_to_cart(request):
 
             if action == "add_to_cart":
                 if book is not None:
-
-                    
-                    all_cart = Cart.objects.filter(user=request.user.customers)
+                    u_cart = Cart.objects.filter(user=request.user.customers)        
+                    all_cart = Cart.objects.filter(user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
 
                     # checking if exchangeable books are in cart
-                    exh_cart = all_cart.filter(
+                    exh_cart = u_cart.filter(
                         book__in=Books.objects.filter(exchangeable=True), )
 
                     try:
@@ -364,6 +364,8 @@ def add_to_cart(request):
                                 )
 
                         elif not book.exchangeable and len(exh_cart) < 1:
+                            print(len(exh_cart))
+                            print('kk')
                             cart = Cart(
                                 user=request.user.customers, book=book, quantity=1
                             )
@@ -569,15 +571,17 @@ def checkout(request):
 
         # deduct store credit on succesful order
         if exh_cart:
-            total_books = usercart.aggregate(Sum("quantity"))["quantity__sum"]
+            count_credit = ([cart.get_value() for cart in usercart])
+            total_credit = sum(count_credit)
             cstmr = request.user.customers
-            cstmr.store_credit -= total_books
+            cstmr.store_credit -= total_credit
             cstmr.save()
 
         for item in usercart:
             if item.book.exchangeable:
                 item.book.exchangeable_stock -= item.quantity
                 item.book.save()
+
             orderd_product = OrderedProducts()
             orderd_product.order = newOrder
             orderd_product.customer = customer
@@ -603,7 +607,8 @@ def checkout(request):
 
     # show diffrent checkout if book is exchangeable
     if exh_cart:
-        total_books = usercart.aggregate(Sum("quantity"))["quantity__sum"]
+        count_credit = ([cart.get_value() for cart in usercart])
+        total_credit = sum(count_credit)
         cstmr = request.user.customers
         store_credit = cstmr.store_credit
 
@@ -617,7 +622,7 @@ def checkout(request):
         }
 
         # show error if store credit is not enough
-        if store_credit < total_books:
+        if store_credit < total_credit:
             messages.add_message(
                 request, messages.ERROR, "Your Exchange credit is less than total books"
             )

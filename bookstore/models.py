@@ -1,4 +1,3 @@
-from email import message
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
@@ -92,6 +91,7 @@ class Books(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     exchangeable = models.BooleanField(default=False)
     exchangeable_stock = models.IntegerField(blank=True, null=True)
+    exchange_value = models.IntegerField(default=1, null=True, blank=True)
     serial_number = models.IntegerField(null=True, blank=True)
     preparation = models.CharField(max_length=260,null=True, blank=True)
 
@@ -177,6 +177,10 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.name}  {self.book.title}"
+
+    
+    def get_value(self):
+        return self.quantity * self.book.exchange_value
 
     @property
     def price(self):
