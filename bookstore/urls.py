@@ -56,6 +56,9 @@ urlpatterns = [
     #add to cart
     path('add_to_cart', add_to_cart, name="add_to_cart" ),
 
+
+    path('get_notification', get_notification, name="get_notifications"),
+
     # user review
     path('write_review/<int:id>', write_review, name="write_review"),
 
