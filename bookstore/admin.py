@@ -49,8 +49,11 @@ admin.site.register(Books,BooksAdmin)
 
 
 class CustomersAdmin(admin.ModelAdmin):
-    # readonly_fields = (,)
-    pass
+    list_display = ('name', 'contact_no', 'store_credit')
+    list_editable = ('store_credit',)
+    search_fields = ['contact_no']
+
+    
 
 admin.site.register(Customers,CustomersAdmin)
 
