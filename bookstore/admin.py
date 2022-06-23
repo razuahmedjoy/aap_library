@@ -191,4 +191,4 @@ class PublisherAdmin(admin.ModelAdmin):
 admin.site.register(Author, AuhtorAdmin)
 admin.site.register(Publisher, PublisherAdmin)
 # admin.site.register(AdminNoification)
-# admin.site.register(Notification)
+

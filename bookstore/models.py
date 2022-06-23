@@ -99,8 +99,8 @@ class Books(models.Model):
         return self.title
 
     
-    # class Meta:
-    #     ordering = ('serial_number', )
+    class Meta:
+        ordering = ('serial_number', )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
