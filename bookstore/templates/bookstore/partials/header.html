@@ -15,37 +15,19 @@
         </a>
 
 
-        <!-- <div>
-
-            <form class="search-form" action="" style="z-index: 100;">
-                
-                <div class="d-flex justify-content-between w-100">
-                    
-                    <input type="search" name="" placeholder="search here..." id="search-box">
-                    <label for="search-box" class="fas fa-search"></label>
-                    
-                    
-                    
-                    
-                </div>
-        </div> -->
-
-
-
-
         <div class="searchbox">
             <form autocomplete="off" class="search" action="/all-books/search">
                 <input required type="" id="srch" name="searchTxt" placeholder="বাংলায় সার্চ করুন" autocomplete="off">
-                    
-                    <label id="searchBtn" for="srch" class="fas fa-search">
-                      
-                    </label>
-      
+
+                <label id="searchBtn" for="srch" class="fas fa-search">
+
+                </label>
+
 
                 <div id="searchResult" class="results">
-              
-            
-            
+
+
+
 
                 </div>
 
@@ -63,7 +45,7 @@
 
         <div class="icons d-flex align-items-center">
             <div id="search-btn" class="fas fa-search"></div>
-            <!-- <a href="#" class="fas fa-heart"></a> -->
+
             <a href="{% url 'cart' %}" class="fas fa-shopping-cart">
                 {% if request.user.is_authenticated %}
                 <span class="total-items">{% total_cart_item request.user %}</span>
@@ -73,21 +55,13 @@
             </a>
 
             {% if request.user.is_authenticated %}
-            <div class="fas fa-user dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-
-
+            <div class="fas fa-user dropdown-toggle position-relative" id="navbarDropdown" role="button" data-bs-toggle="dropdown"aria-expanded="false">
+                <span class="total-items" id="notifi">{% unread_notification request.user %}</span>
             </div>
             <ul class="dropdown-menu header-user-navigation" aria-labelledby="navbarDropdown">
-
                 <li><a class="dropdown-item ms-0" href="{% url 'profile' %}">My Account</a></li>
-
+                <li><a class="dropdown-item ms-0" onclick="getNotification('{{request.user}}')" data-bs-toggle="modal" data-bs-target="#notificationModal">Notifications (<span style="color: red;">{% unread_notification request.user %}</span>) </a></li>
                 <li><a class="dropdown-item ms-0" href="{% url 'logout' %}">Logout</a></li>
-
-
-
-
-
             </ul>
 
             {% else %}
@@ -111,19 +85,18 @@
     <div class="header-2">
 
         <nav class="navbar" style="position: relative;">
-            <div class="dropdown">
+             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle text-left" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Home
-                </button>
+                    data-bs-toggle="dropdown" aria-expanded="false">Exchange</button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="{% url 'exchange' %}">Exchange</a></li>
                     <li><a class="dropdown-item" href="{% url 'author_list' %}">Authors</a></li>
                     <li><a class="dropdown-item" href="{% url 'publihser_list' %}">Publishers</a></li>
-                    <li><a class="dropdown-item" href="{% url 'exchange' %}">Exchange</a></li>
                     <li><a class="dropdown-item" href="{% url 'tracking' %}">Track Order</a></li>
-                    <li><a class="dropdown-item" target="_blank" href="https://www.aapathshala.com/library/">Online Library</a></li>
+                    <li><a class="dropdown-item" target="_blank" href="https://www.aapathshala.com/library/">Online
+                            Library</a></li>
                 </ul>
-            </div>
+             </div>
 
             {% if categories %}
             {% for category in categories %}
@@ -133,17 +106,19 @@
             {% endif %}
 
 
-            
-            <a href="{% url 'tracking' %}" class="btn btn-default online-lib-btn">Track</a>
-            
 
-        
+            <a href="{% url 'tracking' %}" class="btn btn-default online-lib-btn">Track</a>
+
+
+
 
 
         </nav>
     </div>
 
 </header>
+
+
 
 
 <!-- header section ends -->

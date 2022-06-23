@@ -34,6 +34,7 @@
 
   .exchange textarea {
     height: 5rem;
+    font-size: 1.5rem;
   }
 
   .exchange input {
@@ -45,9 +46,17 @@
   }
 
   .rules {
-    text-align: center;
-    max-width: 45ch;
+    text-align: left;
     font-size: 1.5rem;
+  }
+
+  .mdl-btn {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-close {
+    font-size: large;
   }
   
 </style>
@@ -80,7 +89,7 @@
         <h3 class="text-center page-title">এক্সচেঞ্জ নীতিমালা</h3>
         <article class="rules">
           <p>
-            {{web_settings.exchange_rules}}
+            {{web_settings.exchange_rules|safe}}
           </p>
         </article>
 
@@ -90,19 +99,22 @@
       <!-- Modal -->
       <div class="modal fade ExchangeModal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="staticBackdropLabel">এক্সচেঞ্জ নীতিমালা</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p class="rules">
-                {{web_settings.exchange_rules}} 
-              </p>
+              <div style="font-size: large;">
+                {{web_settings.exchange_rules|safe}} 
 
+              </div>
+            
+               
+  
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer mdl-btn">
               <button type="button" data-bs-dismiss="modal" class="btn btn-primary">বুঝতে পেরেছি</button>
             </div>
           </div>
@@ -127,11 +139,6 @@
   $(window).on('load', function () {
     $('.ExchangeModal').modal('show');
   });
-
-  // $('.btn-close').click(function () {
-  //   window.location.href = "{% url 'profile' %}"
-  //   return false;
-  // });
 
 </script>
 

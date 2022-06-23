@@ -1,27 +1,16 @@
-from email import message
-from errno import ESTALE
-from os import device_encoding
-from unicodedata import name
-from uuid import uuid4
-from xml.dom import ValidationErr
+from tkinter.tix import Tree
 from django.forms import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from bookstore.models import *
 from django.template.loader import render_to_string
-from django.contrib.auth.models import User
 from django.contrib import messages
 from time import time
-from django.conf import settings
 
 from django.core.exceptions import ObjectDoesNotExist
 
-
-from django.urls import reverse
-
 from django.db.models import Sum
 
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
 
@@ -931,4 +920,24 @@ def tracking(request):
     
     return render(request, "bookstore/tracking.html")
 
-    
+
+
+def get_notification(request):
+     if request.is_ajax():
+            user = request.GET.get("user")
+            action = request.GET.get("action")
+            notif_id = request.GET.get("notif_id")
+
+            if action == "get_notifications":
+                notif = Notification.objects.filter(user__contact_no=user).order_by('-id')[:10]
+                return JsonResponse({"status": "success", "message": ([notif.serialize() for notif in notif])})
+            
+            if action == "mark_read":
+                notif = Notification.objects.get(id=notif_id)
+                notif.read = True
+                notif.save()
+                return JsonResponse({"status": "success"})
+            
+
+                    
+                   

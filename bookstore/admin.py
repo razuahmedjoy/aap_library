@@ -86,7 +86,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 
-    search_fields = ('payment__transaction_id',)
+    search_fields = ['payment__transaction_id', 'contact_no', 'customer__name']
 
     def get_address(self,obj):
         return f"{obj.address.address}, {obj.address.area}, {obj.address.district}"
@@ -133,9 +133,11 @@ admin.site.register(Payment,PaymentAdmin)
 
 
 class OrderedProductsAdmin(admin.ModelAdmin):
+
     
     list_display = ('__str__','customer')
     readonly_fields = ('customer','order','books','quantity','price','total_amount')
+    
 
 admin.site.register(OrderedProducts,OrderedProductsAdmin)
 
@@ -160,7 +162,17 @@ class QnAAdmin(admin.ModelAdmin):
 
 admin.site.register(QnA,QnAAdmin)
 
-admin.site.register(Exchange)
+
+class ExchangeAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'mobile_no', 'number_of_books', 'sending_date', 'comment', 'status',)
+    list_editable = ('status',)
+
+    search_fields = ['mobile_no']
+
+
+
+
+admin.site.register(Exchange, ExchangeAdmin)
 
 
 admin.site.register(SavedAddress)
@@ -178,3 +190,5 @@ class PublisherAdmin(admin.ModelAdmin):
 
 admin.site.register(Author, AuhtorAdmin)
 admin.site.register(Publisher, PublisherAdmin)
+# admin.site.register(AdminNoification)
+
