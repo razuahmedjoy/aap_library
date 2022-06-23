@@ -180,9 +180,9 @@ AAPLibrary - {{book.title}}
                 <span>Tk. {{book.price}}</span>
             </div>
             {% if book.exchangeable %}
-            {% if book.exchangeable_stock >= 1 %}
-            <h5 class="fw-bold">Credit per Book : {{book.exchange_value}}
-            <h5 class="text-success"><i class="fas fa-check-circle"></i>Available Books : {{book.exchangeable_stock}}
+            {% if book.exchangeable_stock >= 1 %} 
+            <h5 class="text-success"><i class="fas fa-check-circle"></i> Credit Per Book : {{book.exchange_value}}
+            <h5 class="text-success"><i class="fas fa-check-circle"></i> Available Books : {{book.exchangeable_stock}}
             </h5>
             {% else %}
             <h5 class="text-danger"><i class="fas fa-times-circle"></i> Out Of Stock</h5>
