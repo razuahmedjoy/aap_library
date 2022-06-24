@@ -270,7 +270,7 @@ def after_order_change(sender, instance, created, **kwargs):
                     send_tele.send_message(tele_text)
             
             except:
-                print("wrong")
+                pass
         
         if instance.status == "Preaparing":
             new_notif = Notification.objects.create(user=instance.customer, 
