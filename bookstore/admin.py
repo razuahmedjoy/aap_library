@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
 
 # Register your models here.
 from .models import *
@@ -24,10 +26,10 @@ class PreviewImagesTabularAdmin(admin.TabularInline):
 class BooksAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
-    list_display = ('__str__', 'main_category','get_category','price','in_stock','serial_number', 'exchange_value')
+    list_display = ('__str__', 'main_category','get_category','price','in_stock','serial_number', 'exchange_value', 'exchangeable_stock')
     list_filter = ('category','category__parent_category')
 
-    list_editable = ('price','in_stock','serial_number', 'exchange_value')
+    list_editable = ('price','in_stock','serial_number', 'exchange_value', 'exchangeable_stock')
 
     inlines = [PreviewImagesTabularAdmin]
 
@@ -78,18 +80,31 @@ class OrderedBooksAdmin(admin.TabularInline):
     
 
 
+class ExchangeOrderFilter(admin.SimpleListFilter):
+    title = _('Payment Type')
+    parameter_name = 'payment_typ'
+
+    def lookups(self, request, model_admin):
+
+        return (
+            ('Exchange', _('Hide All Exchange Order')),
+        )
+
+    def queryset(self, request, queryset):
+
+        if self.value() == 'Exchange':
+            return queryset.filter(~Q(payment__payment_method="Exchange"))
+     
+
 class OrderAdmin(admin.ModelAdmin):
     
     list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status', 'created_at', 'ordered_books')
     readonly_fields = ('customer','grand_total','order_id','address','payment','contact_no')
-
     list_editable = ('status',)
-
     inlines = [OrderedBooksAdmin]
-
-
-
     search_fields = ['payment__transaction_id', 'contact_no', 'customer__name']
+
+    list_filter = ('payment__payment_method', ExchangeOrderFilter)
 
     def get_address(self,obj):
         return f"{obj.address.address}, {obj.address.area}, {obj.address.district}"
@@ -108,7 +123,6 @@ class OrderAdmin(admin.ModelAdmin):
                 book_list.append(b)
                  
         return book_list
-      
     
     get_address.short_description = "Shipping"
 
@@ -131,8 +145,6 @@ admin.site.register(Payment,PaymentAdmin)
 
 
 class OrderedProductsAdmin(admin.ModelAdmin):
-
-    
     list_display = ('__str__','customer')
     readonly_fields = ('customer','order','books','quantity','price','total_amount')
     
