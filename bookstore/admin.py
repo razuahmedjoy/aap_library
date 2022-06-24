@@ -106,14 +106,9 @@ class OrderAdmin(admin.ModelAdmin):
             else:
                 b = f"{book}"
                 book_list.append(b)
-
-
-            
-            
-            
-        
+                 
         return book_list
-        # return f""
+      
     
     get_address.short_description = "Shipping"
 
