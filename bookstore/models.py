@@ -8,6 +8,8 @@ from django.conf import settings
 import uuid
 from ckeditor.fields import RichTextField
 
+from . import send_tele
+
 
 # Create your models here.
 
@@ -239,11 +241,36 @@ class Order(models.Model):
 # Order notification 
 @receiver(post_save, sender=Order)
 def after_order_change(sender, instance, created, **kwargs):
+    def get_address(obj):
+        return f"{obj.address.address}, {obj.address.area}, {obj.address.district}"
+
+    def get_ordered_books(obj):
+        book_list = []
+        for book in obj.ordered_books.all():
+            if book.quantity > 1:
+                b = f"{book}({book.quantity})"
+                book_list.append(b)
+            else:
+                b = f"{book}"
+                book_list.append(b)
+                 
+        return (", ".join(book_list))
+
     if not created:
         if instance.status == "Paid":
             new_notif = Notification.objects.create(user=instance.customer, 
             message=f"We’ve confirmed your payment For Order ({instance.order_id}).Thank you for Ordering with us.You can track your order status from my account page.")
             new_notif.save()
+
+            try:
+                if not instance.grand_total < 1:
+                    tele_text = f"{instance.created_at.strftime('%m/%d/%Y %I:%M %p')}\n\n*বইয়ের নাম : {get_ordered_books(instance)}\n\n*নাম: {instance.customer.name}\nঠিকানা : {get_address(instance)}\nনাম্বার : {instance.contact_no} \n"
+
+                    # print(tele_text)
+                    send_tele.send_message(tele_text)
+            
+            except:
+                pass
         
         if instance.status == "Preaparing":
             new_notif = Notification.objects.create(user=instance.customer, 
