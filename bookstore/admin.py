@@ -50,10 +50,29 @@ admin.site.register(Sub_Category,Sub_CategoryAdmin)
 admin.site.register(Books,BooksAdmin)
 
 
+
+class CustomerFilter(admin.SimpleListFilter):
+    title = _('Customer Type')
+    parameter_name = 'customer_guest'
+
+    def lookups(self, request, model_admin):
+
+        return (
+            ('Guest', _('Show Only Guest')),
+        )
+
+    def queryset(self, request, queryset):
+
+        if self.value() == 'Guest':
+            return queryset.filter(name='guest-auto')
+
+
 class CustomersAdmin(admin.ModelAdmin):
     list_display = ('name', 'contact_no', 'store_credit')
     list_editable = ('store_credit',)
     search_fields = ['contact_no']
+
+    list_filter = (CustomerFilter,)
 
     
 
