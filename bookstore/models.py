@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User
@@ -161,6 +161,18 @@ class Customers(models.Model):
         return self.name
 
 
+# customer  notification 
+@receiver(pre_save, sender=Customers)
+def before_customer_creation(sender, instance, **kwargs):
+    if instance.name == 'guest-auto':
+        guest_customers = Customers.objects.filter(name='guest-auto', cart__isnull=True)
+        if len(guest_customers) > 800:
+            try:
+                guest_customers.delete()
+            except:
+                pass
+
+
 class Address(models.Model):
     user = models.ForeignKey(Customers, on_delete=models.SET_NULL, null=True)
     district = models.CharField(max_length=50)
@@ -195,8 +207,7 @@ class Cart(models.Model):
 
 class Payment(models.Model):
     customer = models.ForeignKey(
-        Customers, on_delete=models.SET_NULL, null=True, editable=False
-    )
+        Customers, on_delete=models.SET_NULL, null=True, editable=False)
     sender_number = models.CharField(max_length=15)
     transaction_id = models.CharField(max_length=100)
     payment_method = models.CharField(max_length=20)
