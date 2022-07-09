@@ -317,6 +317,8 @@ class WebSettings(models.Model):
     shipping_charge = models.IntegerField(default=50)
     web_logo = models.ImageField(upload_to="web_logo/", null=True, blank=True)
     exchange_rules = RichTextField(blank=True, null=True)
+    show_notification = models.BooleanField(default=False)
+    admin_notification = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return f"Web Settings ( Don't delete it )"
