@@ -27,6 +27,7 @@ from bookstore.forms import *
 def book_store_home(request):
     single_category = None
     all_category = None
+    web_settings = WebSettings.objects.last()
     if "cat_id" in request.GET:
         cat_id = request.GET.get("cat_id")
         try:
@@ -43,6 +44,7 @@ def book_store_home(request):
         "single_category": single_category,
         "all_category": all_category,
         "title": "Home-AAPLibrary",
+        "web_settings" : web_settings,
     }
     return render(request, "bookstore/home.html", context)
 

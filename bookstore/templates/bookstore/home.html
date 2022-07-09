@@ -51,6 +51,7 @@
 {% include 'bookstore/partials/loginPopup.html' %}
 
 <div id="rendered">
+   
 
     {% if all_category %}
 
@@ -197,6 +198,38 @@
 </div>
 
 
+      <!-- Modal -->
+      {% if web_settings.show_notification %}
+    
+      <div class="modal fade notif-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Notification</h5>
+              <button type="button" class="btn-close" style="font-size: large;" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div style="font-size: large;">
+                <p>
+                    {{web_settings.admin_notification|safe}}
+                  </p>
+
+              </div>
+            
+            </div>
+            <div class="modal-footer mdl-btn">
+              <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+
+      <!-- Modal -->
+
+
 
 
 
@@ -211,4 +244,25 @@
 
 {% block js %}
 
-{% endblock %}
+{% if  web_settings.show_notification %}
+<script>
+
+    
+    
+  $(window).on('load', function () {
+    let modalShown = getCookie('modalShown')
+    if (modalShown == null | modalShown == undefined) {
+        $('.notif-modal').modal('show');
+        }
+        const expires = (new Date(Date.now()+ 86400*1000)).toUTCString();
+        document.cookie = "modalShown=True; expires=" + expires + ";path=/;"
+
+  });
+
+</script>
+
+{% endif %}
+
+{% endblock js %}
+
+
