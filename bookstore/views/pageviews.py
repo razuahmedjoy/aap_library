@@ -519,7 +519,6 @@ def checkout(request):
         web_settings = None
 
     if request.method == "POST":
-
         district = request.POST["district"]
         area = request.POST["area"]
         address = request.POST["address"]
@@ -609,6 +608,13 @@ def checkout(request):
 
     # show diffrent checkout if book is exchangeable
     if exh_cart:
+        for item in exh_cart:
+            stock = 0 if item.book.exchangeable_stock is None else item.book.exchangeable_stock
+            if stock < 1:
+                messages.add_message( request, messages.ERROR, "Stock has changed for some item, please remove out of stock products")
+                return HttpResponseRedirect("cart")
+            
+          
         count_credit = ([cart.get_value() for cart in usercart])
         total_credit = sum(count_credit)
         cstmr = request.user.customers
@@ -629,6 +635,10 @@ def checkout(request):
                 request, messages.ERROR, "Your Exchange credit is less than total books"
             )
             return HttpResponseRedirect("cart")
+
+        
+            
+    
 
         return render(request, "bookstore/checkout.html", context)
 
