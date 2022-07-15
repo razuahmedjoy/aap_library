@@ -339,7 +339,7 @@ AAPLibrary - {{book.title}}
                 <div class="tab-content" id="myTabContent">
                     {% if request.user.is_authenticated %}
                     {% for order in orders %}
-                    {% for b in order.orderedproducts_set.all %}
+                    {% for b in order.ordered_books.all %}
 
                     {% if b.id == book.id %}
                     {% if order.status == "Completed" %}
