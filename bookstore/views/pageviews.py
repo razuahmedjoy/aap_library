@@ -82,7 +82,7 @@ def search_books(request):
             return JsonResponse({"status": "success", "books": books})
 
         except:
-            print("here")
+           
             pass
     return JsonResponse({"status": "failed"})
 
@@ -366,8 +366,6 @@ def add_to_cart(request):
                                 )
 
                         elif not book.exchangeable and len(exh_cart) < 1:
-                            print(len(exh_cart))
-                            print('kk')
                             cart = Cart(
                                 user=request.user.customers, book=book, quantity=1
                             )
@@ -512,6 +510,7 @@ def checkout(request):
 
     usercart = Cart.objects.filter(user=request.user.customers)
     exh_cart = usercart.filter(book__in=Books.objects.filter(exchangeable=True))
+    free_delivery = usercart.filter(book__in=Books.objects.filter(free_delivery=True))
 
     try:
         web_settings = WebSettings.objects.last()
@@ -648,6 +647,7 @@ def checkout(request):
             "addressForm": addressForm,
             "paymentForm": paymentForm,
             "web_settings": web_settings,
+            "free_delivery" : free_delivery,
         }
 
     return render(request, "bookstore/checkout.html", context)
@@ -819,6 +819,7 @@ def guest_checkout(request):
     nameForm = GuestNameForm()
 
     usercart = Cart.objects.filter(user=customer)
+    free_delivery = usercart.filter(book__in=Books.objects.filter(free_delivery=True))
    
 
     try:
@@ -896,6 +897,7 @@ def guest_checkout(request):
             "order_id": order_id,
             "order": order,
             "guest" : True,
+            
         }
         return render(request, "bookstore/ordercomplete.html", context)
 
@@ -913,6 +915,7 @@ def guest_checkout(request):
             "paymentForm": paymentForm,
             "web_settings": web_settings,
             "nameForm" : nameForm,
+            "free_delivery" : free_delivery,
         }
 
     return render(request, "bookstore/guestcheckout.html", context)
