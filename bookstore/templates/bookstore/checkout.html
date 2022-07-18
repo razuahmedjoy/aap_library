@@ -118,7 +118,7 @@
                                 <h5 class="fw-bold">Shipping Charge</h5>
 
                             </div>
-                            {% if exh_cart %}
+                            {% if exh_cart or free_delivery %}
                             <span class="badge bg-warning rounded-pill">
                                 Tk. 0
                             </span>
@@ -143,6 +143,10 @@
                             <span class="badge bg-danger rounded-pill">
                                 Tk. 0
                             </span>
+                            {% elif free_delivery %}
+                            <span class="badge bg-danger rounded-pill">
+                                Tk. {% cart_sub_total_free usercart %}
+                            </span>
                             {% else %}
                             <span class="badge bg-danger rounded-pill">
                                 Tk. {% cart_sub_total usercart %}
@@ -161,7 +165,9 @@
 
                     {% csrf_token %}
                     {% if exh_cart %}
-                    <input type="hidden" name="total_amount" value="0">
+                    <input type="hidden" name="total_amount" value="0" >
+                    {% elif free_delivery %}
+                    <input type="hidden" name="total_amount" value="{% cart_sub_total_free usercart %}">
                     {% else %}
                     <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
                     {% endif %}
@@ -180,11 +186,19 @@
 
                         <div class="col-md-6">
                             <h3 class="text-center page-title">Payment Details</h3>
-                            {% if not exh_cart %}
+                            {% if free_delivery %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -  {% cart_sub_total usercart %} TK.</span>
-                            </div>
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
+                                      {% cart_sub_total_free usercart %} TK.</span>
+                            </div> 
+                            {% elif not exh_cart %}
+                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
+                                      {% cart_sub_total usercart %} TK.</span>
+                            </div> 
                             {% endif %}
+
+
 
                            
 

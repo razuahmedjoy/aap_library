@@ -96,6 +96,7 @@ class Books(models.Model):
     exchange_value = models.IntegerField(default=1, null=True, blank=True)
     serial_number = models.IntegerField(null=True, blank=True)
     preparation = models.CharField(max_length=260,null=True, blank=True)
+    free_delivery = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

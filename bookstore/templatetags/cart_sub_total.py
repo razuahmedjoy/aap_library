@@ -32,3 +32,13 @@ def total_cart_item(user):
 def unread_notification(user):
     cart = Notification.objects.filter(user__contact_no=user.username, read=False)
     return len(cart)
+
+
+@register.simple_tag
+def cart_sub_total_free(usercart):
+    subtotal = 0
+    shipping_charge = get_shipping_charge()
+
+    for item in usercart:
+        subtotal += item.total_amount
+    return subtotal
