@@ -117,8 +117,8 @@ class ExchangeOrderFilter(admin.SimpleListFilter):
 
 class OrderAdmin(admin.ModelAdmin):
     
-    list_display = ('__str__','contact_no','grand_total','get_address','payment_details','status', 'created_at', 'ordered_books')
-    readonly_fields = ('customer','grand_total','order_id','address','payment','contact_no')
+    list_display = ('__str__','contact_no','grand_total','get_address', 'shipping_method', 'payment_details','status', 'created_at', 'ordered_books')
+    readonly_fields = ('customer','grand_total','order_id','address', 'shipping_method', 'payment','contact_no')
     list_editable = ('status',)
     inlines = [OrderedBooksAdmin]
     search_fields = ['payment__transaction_id', 'contact_no', 'customer__name']

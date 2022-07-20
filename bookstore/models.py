@@ -240,6 +240,11 @@ class Order(models.Model):
     address = models.ForeignKey(
         Address, on_delete=models.SET_NULL, null=True, blank=True
     )
+
+
+    shipping_method = models.CharField(max_length=255, blank=True)
+
+
     order_id = models.CharField(max_length=100)
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, null=True)
 
@@ -316,6 +321,11 @@ class OrderedProducts(models.Model):
 class WebSettings(models.Model):
     payment_instruction = RichTextField()
     shipping_charge = models.IntegerField(default=50)
+    home_delivery_dhaka = models.IntegerField(default=50)
+    home_delivery_outside = models.IntegerField(default=50)
+    home_delivery_1_3H = models.IntegerField(default=50)
+    home_delivery_12H = models.IntegerField(default=50)
+    
     web_logo = models.ImageField(upload_to="web_logo/", null=True, blank=True)
     exchange_rules = RichTextField(blank=True, null=True)
     show_notification = models.BooleanField(default=False)

@@ -81,7 +81,22 @@
         margin-bottom: 1em;
     }
 
- 
+    .delivery-methods-inputs {
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 2em;
+        font-size: 1.5rem;
+        margin-bottom: 1em;
+
+    }
+
+    .delivery-methods-inputs label {
+        padding: 0.1em;
+    }
+
+    .office-info {
+        display: none;
+    }
 </style>
 {%endblock style%}
 
@@ -119,15 +134,15 @@
 
                             </div>
                             {% if exh_cart or free_delivery %}
-                            <span class="badge bg-warning rounded-pill">
+                            <span class="badge bg-warning rounded-pill shipping_span">
                                 Tk. 0
                             </span>
                             {% else %}
-                            <span class="badge bg-warning rounded-pill">
+                            <span class="badge bg-warning rounded-pill shipping_span">
                                 Tk. {% get_shipping_charge %}
                             </span>
                             {% endif %}
-                            
+
                         </li>
 
 
@@ -140,15 +155,15 @@
 
                             </div>
                             {% if exh_cart %}
-                            <span class="badge bg-danger rounded-pill">
+                            <span class="badge bg-danger rounded-pill sub_total_span">
                                 Tk. 0
                             </span>
                             {% elif free_delivery %}
-                            <span class="badge bg-danger rounded-pill">
+                            <span class="badge bg-danger rounded-pill sub_total_span">
                                 Tk. {% cart_sub_total_free usercart %}
                             </span>
                             {% else %}
-                            <span class="badge bg-danger rounded-pill">
+                            <span class="badge bg-danger rounded-pill sub_total_span">
                                 Tk. {% cart_sub_total usercart %}
                             </span>
                             {% endif %}
@@ -159,27 +174,85 @@
 
 
                 </div>
+
+                <div class="payment-method-input delivery-methods-inputs ">
+                    <p>Select Any Delivery Method</p>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                            id="sundarban" value="sundarban" checked>
+                        <label class="form-check-label" for="sundarban">কুরিয়ার অফিস থেকে সংগ্রহ করব(সারাদেশ,
+                            {% if free_delivery or exh_cart %} 0 {% else %} {{web_settings.shipping_charge}} {% endif %}৳)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                            id="home-delivery" value="home-delivery">
+                        <label class="form-check-label" for="home-delivery">Home Delivery(Inside Dhaka,
+                            {{web_settings.home_delivery_dhaka}}৳)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                            id="home-outside" value="home-outside">
+                        <label class="form-check-label" for="home-outside">Home Delivery(Outside Dhaka,
+                            {{web_settings.home_delivery_outside}}৳)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="1-3h"
+                            value="1-3h">
+                        <label class="form-check-label" for="1-3h">1-3H Super Fast Home Delivery(Inside Dhaka,
+                            {{web_settings.home_delivery_1_3H}}৳)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="12h"
+                            value="12h">
+                        <label class="form-check-label" for="12h">12H Fastest Home Delivery (Inside Dhaka,
+                            {{web_settings.home_delivery_12H}}৳)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                            id="office-radio" value="office-radio">
+                        <label class="form-check-label" for="office-radio">সরাসরি গিয়ে সংগ্রহ করব(ফার্মগেট/­এলিফ্যান্ট
+                            রোড, 0 ৳)</label>
+                    </div>
+                </div>
+
+
+
             </div>
+
+
             <div id="cartList" class="col-md-8">
                 <form method="POST" id="address_form">
 
                     {% csrf_token %}
+                    <input type="hidden" name="shipping_method" value="কুরিয়ার অফিস থেকে সংগ্রহ করব(সারাদেশ, 50 ৳)">
                     {% if exh_cart %}
-                    <input type="hidden" name="total_amount" value="0" >
+                    <input type="hidden" name="total_amount" value="0">
                     {% elif free_delivery %}
                     <input type="hidden" name="total_amount" value="{% cart_sub_total_free usercart %}">
                     {% else %}
                     <input type="hidden" name="total_amount" value="{% cart_sub_total usercart %}">
                     {% endif %}
                     <div class="row cart-items">
-
                         <div class="col-md-6">
-
-                            <h3 class="text-center page-title">Shipping Address</h3> 
+                            <h3 class="text-center page-title">Delivery Address</h3>
                             <div class="shipping-underline"></div>
                             <div class="address_loader">
                                 <button type="button" id="load_default">Use Saved Address</button>
                                 <i class="fas fa-undo" title="Click here to reset address" id="reset_default"></i>
+                            </div>
+                            <div class="office-info payment-method-input delivery-methods-inputs ">
+                                <div class="form-check">
+                                    <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                                        id="office-farm" value="office-farm">
+                                    <label class="form-check-label" for="office-farm">ফার্মগেট অফিস=আনন্দ সিনেমা হলের অপজিটে, 101/A Green Road Dhaka,Aspect Series Office</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
+                                        id="office-el" value="office-el">
+                                    <label class="form-check-label" for="office-el">এলিফ্যান্ট রোড অফিস=ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস</label>
+                                </div>
                             </div>
                             {{ addressForm|crispy }}
                         </div>
@@ -188,19 +261,27 @@
                             <h3 class="text-center page-title">Payment Details</h3>
                             {% if free_delivery %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
-                                      {% cart_sub_total_free usercart %} TK.</span>
-                            </div> 
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i><span
+                                    style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
+                                    <span class="user_total_span">{% cart_sub_total_free usercart %}</span>TK.</span>
+                            </div>
                             {% elif not exh_cart %}
                             <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
-                                      {% cart_sub_total usercart %} TK.</span>
-                            </div> 
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span
+                                    style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
+                                    <span class="user_total_span">{% cart_sub_total usercart %}</span>TK.</span>
+                            </div>
+                            {% elif exh_cart %}
+                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span
+                                    style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
+                                    <span class="user_total_span">0</span>TK.</span>
+                            </div>
                             {% endif %}
 
 
 
-                           
+
 
                             <div class="payment-method-input">
                                 {% if not exh_cart %}
@@ -212,7 +293,8 @@
 
                                         <input class="form-check-input" type="radio" name="payment_method" id="Exchange"
                                             value="Exchange" checked>
-                                        <label class="form-check-label" for="Exchange">Paying With Exchange Credit</label>
+                                        <label class="form-check-label" for="Exchange">Paying With Exchange
+                                            Credit</label>
                                     </div>
                                     {% else %}
                                     <div class="form-check form-check-inline">
@@ -360,6 +442,236 @@
         const area = document.getElementById('id_area');
         area.innerHTML = "";
     })
+
+
+
+
+    /// Delivery address handler
+    document.querySelectorAll('.delivery-methods').forEach(function (button) {
+        button.addEventListener('change', function () {
+            openLoader();
+            const buttonLabel = document.querySelector(`label[for="${button.id}"]`);
+            const userTotal = document.querySelector('.user_total_span');
+            const subTotal = document.querySelector('.sub_total_span');
+            const shippingSpan = document.querySelector('.shipping_span');
+            const formLabel = document.querySelector('label[for="id_address"]');
+            const district = document.getElementById('id_district');
+            const area = document.getElementById('id_area');
+            const address = document.getElementById('id_address');
+            const addressLoader = document.querySelector('.address_loader')
+            const totalAmount = document.querySelector("input[name='total_amount']")
+            const shippingMethod = document.querySelector("input[name='shipping_method']")
+            const officeInfo = document.querySelector('.office-info')
+            officeInfo.style.display = 'none';
+            district.value = "";
+
+            area.innerHTML = "";
+            address.value = ""
+            addressLoader.style.display = "flex";
+
+
+            if (button.value == "sundarban") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'sundarban',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        totalAmount.value = status.value
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "নিকটস্থ সুন্দরবন কুরিয়ার ঠিকানা*";
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        closeLoader();
+
+
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+            }
+
+            if (button.value == "home-delivery") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'home_delivery',
+                    },
+
+                    success: function (status) {
+
+
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "বাসার ঠিকানা (বিস্তারিত)*";
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        closeLoader();
+
+
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+
+            if (button.value == "home-outside") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'home_outside',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "বাসার ঠিকানা (বিস্তারিত)*";
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        closeLoader();
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+
+            if (button.value == "1-3h") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': '1_3h',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "বাসার ঠিকানা (বিস্তারিত)*";
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        closeLoader();
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+
+            if (button.value == "12h") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': '12h',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "বাসার ঠিকানা (বিস্তারিত)*";
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        closeLoader();
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+
+            if (button.value == "office-radio") {
+                addressLoader.style.display = "none";
+                officeInfo.style.display = "block"
+                shippingSpan.innerHTML = `Tk. 0`;
+                closeLoader()
+
+
+            }
+
+
+
+            if (button.value == "office-farm") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'office',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        formLabel.innerHTML = "অফিসের ঠিকানা (Don't Change) *";
+                        district.value = "ঢাকা"
+                        options = `<option value="ফার্মগেট" areaid="ফার্মগেট">ফার্মগেট</option>`;
+                        area.innerHTML = options;
+                        address.value = "আনন্দ সিনেমা হলের অপজিটে,101/A Green Road Dhaka,Aspect Series Office"
+                        addressLoader.style.display = "none"
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        officeInfo.style.display = 'block';
+                        closeLoader();
+
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+
+            if (button.value == "office-el") {
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'office',
+                    },
+
+                    success: function (status) {
+                        userTotal.innerHTML = status.value;
+                        totalAmount.value = status.value
+                        subTotal.innerHTML = `Tk. ${status.value}`;
+                        shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
+                        addressLoader.style.display = "none"
+                        formLabel.innerHTML = "অফিসের ঠিকানা (Don't Change) *";
+                        district.value = "ঢাকা"
+                        options = `<option value="এলিফ্যান্ট রোড" areaid="এলিফ্যান্ট রোড">এলিফ্যান্ট রোড</option>`;
+                        area.innerHTML = options;
+                        address.value = "ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস"
+                        shippingMethod.value = buttonLabel.innerHTML;
+                        officeInfo.style.display = 'block';
+                        closeLoader();
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+            }
+        })
+
+    })
+
+
+
 
 </script>
 

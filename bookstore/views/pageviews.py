@@ -44,7 +44,7 @@ def book_store_home(request):
         "single_category": single_category,
         "all_category": all_category,
         "title": "Home-AAPLibrary",
-        "web_settings" : web_settings,
+        "web_settings": web_settings,
     }
     return render(request, "bookstore/home.html", context)
 
@@ -82,7 +82,7 @@ def search_books(request):
             return JsonResponse({"status": "success", "books": books})
 
         except:
-           
+
             pass
     return JsonResponse({"status": "failed"})
 
@@ -221,7 +221,8 @@ def cart(request):
 
     except:
         device = request.COOKIES["device"]
-        customer, created = Customers.objects.get_or_create(device=device, name="guest-auto")
+        customer, created = Customers.objects.get_or_create(
+            device=device, name="guest-auto")
 
     context = {}
     usercart = Cart.objects.filter(user=customer)
@@ -239,7 +240,8 @@ def buy_now(request):
         book = None
     if book is not None:
         if request.user.is_authenticated:
-            all_cart = Cart.objects.filter(user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
+            all_cart = Cart.objects.filter(
+                user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
             u_cart = Cart.objects.filter(user=request.user.customers)
             exh_cart = u_cart.filter(
                 book__in=Books.objects.filter(exchangeable=True)
@@ -252,7 +254,8 @@ def buy_now(request):
 
                 if book.exchangeable and len(all_cart) < 1:
                     if request.user.customers.store_credit >= 1:
-                        cart = Cart(user=request.user.customers, book=book, quantity=1)
+                        cart = Cart(user=request.user.customers,
+                                    book=book, quantity=1)
                         cart.save()
                     else:
                         messages.add_message(
@@ -262,7 +265,8 @@ def buy_now(request):
 
                 # can not buy book if exchangeable books in cart
                 elif not book.exchangeable and len(exh_cart) < 1:
-                    cart = Cart(user=request.user.customers, book=book, quantity=1)
+                    cart = Cart(user=request.user.customers,
+                                book=book, quantity=1)
                     cart.save()
 
                 else:
@@ -279,7 +283,6 @@ def buy_now(request):
                             request, messages.ERROR, "Remove regular books from cart"
                         )
                         return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
 
         # Logic for Guest user
         else:
@@ -303,7 +306,7 @@ def buy_now(request):
                 else:
                     cart = Cart(user=customer, book=book, quantity=1)
                     cart.save()
-                    
+
     return redirect("cart")
 
 
@@ -322,15 +325,17 @@ def add_to_cart(request):
 
             if action == "add_to_cart":
                 if book is not None:
-                    u_cart = Cart.objects.filter(user=request.user.customers)        
-                    all_cart = Cart.objects.filter(user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
+                    u_cart = Cart.objects.filter(user=request.user.customers)
+                    all_cart = Cart.objects.filter(
+                        user=request.user.customers, book__in=Books.objects.filter(exchangeable=False))
 
                     # checking if exchangeable books are in cart
                     exh_cart = u_cart.filter(
                         book__in=Books.objects.filter(exchangeable=True), )
 
                     try:
-                        cart = Cart.objects.get(user=request.user.customers, book=book)
+                        cart = Cart.objects.get(
+                            user=request.user.customers, book=book)
                         user_cart = Cart.objects.filter(
                             user__contact_no=request.user.username
                         )
@@ -354,7 +359,8 @@ def add_to_cart(request):
                                     user__contact_no=request.user.username
                                 )
                                 return JsonResponse(
-                                    {"status": "success", "count": len(user_cart)}
+                                    {"status": "success",
+                                        "count": len(user_cart)}
                                 )
 
                             else:
@@ -464,7 +470,8 @@ def update_cart_item(request):
             if action == "delete":
                 cart.delete()
                 context = {"usercart": usercart}
-                usercartList = render_to_string("bookstore/renderedcart.html", context)
+                usercartList = render_to_string(
+                    "bookstore/renderedcart.html", context)
 
                 return JsonResponse({"status": "success", "usercart": usercartList})
 
@@ -478,7 +485,6 @@ def update_cart_item(request):
                 else:
                     cart.quantity += 1
 
-                
             if action == "decrease":
                 if cart.quantity > 1:
                     cart.quantity -= 1
@@ -507,10 +513,75 @@ def checkout(request):
     current_user = request.user
     addressForm = AddressForm(instance=current_user)
     paymentForm = PaymentForm(instance=current_user)
-
     usercart = Cart.objects.filter(user=request.user.customers)
-    exh_cart = usercart.filter(book__in=Books.objects.filter(exchangeable=True))
-    free_delivery = usercart.filter(book__in=Books.objects.filter(free_delivery=True))
+    exh_cart = usercart.filter(
+        book__in=Books.objects.filter(exchangeable=True))
+    free_delivery = usercart.filter(
+        book__in=Books.objects.filter(free_delivery=True))
+
+    if request.is_ajax():
+        value = [item.total_amount for item in usercart]
+        value_sum = sum(value)
+
+        action = request.GET.get("action")
+        if action == "sundarban":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.shipping_charge
+
+            except:
+                shipping_charge = 0
+
+            if exh_cart or free_delivery:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "home_delivery":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_dhaka
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "home_outside":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_outside
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "1_3h":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_1_3H
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "12h":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_12H
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "office":
+
+            charge = value_sum
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": 0})
 
     try:
         web_settings = WebSettings.objects.last()
@@ -525,6 +596,7 @@ def checkout(request):
         payment_method = request.POST["payment_method"]
         sender_number = request.POST["sender_number"]
         transaction_id = request.POST["transaction_id"]
+        shipping_method = request.POST["shipping_method"]
 
         total_amount = int(request.POST["total_amount"])
 
@@ -542,7 +614,6 @@ def checkout(request):
         # generate orderid
 
         t = str(time())
-    
 
         order_id = f"AAP-{get_random_string(3).upper()}{t[-3:]}"
         newPayment.order_id = order_id
@@ -566,6 +637,7 @@ def checkout(request):
             address=newOrderAddress,
             order_id=order_id,
             payment=newPayment,
+            shipping_method=shipping_method,
         )
         newOrder.save()
 
@@ -610,16 +682,17 @@ def checkout(request):
         for item in exh_cart:
             stock = 0 if item.book.exchangeable_stock is None else item.book.exchangeable_stock
             if stock < 1:
-                messages.add_message( request, messages.ERROR, "Stock has changed for some item, please remove out of stock products")
+                messages.add_message(
+                    request, messages.ERROR, "Stock has changed for some item, please remove out of stock products")
                 return HttpResponseRedirect("cart")
-            
-          
+
         count_credit = ([cart.get_value() for cart in usercart])
         total_credit = sum(count_credit)
         cstmr = request.user.customers
         store_credit = cstmr.store_credit
 
-        exh_form = PaymentForm(initial={"sender_number": 0, "transaction_id": 0})
+        exh_form = PaymentForm(
+            initial={"sender_number": 0, "transaction_id": 0})
         context = {
             "usercart": usercart,
             "addressForm": addressForm,
@@ -635,10 +708,6 @@ def checkout(request):
             )
             return HttpResponseRedirect("cart")
 
-        
-            
-    
-
         return render(request, "bookstore/checkout.html", context)
 
     else:
@@ -647,7 +716,7 @@ def checkout(request):
             "addressForm": addressForm,
             "paymentForm": paymentForm,
             "web_settings": web_settings,
-            "free_delivery" : free_delivery,
+            "free_delivery": free_delivery,
         }
 
     return render(request, "bookstore/checkout.html", context)
@@ -675,7 +744,8 @@ def default_address(request):
 
     if request.method == "GET":
         try:
-            user_address = SavedAddress.objects.get(user=current_user.customers)
+            user_address = SavedAddress.objects.get(
+                user=current_user.customers)
             return render(
                 request,
                 "bookstore/addressbook.html",
@@ -805,27 +875,89 @@ def publisher_list(request):
     )
 
 
-
-
-# function for guest checkout 
+# function for guest checkout
 
 def guest_checkout(request):
     device = request.COOKIES["device"]
     customer, created = Customers.objects.get_or_create(
-                device=device, name="guest-auto")
+        device=device, name="guest-auto")
 
     addressForm = AddressForm()
     paymentForm = PaymentForm()
     nameForm = GuestNameForm()
 
     usercart = Cart.objects.filter(user=customer)
-    free_delivery = usercart.filter(book__in=Books.objects.filter(free_delivery=True))
-   
+    free_delivery = usercart.filter(
+        book__in=Books.objects.filter(free_delivery=True))
 
     try:
         web_settings = WebSettings.objects.last()
     except:
         web_settings = None
+
+    if request.is_ajax():
+        value = [item.total_amount for item in usercart]
+        value_sum = sum(value)
+
+        action = request.GET.get("action")
+        if action == "sundarban":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.shipping_charge
+
+            except:
+                shipping_charge = 0
+
+            if free_delivery:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "home_delivery":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_dhaka
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "home_outside":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_outside
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "1_3h":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_1_3H
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "12h":
+            try:
+                settings = WebSettings.objects.last()
+                shipping_charge = settings.home_delivery_12H
+            except:
+                shipping_charge = 0
+
+            charge = value_sum + shipping_charge
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+
+        if action == "office":
+
+            charge = value_sum
+            return JsonResponse({"status": "success", "value": charge, "total_delivery": 0})
 
     if request.method == "POST":
         district = request.POST["district"]
@@ -837,8 +969,7 @@ def guest_checkout(request):
         transaction_id = request.POST["transaction_id"]
         total_amount = int(request.POST["total_amount"])
         guest_name = request.POST["guest_name"]
-
-  
+        shipping_method = request.POST["shipping_method"]
 
         customer.name = (f"{guest_name} - Guest")
         customer.save()
@@ -876,10 +1007,10 @@ def guest_checkout(request):
             address=newOrderAddress,
             order_id=order_id,
             payment=newPayment,
+            shipping_method=shipping_method,
         )
         newOrder.save()
 
-     
         for item in usercart:
             orderd_product = OrderedProducts()
             orderd_product.order = newOrder
@@ -896,8 +1027,8 @@ def guest_checkout(request):
         context = {
             "order_id": order_id,
             "order": order,
-            "guest" : True,
-            
+            "guest": True,
+
         }
         return render(request, "bookstore/ordercomplete.html", context)
 
@@ -906,20 +1037,17 @@ def guest_checkout(request):
             "You dont have any product on your cart. Please Add some product"
         )
 
-
-
     else:
         context = {
             "usercart": usercart,
             "addressForm": addressForm,
             "paymentForm": paymentForm,
             "web_settings": web_settings,
-            "nameForm" : nameForm,
-            "free_delivery" : free_delivery,
+            "nameForm": nameForm,
+            "free_delivery": free_delivery,
         }
 
     return render(request, "bookstore/guestcheckout.html", context)
-    
 
 
 def tracking(request):
@@ -929,34 +1057,29 @@ def tracking(request):
             try:
                 order = Order.objects.get(order_id=orderid)
                 return render(request, "bookstore/tracking.html", {
-                    "order" : order,
+                    "order": order,
                 })
             except:
-                 messages.add_message(
-                request, messages.ERROR, "No order found, please check again"
-            )
-    
-    
+                messages.add_message(
+                    request, messages.ERROR, "No order found, please check again"
+                )
+
     return render(request, "bookstore/tracking.html")
 
 
-
 def get_notification(request):
-     if request.is_ajax():
-            user = request.GET.get("user")
-            action = request.GET.get("action")
-            notif_id = request.GET.get("notif_id")
+    if request.is_ajax():
+        user = request.GET.get("user")
+        action = request.GET.get("action")
+        notif_id = request.GET.get("notif_id")
 
-            if action == "get_notifications":
-                notif = Notification.objects.filter(user__contact_no=user).order_by('-id')[:10]
-                return JsonResponse({"status": "success", "message": ([notif.serialize() for notif in notif])})
-            
-            if action == "mark_read":
-                notif = Notification.objects.get(id=notif_id)
-                notif.read = True
-                notif.save()
-                return JsonResponse({"status": "success"})
-            
+        if action == "get_notifications":
+            notif = Notification.objects.filter(
+                user__contact_no=user).order_by('-id')[:10]
+            return JsonResponse({"status": "success", "message": ([notif.serialize() for notif in notif])})
 
-                    
-                   
+        if action == "mark_read":
+            notif = Notification.objects.get(id=notif_id)
+            notif.read = True
+            notif.save()
+            return JsonResponse({"status": "success"})
