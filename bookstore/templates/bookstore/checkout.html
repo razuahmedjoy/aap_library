@@ -191,38 +191,32 @@
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="sundarban" value="sundarban" checked>
-                        <label class="form-check-label" for="sundarban">কুরিয়ার অফিস থেকে সংগ্রহ করব(সারাদেশ,
-                            {% if free_delivery or exh_cart %} 0 {% else %} {{web_settings.shipping_charge}} {% endif %}৳)</label>
+                        <label class="form-check-label" for="sundarban">কুরিয়ার অফিস থেকে সংগ্রহ করব(সারাদেশ,{% if free_delivery or exh_cart %} 0 {% else %} {{web_settings.shipping_charge}} {% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="home-delivery" value="home-delivery">
-                        <label class="form-check-label" for="home-delivery">Home Delivery(Inside Dhaka,
-                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_dhaka  %} {% else %} {{web_settings.home_delivery_dhaka}}{% endif %}৳)</label>
+                        <label class="form-check-label" for="home-delivery">Home Delivery(Inside Dhaka,{% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_dhaka  %} {% else %} {{web_settings.home_delivery_dhaka}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="home-outside" value="home-outside">
-                        <label class="form-check-label" for="home-outside">Home Delivery(Outside Dhaka,
-                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_outside  %} {% else %} {{web_settings.home_delivery_outside}}{% endif %}৳)</label>
+                        <label class="form-check-label" for="home-outside">Home Delivery(Outside Dhaka,{% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_outside  %} {% else %} {{web_settings.home_delivery_outside}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="1-3h"
                             value="1-3h">
-                        <label class="form-check-label" for="1-3h">1-3H Super Fast Home Delivery(Inside Dhaka,
-                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_1_3H  %} {% else %} {{web_settings.home_delivery_1_3H}}{% endif %}৳)</label>
+                        <label class="form-check-label" for="1-3h">1-3H Super Fast Home Delivery(Inside Dhaka,{% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_1_3H  %} {% else %} {{web_settings.home_delivery_1_3H}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="12h"
                             value="12h">
-                        <label class="form-check-label" for="12h">12H Fastest Home Delivery (Inside Dhaka,
-                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_12H  %} {% else %} {{web_settings.home_delivery_12H}}{% endif %}৳)</label>
+                        <label class="form-check-label" for="12h">12H Fastest Home Delivery (Inside Dhaka,{% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_12H  %} {% else %} {{web_settings.home_delivery_12H}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="office-radio" value="office-radio">
-                        <label class="form-check-label" for="office-radio">সরাসরি গিয়ে সংগ্রহ করব(ফার্মগেট/­এলিফ্যান্ট
-                            রোড, 0 ৳)</label>
+                        <label class="form-check-label" for="office-radio">সরাসরি গিয়ে সংগ্রহ করব(ফার্মগেট/­এলিফ্যান্ট রোড, 0 ৳)</label>
                     </div>
                 </div>
 
@@ -483,7 +477,10 @@
 
             if (freeOrexh != null) {
             freeOrexh.style.display = 'block'
+
         }
+
+        
 
 
             if (button.value == "sundarban") {

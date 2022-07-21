@@ -281,9 +281,10 @@ def after_order_change(sender, instance, created, **kwargs):
 
             try:
                 if not instance.grand_total < 1:
-                    tele_text = f"{instance.created_at.strftime('%m/%d/%Y %I:%M %p')}\n\n*বইয়ের নাম : {get_ordered_books(instance)}\n\n*নাম: {instance.customer.name}\nঠিকানা : {get_address(instance)}\nনাম্বার : {instance.contact_no} \n"
+                    tele_text = f"{instance.created_at.strftime('%m/%d/%Y %I:%M %p')}\nMethod : {instance.shipping_method}\n\n*বইয়ের নাম : {get_ordered_books(instance)}\n\n*নাম: {instance.customer.name}\nঠিকানা : {get_address(instance)}\nনাম্বার : {instance.contact_no} \n"
 
-                    # print(tele_text)
+                    
+                 
                     send_tele.send_message(tele_text)
             
             except:
