@@ -42,3 +42,10 @@ def cart_sub_total_free(usercart):
     for item in usercart:
         subtotal += item.total_amount
     return subtotal
+
+
+@register.simple_tag
+def deduct_delivery(current_method):
+    shipping_charge = get_shipping_charge()
+    final_price = current_method - shipping_charge
+    return final_price
