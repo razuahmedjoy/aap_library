@@ -84,10 +84,14 @@
     .delivery-methods-inputs {
         border: 1px solid black;
         border-radius: 10px;
-        padding: 2em;
+        padding: 1em;
         font-size: 1.5rem;
         margin-bottom: 1em;
 
+    }
+
+    .delivery-methods-inputs p {
+        text-align: center;
     }
 
     .delivery-methods-inputs label {
@@ -95,6 +99,12 @@
     }
 
     .office-info {
+        display: none;
+        
+    }
+
+    .free-exh {
+        font-size: 1.5rem;
         display: none;
     }
 </style>
@@ -188,25 +198,25 @@
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="home-delivery" value="home-delivery">
                         <label class="form-check-label" for="home-delivery">Home Delivery(Inside Dhaka,
-                            {{web_settings.home_delivery_dhaka}}৳)</label>
+                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_dhaka  %} {% else %} {{web_settings.home_delivery_dhaka}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                             id="home-outside" value="home-outside">
                         <label class="form-check-label" for="home-outside">Home Delivery(Outside Dhaka,
-                            {{web_settings.home_delivery_outside}}৳)</label>
+                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_outside  %} {% else %} {{web_settings.home_delivery_outside}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="1-3h"
                             value="1-3h">
                         <label class="form-check-label" for="1-3h">1-3H Super Fast Home Delivery(Inside Dhaka,
-                            {{web_settings.home_delivery_1_3H}}৳)</label>
+                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_1_3H  %} {% else %} {{web_settings.home_delivery_1_3H}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method" id="12h"
                             value="12h">
                         <label class="form-check-label" for="12h">12H Fastest Home Delivery (Inside Dhaka,
-                            {{web_settings.home_delivery_12H}}৳)</label>
+                            {% if free_delivery or exh_cart %} {% deduct_delivery web_settings.home_delivery_12H  %} {% else %} {{web_settings.home_delivery_12H}}{% endif %}৳)</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
@@ -271,12 +281,6 @@
                                     style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
                                     <span class="user_total_span">{% cart_sub_total usercart %}</span>TK.</span>
                             </div>
-                            {% elif exh_cart %}
-                            <div class="payment-instruction alert alert-info">{{web_settings.payment_instruction|safe}}
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i> <span
-                                    style="font-weight: bold; font-size: 1.3rem;">তোমাকে মোট সেন্ড মানি করতে হবে -
-                                    <span class="user_total_span">0</span>TK.</span>
-                            </div>
                             {% endif %}
 
 
@@ -296,6 +300,8 @@
                                         <label class="form-check-label" for="Exchange">Paying With Exchange
                                             Credit</label>
                                     </div>
+
+                                    
                                     {% else %}
                                     <div class="form-check form-check-inline">
 
@@ -316,6 +322,11 @@
                                 </div>
                                 {% endif %}
                             </div>
+                            {% if exh_cart %}
+                            <div class="payment-instruction alert alert-info free-exh">
+                                তুমি যেহেতু অন্য ডেলিভারি মেথড চুজ করেছো সেহেতু তোমাকে অতিরিক্ত টাকা সেন্ড মানি করতে হবে। অর্ডার কনফার্ম করতে <span style="font-weight: bold;" class="user_total_span text-bold"></span>৳ , <span style="font-weight: bolder;">01610427497</span> এই নাম্বারে সেন্ড মানি করবে।
+                            </div>
+                            {% endif %}
 
                             <div {% if exh_cart %} style="display: none;" {% endif %}>
                                 {{paymentForm |crispy }}
@@ -464,10 +475,15 @@
             const officeInfo = document.querySelector('.office-info')
             officeInfo.style.display = 'none';
             district.value = "";
-
             area.innerHTML = "";
             address.value = ""
             addressLoader.style.display = "flex";
+
+            const freeOrexh = document.querySelector('.free-exh')
+
+            if (freeOrexh != null) {
+            freeOrexh.style.display = 'block'
+        }
 
 
             if (button.value == "sundarban") {
@@ -485,6 +501,7 @@
                         shippingSpan.innerHTML = `Tk. ${status.total_delivery}`;
                         formLabel.innerHTML = "নিকটস্থ সুন্দরবন কুরিয়ার ঠিকানা*";
                         shippingMethod.value = buttonLabel.innerHTML;
+                        if (freeOrexh != null) {freeOrexh.style.display = 'none'};
                         closeLoader();
 
 
@@ -596,10 +613,30 @@
             }
 
             if (button.value == "office-radio") {
-                addressLoader.style.display = "none";
-                officeInfo.style.display = "block"
-                shippingSpan.innerHTML = `Tk. 0`;
-                closeLoader()
+                $.ajax({
+                    url: "{% url 'checkout' %}",
+                    type: 'GET',
+                    data: {
+                        'action': 'office',
+                    },
+
+                    success: function (status) {
+                    addressLoader.style.display = "none";
+                    officeInfo.style.display = "block"
+                    shippingSpan.innerHTML = `Tk. 0`;
+                    subTotal.innerHTML = `Tk. ${status.value}`;
+                    userTotal.innerHTML = status.value;
+                    if (freeOrexh != null) {freeOrexh.style.display = 'none'};
+                    closeLoader()
+                      
+
+                    },
+                    failure: function (e) {
+                        console.log(e)
+                    }
+                });
+
+                
 
 
             }
@@ -626,6 +663,7 @@
                         address.value = "আনন্দ সিনেমা হলের অপজিটে,101/A Green Road Dhaka,Aspect Series Office"
                         addressLoader.style.display = "none"
                         shippingMethod.value = buttonLabel.innerHTML;
+                        if (freeOrexh != null) {freeOrexh.style.display = 'none'};
                         officeInfo.style.display = 'block';
                         closeLoader();
 
@@ -658,6 +696,7 @@
                         address.value = "ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস"
                         shippingMethod.value = buttonLabel.innerHTML;
                         officeInfo.style.display = 'block';
+                        if (freeOrexh != null) {freeOrexh.style.display = 'none'};
                         closeLoader();
                     },
                     failure: function (e) {

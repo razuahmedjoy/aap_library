@@ -544,6 +544,9 @@ def checkout(request):
                 shipping_charge = settings.home_delivery_dhaka
             except:
                 shipping_charge = 0
+            
+            if exh_cart or free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -554,6 +557,10 @@ def checkout(request):
                 shipping_charge = settings.home_delivery_outside
             except:
                 shipping_charge = 0
+            
+            if exh_cart or free_delivery:
+                shipping_charge -= settings.shipping_charge
+
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -564,6 +571,11 @@ def checkout(request):
                 shipping_charge = settings.home_delivery_1_3H
             except:
                 shipping_charge = 0
+            
+            if exh_cart or free_delivery:
+                shipping_charge -= settings.shipping_charge
+            
+            
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -574,12 +586,14 @@ def checkout(request):
                 shipping_charge = settings.home_delivery_12H
             except:
                 shipping_charge = 0
+            
+            if exh_cart or free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
         if action == "office":
-
             charge = value_sum
             return JsonResponse({"status": "success", "value": charge, "total_delivery": 0})
 
@@ -920,6 +934,9 @@ def guest_checkout(request):
                 shipping_charge = settings.home_delivery_dhaka
             except:
                 shipping_charge = 0
+            
+            if free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -930,6 +947,9 @@ def guest_checkout(request):
                 shipping_charge = settings.home_delivery_outside
             except:
                 shipping_charge = 0
+            
+            if free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -940,6 +960,9 @@ def guest_checkout(request):
                 shipping_charge = settings.home_delivery_1_3H
             except:
                 shipping_charge = 0
+            
+            if free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
@@ -950,12 +973,14 @@ def guest_checkout(request):
                 shipping_charge = settings.home_delivery_12H
             except:
                 shipping_charge = 0
+            
+            if free_delivery:
+                shipping_charge -= settings.shipping_charge
 
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
         if action == "office":
-
             charge = value_sum
             return JsonResponse({"status": "success", "value": charge, "total_delivery": 0})
 
