@@ -107,6 +107,19 @@
         font-size: 1.5rem;
         display: none;
     }
+
+    .modal {
+        font-size: large;
+    }
+
+    .modal-body {
+        display: flex;
+        justify-content: center;
+    }
+
+    .loc-span {
+        cursor: pointer;
+    }
 </style>
 {%endblock style%}
 
@@ -249,13 +262,13 @@
                                 <div class="form-check">
                                     <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                                         id="office-farm" value="office-farm">
-                                    <label class="form-check-label" for="office-farm">ফার্মগেট অফিস=আনন্দ সিনেমা হলের অপজিটে, 101/A Green Road Dhaka,Aspect Series Office</label>
+                                    <label class="form-check-label" for="office-farm">ফার্মগেট অফিস=আনন্দ সিনেমা হলের অপজিটে, 101/A Green Road Dhaka,Aspect Series Office<span data-bs-toggle="modal" data-bs-target="#locationModal" class="badge bg-dark text-light loc-span">ভিডিওতে লোকেশন দেখুন</span></label>
                                 </div>
 
                                 <div class="form-check">
                                     <input class="form-check-input delivery-methods" type="radio" name="delivery_method"
                                         id="office-el" value="office-el">
-                                    <label class="form-check-label" for="office-el">এলিফ্যান্ট রোড অফিস=ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস</label>
+                                    <label class="form-check-label" for="office-el">এলিফ্যান্ট রোড অফিস=ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস<span data-bs-toggle="modal" data-bs-target="#locationModal2" class="badge bg-dark text-light loc-span">ভিডিওতে লোকেশন দেখুন</span></label>
                                 </div>
                             </div>
                             {{ addressForm|crispy }}
@@ -338,6 +351,41 @@
     </div>
 
     {% include 'bookstore/partials/loader.html' %}
+    <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ফার্মগেট অফিস</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="550" src="https://www.youtube.com/embed/ZnpDmJhgKko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer mdl-btn">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="locationModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">এলিফ্যান্ট রোড অফিস</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="550" src="https://www.youtube.com/embed/w-PwxgWDoV8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer mdl-btn">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 </div>
 {% endblock %}
@@ -659,7 +707,7 @@
                         area.innerHTML = options;
                         address.value = "আনন্দ সিনেমা হলের অপজিটে,101/A Green Road Dhaka,Aspect Series Office"
                         addressLoader.style.display = "none"
-                        shippingMethod.value = buttonLabel.innerHTML;
+                        shippingMethod.value = buttonLabel.innerHTML.slice(0, -130);
                         if (freeOrexh != null) {freeOrexh.style.display = 'none'};
                         officeInfo.style.display = 'block';
                         closeLoader();
@@ -691,7 +739,7 @@
                         options = `<option value="এলিফ্যান্ট রোড" areaid="এলিফ্যান্ট রোড">এলিফ্যান্ট রোড</option>`;
                         area.innerHTML = options;
                         address.value = "ইস্টার্ন মল্লিকার বিপরীতে, স্যানস্‌ ক্যাপের পাশের অফিস"
-                        shippingMethod.value = buttonLabel.innerHTML;
+                        shippingMethod.value = buttonLabel.innerHTML.slice(0, -131);
                         officeInfo.style.display = 'block';
                         if (freeOrexh != null) {freeOrexh.style.display = 'none'};
                         closeLoader();
