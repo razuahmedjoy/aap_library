@@ -254,6 +254,9 @@ class Order(models.Model):
     def get_shipping_address(self):
         return f"{self.address.address}, {self.address.area}, {self.address.district}"
 
+    class Meta:
+        ordering = ('-created_at', )
+
 
 # Order notification 
 @receiver(post_save, sender=Order)

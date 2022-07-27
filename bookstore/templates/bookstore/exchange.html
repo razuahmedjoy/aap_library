@@ -127,7 +127,7 @@
             {% for order in exchange_orders %}
             <tr>
              
-              <td>{{order.created_at.date}}</td>
+              <td>{{order.created_at|date:'M d, gA'}}</td>
               <td>{{order.customer}}</td>
               <td>{{order.address.district}}</td>
               <td>{% ordered_books order %}</td>
