@@ -7,6 +7,7 @@ from django.contrib import messages
 from time import time
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
 from django.db.models import Sum
 
@@ -824,6 +825,10 @@ def default_address(request):
 
 # @login_required(login_url="login")
 def exchange(request):
+    exchange_orders = Order.objects.filter(Q(payment__payment_method="Exchange"))
+    paginator = Paginator(exchange_orders, 30)
+    page_number = request.GET.get('page', 1)
+    orders_page = paginator.get_page(page_number)
     web_settings = WebSettings.objects.last()
     if request.method == "POST":
         if request.user.is_authenticated:
@@ -862,6 +867,7 @@ def exchange(request):
         {
             "exchange_form": exchange_form,
             "web_settings": web_settings,
+            "exchange_orders" : orders_page,
         },
     )
 
