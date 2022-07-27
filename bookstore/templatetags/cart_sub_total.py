@@ -49,3 +49,17 @@ def deduct_delivery(current_method):
     shipping_charge = get_shipping_charge()
     final_price = current_method - shipping_charge
     return final_price
+
+
+@register.simple_tag
+def ordered_books(order):
+        book_list = []
+        for book in order.ordered_books.all():
+            if book.quantity > 1:
+                b = f"{book}({book.quantity})"
+                book_list.append(b)
+            else:
+                b = f"{book}"
+                book_list.append(b)
+                 
+        return book_list
