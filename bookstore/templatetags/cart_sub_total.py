@@ -56,10 +56,10 @@ def ordered_books(order):
         book_list = []
         for book in order.ordered_books.all():
             if book.quantity > 1:
-                b = f"{book}({book.quantity})"
+                b = f"{book} ({book.quantity})"
                 book_list.append(b)
             else:
                 b = f"{book}"
                 book_list.append(b)
                  
-        return book_list
+        return (", ".join(book_list))
