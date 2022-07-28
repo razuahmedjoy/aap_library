@@ -826,7 +826,7 @@ def default_address(request):
 # @login_required(login_url="login")
 def exchange(request):
     exchange_orders = Order.objects.filter(Q(payment__payment_method="Exchange"))
-    paginator = Paginator(exchange_orders, 30)
+    paginator = Paginator(exchange_orders, 2)
     page_number = request.GET.get('page', 1)
     orders_page = paginator.get_page(page_number)
     web_settings = WebSettings.objects.last()

@@ -151,20 +151,23 @@
               {% endif %}
 
 
-              {% for p_num in exchange_orders.paginator.page_range %}
-                  {% if forloop.counter < 5 %}
-                      {% if exchange_orders.number == p_num %}
-                      <li class="page-item active">
-                          <a class="page-link" href="?page={{p_num}}">{{p_num}}<span class="sr-only">{{p_num}}</span></a>
-                      </li>
+              {% if exchange_orders.number|add:'-4' > 1 %}
+              <li class="page-item"><a class="page-link" href="?page={{ exchange_orders.number|add:'-5' }}">&hellip;</a></li>
+              {% endif %}
 
-                      {% else %}
-                      <li class="page-item"><a class="page-link" href="?page={{p_num}}">{{p_num}}</a></li>
-                      {% endif %}   
-
-                  {% endif%}        
+              {% for i in exchange_orders.paginator.page_range %}
+                {% if exchange_orders.number == i %}
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" >{{i}}</a>
+                  </li>  
+                {% elif i > exchange_orders.number|add:'-5' and i < exchange_orders.number|add:'5' %}
+                  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
               {% endfor %}
 
+              {% if exchange_orders.paginator.num_pages > exchange_orders.number|add:'4' %}
+              <li class="page-item"><a class="page-link" href="?page={{ exchange_orders.number|add:'5' }}">&hellip;</a></li>
+              {% endif %}
 
               {% if exchange_orders.has_next %}
               <li class="page-item enabled">
