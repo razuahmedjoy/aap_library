@@ -74,6 +74,10 @@
     text-align: center;
   }
 
+  .exchange-table {
+    padding: 0em;
+  }
+
   
 </style>
 {%endblock style%}
@@ -113,7 +117,7 @@
 
       <div class="row exchange-box order-info-box">
         <div class="exh-header"><span>Exchange Orders</span></div>
-        <table class="table table-striped">
+        <table class="table table-striped exchange-table">
           <thead>
             <tr>
               <th scope="col">Time</th>
@@ -131,7 +135,11 @@
               <td>{{order.customer}}</td>
               <td>{{order.address.district}}</td>
               <td>{% ordered_books order %}</td>
+              {% if order.status == "Paid" %}
+              <td>Done</td>
+              {% else %}
               <td>{{order.status}}</td>
+              {% endif %}
             </tr>
             {% endfor %}
           
