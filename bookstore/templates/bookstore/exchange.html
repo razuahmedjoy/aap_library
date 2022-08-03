@@ -74,10 +74,9 @@
     text-align: center;
   }
 
-  .exchange-table {
+  .table>:not(caption)>*>* {
     padding: 0em;
   }
-
   
 </style>
 {%endblock style%}
@@ -117,7 +116,7 @@
 
       <div class="row exchange-box order-info-box">
         <div class="exh-header"><span>Exchange Orders</span></div>
-        <table class="table table-striped exchange-table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">Time</th>
