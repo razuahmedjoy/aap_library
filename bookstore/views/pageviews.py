@@ -581,18 +581,18 @@ def checkout(request):
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
-        if action == "12h":
-            try:
-                settings = WebSettings.objects.last()
-                shipping_charge = settings.home_delivery_12H
-            except:
-                shipping_charge = 0
+        # if action == "12h":
+        #     try:
+        #         settings = WebSettings.objects.last()
+        #         shipping_charge = settings.home_delivery_12H
+        #     except:
+        #         shipping_charge = 0
             
-            if exh_cart or free_delivery:
-                shipping_charge -= settings.shipping_charge
+        #     if exh_cart or free_delivery:
+        #         shipping_charge -= settings.shipping_charge
 
-            charge = value_sum + shipping_charge
-            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+        #     charge = value_sum + shipping_charge
+        #     return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
         if action == "office":
             charge = value_sum
@@ -973,18 +973,18 @@ def guest_checkout(request):
             charge = value_sum + shipping_charge
             return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
-        if action == "12h":
-            try:
-                settings = WebSettings.objects.last()
-                shipping_charge = settings.home_delivery_12H
-            except:
-                shipping_charge = 0
+        # if action == "12h":
+        #     try:
+        #         settings = WebSettings.objects.last()
+        #         shipping_charge = settings.home_delivery_12H
+        #     except:
+        #         shipping_charge = 0
             
-            if free_delivery:
-                shipping_charge -= settings.shipping_charge
+        #     if free_delivery:
+        #         shipping_charge -= settings.shipping_charge
 
-            charge = value_sum + shipping_charge
-            return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
+        #     charge = value_sum + shipping_charge
+        #     return JsonResponse({"status": "success", "value": charge, "total_delivery": shipping_charge})
 
         if action == "office":
             charge = value_sum
