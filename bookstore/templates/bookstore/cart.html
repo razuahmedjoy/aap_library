@@ -200,8 +200,9 @@
 
                 const {status, usercart} = response
                 if (status == "success") {
+                    location.reload();
 
-                    document.getElementById("cartList").innerHTML = usercart;
+                    
 
                 }
             },
