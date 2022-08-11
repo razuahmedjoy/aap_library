@@ -50,7 +50,8 @@ urlpatterns = [
 
 
     # track
-    path('tracking', tracking, name="tracking" ),
+    path('tracking/', tracking, name="tracking" ),
+    path('how-to-order/', how_to_order, name="how_to_order" ),
 
 
     #add to cart
