@@ -1114,3 +1114,10 @@ def get_notification(request):
             notif.read = True
             notif.save()
             return JsonResponse({"status": "success"})
+
+
+
+def how_to_order(request):
+    return render(request, "bookstore/how_to_order.html", {
+        "title": "How To Order",
+    })
