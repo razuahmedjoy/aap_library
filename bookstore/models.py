@@ -8,8 +8,10 @@ from django.conf import settings
 import uuid
 from ckeditor.fields import RichTextField
 
-from . import send_tele
-
+try:
+    from . import send_tele
+except:
+    pass
 
 # Create your models here.
 
@@ -287,9 +289,10 @@ def after_order_change(sender, instance, created, **kwargs):
                     tele_text = f"{instance.created_at.strftime('%m/%d/%Y %I:%M %p')}\nMethod : {instance.shipping_method}\n\n*বইয়ের নাম : {get_ordered_books(instance)}\n\n*নাম: {instance.customer.name}\nঠিকানা : {get_address(instance)}\nনাম্বার : {instance.contact_no} \n"
 
                     
-                 
-                    send_tele.send_message(tele_text)
-            
+                    try:
+                        send_tele.send_message(tele_text)
+                    except:
+                        pass
             except:
                 pass
         

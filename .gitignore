@@ -10,6 +10,7 @@ bookstore\templatetags\__pycache__
 /venv
 /aapbookstore/settigs.py
 /bookstore/migrations
+/bookstore/send_tele.py
 /bookstore/__pycache__
 aapbookstore\__pycache__
 aapbookstore/__pycache__/

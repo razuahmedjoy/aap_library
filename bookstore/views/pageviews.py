@@ -1121,3 +1121,13 @@ def how_to_order(request):
     return render(request, "bookstore/how_to_order.html", {
         "title": "How To Order",
     })
+
+
+def testView(request):
+    orders = Order.objects.all()[:10]
+    
+   
+    context = {
+        "orders": orders
+    }
+    return render(request, "bookstore/partials/order_report.html",context)

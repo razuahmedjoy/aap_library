@@ -30,6 +30,8 @@ urlpatterns = [
     path('search_books/', search_books, name="search_books" ),
     path('passwordreset/', passwordresetView, name="passwordreset" ),
     path('resetpass/', resetpassView, name="resetpass"),
+    path('test/', testView, name="testview"),
+    
 
     
 

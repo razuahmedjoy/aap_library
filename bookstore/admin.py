@@ -1,6 +1,10 @@
+from http.client import HTTPResponse
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
+from django.shortcuts import render
+
+# from .helpers import generate_pdf
 
 # Register your models here.
 from .models import *
@@ -124,6 +128,15 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['payment__transaction_id', 'contact_no', 'customer__name']
 
     list_filter = ('payment__payment_method', ExchangeOrderFilter)
+    actions = ['print_orders',]
+
+
+    def print_orders(self,request,queryset):
+        orders = [entry for entry in queryset]
+        context = {'orders': orders}
+        # print(orders)
+        # pdf = generate_pdf(orders)
+        return render(request, "bookstore/partials/order_report.html",context)
 
     def get_address(self,obj):
         return f"{obj.address.address}, {obj.address.area}, {obj.address.district}"

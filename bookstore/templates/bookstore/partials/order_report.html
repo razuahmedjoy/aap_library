@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Orders</title>
+
+    <style>
+        @font-face {
+            font-family: "HindSiliguri";
+            src: url("{% static 'fonts/HindSiliguri.ttf' %}");
+            font-weight: normal;
+        }
+
+        * {
+            font-family: 'HindSiliguri', sans-serif;
+            font-size: 16px;
+
+        }
+
+        .container {
+            margin: 0 auto;
+
+        }
+
+        .max-w-md {
+            max-width: 600px;
+        }
+
+        .box {
+            border: 1px solid black;
+            padding: .5rem;
+            border-radius: 8px;
+            border-collapse: collapse;
+            margin-bottom: 32px;
+
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .details {
+            padding: 5px 1rem;
+        }
+
+        .table tbody {
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+
+        }
+
+        .text-right {
+            float: right;
+        }
+
+
+        .text-small {
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .flex {
+         
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main style="margin:2% 0;">
+        {% for order in orders %}
+        <div class="box container max-w-lg mb-5">
+            <h3 class="heading text-center font-bold text-lg">
+                পাঠশালা লাইব্রেরি ( 01610427497 )
+            </h3>
+            <div class="details">
+
+                <div class="title">
+                    <div class="grid grid-cols-7 gap-x-2">
+
+                        <div class="flex justify-between">
+                            <span style="font-weight: bold; margin-right:5px">মেথড</span>
+                            <span class="font-bold">:</span>
+                        </div>
+                        <div class="col-span-6">
+                            {{order.shipping_method |safe}}
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="title">
+                    <div class="grid grid-cols-7 gap-x-2">
+
+                        <div class="flex justify-between">
+                            <span style="font-weight: bold; margin-right:5px">বই</span>
+                            <span class="font-bold">:</span>
+                        </div>
+                        <div class="col-span-6">
+                            {% for book in order.ordered_books.all %}
+                            {{book}} ,
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="title">
+                    <div class="grid grid-cols-7 gap-x-2">
+
+                        <div class="flex justify-between">
+                            <span style="font-weight: bold; margin-right:5px">নাম</span>
+                            <span class="font-bold">:</span>
+                        </div>
+                        <div class="col-span-6">
+                            {{order}}
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="title">
+                    <div class="grid grid-cols-7 gap-x-2">
+
+                        <div class="flex justify-between">
+                            <span style="font-weight: bold; margin-right:5px">ঠিকানা</span>
+                            <span class="font-bold">:</span>
+                        </div>
+                        <div class="col-span-6">
+                            {{order.address.address|default_if_none:"N/A"}},
+                            {{order.address.area|default_if_none:"N/A"}},
+                            {{order.address.district|default_if_none:"N/A"}}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="title">
+                    <div class="grid grid-cols-7 gap-x-2">
+
+                        <div class="flex justify-between">
+                            <span style="font-weight: bold; margin-right:5px">নাম্বার</span>
+                            <span class="font-bold">:</span>
+                        </div>
+                        <div class="col-span-6">
+                            {{order.contact_no}}
+                        </div>
+                    </div>
+
+
+                </div>
+
+              
+
+
+
+
+            </div>
+            <p class="text-small" style="margin-bottom: 0; padding-bottom:0">AAP Library: https://aaplibrary.com</p>
+
+        </div>
+        {%endfor%}
+    </main>
+</body>
+
+</html>
