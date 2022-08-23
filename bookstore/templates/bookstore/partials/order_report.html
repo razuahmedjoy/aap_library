@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-span-6">
                             {% for book in order.ordered_books.all %}
-                            {{book}} ,
+                            {{book}} x {{book.quantity}},
                             {% endfor %}
                         </div>
                     </div>

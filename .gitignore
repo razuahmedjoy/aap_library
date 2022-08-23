@@ -17,7 +17,7 @@ aapbookstore/__pycache__/
 bookstore/locations/__pycache__/
 bookstore/templatetags/__pycache__/
 bookstore/views/__pycache__/
-bookstore\send_tele.py
+bookstore/send_tele.py
 # added in main branch by rupa
 # Added some lines by rupa in git ignore
 
